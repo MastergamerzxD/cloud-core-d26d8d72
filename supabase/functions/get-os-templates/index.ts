@@ -51,15 +51,15 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Build proper API URL
-    let fullApiUrl = apiUrl.trim();
-    if (!fullApiUrl.includes("index.php")) {
-      fullApiUrl = fullApiUrl.replace(/\/$/, "") + "/index.php";
+    // Build proper API URL with authentication in query string
+    // Virtualizor API expects auth params in URL, not POST body
+    let baseUrl = apiUrl.trim().replace(/\/$/, "");
+    if (!baseUrl.includes("index.php")) {
+      baseUrl = baseUrl + "/index.php";
     }
 
-    // Fetch OS templates from Virtualizor
-    // Reference: https://virtualizor.com/admin-api/list-os-templates
-    const params = new URLSearchParams({
+    // Build URL with query parameters for authentication
+    const queryParams = new URLSearchParams({
       api: "json",
       apikey: apiKey,
       apipass: apiPass,
@@ -68,48 +68,43 @@ Deno.serve(async (req) => {
 
     // If plan_id provided, add it to get plan-specific templates
     if (planId) {
-      params.set("plid", planId.toString());
+      queryParams.set("plid", planId.toString());
     }
 
-    console.log("Fetching OS templates from Virtualizor");
-
-    // Try HTTPS first, then HTTP if SSL fails (for self-signed certs)
-    const urlsToTry = [fullApiUrl];
-    if (fullApiUrl.startsWith("https://")) {
-      urlsToTry.push(fullApiUrl.replace("https://", "http://").replace(":4085", ":4084"));
+    // Try HTTP directly (port 4084) to avoid SSL issues
+    let httpUrl = baseUrl;
+    if (httpUrl.startsWith("https://")) {
+      httpUrl = httpUrl.replace("https://", "http://").replace(":4085", ":4084");
     }
+
+    const fullUrl = `${httpUrl}?${queryParams.toString()}`;
+    console.log("Fetching OS templates from:", fullUrl.replace(apiPass, "***"));
 
     let data: any = null;
     let lastError: Error | null = null;
 
-    for (const url of urlsToTry) {
-      try {
-        console.log("Trying URL:", url);
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: params.toString(),
-        });
+    try {
+      const response = await fetch(fullUrl, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+        },
+      });
 
-        const responseText = await response.text();
-        console.log("Raw response (first 300 chars):", responseText.substring(0, 300));
+      const responseText = await response.text();
+      console.log("Raw response (first 500 chars):", responseText.substring(0, 500));
 
-        // Check if response is HTML (error page)
-        if (responseText.startsWith("<!DOCTYPE") || responseText.startsWith("<html")) {
-          console.error("Received HTML instead of JSON from", url);
-          lastError = new Error("Virtualizor returned HTML instead of JSON");
-          continue;
-        }
-
+      // Check if response is HTML (error page or login page)
+      if (responseText.trim().startsWith("<!DOCTYPE") || responseText.trim().startsWith("<html") || responseText.trim().startsWith("<")) {
+        console.error("Received HTML instead of JSON - likely authentication failed or wrong endpoint");
+        lastError = new Error("API returned HTML. Check credentials and ensure API access is enabled.");
+      } else {
         data = JSON.parse(responseText);
         console.log("Virtualizor OS templates response:", JSON.stringify(data).substring(0, 500));
-        break; // Success
-      } catch (error: any) {
-        console.error("Error for URL", url, ":", error.message);
-        lastError = error;
       }
+    } catch (error: any) {
+      console.error("Fetch error:", error.message);
+      lastError = error;
     }
 
     if (!data) {
@@ -117,7 +112,7 @@ Deno.serve(async (req) => {
         JSON.stringify({ 
           error: lastError?.message || "Failed to connect to Virtualizor", 
           templates: [],
-          hint: "SSL certificate issue. Consider using HTTP or fixing the certificate."
+          hint: "Ensure API credentials are correct and HTTP access (port 4084) is enabled."
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
