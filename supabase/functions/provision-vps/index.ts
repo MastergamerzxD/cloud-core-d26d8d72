@@ -139,52 +139,68 @@ Deno.serve(async (req) => {
     const rootPassword = generatePassword();
 
     const baseUrls = buildBaseUrls(apiUrl);
-    const apiModes: Array<"1" | "json"> = ["1", "json"];
+    const apiModes: Array<"1" | "json"> = ["json", "1"];
+    const authStyles = [
+      { key: "api_key", pass: "api_pass" },  // Newer style with underscore
+      { key: "apikey", pass: "apipass" },    // Legacy style without underscore
+    ];
 
-    const vpsParams = new URLSearchParams({
+    const vpsParams: Record<string, string> = {
       plid: product.virtualizor_plan_id.toString(),
       hostname: order.hostname || `vps-${order.order_number}`,
       osid: order.os_template || "297",
       rootpass: rootPassword,
       addvps: "1",
-    });
+    };
 
-    console.log("VPS Params:", Object.fromEntries(vpsParams.entries()));
+    console.log("VPS Params:", vpsParams);
 
     let virtualizorData: any = null;
     const debug: { url: string; error: string; raw?: string }[] = [];
 
     for (const baseUrl of baseUrls) {
-      for (const apiMode of apiModes) {
-        const query = new URLSearchParams({
-          api: apiMode,
-          apikey: apiKey,
-          apipass: apiPass,
-          act: "addvs",
-        });
-
-        const url = `${baseUrl}?${query.toString()}`;
-        console.log("Virtualizor addvs try:", url.replace(apiPass, "***"));
-
-        try {
-          const result = await tryVirtualizorJson(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-              "Accept": "application/json",
-            },
-            body: vpsParams.toString(),
+      for (const authStyle of authStyles) {
+        for (const apiMode of apiModes) {
+          const query = new URLSearchParams({
+            api: apiMode,
+            [authStyle.key]: apiKey,
+            [authStyle.pass]: apiPass,
+            act: "addvs",
           });
 
-          if (result.ok) {
-            virtualizorData = result.json;
-            break;
-          } else {
-            debug.push({ url: url.replace(apiPass, "***"), error: result.error, raw: result.raw });
+          const url = `${baseUrl}?${query.toString()}`;
+          console.log("Virtualizor addvs try:", url.replace(apiPass, "***"));
+
+          try {
+            // Include auth in POST body as well
+            const bodyParams = new URLSearchParams({
+              ...vpsParams,
+              [authStyle.key]: apiKey,
+              [authStyle.pass]: apiPass,
+            });
+
+            const result = await tryVirtualizorJson(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Accept": "application/json",
+              },
+              body: bodyParams.toString(),
+            });
+
+            if (result.ok) {
+              virtualizorData = result.json;
+              break;
+            } else {
+              debug.push({ url: url.replace(apiPass, "***"), error: result.error, raw: result.raw });
+            }
+          } catch (e: any) {
+            debug.push({ url: url.replace(apiPass, "***"), error: e?.message || String(e) });
           }
-        } catch (e: any) {
-          debug.push({ url: url.replace(apiPass, "***"), error: e?.message || String(e) });
+
+          if (virtualizorData) break;
         }
+        if (virtualizorData) break;
       }
       if (virtualizorData) break;
     }
