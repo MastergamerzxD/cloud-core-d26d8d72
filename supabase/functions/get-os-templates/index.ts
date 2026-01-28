@@ -89,36 +89,47 @@ Deno.serve(async (req) => {
     const baseUrls = buildBaseUrls(apiUrl);
 
     // Virtualizor admin API has multiple variants in the wild.
-    // We'll try the common ones to avoid “Login” HTML pages.
-    const apiModes: Array<"1" | "json"> = ["1", "json"];
-    const methods: Array<"GET" | "POST"> = ["POST", "GET"]; // POST first (more common in Virtualizor)
+    // We'll try the common ones to avoid "Login" HTML pages.
+    // Try both underscore and non-underscore parameter names
+    const apiModes: Array<"1" | "json"> = ["json", "1"];
+    const authStyles = [
+      { key: "api_key", pass: "api_pass" },  // Newer style with underscore
+      { key: "apikey", pass: "apipass" },    // Legacy style without underscore
+    ];
 
     let data: any = null;
     let debug: { url: string; error: string; raw?: string }[] = [];
 
     for (const baseUrl of baseUrls) {
-      for (const apiMode of apiModes) {
-        const query = new URLSearchParams({
-          api: apiMode,
-          apikey: apiKey,
-          apipass: apiPass,
-          act: "ostemplates",
-        });
-        if (planId) query.set("plid", planId.toString());
+      for (const authStyle of authStyles) {
+        for (const apiMode of apiModes) {
+          const query = new URLSearchParams({
+            api: apiMode,
+            [authStyle.key]: apiKey,
+            [authStyle.pass]: apiPass,
+            act: "ostemplates",
+          });
+          if (planId) query.set("plid", planId.toString());
 
-        const url = `${baseUrl}?${query.toString()}`;
+          const url = `${baseUrl}?${query.toString()}`;
 
-        for (const method of methods) {
-          console.log("Virtualizor ostemplates try:", url.replace(apiPass, "***"), method);
+          // Try POST with credentials also in body
+          console.log("Virtualizor ostemplates try:", url.replace(apiPass, "***"), "POST");
 
           try {
+            // POST with params in body (some Virtualizor versions prefer this)
+            const bodyParams = new URLSearchParams({
+              [authStyle.key]: apiKey,
+              [authStyle.pass]: apiPass,
+            });
+
             const result = await tryVirtualizorJson(url, {
-              method,
+              method: "POST",
               headers: {
                 "Accept": "application/json",
-                ...(method === "POST" ? { "Content-Type": "application/x-www-form-urlencoded" } : {}),
+                "Content-Type": "application/x-www-form-urlencoded",
               },
-              body: method === "POST" ? "" : undefined,
+              body: bodyParams.toString(),
             });
 
             if (result.ok) {
@@ -127,11 +138,26 @@ Deno.serve(async (req) => {
             } else {
               debug.push({ url: url.replace(apiPass, "***"), error: result.error, raw: result.raw });
             }
+
+            // Also try GET
+            console.log("Virtualizor ostemplates try:", url.replace(apiPass, "***"), "GET");
+            const getResult = await tryVirtualizorJson(url, {
+              method: "GET",
+              headers: { "Accept": "application/json" },
+            });
+
+            if (getResult.ok) {
+              data = getResult.json;
+              break;
+            } else {
+              debug.push({ url: url.replace(apiPass, "***"), error: getResult.error, raw: getResult.raw });
+            }
           } catch (e: any) {
             debug.push({ url: url.replace(apiPass, "***"), error: e?.message || String(e) });
           }
-        }
 
+          if (data) break;
+        }
         if (data) break;
       }
       if (data) break;
