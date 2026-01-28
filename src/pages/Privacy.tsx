@@ -6,11 +6,13 @@ export default function Privacy() {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy - Cloud on Fire VPS Hosting</title>
+        <title>Privacy Policy - Cloud on Fire VPS Hosting India</title>
         <meta 
           name="description" 
-          content="Privacy Policy for Cloud on Fire VPS hosting. Learn how we collect, use, and protect your personal information." 
+          content="Privacy Policy for Cloud on Fire VPS hosting. Learn how we collect, use, protect your personal information and your rights regarding data privacy." 
         />
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://cloudonfire.in/privacy" />
       </Helmet>
       <Layout>
         <section className="section-padding">

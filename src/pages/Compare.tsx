@@ -63,13 +63,19 @@ export default function Compare() {
   return (
     <>
       <Helmet>
-        <title>Compare VPS Plans - Pro vs Budget VPS | Cloud on Fire India</title>
+        <title>Compare VPS Plans India - Pro vs Budget VPS | Cloud on Fire</title>
         <meta 
           name="description" 
-          content="Compare Cloud on Fire Pro VPS and Budget VPS plans. See detailed differences in performance, DDoS protection, support, and pricing to choose the right VPS for your needs." 
+          content="Compare Cloud on Fire Pro VPS vs Budget VPS plans. Detailed comparison of performance, DDoS protection, pricing, and features. Find the best VPS for your needs in India." 
         />
-        <meta property="og:title" content="Compare VPS Plans - Pro vs Budget VPS | Cloud on Fire" />
+        <meta name="keywords" content="VPS comparison India, Pro VPS vs Budget VPS, gaming VPS comparison, best VPS India, VPS features comparison" />
+        <link rel="canonical" href="https://cloudonfire.in/compare" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://cloudonfire.in/compare" />
+        <meta property="og:title" content="Compare VPS Plans - Pro vs Budget | Cloud on Fire" />
         <meta property="og:description" content="Detailed comparison between Pro VPS and Budget VPS. Find the perfect plan for your workload." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Compare VPS Plans | Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}

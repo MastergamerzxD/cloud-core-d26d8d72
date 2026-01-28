@@ -39,13 +39,19 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact Us - Cloud on Fire VPS Hosting Support</title>
+        <title>Contact Us - Cloud on Fire VPS Support | 24/7 Expert Help</title>
         <meta 
           name="description" 
-          content="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support available. Response time under 15 minutes for Pro VPS." 
+          content="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support available. Response time under 15 minutes for Pro VPS customers." 
         />
+        <meta name="keywords" content="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support" />
+        <link rel="canonical" href="https://cloudonfire.in/contact" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://cloudonfire.in/contact" />
         <meta property="og:title" content="Contact Us - Cloud on Fire Support" />
         <meta property="og:description" content="Get in touch with Cloud on Fire. 24/7 support, fast response times." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Contact Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}

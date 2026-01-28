@@ -6,11 +6,13 @@ export default function Terms() {
   return (
     <>
       <Helmet>
-        <title>Terms of Service - Cloud on Fire VPS Hosting</title>
+        <title>Terms of Service - Cloud on Fire VPS Hosting India</title>
         <meta 
           name="description" 
-          content="Terms of Service for Cloud on Fire VPS hosting services. Read our policies on service usage, acceptable use, and customer responsibilities." 
+          content="Terms of Service for Cloud on Fire VPS hosting. Read our policies on service usage, acceptable use, payment terms, SLA, refund policy, and customer responsibilities." 
         />
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://cloudonfire.in/terms" />
       </Helmet>
       <Layout>
         <section className="section-padding">

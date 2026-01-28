@@ -33,13 +33,19 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>About Us - Cloud on Fire VPS Hosting India</title>
+        <title>About Us - Cloud on Fire | India's Performance-Focused VPS Provider</title>
         <meta 
           name="description" 
-          content="Learn about Cloud on Fire, India's performance-focused VPS hosting provider. Our mission is to provide enterprise-grade infrastructure accessible to everyone." 
+          content="Learn about Cloud on Fire, India's performance-focused VPS hosting provider. Our mission is to provide enterprise-grade infrastructure accessible to developers and businesses." 
         />
+        <meta name="keywords" content="Cloud on Fire, about Cloud on Fire, VPS hosting company India, Indian hosting provider, VPS company" />
+        <link rel="canonical" href="https://cloudonfire.in/about" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://cloudonfire.in/about" />
         <meta property="og:title" content="About Us - Cloud on Fire VPS Hosting" />
         <meta property="og:description" content="India's performance-focused VPS hosting provider with enterprise-grade infrastructure." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="About Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}

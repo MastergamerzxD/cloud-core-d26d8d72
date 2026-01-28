@@ -48,13 +48,19 @@ export default function Infrastructure() {
   return (
     <>
       <Helmet>
-        <title>Infrastructure - Enterprise VPS Hardware India | Cloud on Fire</title>
+        <title>Infrastructure - Enterprise VPS Hardware India | Intel Xeon & AMD EPYC | Cloud on Fire</title>
         <meta 
           name="description" 
-          content="Learn about Cloud on Fire's enterprise-grade infrastructure. Intel Xeon & AMD EPYC processors, NVMe storage, premium network, and Tier-3 data centers in India." 
+          content="Learn about Cloud on Fire's enterprise-grade VPS infrastructure in India. Intel Xeon & AMD EPYC processors, NVMe SSD storage, Tier-3 data centers, and 10Gbps+ premium network." 
         />
+        <meta name="keywords" content="VPS infrastructure India, Intel Xeon VPS, AMD EPYC server, NVMe VPS hosting, data center India, enterprise VPS hardware" />
+        <link rel="canonical" href="https://cloudonfire.in/infrastructure" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://cloudonfire.in/infrastructure" />
         <meta property="og:title" content="Infrastructure - Enterprise VPS Hardware | Cloud on Fire" />
         <meta property="og:description" content="Enterprise-grade hardware: Intel Xeon, AMD EPYC, NVMe storage, and premium networking." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="VPS Infrastructure | Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}

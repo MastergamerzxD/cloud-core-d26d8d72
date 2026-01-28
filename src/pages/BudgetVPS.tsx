@@ -90,13 +90,20 @@ export default function BudgetVPS() {
   return (
     <>
       <Helmet>
-        <title>Budget VPS - Affordable VPS Hosting India | Cloud on Fire</title>
+        <title>Budget VPS India - Cheap VPS Hosting | From ₹499/mo | Cloud on Fire</title>
         <meta 
           name="description" 
-          content="Cost-effective VPS hosting in India starting from ₹499/month. DDoS protection included. Perfect for websites, bots, and development servers." 
+          content="Affordable VPS hosting in India from ₹499/month. DDoS protection included. Perfect for websites, WordPress, bots, and development servers. NVMe storage, unlimited bandwidth." 
         />
-        <meta property="og:title" content="Budget VPS - Affordable VPS Hosting India | Cloud on Fire" />
+        <meta name="keywords" content="cheap VPS India, budget VPS, affordable VPS hosting, WordPress VPS India, development server, Discord bot hosting, website hosting VPS" />
+        <link rel="canonical" href="https://cloudonfire.in/budget-vps" />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content="https://cloudonfire.in/budget-vps" />
+        <meta property="og:title" content="Budget VPS India - Cheap VPS Hosting | Cloud on Fire" />
         <meta property="og:description" content="Affordable VPS hosting with DDoS protection from ₹499/month. Ideal for websites and development." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Budget VPS - Cheap VPS India | Cloud on Fire" />
+        <meta name="twitter:description" content="Affordable VPS hosting from ₹499/month with DDoS protection included." />
       </Helmet>
       <Layout>
         {/* Hero */}

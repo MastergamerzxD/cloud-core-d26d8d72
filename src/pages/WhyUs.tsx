@@ -79,13 +79,19 @@ export default function WhyUs() {
   return (
     <>
       <Helmet>
-        <title>Why Cloud on Fire - Best VPS Hosting Provider India</title>
+        <title>Why Cloud on Fire - Best VPS Hosting Provider India | Reliability & Performance</title>
         <meta 
           name="description" 
-          content="Why choose Cloud on Fire? Performance engineering, enterprise DDoS protection, reliable infrastructure, expert support, and transparent pricing for Indian developers." 
+          content="Why choose Cloud on Fire? Performance engineering, enterprise DDoS protection, reliable infrastructure, 24/7 expert support, and transparent INR pricing for Indian developers." 
         />
-        <meta property="og:title" content="Why Cloud on Fire - Best VPS Hosting Provider" />
+        <meta name="keywords" content="why Cloud on Fire, best VPS provider India, reliable VPS hosting, VPS support, transparent VPS pricing" />
+        <link rel="canonical" href="https://cloudonfire.in/why-us" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://cloudonfire.in/why-us" />
+        <meta property="og:title" content="Why Cloud on Fire - Best VPS Provider" />
         <meta property="og:description" content="Performance, reliability, and transparency. See why developers choose Cloud on Fire." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Why Choose Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}
