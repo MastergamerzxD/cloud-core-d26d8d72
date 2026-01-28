@@ -94,6 +94,27 @@ export default function AdminProducts() {
     }
   };
 
+  const parseSupabaseError = (error: any): string => {
+    if (!error) return "An unexpected error occurred";
+    
+    const message = error.message || error.details || String(error);
+    
+    if (message.includes("products_product_type_check")) {
+      return "Invalid product type. Please select Pro VPS or Budget VPS.";
+    }
+    if (message.includes("products_slug_key")) {
+      return "A product with this slug already exists. Please use a unique slug.";
+    }
+    if (message.includes("violates not-null constraint")) {
+      return "Please fill in all required fields.";
+    }
+    if (message.includes("violates check constraint")) {
+      return "Invalid data provided. Please check your inputs.";
+    }
+    
+    return "Failed to save product. Please try again.";
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -117,7 +138,7 @@ export default function AdminProducts() {
       fetchProducts();
     } catch (error: any) {
       console.error("Error saving product:", error);
-      toast.error(error.message || "Failed to save product");
+      toast.error(parseSupabaseError(error));
     }
   };
 
@@ -203,6 +224,19 @@ export default function AdminProducts() {
       key: "price",
       header: "Monthly Price",
       cell: (row) => formatCurrency(row.price_monthly),
+    },
+    {
+      key: "virtualizor",
+      header: "Virtualizor ID",
+      cell: (row) => (
+        row.virtualizor_plan_id ? (
+          <Badge variant="outline" className="font-mono">
+            #{row.virtualizor_plan_id}
+          </Badge>
+        ) : (
+          <span className="text-muted-foreground text-sm">Not linked</span>
+        )
+      ),
     },
     {
       key: "status",
