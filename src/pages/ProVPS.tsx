@@ -97,13 +97,20 @@ export default function ProVPS() {
   return (
     <>
       <Helmet>
-        <title>Pro VPS - Gaming VPS India | High-Performance Servers | Cloud on Fire</title>
+        <title>Pro VPS India - Gaming VPS Server Hosting | From ₹299/mo | Cloud on Fire</title>
         <meta 
           name="description" 
-          content="Pro VPS for gaming and high-traffic applications. Dedicated resources, premium DDoS protection, never suspended under attacks. Starting from ₹299/month in India." 
+          content="Pro VPS for gaming servers and high-traffic apps in India. Dedicated CPU cores, premium DDoS protection, never suspended under attacks. Minecraft, FiveM, CS2 servers from ₹299/month." 
         />
-        <meta property="og:title" content="Pro VPS - Gaming VPS India | Cloud on Fire" />
-        <meta property="og:description" content="High-performance gaming VPS with dedicated resources and premium DDoS protection from ₹299/month." />
+        <meta name="keywords" content="gaming VPS India, pro VPS, Minecraft server hosting India, FiveM server, dedicated VPS, game server hosting, CS2 server, Valorant server, high performance VPS" />
+        <link rel="canonical" href="https://cloudonfire.in/pro-vps" />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content="https://cloudonfire.in/pro-vps" />
+        <meta property="og:title" content="Pro VPS India - Gaming VPS Server Hosting | Cloud on Fire" />
+        <meta property="og:description" content="Gaming VPS with dedicated resources and premium DDoS protection. Never suspended under attacks. From ₹299/month." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Pro VPS - Gaming VPS India | Cloud on Fire" />
+        <meta name="twitter:description" content="Dedicated gaming VPS with premium DDoS protection from ₹299/month." />
       </Helmet>
       <Layout>
         {/* Hero */}

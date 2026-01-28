@@ -122,13 +122,51 @@ export default function FAQ() {
   return (
     <>
       <Helmet>
-        <title>FAQ - VPS Hosting Questions Answered | Cloud on Fire</title>
+        <title>FAQ - VPS Hosting Questions Answered | Cloud on Fire India</title>
         <meta 
           name="description" 
-          content="Find answers to frequently asked questions about Cloud on Fire VPS hosting. Learn about Pro VPS, Budget VPS, DDoS protection, billing, and technical specifications." 
+          content="Find answers to frequently asked questions about Cloud on Fire VPS hosting. Learn about Pro VPS, Budget VPS, DDoS protection, billing, payment methods, and technical specifications." 
         />
+        <meta name="keywords" content="VPS FAQ, VPS hosting questions, DDoS protection FAQ, VPS billing, Cloud on Fire FAQ" />
+        <link rel="canonical" href="https://cloudonfire.in/faq" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://cloudonfire.in/faq" />
         <meta property="og:title" content="FAQ - VPS Hosting Questions | Cloud on Fire" />
         <meta property="og:description" content="Answers to common questions about Cloud on Fire VPS hosting services." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="VPS FAQ | Cloud on Fire" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is Cloud on Fire?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Cloud on Fire is a VPS hosting provider based in India, offering high-performance virtual private servers with enterprise-grade DDoS protection."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's the difference between Pro VPS and Budget VPS?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Pro VPS offers dedicated CPU cores, premium DDoS protection (never suspended under attacks), and is optimized for gaming. Budget VPS uses shared resources and is ideal for websites and development."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is DDoS protection included?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, DDoS protection is included on all VPS plans at no extra cost."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
       <Layout>
         {/* Hero */}

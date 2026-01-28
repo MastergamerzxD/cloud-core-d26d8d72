@@ -40,13 +40,19 @@ export default function DDoSProtection() {
   return (
     <>
       <Helmet>
-        <title>DDoS Protection - Enterprise Anti-DDoS for VPS India | Cloud on Fire</title>
+        <title>DDoS Protection India - Enterprise Anti-DDoS for VPS | Cloud on Fire</title>
         <meta 
           name="description" 
-          content="Enterprise-grade DDoS protection for VPS hosting. Multi-layer mitigation up to 1Tbps. Pro VPS never suspended under attack. Protect your servers today." 
+          content="Enterprise-grade DDoS protection for VPS hosting in India. Multi-layer mitigation up to 1Tbps. Pro VPS never suspended under attack. Protect your servers from UDP, TCP, HTTP floods." 
         />
+        <meta name="keywords" content="DDoS protection India, anti-DDoS VPS, DDoS mitigation, protected VPS hosting, DDoS attack protection, 1Tbps DDoS protection" />
+        <link rel="canonical" href="https://cloudonfire.in/ddos-protection" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://cloudonfire.in/ddos-protection" />
         <meta property="og:title" content="DDoS Protection - Enterprise Anti-DDoS | Cloud on Fire" />
         <meta property="og:description" content="Multi-layer DDoS mitigation up to 1Tbps. Keep your services online during attacks." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="DDoS Protection | Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}
