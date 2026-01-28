@@ -73,16 +73,55 @@ Deno.serve(async (req) => {
 
     console.log("Fetching OS templates from Virtualizor");
 
-    const response = await fetch(fullApiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
-    });
+    // Try HTTPS first, then HTTP if SSL fails (for self-signed certs)
+    const urlsToTry = [fullApiUrl];
+    if (fullApiUrl.startsWith("https://")) {
+      urlsToTry.push(fullApiUrl.replace("https://", "http://").replace(":4085", ":4084"));
+    }
 
-    const data = await response.json();
-    console.log("Virtualizor OS templates response:", JSON.stringify(data).substring(0, 500));
+    let data: any = null;
+    let lastError: Error | null = null;
+
+    for (const url of urlsToTry) {
+      try {
+        console.log("Trying URL:", url);
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: params.toString(),
+        });
+
+        const responseText = await response.text();
+        console.log("Raw response (first 300 chars):", responseText.substring(0, 300));
+
+        // Check if response is HTML (error page)
+        if (responseText.startsWith("<!DOCTYPE") || responseText.startsWith("<html")) {
+          console.error("Received HTML instead of JSON from", url);
+          lastError = new Error("Virtualizor returned HTML instead of JSON");
+          continue;
+        }
+
+        data = JSON.parse(responseText);
+        console.log("Virtualizor OS templates response:", JSON.stringify(data).substring(0, 500));
+        break; // Success
+      } catch (error: any) {
+        console.error("Error for URL", url, ":", error.message);
+        lastError = error;
+      }
+    }
+
+    if (!data) {
+      return new Response(
+        JSON.stringify({ 
+          error: lastError?.message || "Failed to connect to Virtualizor", 
+          templates: [],
+          hint: "SSL certificate issue. Consider using HTTP or fixing the certificate."
+        }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     if (data.error) {
       return new Response(
