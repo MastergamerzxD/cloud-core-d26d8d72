@@ -41,23 +41,19 @@ interface Product {
   ram_gb: number;
   storage_gb: number;
   bandwidth_tb: number;
+  virtualizor_plan_id: number | null;
+}
+
+interface OsTemplate {
+  id: string;
+  name: string;
+  category: string;
 }
 
 const billingCycles = [
   { value: "monthly", label: "Monthly", discount: 0 },
   { value: "quarterly", label: "Quarterly", discount: 5 },
   { value: "yearly", label: "Yearly", discount: 15 },
-];
-
-const osTemplates = [
-  { value: "ubuntu-22.04", label: "Ubuntu 22.04 LTS" },
-  { value: "ubuntu-20.04", label: "Ubuntu 20.04 LTS" },
-  { value: "debian-12", label: "Debian 12" },
-  { value: "debian-11", label: "Debian 11" },
-  { value: "centos-9", label: "CentOS Stream 9" },
-  { value: "almalinux-9", label: "AlmaLinux 9" },
-  { value: "rocky-9", label: "Rocky Linux 9" },
-  { value: "windows-2022", label: "Windows Server 2022" },
 ];
 
 export default function Order() {
@@ -70,7 +66,9 @@ export default function Order() {
   const [selectedProduct, setSelectedProduct] = useState<string>("");
   const [billingCycle, setBillingCycle] = useState("monthly");
   const [hostname, setHostname] = useState("");
-  const [osTemplate, setOsTemplate] = useState("ubuntu-22.04");
+  const [osTemplate, setOsTemplate] = useState("");
+  const [osTemplates, setOsTemplates] = useState<OsTemplate[]>([]);
+  const [isLoadingOs, setIsLoadingOs] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -90,6 +88,16 @@ export default function Order() {
     }
   }, [searchParams, products]);
 
+  // Fetch OS templates when product is selected
+  useEffect(() => {
+    if (selectedProduct) {
+      const product = products.find(p => p.id === selectedProduct);
+      if (product?.virtualizor_plan_id) {
+        fetchOsTemplates(product.virtualizor_plan_id);
+      }
+    }
+  }, [selectedProduct, products]);
+
   const fetchProducts = async () => {
     try {
       const { data, error } = await supabase
@@ -105,6 +113,37 @@ export default function Order() {
       toast.error("Failed to load products");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchOsTemplates = async (planId: number) => {
+    setIsLoadingOs(true);
+    setOsTemplate(""); // Reset selection
+    try {
+      const { data, error } = await supabase.functions.invoke("get-os-templates", {
+        body: { plan_id: planId },
+      });
+
+      if (error) throw error;
+
+      const templates = data?.templates || [];
+      setOsTemplates(templates);
+      
+      // Auto-select first template if available
+      if (templates.length > 0) {
+        setOsTemplate(templates[0].id);
+      }
+    } catch (error) {
+      console.error("Error fetching OS templates:", error);
+      // Fallback to default templates if API fails
+      setOsTemplates([
+        { id: "297", name: "Ubuntu 22.04 LTS", category: "linux" },
+        { id: "288", name: "Ubuntu 20.04 LTS", category: "linux" },
+        { id: "308", name: "Debian 12", category: "linux" },
+      ]);
+      setOsTemplate("297");
+    } finally {
+      setIsLoadingOs(false);
     }
   };
 
@@ -555,18 +594,30 @@ export default function Order() {
 
                       <div className="space-y-2">
                         <Label>Operating System *</Label>
-                        <Select value={osTemplate} onValueChange={setOsTemplate}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select OS" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {osTemplates.map((os) => (
-                              <SelectItem key={os.value} value={os.value}>
-                                {os.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                        {isLoadingOs ? (
+                          <div className="flex items-center gap-2 h-10 px-3 border rounded-md bg-muted">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <span className="text-sm text-muted-foreground">Loading OS templates...</span>
+                          </div>
+                        ) : (
+                          <Select value={osTemplate} onValueChange={setOsTemplate}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select OS" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {osTemplates.map((os) => (
+                                <SelectItem key={os.id} value={os.id}>
+                                  {os.name}
+                                </SelectItem>
+                              ))}
+                              {osTemplates.length === 0 && (
+                                <div className="px-2 py-4 text-sm text-muted-foreground text-center">
+                                  No OS templates available
+                                </div>
+                              )}
+                            </SelectContent>
+                          </Select>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
@@ -645,11 +696,11 @@ export default function Order() {
                                 <p>• {selectedProductData.storage_gb} GB NVMe Storage</p>
                                 <p>• {selectedProductData.bandwidth_tb} TB Bandwidth</p>
                                 <p>• Hostname: {hostname}</p>
-                                <p>• OS: {osTemplates.find(o => o.value === osTemplate)?.label}</p>
+                                <p>• OS: {osTemplates.find(o => o.id === osTemplate)?.name || osTemplate}</p>
                               </div>
                             </div>
-                            <Badge variant={selectedProductData.product_type === "pro" ? "default" : "secondary"}>
-                              {selectedProductData.product_type === "pro" ? "Pro VPS" : "Budget VPS"}
+                            <Badge variant={selectedProductData.product_type === "pro_vps" ? "default" : "secondary"}>
+                              {selectedProductData.product_type === "pro_vps" ? "Pro VPS" : "Budget VPS"}
                             </Badge>
                           </div>
                         </div>
