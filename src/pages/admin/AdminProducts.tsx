@@ -52,7 +52,7 @@ const initialFormState = {
   name: "",
   slug: "",
   description: "",
-  product_type: "pro",
+  product_type: "pro_vps",
   cpu_cores: 1,
   ram_gb: 1,
   storage_gb: 20,
@@ -177,8 +177,8 @@ export default function AdminProducts() {
       key: "type",
       header: "Type",
       cell: (row) => (
-        <Badge variant={row.product_type === "pro" ? "default" : "secondary"}>
-          {row.product_type}
+        <Badge variant={row.product_type === "pro_vps" ? "default" : "secondary"}>
+          {row.product_type === "pro_vps" ? "Pro VPS" : "Budget VPS"}
         </Badge>
       ),
     },
@@ -299,8 +299,8 @@ export default function AdminProducts() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="pro">Pro VPS</SelectItem>
-                        <SelectItem value="budget">Budget VPS</SelectItem>
+                        <SelectItem value="pro_vps">Pro VPS</SelectItem>
+                        <SelectItem value="budget_vps">Budget VPS</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

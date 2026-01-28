@@ -398,8 +398,8 @@ export default function Order() {
                                   <div className="flex items-center gap-2 mb-2">
                                     <Server className="w-5 h-5 text-primary" />
                                     <span className="font-semibold text-lg">{product.name}</span>
-                                    <Badge variant={product.product_type === "pro" ? "default" : "secondary"}>
-                                      {product.product_type === "pro" ? "Pro" : "Budget"}
+                                    <Badge variant={product.product_type === "pro_vps" ? "default" : "secondary"}>
+                                      {product.product_type === "pro_vps" ? "Pro VPS" : "Budget VPS"}
                                     </Badge>
                                   </div>
                                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm text-muted-foreground">

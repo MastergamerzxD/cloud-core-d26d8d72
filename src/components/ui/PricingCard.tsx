@@ -11,7 +11,7 @@ interface PricingCardProps {
   description: string;
   features: string[];
   popular?: boolean;
-  type: "pro" | "budget";
+  type: "pro_vps" | "budget_vps";
   index?: number;
 }
 
@@ -49,11 +49,11 @@ export default function PricingCard({
 
       <div className="mb-4 sm:mb-6">
         <span className={`inline-block px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold rounded-full mb-3 sm:mb-4 ${
-          type === "pro" 
+          type === "pro_vps" 
             ? "bg-primary/20 text-primary" 
             : "bg-secondary text-secondary-foreground"
         }`}>
-          {type === "pro" ? "Pro VPS" : "Budget VPS"}
+          {type === "pro_vps" ? "Pro VPS" : "Budget VPS"}
         </span>
         <h3 className="text-lg sm:text-xl font-bold text-foreground">{name}</h3>
         <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">{description}</p>
