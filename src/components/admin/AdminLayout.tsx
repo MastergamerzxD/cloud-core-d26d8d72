@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import AdminSidebar from "./AdminSidebar";
 import AdminHeader from "./AdminHeader";
 import { Loader2 } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -11,6 +12,7 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const { user, isAdmin, isLoading } = useAuth();
+  const isMobile = useIsMobile();
 
   if (isLoading) {
     return (
@@ -21,7 +23,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/admin-login" replace />;
   }
 
   if (!isAdmin) {
@@ -31,7 +33,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       <AdminSidebar />
-      <div className="pl-64">
+      <div className={isMobile ? "" : "pl-64"}>
         <AdminHeader />
         <main className="p-6">{children}</main>
       </div>
