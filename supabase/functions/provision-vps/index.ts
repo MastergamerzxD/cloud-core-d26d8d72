@@ -193,18 +193,21 @@ Deno.serve(async (req) => {
       await supabase
         .from("orders")
         .update({
+          status: "pending",
           notes:
             "Provisioning failed: Virtualizor API returned login HTML for all attempts. Check Master/Admin API key/pass and IP allowlist.",
         })
         .eq("id", order_id);
 
+      // Return 200 with error in body so frontend doesn't get "non-2xx" toast
       return new Response(
         JSON.stringify({
+          success: false,
           error:
-            "Cannot provision: Virtualizor API rejected credentials (login HTML). Please verify Master/Admin API credentials and IP restrictions.",
+            "Cannot provision: Virtualizor API rejected credentials. Please verify Master/Admin API credentials and IP restrictions in admin settings.",
           debug: debug.slice(0, 3),
         }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
@@ -213,16 +216,18 @@ Deno.serve(async (req) => {
       await supabase
         .from("orders")
         .update({ 
+          status: "pending",
           notes: `Provisioning failed: ${JSON.stringify(virtualizorData.error)}` 
         })
         .eq("id", order_id);
 
       return new Response(
         JSON.stringify({ 
+          success: false,
           error: "Failed to provision VPS", 
           details: virtualizorData.error 
         }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
@@ -286,11 +291,11 @@ Deno.serve(async (req) => {
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Provisioning error:", error);
     return new Response(
-      JSON.stringify({ error: "Internal server error" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      JSON.stringify({ success: false, error: error?.message || "Internal server error" }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
