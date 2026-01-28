@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Flame } from "lucide-react";
+import { Menu, X, ChevronDown, Flame, User, LogIn, UserPlus, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -35,6 +36,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const { user, isLoading } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,18 +132,45 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link to="/contact">
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
-                Contact Sales
-              </Button>
-            </Link>
-            <Link to="/pricing">
-              <Button className="btn-fire">
-                <span className="relative z-10">Get Started</span>
-              </Button>
-            </Link>
+          {/* Desktop CTA - Auth Aware */}
+          <div className="hidden lg:flex items-center gap-3">
+            {isLoading ? (
+              <div className="w-32 h-10 bg-muted/50 rounded-lg animate-pulse" />
+            ) : user ? (
+              <>
+                <Link to="/dashboard">
+                  <Button variant="ghost" className="text-muted-foreground hover:text-foreground gap-2">
+                    <LayoutDashboard className="w-4 h-4" />
+                    Client Portal
+                  </Button>
+                </Link>
+                <Link to="/order">
+                  <Button className="btn-fire">
+                    <span className="relative z-10">Order Now</span>
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" className="text-muted-foreground hover:text-foreground gap-2">
+                    <LogIn className="w-4 h-4" />
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button variant="outline" className="gap-2 border-primary/50 hover:bg-primary/10">
+                    <UserPlus className="w-4 h-4" />
+                    Register
+                  </Button>
+                </Link>
+                <Link to="/pricing">
+                  <Button className="btn-fire">
+                    <span className="relative z-10">Get Started</span>
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -206,17 +235,46 @@ export default function Navbar() {
                     )}
                   </div>
                 ))}
+                
+                {/* Mobile Auth Section */}
                 <div className="pt-3 sm:pt-4 px-4 space-y-2 sm:space-y-3 border-t border-border/30 mt-2">
-                  <Link to="/contact" className="block">
-                    <Button variant="outline" className="w-full h-10 sm:h-11 text-sm">
-                      Contact Sales
-                    </Button>
-                  </Link>
-                  <Link to="/pricing" className="block">
-                    <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
-                      <span className="relative z-10">Get Started</span>
-                    </Button>
-                  </Link>
+                  {isLoading ? (
+                    <div className="h-11 bg-muted/50 rounded-lg animate-pulse" />
+                  ) : user ? (
+                    <>
+                      <Link to="/dashboard" className="block">
+                        <Button variant="outline" className="w-full h-10 sm:h-11 text-sm gap-2">
+                          <LayoutDashboard className="w-4 h-4" />
+                          Client Portal
+                        </Button>
+                      </Link>
+                      <Link to="/order" className="block">
+                        <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
+                          <span className="relative z-10">Order Now</span>
+                        </Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/login" className="block">
+                        <Button variant="outline" className="w-full h-10 sm:h-11 text-sm gap-2">
+                          <LogIn className="w-4 h-4" />
+                          Login
+                        </Button>
+                      </Link>
+                      <Link to="/register" className="block">
+                        <Button variant="secondary" className="w-full h-10 sm:h-11 text-sm gap-2">
+                          <UserPlus className="w-4 h-4" />
+                          Register
+                        </Button>
+                      </Link>
+                      <Link to="/pricing" className="block">
+                        <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
+                          <span className="relative z-10">Get Started</span>
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 const proPlans = [
   {
     name: "Pro Starter",
+    slug: "pro-starter",
     price: "₹299",
     description: "Entry-level gaming VPS",
     type: "pro" as const,
@@ -23,6 +24,7 @@ const proPlans = [
   },
   {
     name: "Pro Performance",
+    slug: "pro-performance",
     price: "₹599",
     description: "Most popular choice",
     type: "pro" as const,
@@ -39,6 +41,7 @@ const proPlans = [
   },
   {
     name: "Pro Ultimate",
+    slug: "pro-ultimate",
     price: "₹999",
     description: "Maximum performance",
     type: "pro" as const,
@@ -58,6 +61,7 @@ const proPlans = [
 const budgetPlans = [
   {
     name: "Budget Starter",
+    slug: "budget-starter",
     price: "₹499",
     description: "Entry-level budget VPS",
     type: "budget" as const,
@@ -72,6 +76,7 @@ const budgetPlans = [
   },
   {
     name: "Budget Plus",
+    slug: "budget-plus",
     price: "₹799",
     description: "Best value option",
     type: "budget" as const,
@@ -87,6 +92,7 @@ const budgetPlans = [
   },
   {
     name: "Budget Pro",
+    slug: "budget-pro",
     price: "₹1,199",
     description: "Maximum budget value",
     type: "budget" as const,

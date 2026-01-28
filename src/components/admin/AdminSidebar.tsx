@@ -18,9 +18,13 @@ import {
   FileText,
   ChevronLeft,
   ChevronRight,
+  Flame,
+  Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
@@ -40,32 +44,28 @@ const menuItems = [
   { icon: Settings, label: "Settings", path: "/admin/settings" },
 ];
 
-export default function AdminSidebar() {
+function SidebarContent({ collapsed, setCollapsed }: { collapsed: boolean; setCollapsed?: (v: boolean) => void }) {
   const location = useLocation();
-  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <aside
-      className={cn(
-        "fixed left-0 top-0 z-40 h-screen bg-card border-r border-border transition-all duration-300",
-        collapsed ? "w-16" : "w-64"
-      )}
-    >
+    <>
       <div className="flex h-16 items-center justify-between border-b border-border px-4">
         {!collapsed && (
           <Link to="/admin" className="flex items-center gap-2">
-            <Server className="h-6 w-6 text-primary" />
+            <Flame className="h-6 w-6 text-primary" />
             <span className="font-bold text-lg">Admin Panel</span>
           </Link>
         )}
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setCollapsed(!collapsed)}
-          className={cn(collapsed && "mx-auto")}
-        >
-          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-        </Button>
+        {setCollapsed && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setCollapsed(!collapsed)}
+            className={cn(collapsed && "mx-auto")}
+          >
+            {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+          </Button>
+        )}
       </div>
 
       <nav className="flex flex-col gap-1 p-2 overflow-y-auto h-[calc(100vh-4rem)]">
@@ -91,7 +91,53 @@ export default function AdminSidebar() {
             </Link>
           );
         })}
+
+        {/* Back to website link */}
+        <div className="mt-auto pt-4 border-t border-border">
+          <Link
+            to="/"
+            className={cn(
+              "flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors",
+              collapsed && "justify-center px-2"
+            )}
+            title={collapsed ? "Back to Website" : undefined}
+          >
+            <Flame className="h-4 w-4 flex-shrink-0" />
+            {!collapsed && <span>Back to Website</span>}
+          </Link>
+        </div>
       </nav>
+    </>
+  );
+}
+
+export default function AdminSidebar() {
+  const [collapsed, setCollapsed] = useState(false);
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="ghost" size="icon" className="fixed top-4 left-4 z-50 md:hidden">
+            <Menu className="h-5 w-5" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="p-0 w-64">
+          <SidebarContent collapsed={false} />
+        </SheetContent>
+      </Sheet>
+    );
+  }
+
+  return (
+    <aside
+      className={cn(
+        "fixed left-0 top-0 z-40 h-screen bg-card border-r border-border transition-all duration-300 hidden md:block",
+        collapsed ? "w-16" : "w-64"
+      )}
+    >
+      <SidebarContent collapsed={collapsed} setCollapsed={setCollapsed} />
     </aside>
   );
 }

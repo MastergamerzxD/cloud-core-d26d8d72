@@ -7,6 +7,7 @@ import PricingCard from "@/components/ui/PricingCard";
 const pricingPlans = [
   {
     name: "Pro Starter",
+    slug: "pro-starter",
     price: "₹299",
     description: "Perfect for small game servers",
     type: "pro" as const,
@@ -22,6 +23,7 @@ const pricingPlans = [
   },
   {
     name: "Pro Performance",
+    slug: "pro-performance",
     price: "₹599",
     description: "Ideal for high-traffic applications",
     type: "pro" as const,
@@ -38,6 +40,7 @@ const pricingPlans = [
   },
   {
     name: "Budget Essential",
+    slug: "budget-starter",
     price: "₹499",
     description: "Cost-effective for websites & bots",
     type: "budget" as const,

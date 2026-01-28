@@ -13,7 +13,8 @@ import {
   ChevronRight,
   HelpCircle,
   Menu,
-  X,
+  Flame,
+  Plus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -29,7 +30,6 @@ const menuItems = [
   { icon: Gift, label: "Redeem Gift Card", path: "/dashboard/redeem" },
   { icon: MessageSquare, label: "Support Tickets", path: "/dashboard/tickets" },
   { icon: User, label: "My Profile", path: "/dashboard/profile" },
-  { icon: HelpCircle, label: "Help & FAQ", path: "/faq" },
 ];
 
 function SidebarContent({ collapsed, setCollapsed }: { collapsed: boolean; setCollapsed?: (v: boolean) => void }) {
@@ -40,7 +40,7 @@ function SidebarContent({ collapsed, setCollapsed }: { collapsed: boolean; setCo
       <div className="flex h-16 items-center justify-between border-b border-border px-4">
         {!collapsed && (
           <Link to="/dashboard" className="flex items-center gap-2">
-            <Server className="h-6 w-6 text-primary" />
+            <Flame className="h-6 w-6 text-primary" />
             <span className="font-bold text-lg">Client Portal</span>
           </Link>
         )}
@@ -56,7 +56,16 @@ function SidebarContent({ collapsed, setCollapsed }: { collapsed: boolean; setCo
         )}
       </div>
 
-      <nav className="flex flex-col gap-1 p-2 overflow-y-auto h-[calc(100vh-4rem)]">
+      <div className="p-2">
+        <Link to="/order" className="block">
+          <Button className={cn("w-full btn-fire", collapsed ? "px-2" : "")}>
+            <Plus className="h-4 w-4" />
+            {!collapsed && <span className="relative z-10 ml-2">Order VPS</span>}
+          </Button>
+        </Link>
+      </div>
+
+      <nav className="flex flex-col gap-1 p-2 overflow-y-auto h-[calc(100vh-8rem)]">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path || 
             (item.path !== "/dashboard" && location.pathname.startsWith(item.path));
@@ -79,6 +88,32 @@ function SidebarContent({ collapsed, setCollapsed }: { collapsed: boolean; setCo
             </Link>
           );
         })}
+
+        {/* Help & Back to website */}
+        <div className="mt-auto pt-4 border-t border-border space-y-1">
+          <Link
+            to="/faq"
+            className={cn(
+              "flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors",
+              collapsed && "justify-center px-2"
+            )}
+            title={collapsed ? "Help & FAQ" : undefined}
+          >
+            <HelpCircle className="h-4 w-4 flex-shrink-0" />
+            {!collapsed && <span>Help & FAQ</span>}
+          </Link>
+          <Link
+            to="/"
+            className={cn(
+              "flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors",
+              collapsed && "justify-center px-2"
+            )}
+            title={collapsed ? "Back to Website" : undefined}
+          >
+            <Flame className="h-4 w-4 flex-shrink-0" />
+            {!collapsed && <span>Back to Website</span>}
+          </Link>
+        </div>
       </nav>
     </>
   );

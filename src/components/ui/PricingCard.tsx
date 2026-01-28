@@ -5,6 +5,7 @@ import { Button } from "./button";
 
 interface PricingCardProps {
   name: string;
+  slug?: string;
   price: string;
   period?: string;
   description: string;
@@ -16,6 +17,7 @@ interface PricingCardProps {
 
 export default function PricingCard({
   name,
+  slug,
   price,
   period = "/month",
   description,
@@ -24,6 +26,9 @@ export default function PricingCard({
   type,
   index = 0,
 }: PricingCardProps) {
+  // Generate slug from name if not provided
+  const productSlug = slug || name.toLowerCase().replace(/\s+/g, "-");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -68,12 +73,12 @@ export default function PricingCard({
         ))}
       </ul>
 
-      <Link to="/contact" className="block">
+      <Link to={`/order?product=${productSlug}`} className="block">
         <Button
           className={`w-full h-10 sm:h-11 text-sm sm:text-base ${popular ? "btn-fire" : ""}`}
           variant={popular ? "default" : "outline"}
         >
-          <span className={popular ? "relative z-10" : ""}>Get Started</span>
+          <span className={popular ? "relative z-10" : ""}>Order Now</span>
         </Button>
       </Link>
     </motion.div>

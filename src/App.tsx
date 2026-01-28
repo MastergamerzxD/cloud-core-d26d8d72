@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
+import Order from "./pages/Order";
 
 // Client Pages
 import ClientDashboard from "./pages/client/ClientDashboard";
@@ -80,6 +81,7 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/admin-login" element={<AdminLogin />} />
+                <Route path="/order" element={<Order />} />
                 
                 {/* Client Dashboard Routes */}
                 <Route path="/dashboard" element={<ClientDashboard />} />
