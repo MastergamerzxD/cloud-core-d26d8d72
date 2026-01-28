@@ -5,19 +5,17 @@ import { Button } from "./button";
 
 interface PricingCardProps {
   name: string;
-  slug?: string;
   price: string;
   period?: string;
   description: string;
   features: string[];
   popular?: boolean;
-  type: "pro_vps" | "budget_vps";
+  type: "pro" | "budget";
   index?: number;
 }
 
 export default function PricingCard({
   name,
-  slug,
   price,
   period = "/month",
   description,
@@ -26,9 +24,6 @@ export default function PricingCard({
   type,
   index = 0,
 }: PricingCardProps) {
-  // Generate slug from name if not provided
-  const productSlug = slug || name.toLowerCase().replace(/\s+/g, "-");
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -49,11 +44,11 @@ export default function PricingCard({
 
       <div className="mb-4 sm:mb-6">
         <span className={`inline-block px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold rounded-full mb-3 sm:mb-4 ${
-          type === "pro_vps" 
+          type === "pro" 
             ? "bg-primary/20 text-primary" 
             : "bg-secondary text-secondary-foreground"
         }`}>
-          {type === "pro_vps" ? "Pro VPS" : "Budget VPS"}
+          {type === "pro" ? "Pro VPS" : "Budget VPS"}
         </span>
         <h3 className="text-lg sm:text-xl font-bold text-foreground">{name}</h3>
         <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">{description}</p>
@@ -73,12 +68,12 @@ export default function PricingCard({
         ))}
       </ul>
 
-      <Link to={`/order?product=${productSlug}`} className="block">
+      <Link to="/contact" className="block">
         <Button
           className={`w-full h-10 sm:h-11 text-sm sm:text-base ${popular ? "btn-fire" : ""}`}
           variant={popular ? "default" : "outline"}
         >
-          <span className={popular ? "relative z-10" : ""}>Order Now</span>
+          <span className={popular ? "relative z-10" : ""}>Get Started</span>
         </Button>
       </Link>
     </motion.div>

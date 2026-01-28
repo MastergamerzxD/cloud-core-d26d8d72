@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Zap, Server, Clock, Check, ArrowRight, Flame, Loader2 } from "lucide-react";
+import { Shield, Zap, Server, Clock, Check, ArrowRight, Flame } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import PricingCard from "@/components/ui/PricingCard";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { supabase } from "@/integrations/supabase/client";
-
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-  product_type: string;
-  cpu_cores: number;
-  ram_gb: number;
-  storage_gb: number;
-  bandwidth_tb: number;
-  price_monthly: number;
-}
 
 const features = [
   {
@@ -56,52 +41,59 @@ const useCases = [
   "API Backends",
 ];
 
+const plans = [
+  {
+    name: "Pro Starter",
+    price: "₹299",
+    description: "Entry-level gaming VPS",
+    type: "pro" as const,
+    features: [
+      "2 vCPU Cores (Dedicated)",
+      "4 GB DDR4 ECC RAM",
+      "50 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "Premium DDoS Protection",
+      "Never Suspended",
+      "1 IPv4 Address",
+    ],
+  },
+  {
+    name: "Pro Performance",
+    price: "₹599",
+    description: "Most popular choice",
+    type: "pro" as const,
+    popular: true,
+    features: [
+      "4 vCPU Cores (Dedicated)",
+      "8 GB DDR4 ECC RAM",
+      "100 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "Premium DDoS Protection",
+      "Never Suspended",
+      "1 IPv4 Address",
+      "Priority Support",
+    ],
+  },
+  {
+    name: "Pro Ultimate",
+    price: "₹999",
+    description: "Maximum performance",
+    type: "pro" as const,
+    features: [
+      "8 vCPU Cores (Dedicated)",
+      "16 GB DDR4 ECC RAM",
+      "200 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "Premium DDoS Protection",
+      "Never Suspended",
+      "2 IPv4 Addresses",
+      "Priority Support",
+      "Weekly Backups",
+    ],
+  },
+];
+
 export default function ProVPS() {
-  const [plans, setPlans] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .eq("is_active", true)
-        .eq("product_type", "pro_vps")
-        .order("price_monthly");
-
-      if (error) throw error;
-      setPlans(data || []);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
-  const getFeatures = (product: Product): string[] => {
-    const features: string[] = [];
-    features.push(`${product.cpu_cores} vCPU Cores (Dedicated)`);
-    features.push(`${product.ram_gb} GB DDR4 ECC RAM`);
-    features.push(`${product.storage_gb} GB NVMe Storage`);
-    features.push(product.bandwidth_tb >= 100 ? "Unlimited Bandwidth" : `${product.bandwidth_tb} TB Bandwidth`);
-    features.push("Premium DDoS Protection");
-    features.push("Never Suspended");
-    features.push("1 IPv4 Address");
-    return features;
-  };
-
   return (
     <>
       <Helmet>
@@ -166,14 +158,12 @@ export default function ProVPS() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
               >
-                <Link to="/pricing">
-                  <Button size="lg" className="btn-fire text-base px-8">
-                    <span className="relative z-10 flex items-center gap-2">
-                      View Plans
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </Button>
-                </Link>
+                <Button size="lg" className="btn-fire text-base px-8">
+                  <span className="relative z-10 flex items-center gap-2">
+                    View Plans
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Button>
                 <Link to="/compare">
                   <Button size="lg" variant="outline" className="text-base px-8">
                     Compare with Budget VPS
@@ -286,31 +276,11 @@ export default function ProVPS() {
               description="All plans include premium DDoS protection and dedicated resources."
             />
 
-            {isLoading ? (
-              <div className="flex justify-center py-12">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              </div>
-            ) : plans.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                {plans.map((plan, index) => (
-                  <PricingCard
-                    key={plan.id}
-                    name={plan.name}
-                    slug={plan.slug}
-                    price={formatPrice(plan.price_monthly)}
-                    description={plan.description || "High-performance VPS"}
-                    features={getFeatures(plan)}
-                    type="pro_vps"
-                    popular={index === 1}
-                    index={index}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-muted-foreground py-12">
-                No Pro VPS plans available yet. Check back soon!
-              </p>
-            )}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {plans.map((plan, index) => (
+                <PricingCard key={plan.name} {...plan} index={index} />
+              ))}
+            </div>
 
             <p className="text-center text-sm text-muted-foreground mt-8">
               Need more resources? <Link to="/contact" className="text-primary hover:underline">Contact us</Link> for custom plans.

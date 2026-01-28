@@ -1,7 +1,0 @@
-project_id = "kwqjuczfjbwzyjghxcrh"
-
-[functions.provision-vps]
-verify_jwt = false
-
-[functions.get-os-templates]
-verify_jwt = false

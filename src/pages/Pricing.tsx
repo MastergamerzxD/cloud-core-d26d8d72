@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
@@ -6,74 +5,104 @@ import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import PricingCard from "@/components/ui/PricingCard";
 import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
-import { Loader2 } from "lucide-react";
 
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-  product_type: string;
-  cpu_cores: number;
-  ram_gb: number;
-  storage_gb: number;
-  bandwidth_tb: number;
-  price_monthly: number;
-}
+const proPlans = [
+  {
+    name: "Pro Starter",
+    price: "₹299",
+    description: "Entry-level gaming VPS",
+    type: "pro" as const,
+    features: [
+      "2 vCPU Cores (Dedicated)",
+      "4 GB DDR4 ECC RAM",
+      "50 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "Premium DDoS Protection",
+      "Never Suspended",
+    ],
+  },
+  {
+    name: "Pro Performance",
+    price: "₹599",
+    description: "Most popular choice",
+    type: "pro" as const,
+    popular: true,
+    features: [
+      "4 vCPU Cores (Dedicated)",
+      "8 GB DDR4 ECC RAM",
+      "100 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "Premium DDoS Protection",
+      "Never Suspended",
+      "Priority Support",
+    ],
+  },
+  {
+    name: "Pro Ultimate",
+    price: "₹999",
+    description: "Maximum performance",
+    type: "pro" as const,
+    features: [
+      "8 vCPU Cores (Dedicated)",
+      "16 GB DDR4 ECC RAM",
+      "200 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "Premium DDoS Protection",
+      "Never Suspended",
+      "Priority Support",
+      "Weekly Backups",
+    ],
+  },
+];
+
+const budgetPlans = [
+  {
+    name: "Budget Starter",
+    price: "₹499",
+    description: "Entry-level budget VPS",
+    type: "budget" as const,
+    features: [
+      "2 vCPU Cores (Shared)",
+      "4 GB DDR4 RAM",
+      "60 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "DDoS Protection",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Plus",
+    price: "₹799",
+    description: "Best value option",
+    type: "budget" as const,
+    popular: true,
+    features: [
+      "4 vCPU Cores (Shared)",
+      "8 GB DDR4 RAM",
+      "120 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "DDoS Protection",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Pro",
+    price: "₹1,199",
+    description: "Maximum budget value",
+    type: "budget" as const,
+    features: [
+      "6 vCPU Cores (Shared)",
+      "12 GB DDR4 RAM",
+      "200 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "DDoS Protection",
+      "Standard Support",
+      "Weekly Backups",
+    ],
+  },
+];
 
 export default function Pricing() {
-  const [proPlans, setProPlans] = useState<Product[]>([]);
-  const [budgetPlans, setBudgetPlans] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .eq("is_active", true)
-        .order("price_monthly");
-
-      if (error) throw error;
-
-      const pro = data?.filter((p) => p.product_type === "pro_vps") || [];
-      const budget = data?.filter((p) => p.product_type === "budget_vps") || [];
-      setProPlans(pro);
-      setBudgetPlans(budget);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
-  const getFeatures = (product: Product): string[] => {
-    const features: string[] = [];
-    const isProType = product.product_type === "pro_vps";
-    
-    features.push(`${product.cpu_cores} vCPU Cores (${isProType ? "Dedicated" : "Shared"})`);
-    features.push(`${product.ram_gb} GB DDR4${isProType ? " ECC" : ""} RAM`);
-    features.push(`${product.storage_gb} GB NVMe Storage`);
-    features.push(product.bandwidth_tb >= 100 ? "Unlimited Bandwidth" : `${product.bandwidth_tb} TB Bandwidth`);
-    features.push(isProType ? "Premium DDoS Protection" : "DDoS Protection");
-    if (isProType) features.push("Never Suspended");
-    
-    return features;
-  };
-
   return (
     <>
       <Helmet>
@@ -133,77 +162,39 @@ export default function Pricing() {
           </div>
         </section>
 
-        {isLoading ? (
-          <div className="flex justify-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        {/* Pro VPS Plans */}
+        <section className="pb-16">
+          <div className="container-wide">
+            <SectionHeader
+              badge="Pro VPS"
+              title="High-Performance Gaming VPS"
+              description="Dedicated resources, premium DDoS protection, never suspended under attacks."
+            />
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {proPlans.map((plan, index) => (
+                <PricingCard key={plan.name} {...plan} index={index} />
+              ))}
+            </div>
           </div>
-        ) : (
-          <>
-            {/* Pro VPS Plans */}
-            {proPlans.length > 0 && (
-              <section className="pb-16">
-                <div className="container-wide">
-                  <SectionHeader
-                    badge="Pro VPS"
-                    title="High-Performance Gaming VPS"
-                    description="Dedicated resources, premium DDoS protection, never suspended under attacks."
-                  />
+        </section>
 
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    {proPlans.map((plan, index) => (
-                      <PricingCard
-                        key={plan.id}
-                        name={plan.name}
-                        slug={plan.slug}
-                        price={formatPrice(plan.price_monthly)}
-                        description={plan.description || "High-performance VPS"}
-                        features={getFeatures(plan)}
-                        type="pro_vps"
-                        popular={index === 1}
-                        index={index}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </section>
-            )}
+        {/* Budget VPS Plans */}
+        <section className="section-padding bg-card/30">
+          <div className="container-wide">
+            <SectionHeader
+              badge="Budget VPS"
+              title="Cost-Effective Standard VPS"
+              description="Reliable hosting for websites, bots, and development servers."
+            />
 
-            {/* Budget VPS Plans */}
-            {budgetPlans.length > 0 && (
-              <section className="section-padding bg-card/30">
-                <div className="container-wide">
-                  <SectionHeader
-                    badge="Budget VPS"
-                    title="Cost-Effective Standard VPS"
-                    description="Reliable hosting for websites, bots, and development servers."
-                  />
-
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    {budgetPlans.map((plan, index) => (
-                      <PricingCard
-                        key={plan.id}
-                        name={plan.name}
-                        slug={plan.slug}
-                        price={formatPrice(plan.price_monthly)}
-                        description={plan.description || "Affordable VPS"}
-                        features={getFeatures(plan)}
-                        type="budget_vps"
-                        popular={index === 1}
-                        index={index}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </section>
-            )}
-
-            {proPlans.length === 0 && budgetPlans.length === 0 && (
-              <section className="py-20 text-center">
-                <p className="text-muted-foreground">No plans available yet. Check back soon!</p>
-              </section>
-            )}
-          </>
-        )}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {budgetPlans.map((plan, index) => (
+                <PricingCard key={plan.name} {...plan} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* FAQ */}
         <section className="section-padding">

@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Server, Check, ArrowRight, Wallet, AlertTriangle, Loader2 } from "lucide-react";
+import { Shield, Server, Check, ArrowRight, Wallet, AlertTriangle } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import PricingCard from "@/components/ui/PricingCard";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { supabase } from "@/integrations/supabase/client";
-
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-  product_type: string;
-  cpu_cores: number;
-  ram_gb: number;
-  storage_gb: number;
-  bandwidth_tb: number;
-  price_monthly: number;
-}
 
 const features = [
   {
@@ -51,52 +36,57 @@ const useCases = [
   "Static File Hosting",
 ];
 
+const plans = [
+  {
+    name: "Budget Starter",
+    price: "₹499",
+    description: "Entry-level budget VPS",
+    type: "budget" as const,
+    features: [
+      "2 vCPU Cores (Shared)",
+      "4 GB DDR4 RAM",
+      "60 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "DDoS Protection",
+      "1 IPv4 Address",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Plus",
+    price: "₹799",
+    description: "Best value option",
+    type: "budget" as const,
+    popular: true,
+    features: [
+      "4 vCPU Cores (Shared)",
+      "8 GB DDR4 RAM",
+      "120 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "DDoS Protection",
+      "1 IPv4 Address",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Pro",
+    price: "₹1,199",
+    description: "Maximum budget value",
+    type: "budget" as const,
+    features: [
+      "6 vCPU Cores (Shared)",
+      "12 GB DDR4 RAM",
+      "200 GB NVMe Storage",
+      "Unlimited Bandwidth",
+      "DDoS Protection",
+      "1 IPv4 Address",
+      "Standard Support",
+      "Weekly Backups",
+    ],
+  },
+];
+
 export default function BudgetVPS() {
-  const [plans, setPlans] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .eq("is_active", true)
-        .eq("product_type", "budget_vps")
-        .order("price_monthly");
-
-      if (error) throw error;
-      setPlans(data || []);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
-  const getFeatures = (product: Product): string[] => {
-    const features: string[] = [];
-    features.push(`${product.cpu_cores} vCPU Cores (Shared)`);
-    features.push(`${product.ram_gb} GB DDR4 RAM`);
-    features.push(`${product.storage_gb} GB NVMe Storage`);
-    features.push(product.bandwidth_tb >= 100 ? "Unlimited Bandwidth" : `${product.bandwidth_tb} TB Bandwidth`);
-    features.push("DDoS Protection");
-    features.push("1 IPv4 Address");
-    features.push("Standard Support");
-    return features;
-  };
-
   return (
     <>
       <Helmet>
@@ -161,14 +151,12 @@ export default function BudgetVPS() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
               >
-                <Link to="/pricing">
-                  <Button size="lg" className="btn-fire text-base px-8">
-                    <span className="relative z-10 flex items-center gap-2">
-                      View Plans
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </Button>
-                </Link>
+                <Button size="lg" className="btn-fire text-base px-8">
+                  <span className="relative z-10 flex items-center gap-2">
+                    View Plans
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Button>
                 <Link to="/compare">
                   <Button size="lg" variant="outline" className="text-base px-8">
                     Compare with Pro VPS
@@ -308,31 +296,11 @@ export default function BudgetVPS() {
               description="Affordable plans with DDoS protection included."
             />
 
-            {isLoading ? (
-              <div className="flex justify-center py-12">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              </div>
-            ) : plans.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                {plans.map((plan, index) => (
-                  <PricingCard
-                    key={plan.id}
-                    name={plan.name}
-                    slug={plan.slug}
-                    price={formatPrice(plan.price_monthly)}
-                    description={plan.description || "Affordable VPS"}
-                    features={getFeatures(plan)}
-                    type="budget_vps"
-                    popular={index === 1}
-                    index={index}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-muted-foreground py-12">
-                No Budget VPS plans available yet. Check back soon!
-              </p>
-            )}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {plans.map((plan, index) => (
+                <PricingCard key={plan.name} {...plan} index={index} />
+              ))}
+            </div>
 
             <p className="text-center text-sm text-muted-foreground mt-8">
               Need guaranteed uptime? Check out <Link to="/pro-vps" className="text-primary hover:underline">Pro VPS</Link> plans.
