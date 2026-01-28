@@ -109,31 +109,37 @@ Deno.serve(async (req) => {
 
     const rootPassword = generatePassword();
 
-    // Prepare Virtualizor API request
+    // Build proper Virtualizor API URL
+    // If base URL is provided, construct full API URL
+    let fullApiUrl = apiUrl.trim();
+    if (!fullApiUrl.includes("index.php")) {
+      fullApiUrl = fullApiUrl.replace(/\/$/, "") + "/index.php";
+    }
+
+    // Prepare Virtualizor API request using POST method
     // Reference: https://virtualizor.com/admin-api/create-virtual-server
     const virtualizorParams = new URLSearchParams({
-      api_key: apiKey,
-      api_pass: apiPass,
+      api: "json",
+      apikey: apiKey,
+      apipass: apiPass,
       act: "addvs",
       plid: product.virtualizor_plan_id.toString(),
       hostname: order.hostname || `vps-${order.order_number}`,
-      osid: mapOsTemplate(order.os_template || "ubuntu-22.04"),
+      osid: order.os_template || "297", // OS ID from Virtualizor
       rootpass: rootPassword,
-      num_ips: "1",
-      ram: (product.ram_gb * 1024).toString(),
-      cores: product.cpu_cores.toString(),
-      space: product.storage_gb.toString(),
-      bandwidth: (product.bandwidth_tb * 1024).toString(),
+      addvps: "1", // Required to actually add the VPS
     });
 
-    console.log("Calling Virtualizor API:", apiUrl);
+    console.log("Calling Virtualizor API:", fullApiUrl);
+    console.log("Params:", Object.fromEntries(virtualizorParams.entries()));
 
-    // Call Virtualizor API
-    const virtualizorResponse = await fetch(`${apiUrl}?${virtualizorParams.toString()}`, {
-      method: "GET",
+    // Call Virtualizor API using POST
+    const virtualizorResponse = await fetch(fullApiUrl, {
+      method: "POST",
       headers: {
-        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
+      body: virtualizorParams.toString(),
     });
 
     const virtualizorData = await virtualizorResponse.json();
