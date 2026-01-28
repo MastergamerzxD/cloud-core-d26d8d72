@@ -22,6 +22,17 @@ import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AdminLogin from "./pages/AdminLogin";
+
+// Client Pages
+import ClientDashboard from "./pages/client/ClientDashboard";
+import ClientVPS from "./pages/client/ClientVPS";
+import ClientOrders from "./pages/client/ClientOrders";
+import ClientInvoices from "./pages/client/ClientInvoices";
+import ClientTickets from "./pages/client/ClientTickets";
+import ClientProfile from "./pages/client/ClientProfile";
+import ClientWallet from "./pages/client/ClientWallet";
+import ClientRedeem from "./pages/client/ClientRedeem";
 
 // Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -68,6 +79,17 @@ const App = () => (
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/admin-login" element={<AdminLogin />} />
+                
+                {/* Client Dashboard Routes */}
+                <Route path="/dashboard" element={<ClientDashboard />} />
+                <Route path="/dashboard/vps" element={<ClientVPS />} />
+                <Route path="/dashboard/orders" element={<ClientOrders />} />
+                <Route path="/dashboard/invoices" element={<ClientInvoices />} />
+                <Route path="/dashboard/tickets" element={<ClientTickets />} />
+                <Route path="/dashboard/profile" element={<ClientProfile />} />
+                <Route path="/dashboard/wallet" element={<ClientWallet />} />
+                <Route path="/dashboard/redeem" element={<ClientRedeem />} />
                 
                 {/* Admin Routes */}
                 <Route path="/admin" element={<AdminDashboard />} />

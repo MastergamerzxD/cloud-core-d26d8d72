@@ -37,8 +37,8 @@ export default function Register() {
       if (error) {
         toast.error(error.message);
       } else {
-        toast.success("Account created successfully! You can now sign in.");
-        navigate("/login");
+        toast.success("Account created successfully!");
+        navigate("/dashboard");
       }
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
