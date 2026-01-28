@@ -133,17 +133,70 @@ Deno.serve(async (req) => {
     console.log("Calling Virtualizor API:", fullApiUrl);
     console.log("Params:", Object.fromEntries(virtualizorParams.entries()));
 
-    // Call Virtualizor API using POST
-    const virtualizorResponse = await fetch(fullApiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: virtualizorParams.toString(),
-    });
+    // Try HTTPS first, then HTTP if SSL fails (for self-signed certs)
+    let virtualizorData: any = null;
+    let lastError: Error | null = null;
 
-    const virtualizorData = await virtualizorResponse.json();
-    console.log("Virtualizor response:", JSON.stringify(virtualizorData));
+    const urlsToTry = [fullApiUrl];
+    // If URL is HTTPS, also try HTTP as fallback for self-signed certs
+    if (fullApiUrl.startsWith("https://")) {
+      urlsToTry.push(fullApiUrl.replace("https://", "http://").replace(":4085", ":4084"));
+    }
+
+    for (const url of urlsToTry) {
+      try {
+        console.log("Trying URL:", url);
+        const virtualizorResponse = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: virtualizorParams.toString(),
+        });
+
+        const responseText = await virtualizorResponse.text();
+        console.log("Raw response (first 500 chars):", responseText.substring(0, 500));
+
+        // Check if response is HTML (error page)
+        if (responseText.startsWith("<!DOCTYPE") || responseText.startsWith("<html")) {
+          console.error("Received HTML instead of JSON from", url);
+          lastError = new Error("Virtualizor returned HTML instead of JSON. Check API URL and credentials.");
+          continue;
+        }
+
+        try {
+          virtualizorData = JSON.parse(responseText);
+          console.log("Virtualizor response:", JSON.stringify(virtualizorData));
+          break; // Success, exit loop
+        } catch (parseError) {
+          console.error("JSON parse error:", parseError);
+          lastError = new Error(`Invalid JSON response: ${responseText.substring(0, 100)}`);
+          continue;
+        }
+      } catch (error: any) {
+        console.error("Fetch error for", url, ":", error.message);
+        lastError = error;
+        // Continue to next URL
+      }
+    }
+
+    if (!virtualizorData && lastError) {
+      // All attempts failed
+      await supabase
+        .from("orders")
+        .update({ 
+          notes: `Provisioning failed: SSL certificate error. Please check Virtualizor API URL or use HTTP. Error: ${lastError.message}` 
+        })
+        .eq("id", order_id);
+
+      return new Response(
+        JSON.stringify({ 
+          error: "Cannot connect to Virtualizor. Please check API URL and ensure the certificate is valid, or use HTTP instead of HTTPS.",
+          details: lastError.message
+        }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     if (virtualizorData.error) {
       // Log the error and update order
