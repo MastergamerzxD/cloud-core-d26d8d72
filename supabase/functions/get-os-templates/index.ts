@@ -6,6 +6,41 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+function buildBaseUrls(rawUrl: string): string[] {
+  let base = rawUrl.trim().replace(/\/$/, "");
+  if (!base.includes("index.php")) base = `${base}/index.php`;
+
+  const urls: string[] = [base];
+  // Common Virtualizor ports
+  if (base.startsWith("https://") && base.includes(":4085")) {
+    urls.push(base.replace("https://", "http://").replace(":4085", ":4084"));
+  }
+  if (base.startsWith("http://") && base.includes(":4084")) {
+    urls.push(base.replace("http://", "https://").replace(":4084", ":4085"));
+  }
+
+  // Dedupe
+  return Array.from(new Set(urls));
+}
+
+async function tryVirtualizorJson(url: string, options: RequestInit) {
+  const res = await fetch(url, options);
+  const text = await res.text();
+
+  // Virtualizor returns a login HTML page if auth fails.
+  const trimmed = text.trim();
+  if (trimmed.startsWith("<!DOCTYPE") || trimmed.startsWith("<html") || trimmed.startsWith("<")) {
+    return { ok: false as const, error: `HTML_RESPONSE_${res.status}`, raw: trimmed.slice(0, 500) };
+  }
+
+  try {
+    const json = JSON.parse(text);
+    return { ok: true as const, json };
+  } catch {
+    return { ok: false as const, error: `INVALID_JSON_${res.status}`, raw: trimmed.slice(0, 500) };
+  }
+}
+
 interface OsTemplatesRequest {
   plan_id?: number;
 }
@@ -51,68 +86,64 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Build proper API URL with authentication in query string
-    // Virtualizor API expects auth params in URL, not POST body
-    let baseUrl = apiUrl.trim().replace(/\/$/, "");
-    if (!baseUrl.includes("index.php")) {
-      baseUrl = baseUrl + "/index.php";
-    }
+    const baseUrls = buildBaseUrls(apiUrl);
 
-    // Build URL with query parameters for authentication
-    const queryParams = new URLSearchParams({
-      api: "json",
-      apikey: apiKey,
-      apipass: apiPass,
-      act: "ostemplates",
-    });
-
-    // If plan_id provided, add it to get plan-specific templates
-    if (planId) {
-      queryParams.set("plid", planId.toString());
-    }
-
-    // Try HTTP directly (port 4084) to avoid SSL issues
-    let httpUrl = baseUrl;
-    if (httpUrl.startsWith("https://")) {
-      httpUrl = httpUrl.replace("https://", "http://").replace(":4085", ":4084");
-    }
-
-    const fullUrl = `${httpUrl}?${queryParams.toString()}`;
-    console.log("Fetching OS templates from:", fullUrl.replace(apiPass, "***"));
+    // Virtualizor admin API has multiple variants in the wild.
+    // We'll try the common ones to avoid “Login” HTML pages.
+    const apiModes: Array<"1" | "json"> = ["1", "json"];
+    const methods: Array<"GET" | "POST"> = ["POST", "GET"]; // POST first (more common in Virtualizor)
 
     let data: any = null;
-    let lastError: Error | null = null;
+    let debug: { url: string; error: string; raw?: string }[] = [];
 
-    try {
-      const response = await fetch(fullUrl, {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-        },
-      });
+    for (const baseUrl of baseUrls) {
+      for (const apiMode of apiModes) {
+        const query = new URLSearchParams({
+          api: apiMode,
+          apikey: apiKey,
+          apipass: apiPass,
+          act: "ostemplates",
+        });
+        if (planId) query.set("plid", planId.toString());
 
-      const responseText = await response.text();
-      console.log("Raw response (first 500 chars):", responseText.substring(0, 500));
+        const url = `${baseUrl}?${query.toString()}`;
 
-      // Check if response is HTML (error page or login page)
-      if (responseText.trim().startsWith("<!DOCTYPE") || responseText.trim().startsWith("<html") || responseText.trim().startsWith("<")) {
-        console.error("Received HTML instead of JSON - likely authentication failed or wrong endpoint");
-        lastError = new Error("API returned HTML. Check credentials and ensure API access is enabled.");
-      } else {
-        data = JSON.parse(responseText);
-        console.log("Virtualizor OS templates response:", JSON.stringify(data).substring(0, 500));
+        for (const method of methods) {
+          console.log("Virtualizor ostemplates try:", url.replace(apiPass, "***"), method);
+
+          try {
+            const result = await tryVirtualizorJson(url, {
+              method,
+              headers: {
+                "Accept": "application/json",
+                ...(method === "POST" ? { "Content-Type": "application/x-www-form-urlencoded" } : {}),
+              },
+              body: method === "POST" ? "" : undefined,
+            });
+
+            if (result.ok) {
+              data = result.json;
+              break;
+            } else {
+              debug.push({ url: url.replace(apiPass, "***"), error: result.error, raw: result.raw });
+            }
+          } catch (e: any) {
+            debug.push({ url: url.replace(apiPass, "***"), error: e?.message || String(e) });
+          }
+        }
+
+        if (data) break;
       }
-    } catch (error: any) {
-      console.error("Fetch error:", error.message);
-      lastError = error;
+      if (data) break;
     }
 
     if (!data) {
       return new Response(
-        JSON.stringify({ 
-          error: lastError?.message || "Failed to connect to Virtualizor", 
+        JSON.stringify({
+          error: "Unable to fetch OS templates from Virtualizor",
           templates: [],
-          hint: "Ensure API credentials are correct and HTTP access (port 4084) is enabled."
+          hint: "Virtualizor returned the login page (HTML) for all attempts. This usually means the API key/pass is not a Master/Admin API key, or API access is restricted by IP.",
+          debug: debug.slice(0, 3),
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );

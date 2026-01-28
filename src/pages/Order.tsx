@@ -126,7 +126,16 @@ export default function Order() {
 
       if (error) throw error;
 
-      const templates = data?.templates || [];
+      // If the function returns an error payload (status 200), treat it as failure
+      if (data?.error) {
+        throw new Error(data.error);
+      }
+
+      const templates = (data?.templates || []) as OsTemplate[];
+      if (!templates.length) {
+        throw new Error("No OS templates returned");
+      }
+
       setOsTemplates(templates);
       
       // Auto-select first template if available
@@ -136,6 +145,9 @@ export default function Order() {
     } catch (error) {
       console.error("Error fetching OS templates:", error);
       // Fallback to default templates if API fails
+      toast.message("Using default OS list", {
+        description: "OS templates couldn't be fetched from the provisioning backend. You can still place the order.",
+      });
       setOsTemplates([
         { id: "297", name: "Ubuntu 22.04 LTS", category: "linux" },
         { id: "288", name: "Ubuntu 20.04 LTS", category: "linux" },
