@@ -60,18 +60,18 @@ export default function PricingPreview() {
         <SectionHeader
           badge="Pricing"
           title="Transparent Pricing, No Hidden Fees"
-          description="Choose from our range of VPS plans. All prices in INR, billed monthly. No setup fees, no surprises."
+          description="All prices in INR, billed monthly. No setup fees."
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
           {pricingPlans.map((plan, index) => (
             <PricingCard key={plan.name} {...plan} index={index} />
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-8 sm:mt-12 text-center">
           <Link to="/pricing">
-            <Button variant="outline" size="lg" className="group">
+            <Button variant="outline" size="lg" className="group text-sm sm:text-base">
               View All Plans
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>

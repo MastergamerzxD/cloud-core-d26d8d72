@@ -15,36 +15,36 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center"
+          className="max-w-3xl mx-auto text-center px-2"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
             Ready to Deploy Your
             <br />
             <span className="text-fire-gradient">High-Performance VPS?</span>
           </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground mb-6 sm:mb-10 max-w-xl mx-auto">
             Join hundreds of developers and businesses who trust Cloud on Fire for 
-            their mission-critical workloads. Get started in minutes.
+            their mission-critical workloads.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/pricing">
-              <Button size="lg" className="btn-fire text-base px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <Link to="/pricing" className="w-full sm:w-auto">
+              <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
                 <span className="relative z-10 flex items-center gap-2">
                   Get Started Now
                   <ArrowRight className="w-4 h-4" />
                 </span>
               </Button>
             </Link>
-            <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-base px-8">
+            <Link to="/contact" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
                 <MessageCircle className="w-4 h-4 mr-2" />
                 Talk to Sales
               </Button>
             </Link>
           </div>
 
-          <p className="mt-8 text-sm text-muted-foreground">
+          <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-muted-foreground">
             No credit card required • Cancel anytime • 24/7 support
           </p>
         </motion.div>

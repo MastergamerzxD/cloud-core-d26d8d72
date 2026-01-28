@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center section-padding overflow-hidden">
-      {/* Hero glow effect */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center section-padding overflow-hidden">
+      {/* Hero glow effect - smaller on mobile */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] sm:w-[500px] lg:w-[800px] h-[300px] sm:h-[400px] lg:h-[600px] bg-primary/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none" />
       
       <div className="container-wide relative">
         <div className="max-w-4xl mx-auto text-center">
@@ -17,9 +17,9 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-8">
-              <Shield className="w-4 h-4" />
-              Enterprise-Grade DDoS Protection Included
+            <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-4 sm:mb-8">
+              <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden xs:inline">Enterprise-Grade</span> DDoS Protection
             </span>
           </motion.div>
 
@@ -28,7 +28,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6"
           >
             High-Performance VPS.
             <br />
@@ -40,7 +40,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-2"
           >
             Deploy game servers, high-traffic applications, and real-time workloads 
             on infrastructure that never compromises. India's most reliable VPS hosting 
@@ -52,18 +52,18 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
           >
-            <Link to="/pro-vps">
-              <Button size="lg" className="btn-fire text-base px-8">
+            <Link to="/pro-vps" className="w-full sm:w-auto">
+              <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
                 <span className="relative z-10 flex items-center gap-2">
                   Explore Pro VPS
                   <ArrowRight className="w-4 h-4" />
                 </span>
               </Button>
             </Link>
-            <Link to="/budget-vps">
-              <Button size="lg" variant="outline" className="text-base px-8 border-border/50 hover:border-primary/50 hover:bg-primary/5">
+            <Link to="/budget-vps" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 border-border/50 hover:border-primary/50 hover:bg-primary/5 w-full sm:w-auto h-11 sm:h-12">
                 View Budget VPS
               </Button>
             </Link>
@@ -74,7 +74,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto"
+            className="mt-10 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 max-w-3xl mx-auto"
           >
             {[
               { value: "99.9%", label: "Uptime SLA" },
@@ -82,15 +82,15 @@ export default function HeroSection() {
               { value: "<1ms", label: "Network Latency" },
               { value: "24/7", label: "Expert Support" },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-fire-gradient">{stat.value}</div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+              <div key={index} className="text-center p-3 sm:p-0">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-fire-gradient">{stat.value}</div>
+                <div className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">{stat.label}</div>
               </div>
             ))}
           </motion.div>
         </div>
 
-        {/* Floating elements */}
+        {/* Floating elements - hidden on mobile/tablet */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}

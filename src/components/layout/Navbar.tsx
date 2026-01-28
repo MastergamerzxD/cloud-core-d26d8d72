@@ -161,16 +161,16 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden border-t border-border/50"
+              className="lg:hidden overflow-hidden border-t border-border/50 bg-background/95 backdrop-blur-xl"
             >
-              <div className="py-4 space-y-2">
+              <div className="py-3 sm:py-4 space-y-1 sm:space-y-2 max-h-[70vh] overflow-y-auto">
                 {navigation.map((item) => (
                   <div key={item.name}>
                     {item.children ? (
                       <div>
                         <button
                           onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
-                          className="flex items-center justify-between w-full px-4 py-3 text-foreground"
+                          className="flex items-center justify-between w-full px-4 py-2.5 sm:py-3 text-sm sm:text-base text-foreground"
                         >
                           {item.name}
                           <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === item.name ? "rotate-180" : ""}`} />
@@ -181,13 +181,13 @@ export default function Navbar() {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="pl-4 space-y-1"
+                              className="pl-4 space-y-0.5 sm:space-y-1 bg-secondary/30"
                             >
                               {item.children.map((child) => (
                                 <Link
                                   key={child.name}
                                   to={child.href}
-                                  className="block px-4 py-2 text-muted-foreground hover:text-primary transition-colors"
+                                  className="block px-4 py-2 sm:py-2.5 text-sm text-muted-foreground hover:text-primary transition-colors"
                                 >
                                   {child.name}
                                 </Link>
@@ -199,21 +199,21 @@ export default function Navbar() {
                     ) : (
                       <Link
                         to={item.href}
-                        className="block px-4 py-3 text-foreground hover:text-primary transition-colors"
+                        className="block px-4 py-2.5 sm:py-3 text-sm sm:text-base text-foreground hover:text-primary transition-colors"
                       >
                         {item.name}
                       </Link>
                     )}
                   </div>
                 ))}
-                <div className="pt-4 px-4 space-y-3">
+                <div className="pt-3 sm:pt-4 px-4 space-y-2 sm:space-y-3 border-t border-border/30 mt-2">
                   <Link to="/contact" className="block">
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full h-10 sm:h-11 text-sm">
                       Contact Sales
                     </Button>
                   </Link>
                   <Link to="/pricing" className="block">
-                    <Button className="w-full btn-fire">
+                    <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
                       <span className="relative z-10">Get Started</span>
                     </Button>
                   </Link>

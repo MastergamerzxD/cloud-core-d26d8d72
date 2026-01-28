@@ -42,10 +42,10 @@ export default function FeaturesSection() {
         <SectionHeader
           badge="Why Choose Us"
           title="Infrastructure Built for Performance"
-          description="Every component of our platform is engineered for stability, speed, and security. From network architecture to hardware selection, we prioritize reliability."
+          description="Every component of our platform is engineered for stability, speed, and security."
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((feature, index) => (
             <FeatureCard key={feature.title} {...feature} index={index} />
           ))}

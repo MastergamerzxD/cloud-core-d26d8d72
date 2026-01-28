@@ -32,19 +32,19 @@ export default function ComparisonPreview() {
         >
           <div className="glass-card overflow-hidden">
             {/* Header */}
-            <div className="grid grid-cols-3 gap-4 p-6 border-b border-border/50 bg-secondary/30">
-              <div className="text-sm font-medium text-muted-foreground">Feature</div>
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-6 border-b border-border/50 bg-secondary/30">
+              <div className="text-xs sm:text-sm font-medium text-muted-foreground">Feature</div>
               <div className="text-center">
-                <span className="inline-block px-3 py-1 text-sm font-semibold bg-primary/20 text-primary rounded-full">
+                <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm font-semibold bg-primary/20 text-primary rounded-full">
                   Pro VPS
                 </span>
-                <div className="text-xs text-muted-foreground mt-1">From ₹299/mo</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1">From ₹299/mo</div>
               </div>
               <div className="text-center">
-                <span className="inline-block px-3 py-1 text-sm font-semibold bg-secondary text-secondary-foreground rounded-full">
-                  Budget VPS
+                <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm font-semibold bg-secondary text-secondary-foreground rounded-full">
+                  Budget
                 </span>
-                <div className="text-xs text-muted-foreground mt-1">From ₹499/mo</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1">From ₹499/mo</div>
               </div>
             </div>
 
@@ -52,23 +52,23 @@ export default function ComparisonPreview() {
             {comparisonData.map((row, index) => (
               <div
                 key={row.feature}
-                className={`grid grid-cols-3 gap-4 p-4 ${
+                className={`grid grid-cols-3 gap-2 sm:gap-4 p-2.5 sm:p-4 ${
                   index !== comparisonData.length - 1 ? "border-b border-border/30" : ""
                 }`}
               >
-                <div className="text-sm text-foreground">{row.feature}</div>
+                <div className="text-xs sm:text-sm text-foreground leading-tight">{row.feature}</div>
                 <div className="flex justify-center">
                   {row.pro ? (
-                    <Check className="w-5 h-5 text-primary" />
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                   ) : (
-                    <X className="w-5 h-5 text-muted-foreground/50" />
+                    <X className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/50" />
                   )}
                 </div>
                 <div className="flex justify-center">
                   {row.budget ? (
-                    <Check className="w-5 h-5 text-primary" />
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                   ) : (
-                    <X className="w-5 h-5 text-muted-foreground/50" />
+                    <X className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/50" />
                   )}
                 </div>
               </div>
