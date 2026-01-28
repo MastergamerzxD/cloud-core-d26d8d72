@@ -61,6 +61,21 @@ export default function AdminOrders() {
     }
   };
 
+  const parseSupabaseError = (error: any): string => {
+    if (!error) return "An unexpected error occurred";
+    
+    const message = error.message || error.details || String(error);
+    
+    if (message.includes("violates check constraint")) {
+      return "Invalid status value. Please try again.";
+    }
+    if (message.includes("permission denied") || message.includes("RLS")) {
+      return "You don't have permission to update this order.";
+    }
+    
+    return "Failed to update order. Please try again.";
+  };
+
   const updateStatus = async (id: string, status: "pending" | "paid" | "provisioning" | "active" | "suspended" | "cancelled" | "expired") => {
     try {
       const { error } = await supabase
@@ -72,7 +87,8 @@ export default function AdminOrders() {
       toast.success(`Order status updated to ${status}`);
       fetchOrders();
     } catch (error: any) {
-      toast.error(error.message || "Failed to update order");
+      console.error("Error updating order:", error);
+      toast.error(parseSupabaseError(error));
     }
   };
 

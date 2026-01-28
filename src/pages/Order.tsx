@@ -173,6 +173,38 @@ export default function Order() {
     }
   };
 
+  const parseSupabaseError = (error: any): string => {
+    if (!error) return "An unexpected error occurred";
+    
+    const message = error.message || error.details || String(error);
+    
+    // Common Supabase/PostgreSQL error patterns
+    if (message.includes("null value in column")) {
+      return "Failed to generate order. Please try again.";
+    }
+    if (message.includes("violates not-null constraint")) {
+      return "Required information is missing. Please check your details.";
+    }
+    if (message.includes("violates unique constraint")) {
+      return "This order already exists. Please refresh and try again.";
+    }
+    if (message.includes("violates foreign key constraint")) {
+      return "Invalid product selected. Please choose a valid plan.";
+    }
+    if (message.includes("violates check constraint")) {
+      return "Invalid data provided. Please check your inputs.";
+    }
+    if (message.includes("permission denied") || message.includes("RLS")) {
+      return "You don't have permission to perform this action.";
+    }
+    if (message.includes("JWT expired")) {
+      return "Your session has expired. Please log in again.";
+    }
+    
+    // Return a generic user-friendly message
+    return "Failed to place order. Please try again or contact support.";
+  };
+
   const handleSubmitOrder = async () => {
     if (!user) {
       toast.error("Please log in to place an order");
@@ -189,7 +221,12 @@ export default function Order() {
 
     try {
       // Generate order number
-      const { data: orderNumber } = await supabase.rpc("generate_order_number");
+      const { data: orderNumber, error: orderNumError } = await supabase.rpc("generate_order_number");
+      
+      if (orderNumError || !orderNumber) {
+        console.error("Error generating order number:", orderNumError);
+        throw new Error("Failed to generate order number");
+      }
 
       // Create order
       const { data: order, error: orderError } = await supabase
@@ -207,10 +244,18 @@ export default function Order() {
         .select()
         .single();
 
-      if (orderError) throw orderError;
+      if (orderError) {
+        console.error("Order creation error:", orderError);
+        throw orderError;
+      }
 
       // Generate invoice number
-      const { data: invoiceNumber } = await supabase.rpc("generate_invoice_number");
+      const { data: invoiceNumber, error: invoiceNumError } = await supabase.rpc("generate_invoice_number");
+      
+      if (invoiceNumError || !invoiceNumber) {
+        console.error("Error generating invoice number:", invoiceNumError);
+        throw new Error("Failed to generate invoice number");
+      }
 
       // Create invoice
       const dueDate = new Date();
@@ -227,7 +272,10 @@ export default function Order() {
         status: "pending",
       });
 
-      if (invoiceError) throw invoiceError;
+      if (invoiceError) {
+        console.error("Invoice creation error:", invoiceError);
+        throw invoiceError;
+      }
 
       // Record coupon usage if applied
       if (appliedCoupon) {
@@ -249,7 +297,7 @@ export default function Order() {
       navigate("/dashboard/orders");
     } catch (error: any) {
       console.error("Error creating order:", error);
-      toast.error(error.message || "Failed to place order");
+      toast.error(parseSupabaseError(error));
     } finally {
       setIsSubmitting(false);
     }
