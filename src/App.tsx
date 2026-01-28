@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import PasswordProtection from "@/components/auth/PasswordProtection";
 import Index from "./pages/Index";
 import ProVPS from "./pages/ProVPS";
 import BudgetVPS from "./pages/BudgetVPS";
@@ -27,24 +28,26 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/pro-vps" element={<ProVPS />} />
-            <Route path="/budget-vps" element={<BudgetVPS />} />
-            <Route path="/compare" element={<Compare />} />
-            <Route path="/ddos-protection" element={<DDoSProtection />} />
-            <Route path="/infrastructure" element={<Infrastructure />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/why-us" element={<WhyUs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <PasswordProtection>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/pro-vps" element={<ProVPS />} />
+              <Route path="/budget-vps" element={<BudgetVPS />} />
+              <Route path="/compare" element={<Compare />} />
+              <Route path="/ddos-protection" element={<DDoSProtection />} />
+              <Route path="/infrastructure" element={<Infrastructure />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/why-us" element={<WhyUs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </PasswordProtection>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
