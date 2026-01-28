@@ -1,1 +1,4 @@
 project_id = "kwqjuczfjbwzyjghxcrh"
+
+[functions.provision-vps]
+verify_jwt = false
