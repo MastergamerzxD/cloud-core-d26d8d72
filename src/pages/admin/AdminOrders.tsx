@@ -7,10 +7,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
-import { MoreHorizontal, Eye, Check, X } from "lucide-react";
+import { MoreHorizontal, Eye, Check, X, Server, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 
@@ -25,12 +26,13 @@ interface Order {
   hostname: string | null;
   os_template: string | null;
   created_at: string;
-  products: { name: string } | null;
+  products: { name: string; virtualizor_plan_id: number | null } | null;
 }
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [provisioningOrderId, setProvisioningOrderId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [total, setTotal] = useState(0);
@@ -47,7 +49,7 @@ export default function AdminOrders() {
 
       const { data, count, error } = await supabase
         .from("orders")
-        .select("*, products(name)", { count: "exact" })
+        .select("*, products(name, virtualizor_plan_id)", { count: "exact" })
         .range(from, to)
         .order("created_at", { ascending: false });
 
@@ -92,6 +94,63 @@ export default function AdminOrders() {
     }
   };
 
+  const provisionVps = async (orderId: string) => {
+    setProvisioningOrderId(orderId);
+    
+    try {
+      const response = await supabase.functions.invoke("provision-vps", {
+        body: { order_id: orderId },
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message || "Provisioning failed");
+      }
+
+      const data = response.data;
+
+      if (data.error) {
+        if (data.requires_config) {
+          toast.error("Virtualizor API not configured. Please configure it in Settings.");
+        } else {
+          toast.error(data.error);
+        }
+        return;
+      }
+
+      toast.success("VPS provisioned successfully!", {
+        description: `IP: ${data.vps?.ip_address || "Pending"} | Password: ${data.vps?.root_password}`,
+        duration: 10000,
+      });
+      
+      fetchOrders();
+    } catch (error: any) {
+      console.error("Provisioning error:", error);
+      toast.error(error.message || "Failed to provision VPS");
+    } finally {
+      setProvisioningOrderId(null);
+    }
+  };
+
+  const markAsPaidAndProvision = async (orderId: string) => {
+    try {
+      // First mark as paid
+      const { error } = await supabase
+        .from("orders")
+        .update({ status: "paid" })
+        .eq("id", orderId);
+
+      if (error) throw error;
+      
+      toast.success("Order marked as paid. Starting provisioning...");
+      
+      // Then provision
+      await provisionVps(orderId);
+    } catch (error: any) {
+      console.error("Error:", error);
+      toast.error(parseSupabaseError(error));
+    }
+  };
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
@@ -123,7 +182,16 @@ export default function AdminOrders() {
     {
       key: "product",
       header: "Product",
-      cell: (row) => row.products?.name || "—",
+      cell: (row) => (
+        <div>
+          <p>{row.products?.name || "—"}</p>
+          {row.products?.virtualizor_plan_id && (
+            <span className="text-xs text-muted-foreground">
+              Plan #{row.products.virtualizor_plan_id}
+            </span>
+          )}
+        </div>
+      ),
     },
     {
       key: "amount",
@@ -155,24 +223,46 @@ export default function AdminOrders() {
       cell: (row) => (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <MoreHorizontal className="h-4 w-4" />
+            <Button variant="ghost" size="icon" disabled={provisioningOrderId === row.id}>
+              {provisioningOrderId === row.id ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <MoreHorizontal className="h-4 w-4" />
+              )}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>
               <Eye className="mr-2 h-4 w-4" /> View Details
             </DropdownMenuItem>
+            
+            <DropdownMenuSeparator />
+            
             {row.status === "pending" && (
-              <DropdownMenuItem onClick={() => updateStatus(row.id, "paid")}>
-                <Check className="mr-2 h-4 w-4" /> Mark as Paid
-              </DropdownMenuItem>
+              <>
+                <DropdownMenuItem onClick={() => markAsPaidAndProvision(row.id)}>
+                  <Server className="mr-2 h-4 w-4" /> Mark Paid & Provision
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => updateStatus(row.id, "paid")}>
+                  <Check className="mr-2 h-4 w-4" /> Mark as Paid Only
+                </DropdownMenuItem>
+              </>
             )}
+            
             {row.status === "paid" && (
-              <DropdownMenuItem onClick={() => updateStatus(row.id, "provisioning")}>
-                <Check className="mr-2 h-4 w-4" /> Start Provisioning
+              <DropdownMenuItem onClick={() => provisionVps(row.id)}>
+                <Server className="mr-2 h-4 w-4" /> Provision VPS
               </DropdownMenuItem>
             )}
+            
+            {row.status === "provisioning" && (
+              <DropdownMenuItem onClick={() => provisionVps(row.id)}>
+                <Server className="mr-2 h-4 w-4" /> Retry Provisioning
+              </DropdownMenuItem>
+            )}
+            
+            <DropdownMenuSeparator />
+            
             {!["cancelled", "expired"].includes(row.status) && (
               <DropdownMenuItem
                 onClick={() => updateStatus(row.id, "cancelled")}
@@ -192,7 +282,7 @@ export default function AdminOrders() {
       <div className="space-y-6">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Orders</h2>
-          <p className="text-muted-foreground">Manage customer orders</p>
+          <p className="text-muted-foreground">Manage customer orders and VPS provisioning</p>
         </div>
 
         <DataTable
