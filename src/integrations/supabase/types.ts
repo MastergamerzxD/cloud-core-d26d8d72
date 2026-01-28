@@ -53,6 +53,36 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_impersonations: {
+        Row: {
+          admin_id: string
+          ended_at: string | null
+          id: string
+          impersonated_user_id: string
+          ip_address: string | null
+          started_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          admin_id: string
+          ended_at?: string | null
+          id?: string
+          impersonated_user_id: string
+          ip_address?: string | null
+          started_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          admin_id?: string
+          ended_at?: string | null
+          id?: string
+          impersonated_user_id?: string
+          ip_address?: string | null
+          started_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       admin_settings: {
         Row: {
           category: string
@@ -540,9 +570,13 @@ export type Database = {
           created_at: string
           full_name: string | null
           id: string
+          is_suspended: boolean | null
+          last_login_at: string | null
+          login_count: number | null
           phone: string | null
           postal_code: string | null
           state: string | null
+          suspended_reason: string | null
           updated_at: string
           user_id: string
         }
@@ -554,9 +588,13 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id?: string
+          is_suspended?: boolean | null
+          last_login_at?: string | null
+          login_count?: number | null
           phone?: string | null
           postal_code?: string | null
           state?: string | null
+          suspended_reason?: string | null
           updated_at?: string
           user_id: string
         }
@@ -568,9 +606,13 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id?: string
+          is_suspended?: boolean | null
+          last_login_at?: string | null
+          login_count?: number | null
           phone?: string | null
           postal_code?: string | null
           state?: string | null
+          suspended_reason?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -742,6 +784,33 @@ export type Database = {
         }
         Relationships: []
       }
+      user_wallets: {
+        Row: {
+          balance: number
+          created_at: string
+          currency: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       vps_instances: {
         Row: {
           created_at: string
@@ -811,11 +880,59 @@ export type Database = {
           },
         ]
       }
+      wallet_transactions: {
+        Row: {
+          amount: number
+          balance_after: number
+          created_at: string
+          description: string | null
+          id: string
+          reference_id: string | null
+          source: string
+          type: string
+          user_id: string
+          wallet_id: string
+        }
+        Insert: {
+          amount: number
+          balance_after: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          reference_id?: string | null
+          source: string
+          type: string
+          user_id: string
+          wallet_id: string
+        }
+        Update: {
+          amount?: number
+          balance_after?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          reference_id?: string | null
+          source?: string
+          type?: string
+          user_id?: string
+          wallet_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wallet_transactions_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "user_wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      demote_from_admin: { Args: { target_user_id: string }; Returns: boolean }
       generate_coupon_code: { Args: never; Returns: string }
       generate_gift_card_code: { Args: never; Returns: string }
       generate_invoice_number: { Args: never; Returns: string }
@@ -828,6 +945,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      promote_to_admin: { Args: { target_user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user"

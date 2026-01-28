@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Loader2, Server } from "lucide-react";
+import { Loader2, Shield, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function AdminLogin() {
   const navigate = useNavigate();
-  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -20,13 +20,32 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const { error } = await signIn(email, password);
-      if (error) {
-        toast.error(error.message);
-      } else {
-        toast.success("Logged in successfully");
-        navigate("/dashboard");
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) throw authError;
+
+      // Check if user is admin
+      const { data: roleData, error: roleError } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", authData.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+
+      if (roleError) throw roleError;
+
+      if (!roleData) {
+        // Not an admin, sign out
+        await supabase.auth.signOut();
+        toast.error("Access denied. This login is for administrators only.");
+        return;
       }
+
+      toast.success("Welcome back, Admin!");
+      navigate("/admin");
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     } finally {
@@ -40,20 +59,20 @@ export default function Login() {
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <Server className="h-6 w-6 text-primary" />
+              <Shield className="h-6 w-6 text-primary" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Welcome back</CardTitle>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardTitle className="text-2xl">Admin Portal</CardTitle>
+          <CardDescription>Sign in to access the admin dashboard</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Admin Email</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="admin@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -70,24 +89,21 @@ export default function Login() {
                 required
               />
             </div>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-4">
+
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Sign In
+              Sign In to Admin
             </Button>
-            <p className="text-sm text-muted-foreground text-center">
-              Don't have an account?{" "}
-              <Link to="/register" className="text-primary hover:underline">
-                Sign up
+
+            <div className="text-center">
+              <Link
+                to="/login"
+                className="text-sm text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+              >
+                <ArrowLeft className="h-3 w-3" /> Back to User Login
               </Link>
-            </p>
-            <p className="text-xs text-muted-foreground text-center">
-              <Link to="/admin-login" className="hover:underline">
-                Admin Portal →
-              </Link>
-            </p>
-          </CardFooter>
+            </div>
+          </CardContent>
         </form>
       </Card>
     </div>
