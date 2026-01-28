@@ -6,6 +6,35 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+function buildBaseUrls(rawUrl: string): string[] {
+  let base = rawUrl.trim().replace(/\/$/, "");
+  if (!base.includes("index.php")) base = `${base}/index.php`;
+
+  const urls: string[] = [base];
+  if (base.startsWith("https://") && base.includes(":4085")) {
+    urls.push(base.replace("https://", "http://").replace(":4085", ":4084"));
+  }
+  if (base.startsWith("http://") && base.includes(":4084")) {
+    urls.push(base.replace("http://", "https://").replace(":4084", ":4085"));
+  }
+  return Array.from(new Set(urls));
+}
+
+async function tryVirtualizorJson(url: string, options: RequestInit) {
+  const res = await fetch(url, options);
+  const text = await res.text();
+  const trimmed = text.trim();
+  if (trimmed.startsWith("<!DOCTYPE") || trimmed.startsWith("<html") || trimmed.startsWith("<")) {
+    return { ok: false as const, error: `HTML_RESPONSE_${res.status}`, raw: trimmed.slice(0, 500) };
+  }
+  try {
+    const json = JSON.parse(text);
+    return { ok: true as const, json };
+  } catch {
+    return { ok: false as const, error: `INVALID_JSON_${res.status}`, raw: trimmed.slice(0, 500) };
+  }
+}
+
 interface ProvisionRequest {
   order_id: string;
 }
@@ -109,30 +138,9 @@ Deno.serve(async (req) => {
 
     const rootPassword = generatePassword();
 
-    // Build proper Virtualizor API URL with authentication in query string
-    // Virtualizor API expects auth params in URL, not POST body
-    let baseUrl = apiUrl.trim().replace(/\/$/, "");
-    if (!baseUrl.includes("index.php")) {
-      baseUrl = baseUrl + "/index.php";
-    }
+    const baseUrls = buildBaseUrls(apiUrl);
+    const apiModes: Array<"1" | "json"> = ["1", "json"];
 
-    // Use HTTP directly (port 4084) to avoid SSL certificate issues
-    let httpUrl = baseUrl;
-    if (httpUrl.startsWith("https://")) {
-      httpUrl = httpUrl.replace("https://", "http://").replace(":4085", ":4084");
-    }
-
-    // Build URL with query parameters for authentication
-    const queryParams = new URLSearchParams({
-      api: "json",
-      apikey: apiKey,
-      apipass: apiPass,
-      act: "addvs",
-    });
-
-    const fullApiUrl = `${httpUrl}?${queryParams.toString()}`;
-
-    // Prepare POST body for VPS creation parameters
     const vpsParams = new URLSearchParams({
       plid: product.virtualizor_plan_id.toString(),
       hostname: order.hostname || `vps-${order.order_number}`,
@@ -141,50 +149,60 @@ Deno.serve(async (req) => {
       addvps: "1",
     });
 
-    console.log("Calling Virtualizor API:", fullApiUrl.replace(apiPass, "***"));
     console.log("VPS Params:", Object.fromEntries(vpsParams.entries()));
 
     let virtualizorData: any = null;
-    let lastError: Error | null = null;
+    const debug: { url: string; error: string; raw?: string }[] = [];
 
-    try {
-      const virtualizorResponse = await fetch(fullApiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Accept": "application/json",
-        },
-        body: vpsParams.toString(),
-      });
+    for (const baseUrl of baseUrls) {
+      for (const apiMode of apiModes) {
+        const query = new URLSearchParams({
+          api: apiMode,
+          apikey: apiKey,
+          apipass: apiPass,
+          act: "addvs",
+        });
 
-      const responseText = await virtualizorResponse.text();
-      console.log("Raw response (first 500 chars):", responseText.substring(0, 500));
+        const url = `${baseUrl}?${query.toString()}`;
+        console.log("Virtualizor addvs try:", url.replace(apiPass, "***"));
 
-      // Check if response is HTML (error page)
-      if (responseText.trim().startsWith("<!DOCTYPE") || responseText.trim().startsWith("<html") || responseText.trim().startsWith("<")) {
-        console.error("Received HTML instead of JSON - authentication failed or wrong endpoint");
-        lastError = new Error("API returned HTML. Check credentials and ensure API access is enabled.");
-      } else {
-        virtualizorData = JSON.parse(responseText);
-        console.log("Virtualizor response:", JSON.stringify(virtualizorData));
+        try {
+          const result = await tryVirtualizorJson(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Accept": "application/json",
+            },
+            body: vpsParams.toString(),
+          });
+
+          if (result.ok) {
+            virtualizorData = result.json;
+            break;
+          } else {
+            debug.push({ url: url.replace(apiPass, "***"), error: result.error, raw: result.raw });
+          }
+        } catch (e: any) {
+          debug.push({ url: url.replace(apiPass, "***"), error: e?.message || String(e) });
+        }
       }
-    } catch (error: any) {
-      console.error("Fetch error:", error.message);
-      lastError = error;
+      if (virtualizorData) break;
     }
 
-    if (!virtualizorData && lastError) {
+    if (!virtualizorData) {
       await supabase
         .from("orders")
-        .update({ 
-          notes: `Provisioning failed: ${lastError.message}` 
+        .update({
+          notes:
+            "Provisioning failed: Virtualizor API returned login HTML for all attempts. Check Master/Admin API key/pass and IP allowlist.",
         })
         .eq("id", order_id);
 
       return new Response(
-        JSON.stringify({ 
-          error: "Cannot connect to Virtualizor. Check API URL and credentials.",
-          details: lastError.message
+        JSON.stringify({
+          error:
+            "Cannot provision: Virtualizor API rejected credentials (login HTML). Please verify Master/Admin API credentials and IP restrictions.",
+          debug: debug.slice(0, 3),
         }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
