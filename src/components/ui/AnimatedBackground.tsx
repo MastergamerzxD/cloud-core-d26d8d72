@@ -36,9 +36,9 @@ export default function AnimatedBackground() {
         this.opacity = Math.random() * 0.5 + 0.1;
         
         const colors = [
-          "255, 140, 50", // Orange
-          "255, 100, 50", // Deep orange
-          "255, 180, 80", // Light orange
+          "255, 140, 50",
+          "255, 100, 50",
+          "255, 180, 80",
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -95,14 +95,9 @@ export default function AnimatedBackground() {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw gradient background
       const gradient = ctx.createRadialGradient(
-        canvas.width / 2,
-        canvas.height / 3,
-        0,
-        canvas.width / 2,
-        canvas.height / 3,
-        canvas.width * 0.8
+        canvas.width / 2, canvas.height / 3, 0,
+        canvas.width / 2, canvas.height / 3, canvas.width * 0.8
       );
       gradient.addColorStop(0, "rgba(255, 100, 50, 0.03)");
       gradient.addColorStop(0.5, "rgba(255, 80, 40, 0.01)");
@@ -136,10 +131,23 @@ export default function AnimatedBackground() {
 
   return (
     <>
+      {/* Data center background image */}
+      <div 
+        className="fixed inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: "url('/images/datacenter-bg.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+      {/* Dark overlay to maintain readability */}
+      <div className="fixed inset-0 -z-20 pointer-events-none bg-background/85" />
+      
+      {/* Particle canvas on top */}
       <canvas
         ref={canvasRef}
         className="fixed inset-0 -z-10 pointer-events-none"
-        style={{ background: "linear-gradient(180deg, hsl(222 47% 6%), hsl(222 47% 3%))" }}
       />
       {/* Grid pattern overlay */}
       <div 
