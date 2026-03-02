@@ -175,7 +175,7 @@ export default function ProVPS() {
         </section>
 
         {/* Features */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
               badge="Pro Features"
@@ -268,7 +268,7 @@ export default function ProVPS() {
         </section>
 
         {/* Pricing */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
               badge="Pricing"

@@ -90,7 +90,7 @@ export default function Infrastructure() {
         </section>
 
         {/* World Map */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
               badge="Data Center Locations"
@@ -132,7 +132,7 @@ export default function Infrastructure() {
         </section>
 
         {/* Yotta Data Center */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>

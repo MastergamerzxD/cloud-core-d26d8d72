@@ -15,7 +15,7 @@ const comparisonData = [
 
 export default function ComparisonPreview() {
   return (
-    <section className="section-padding bg-card/30">
+    <section className="section-padding bg-card/60">
       <div className="container-wide">
         <SectionHeader
           badge="Compare Plans"

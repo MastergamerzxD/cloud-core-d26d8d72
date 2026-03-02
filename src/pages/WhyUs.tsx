@@ -121,7 +121,7 @@ export default function WhyUs() {
         </section>
 
         {/* Reasons */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <div className="space-y-16">
               {reasons.map((reason, index) => (
