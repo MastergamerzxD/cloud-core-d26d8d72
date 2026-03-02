@@ -28,7 +28,7 @@ export default function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Link to="/pricing" className="w-full sm:w-auto">
+            <Link to="/pro-vps" className="w-full sm:w-auto">
               <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
                 <span className="relative z-10 flex items-center gap-2">
                   Get Started Now
