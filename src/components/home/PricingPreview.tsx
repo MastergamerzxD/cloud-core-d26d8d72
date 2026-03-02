@@ -55,7 +55,7 @@ const pricingPlans = [
 
 export default function PricingPreview() {
   return (
-    <section className="section-padding bg-card/30">
+    <section className="section-padding bg-card/60">
       <div className="container-wide">
         <SectionHeader
           badge="Pricing"

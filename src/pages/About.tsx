@@ -75,7 +75,7 @@ export default function About() {
         </section>
 
         {/* Story */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -168,7 +168,7 @@ export default function About() {
         </section>
 
         {/* CTA */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

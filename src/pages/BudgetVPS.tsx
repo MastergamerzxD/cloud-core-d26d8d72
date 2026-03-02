@@ -194,7 +194,7 @@ export default function BudgetVPS() {
         </section>
 
         {/* Features */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
               badge="Budget Features"
@@ -288,7 +288,7 @@ export default function BudgetVPS() {
         </section>
 
         {/* Pricing */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
               badge="Pricing"

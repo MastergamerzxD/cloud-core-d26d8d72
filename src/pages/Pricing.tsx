@@ -180,7 +180,7 @@ export default function Pricing() {
         </section>
 
         {/* Budget VPS Plans */}
-        <section className="section-padding bg-card/30">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
               badge="Budget VPS"

@@ -30,7 +30,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border/50 bg-card/30">
+    <footer className="relative border-t border-border/50 bg-card/60">
       <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       
       <div className="relative container-wide py-10 sm:py-16 lg:py-20">
