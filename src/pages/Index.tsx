@@ -2,6 +2,9 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/home/HeroSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
+import CompanySection from "@/components/home/CompanySection";
+import TechStackSection from "@/components/home/TechStackSection";
+import UseCasesSection from "@/components/home/UseCasesSection";
 import ComparisonPreview from "@/components/home/ComparisonPreview";
 import TrustSection from "@/components/home/TrustSection";
 import PricingPreview from "@/components/home/PricingPreview";
@@ -14,9 +17,9 @@ export default function Index() {
         <title>Cloud on Fire - Best VPS Hosting India | Gaming VPS from ₹299/mo</title>
         <meta 
           name="description" 
-          content="India's #1 high-performance VPS hosting. Gaming VPS from ₹299/month with enterprise DDoS protection, NVMe storage, and 99.9% uptime. Never suspended under attacks." 
+          content="India's #1 high-performance VPS hosting based in Delhi. Gaming VPS from ₹299/month with enterprise DDoS protection, NVMe storage, Yotta data centers, and 99.9% uptime." 
         />
-        <meta name="keywords" content="VPS hosting India, gaming VPS, cheap VPS India, DDoS protected VPS, cloud server India, game server hosting, Minecraft server hosting India, FiveM server, budget VPS" />
+        <meta name="keywords" content="VPS hosting India, gaming VPS, cheap VPS India, DDoS protected VPS, cloud server India, game server hosting, Minecraft server hosting India, FiveM server, budget VPS, Delhi VPS hosting" />
         <link rel="canonical" href="https://cloudonfire.in/" />
         
         {/* Open Graph */}
@@ -41,6 +44,7 @@ export default function Index() {
             "description": "High-performance VPS hosting in India with enterprise DDoS protection",
             "address": {
               "@type": "PostalAddress",
+              "addressLocality": "Delhi",
               "addressCountry": "IN"
             },
             "sameAs": [],
@@ -56,7 +60,10 @@ export default function Index() {
       </Helmet>
       <Layout>
         <HeroSection />
+        <CompanySection />
         <FeaturesSection />
+        <TechStackSection />
+        <UseCasesSection />
         <ComparisonPreview />
         <TrustSection />
         <PricingPreview />

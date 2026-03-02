@@ -1,64 +1,67 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Cpu, HardDrive, Network, Shield, Server, Globe, ArrowRight } from "lucide-react";
+import { Cpu, HardDrive, Network, Shield, Server, ArrowRight, Building2, Check } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
+import WorldMap from "@/components/infrastructure/WorldMap";
 
 const specs = [
   {
     icon: Cpu,
     title: "Enterprise Processors",
-    description: "Latest-generation Intel Xeon and AMD EPYC processors with high single-thread performance for gaming and real-time applications.",
-    details: ["Intel Xeon Gold Series", "AMD EPYC 7003 Series", "High clock speeds", "Large L3 cache"],
+    description: "Latest-generation AMD EPYC 7003 series processors with high single-thread performance optimized for gaming and real-time applications.",
+    details: ["AMD EPYC™ 7003 Series", "High clock speeds (up to 3.7GHz)", "Large L3 cache (256MB)", "PCIe Gen4 support"],
   },
   {
     icon: HardDrive,
-    title: "NVMe Storage",
-    description: "Enterprise-grade NVMe SSDs with sustained read/write performance and RAID protection for data integrity.",
-    details: ["Samsung PM9A3 / Intel P5316", "Up to 7GB/s read speeds", "RAID 10 configuration", "Daily backups available"],
+    title: "NVMe Gen4 Storage",
+    description: "Enterprise-grade NVMe Gen4 SSDs delivering sustained read/write performance with RAID protection for data integrity.",
+    details: ["Samsung PM9A3 drives", "Up to 7GB/s read speeds", "RAID 10 configuration", "Daily backups available"],
   },
   {
     icon: Network,
     title: "Premium Network",
-    description: "Multiple Tier-1 transit providers with intelligent routing for optimal latency across India and globally.",
+    description: "Multiple Tier-1 transit providers with BGP-optimized routing for the lowest possible latency across India.",
     details: ["10Gbps+ uplinks", "Multiple peering points", "BGP optimized routing", "Redundant connectivity"],
   },
   {
     icon: Shield,
     title: "Security Infrastructure",
-    description: "Multi-layer security from hardware firewalls to application-level protection.",
-    details: ["Hardware firewalls", "DDoS mitigation", "Network segmentation", "24/7 monitoring"],
+    description: "Multi-layer security from hardware firewalls to application-level protection, including always-on DDoS mitigation.",
+    details: ["Juniper hardware firewalls", "1Tbps DDoS mitigation", "Network segmentation", "24/7 NOC monitoring"],
   },
 ];
 
-const datacenterFeatures = [
-  "Tier-3 equivalent facility",
+const yottaFeatures = [
+  "Tier-3+ certified facility",
   "N+1 power redundancy",
-  "UPS and diesel backup",
+  "UPS and diesel backup generators",
   "Precision cooling systems",
-  "24/7 security personnel",
-  "Biometric access control",
-  "Fire suppression systems",
-  "Environmental monitoring",
+  "24/7 on-site security personnel",
+  "Biometric + RFID access control",
+  "FM-200 fire suppression",
+  "Environmental monitoring sensors",
+  "Seismic zone protection",
+  "99.995% facility uptime",
 ];
 
 export default function Infrastructure() {
   return (
     <>
       <Helmet>
-        <title>Infrastructure - Enterprise VPS Hardware India | Intel Xeon & AMD EPYC | Cloud on Fire</title>
+        <title>Infrastructure - Yotta Data Centers Delhi & Mumbai | Cloud on Fire</title>
         <meta 
           name="description" 
-          content="Learn about Cloud on Fire's enterprise-grade VPS infrastructure in India. Intel Xeon & AMD EPYC processors, NVMe SSD storage, Tier-3 data centers, and 10Gbps+ premium network." 
+          content="Cloud on Fire operates from Yotta's Tier-3+ data centers in Delhi and Mumbai. AMD EPYC processors, NVMe Gen4 storage, 10Gbps network, and 1Tbps DDoS protection." 
         />
-        <meta name="keywords" content="VPS infrastructure India, Intel Xeon VPS, AMD EPYC server, NVMe VPS hosting, data center India, enterprise VPS hardware" />
+        <meta name="keywords" content="Yotta data center, VPS infrastructure India, AMD EPYC VPS, NVMe VPS hosting, Delhi data center, Mumbai data center, enterprise VPS hardware" />
         <link rel="canonical" href="https://cloudonfire.in/infrastructure" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://cloudonfire.in/infrastructure" />
-        <meta property="og:title" content="Infrastructure - Enterprise VPS Hardware | Cloud on Fire" />
-        <meta property="og:description" content="Enterprise-grade hardware: Intel Xeon, AMD EPYC, NVMe storage, and premium networking." />
+        <meta property="og:title" content="Infrastructure - Yotta Data Centers | Cloud on Fire" />
+        <meta property="og:description" content="Tier-3+ Yotta data centers in Delhi & Mumbai with enterprise hardware." />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="VPS Infrastructure | Cloud on Fire" />
       </Helmet>
@@ -66,63 +69,48 @@ export default function Infrastructure() {
         {/* Hero */}
         <section className="relative min-h-[60vh] flex items-center section-padding overflow-hidden">
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
-          
           <div className="container-wide relative">
             <div className="max-w-4xl mx-auto text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                 <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-8">
                   <Server className="w-4 h-4" />
                   Enterprise Infrastructure
                 </span>
               </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6"
-              >
-                Built on Hardware
-                <br />
-                <span className="text-fire-gradient">You Can Trust</span>
+              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+                Powered by <span className="text-fire-gradient">Yotta Data Centers</span>
               </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
-              >
-                Every component of our infrastructure is selected for reliability and performance. 
-                We use the same enterprise-grade hardware trusted by major cloud providers.
+              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Our infrastructure runs on India's most advanced data centers — Yotta's Tier-3+ certified facilities in Delhi and Mumbai with enterprise-grade hardware at every level.
               </motion.p>
             </div>
           </div>
         </section>
 
-        {/* Hardware Specs */}
+        {/* World Map */}
         <section className="section-padding bg-card/30">
           <div className="container-wide">
             <SectionHeader
-              badge="Hardware"
-              title="Enterprise-Grade Components"
-              description="We don't cut corners on hardware. Every server is built with reliability in mind."
+              badge="Data Center Locations"
+              title="Delhi & Mumbai — Connected Infrastructure"
+              description="Strategic dual-location deployment ensures low latency across India with automatic failover capabilities."
             />
+            <div className="max-w-5xl mx-auto">
+              <WorldMap />
+            </div>
+          </div>
+        </section>
 
+        {/* Hardware Specs */}
+        <section className="section-padding">
+          <div className="container-wide">
+            <SectionHeader badge="Hardware" title="Enterprise-Grade Components" description="Every server is built with reliability and raw performance in mind." />
             <div className="grid md:grid-cols-2 gap-6">
               {specs.map((spec, index) => (
-                <motion.div
-                  key={spec.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="glass-card p-6"
-                >
+                <motion.div key={spec.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }} className="glass-card p-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <spec.icon className="w-6 h-6 text-primary" />
@@ -132,9 +120,7 @@ export default function Infrastructure() {
                       <p className="text-muted-foreground text-sm mb-4">{spec.description}</p>
                       <div className="grid grid-cols-2 gap-2">
                         {spec.details.map((detail) => (
-                          <span key={detail} className="text-xs text-muted-foreground bg-secondary/50 px-2 py-1 rounded">
-                            {detail}
-                          </span>
+                          <span key={detail} className="text-xs text-muted-foreground bg-secondary/50 px-2 py-1 rounded">{detail}</span>
                         ))}
                       </div>
                     </div>
@@ -145,47 +131,41 @@ export default function Infrastructure() {
           </div>
         </section>
 
-        {/* Data Center */}
-        <section className="section-padding">
+        {/* Yotta Data Center */}
+        <section className="section-padding bg-card/30">
           <div className="container-wide">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
-                  Data Center
+              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
+                  <Building2 className="w-3 h-3" />
+                  Yotta Data Centers
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
-                  Secure, Reliable
+                  India's Most Advanced
                   <br />
-                  <span className="text-fire-gradient">Facility Standards</span>
+                  <span className="text-fire-gradient">Data Center Facilities</span>
                 </h2>
-                <p className="text-muted-foreground mb-8">
-                  Our servers are housed in facilities that meet stringent reliability 
-                  and security standards. Redundant power, cooling, and connectivity 
-                  ensure your services stay online.
+                <p className="text-muted-foreground mb-4">
+                  All Cloud on Fire servers are housed in Yotta's world-class data centers — 
+                  India's largest and most advanced data center provider. Yotta facilities are 
+                  built to Uptime Institute Tier-3+ standards with multi-layer redundancy.
                 </p>
-
+                <p className="text-muted-foreground mb-8">
+                  With locations in Delhi NCR and Mumbai, we ensure pan-India low-latency coverage 
+                  with redundant connectivity and automatic failover capabilities.
+                </p>
                 <div className="grid grid-cols-2 gap-3">
-                  {datacenterFeatures.map((feature) => (
+                  {yottaFeatures.map((feature) => (
                     <div key={feature} className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <Check className="w-4 h-4 text-primary shrink-0" />
                       <span className="text-sm text-muted-foreground">{feature}</span>
                     </div>
                   ))}
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative"
-              >
+              <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+                className="relative">
                 <div className="glass-card p-8 aspect-square flex flex-col justify-center">
                   <div className="space-y-4">
                     {[...Array(5)].map((_, i) => (
@@ -208,57 +188,36 @@ export default function Infrastructure() {
                       </div>
                     ))}
                   </div>
+                  <div className="mt-6 text-center">
+                    <span className="text-sm text-muted-foreground">Yotta Server Rack — Live Status</span>
+                  </div>
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Network Map */}
-        <section className="section-padding bg-card/30">
-          <div className="container-wide">
-            <SectionHeader
-              badge="Network"
-              title="Optimized for India & Beyond"
-              description="Strategic connectivity ensures low latency across the Indian subcontinent and globally."
-            />
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="glass-card p-8 max-w-4xl mx-auto"
-            >
-              <div className="grid md:grid-cols-3 gap-8 text-center">
-                <div>
-                  <Globe className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-foreground mb-1">India</div>
-                  <div className="text-sm text-muted-foreground">&lt;5ms latency</div>
-                </div>
-                <div>
-                  <Globe className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-foreground mb-1">Asia Pacific</div>
-                  <div className="text-sm text-muted-foreground">&lt;50ms latency</div>
-                </div>
-                <div>
-                  <Globe className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-foreground mb-1">Global</div>
-                  <div className="text-sm text-muted-foreground">&lt;150ms latency</div>
-                </div>
+        {/* CTA */}
+        <section className="section-padding">
+          <div className="container-wide text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Ready to Deploy on <span className="text-fire-gradient">Premium Infrastructure?</span>
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+                Get your VPS running on Yotta data centers with enterprise hardware and DDoS protection.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link to="/pro-vps">
+                  <Button size="lg" className="btn-fire">
+                    <span className="relative z-10 flex items-center gap-2">Explore Pro VPS<ArrowRight className="w-4 h-4" /></span>
+                  </Button>
+                </Link>
+                <Link to="/budget-vps">
+                  <Button size="lg" variant="outline">View Budget VPS</Button>
+                </Link>
               </div>
             </motion.div>
-
-            <div className="text-center mt-12">
-              <Link to="/pricing">
-                <Button size="lg" className="btn-fire">
-                  <span className="relative z-10 flex items-center gap-2">
-                    View VPS Plans
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Button>
-              </Link>
-            </div>
           </div>
         </section>
       </Layout>
