@@ -129,7 +129,7 @@ export default function AnimatedBackground() {
         }}
       />
       {/* Light overall tint so text remains readable — background still clearly visible */}
-      <div className="fixed inset-0 -z-20 pointer-events-none bg-background/78" />
+      <div className="fixed inset-0 -z-20 pointer-events-none bg-background/70" />
       
       {/* Particle canvas */}
       <canvas
