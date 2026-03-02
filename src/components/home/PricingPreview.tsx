@@ -70,9 +70,9 @@ export default function PricingPreview() {
         </div>
 
         <div className="mt-8 sm:mt-12 text-center">
-          <Link to="/pricing">
+          <Link to="/compare">
             <Button variant="outline" size="lg" className="group text-sm sm:text-base">
-              View All Plans
+              Compare All Plans
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>

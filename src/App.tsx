@@ -11,7 +11,6 @@ import BudgetVPS from "./pages/BudgetVPS";
 import Compare from "./pages/Compare";
 import DDoSProtection from "./pages/DDoSProtection";
 import Infrastructure from "./pages/Infrastructure";
-import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import WhyUs from "./pages/WhyUs";
 import Contact from "./pages/Contact";
@@ -37,7 +36,6 @@ const App = () => (
               <Route path="/compare" element={<Compare />} />
               <Route path="/ddos-protection" element={<DDoSProtection />} />
               <Route path="/infrastructure" element={<Infrastructure />} />
-              <Route path="/pricing" element={<Pricing />} />
               <Route path="/about" element={<About />} />
               <Route path="/why-us" element={<WhyUs />} />
               <Route path="/contact" element={<Contact />} />
