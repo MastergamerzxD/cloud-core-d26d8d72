@@ -15,7 +15,7 @@ const techItems = [
 
 export default function TechStackSection() {
   return (
-    <section className="section-padding bg-card/30 relative overflow-hidden">
+    <section className="section-padding bg-card/60 relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
       
       <div className="container-wide relative">
