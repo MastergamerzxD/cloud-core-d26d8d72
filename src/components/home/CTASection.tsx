@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 export default function CTASection() {
+  const { openPopup } = useLaunchPopup();
+
   return (
     <section className="section-padding relative overflow-hidden">
       {/* Background gradient */}
@@ -28,14 +31,12 @@ export default function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Link to="/pro-vps" className="w-full sm:w-auto">
-              <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
-                <span className="relative z-10 flex items-center gap-2">
-                  Get Started Now
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </Button>
-            </Link>
+            <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
+              <span className="relative z-10 flex items-center gap-2">
+                Get Started Now
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Button>
             <Link to="/contact" className="w-full sm:w-auto">
               <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
                 <MessageCircle className="w-4 h-4 mr-2" />
@@ -45,7 +46,7 @@ export default function CTASection() {
           </div>
 
           <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-muted-foreground">
-            No credit card required • Cancel anytime • 24/7 support
+            Launching 15th April 2026 • No credit card required • 24/7 support
           </p>
         </motion.div>
       </div>

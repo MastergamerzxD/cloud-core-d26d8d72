@@ -1,7 +1,9 @@
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Shield, Zap, Server, Play, Globe, Cpu, HardDrive } from "lucide-react";
+import { ArrowRight, Shield, Zap, Server, Globe, Cpu, HardDrive, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 const floatingFeatures = [
   { icon: Shield, label: "DDoS Protected", delay: 0 },
@@ -10,7 +12,26 @@ const floatingFeatures = [
   { icon: Globe, label: "India Optimized", delay: 0.3 },
 ];
 
+const rotatingTexts = [
+  "High-Performance VPS",
+  "The VPS Hosting Revolution Is Here",
+  "Made by Developers, for Developers",
+  "Made by Gamers, for Gamers",
+  "Made by People, for the People",
+  "Enterprise-Grade Infrastructure",
+];
+
 export default function HeroSection() {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const { openPopup } = useLaunchPopup();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTextIndex((prev) => (prev + 1) % rotatingTexts.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center section-padding overflow-hidden">
       {/* Multiple layered glow effects for depth */}
@@ -25,11 +46,23 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left content */}
           <div className="text-center lg:text-left">
-            {/* Badge */}
+            {/* Launch badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+            >
+              <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-2 sm:mb-3">
+                <Rocket className="w-3 h-3 sm:w-4 sm:h-4" />
+                Launching 15th April 2026
+              </span>
+            </motion.div>
+
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
             >
               <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-4 sm:mb-6">
                 <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -37,17 +70,31 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
+            {/* Headline with rotating text */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6"
+              className="mb-4 sm:mb-6"
             >
-              High-Performance VPS
-              <br />
-              <span className="text-fire-gradient">Built for Stability.</span>
-            </motion.h1>
+              <div className="h-[2.8em] sm:h-[2.4em] md:h-[2.4em] lg:h-[2.4em] xl:h-[2.4em] overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.h1
+                    key={currentTextIndex}
+                    initial={{ y: 40, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -40, opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1]"
+                  >
+                    {rotatingTexts[currentTextIndex]}
+                  </motion.h1>
+                </AnimatePresence>
+              </div>
+              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-fire-gradient leading-[1.1]">
+                Built for Stability.
+              </span>
+            </motion.div>
 
             {/* Subheadline */}
             <motion.p
@@ -68,19 +115,15 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10"
             >
-              <Link to="/pro-vps" className="w-full sm:w-auto">
-                <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
-                  <span className="relative z-10 flex items-center gap-2">
-                    Explore Pro VPS
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Button>
-              </Link>
-              <Link to="/budget-vps" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 border-border/50 hover:border-primary/50 hover:bg-primary/5 w-full sm:w-auto h-11 sm:h-12">
-                  View Budget VPS
-                </Button>
-              </Link>
+              <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
+                <span className="relative z-10 flex items-center gap-2">
+                  Explore Pro VPS
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </Button>
+              <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 border-border/50 hover:border-primary/50 hover:bg-primary/5 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
+                View Budget VPS
+              </Button>
             </motion.div>
 
             {/* Trust indicators */}
@@ -100,7 +143,7 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5 text-primary" />
-                <span>&lt;1ms Latency</span>
+                <span>NVMe Storage</span>
               </div>
             </motion.div>
           </div>
@@ -119,7 +162,7 @@ export default function HeroSection() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-fire-red flex items-center justify-center">
-                      <Server className="w-5 h-5 text-white" />
+                      <Server className="w-5 h-5 text-primary-foreground" />
                     </div>
                     <div>
                       <div className="text-sm font-semibold text-foreground">Pro VPS Server</div>
@@ -171,7 +214,7 @@ export default function HeroSection() {
                       <Shield className="w-5 h-5 text-primary" />
                       <div>
                         <div className="text-sm font-medium text-foreground">DDoS Protection Active</div>
-                        <div className="text-xs text-muted-foreground">0 attacks mitigated today</div>
+                        <div className="text-xs text-muted-foreground">All systems protected</div>
                       </div>
                     </div>
                     <div className="px-2 py-1 bg-green-500/20 text-green-500 text-xs font-medium rounded-full">
@@ -204,7 +247,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Stats bar - visible on all screens */}
+        {/* Stats bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -216,7 +259,7 @@ export default function HeroSection() {
               {[
                 { value: "99.9%", label: "Uptime SLA", sublabel: "Enterprise reliability" },
                 { value: "₹299", label: "Starting Price", sublabel: "No hidden fees" },
-                { value: "<1ms", label: "Network Latency", sublabel: "India optimized" },
+                { value: "Apr '26", label: "Launch Date", sublabel: "Coming soon" },
                 { value: "24/7", label: "Expert Support", sublabel: "Always available" },
               ].map((stat, index) => (
                 <div key={index} className="text-center relative">
