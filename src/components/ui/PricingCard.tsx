@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "./button";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 interface PricingCardProps {
   name: string;
@@ -24,6 +24,8 @@ export default function PricingCard({
   type,
   index = 0,
 }: PricingCardProps) {
+  const { openPopup } = useLaunchPopup();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -68,14 +70,13 @@ export default function PricingCard({
         ))}
       </ul>
 
-      <Link to="/contact" className="block">
-        <Button
-          className={`w-full h-10 sm:h-11 text-sm sm:text-base ${popular ? "btn-fire" : ""}`}
-          variant={popular ? "default" : "outline"}
-        >
-          <span className={popular ? "relative z-10" : ""}>Get Started</span>
-        </Button>
-      </Link>
+      <Button
+        className={`w-full h-10 sm:h-11 text-sm sm:text-base ${popular ? "btn-fire" : ""}`}
+        variant={popular ? "default" : "outline"}
+        onClick={openPopup}
+      >
+        <span className={popular ? "relative z-10" : ""}>Get Started</span>
+      </Button>
     </motion.div>
   );
 }

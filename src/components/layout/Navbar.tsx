@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -25,6 +26,7 @@ const navigation = [
       { name: "Why Cloud on Fire", href: "/why-us" },
       { name: "FAQ", href: "/faq" },
       { name: "Contact", href: "/contact" },
+      { name: "Status", href: "/status" },
     ],
   },
 ];
@@ -34,6 +36,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const { openPopup } = useLaunchPopup();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -103,11 +106,9 @@ export default function Navbar() {
             <Link to="/contact">
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">Contact Sales</Button>
             </Link>
-            <Link to="/pro-vps">
-              <Button className="btn-fire">
-                <span className="relative z-10">Get Started</span>
-              </Button>
-            </Link>
+            <Button className="btn-fire" onClick={openPopup}>
+              <span className="relative z-10">Get Started</span>
+            </Button>
           </div>
 
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 text-foreground">
@@ -154,11 +155,9 @@ export default function Navbar() {
                   <Link to="/contact" className="block">
                     <Button variant="outline" className="w-full h-10 sm:h-11 text-sm">Contact Sales</Button>
                   </Link>
-                  <Link to="/pro-vps" className="block">
-                    <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
-                      <span className="relative z-10">Get Started</span>
-                    </Button>
-                  </Link>
+                  <Button className="w-full h-10 sm:h-11 text-sm btn-fire" onClick={openPopup}>
+                    <span className="relative z-10">Get Started</span>
+                  </Button>
                 </div>
               </div>
             </motion.div>

@@ -18,7 +18,7 @@ const footerLinks = {
     { name: "Contact", href: "/contact" },
     { name: "FAQ", href: "/faq" },
     { name: "Documentation", href: "#" },
-    { name: "Status", href: "#" },
+    { name: "Status", href: "/status" },
   ],
   legal: [
     { name: "Terms of Service", href: "/terms" },
@@ -44,7 +44,7 @@ export default function Footer() {
             </Link>
             <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-sm">
               Delhi-based VPS hosting company delivering enterprise-grade virtual private servers 
-              with premium DDoS protection across India. Powered by Yotta data centers.
+              with premium DDoS protection across India.
             </p>
             <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
               <div className="flex items-center gap-2 sm:gap-3">
@@ -108,7 +108,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Cloud on Fire. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <span className="text-[10px] sm:text-xs text-muted-foreground">Powered by Yotta Data Centers</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground">Made with ❤️ in India</span>
           </div>
         </div>
       </div>

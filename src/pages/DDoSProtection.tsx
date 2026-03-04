@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, ArrowRight, Check, Layers, Eye, Clock, Zap, Activity } from "lucide-react";
+import { Shield, ArrowRight, Check, Layers, Clock, Zap, Activity } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import LiveAttackAnimation from "@/components/ddos/LiveAttackAnimation";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 const protectionLayers = [
   {
@@ -17,11 +18,6 @@ const protectionLayers = [
     icon: Shield,
     title: "Volumetric Attack Mitigation",
     description: "Our scrubbing centers absorb and neutralize large-scale volumetric attacks up to 1Tbps. Legitimate traffic passes through unaffected while malicious packets are dropped at the network edge.",
-  },
-  {
-    icon: Eye,
-    title: "Application Layer Protection",
-    description: "Deep packet inspection (DPI) analyzes Layer 7 traffic to identify and block sophisticated application-layer attacks including HTTP floods, Slowloris, and protocol-abuse attacks.",
   },
   {
     icon: Clock,
@@ -41,26 +37,29 @@ const protectionLayers = [
 ];
 
 const attackTypes = [
-  "UDP Flood", "TCP SYN Flood", "HTTP Flood", "DNS Amplification",
-  "NTP Amplification", "ICMP Flood", "Slowloris", "SSDP Amplification",
-  "Memcached Amplification", "GRE Flood", "TCP ACK Flood", "Application Layer Attacks",
+  "UDP Flood", "TCP SYN Flood", "DNS Amplification",
+  "NTP Amplification", "ICMP Flood", "SSDP Amplification",
+  "Memcached Amplification", "GRE Flood", "TCP ACK Flood",
+  "TCP RST Flood", "UDP Fragment Flood", "IP Null Attack",
 ];
 
 export default function DDoSProtection() {
+  const { openPopup } = useLaunchPopup();
+
   return (
     <>
       <Helmet>
         <title>DDoS Protection India - Enterprise Anti-DDoS for VPS | Cloud on Fire</title>
         <meta 
           name="description" 
-          content="Enterprise-grade DDoS protection for VPS hosting in India. Multi-layer mitigation up to 1Tbps. Pro VPS never suspended under attack. Live attack mitigation dashboard." 
+          content="Enterprise-grade Layer 4 DDoS protection for VPS hosting in India. Multi-layer mitigation up to 1Tbps powered by Joy Services. Pro VPS never suspended under attack." 
         />
-        <meta name="keywords" content="DDoS protection India, anti-DDoS VPS, DDoS mitigation, protected VPS hosting, DDoS attack protection, 1Tbps DDoS protection" />
+        <meta name="keywords" content="DDoS protection India, anti-DDoS VPS, DDoS mitigation, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection" />
         <link rel="canonical" href="https://cloudonfire.in/ddos-protection" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://cloudonfire.in/ddos-protection" />
         <meta property="og:title" content="DDoS Protection - Enterprise Anti-DDoS | Cloud on Fire" />
-        <meta property="og:description" content="Multi-layer DDoS mitigation up to 1Tbps. Keep your services online during attacks." />
+        <meta property="og:description" content="Layer 4 DDoS mitigation up to 1Tbps powered by Joy Services. Keep your services online during attacks." />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="DDoS Protection | Cloud on Fire" />
       </Helmet>
@@ -74,26 +73,24 @@ export default function DDoSProtection() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                 <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-8">
                   <Shield className="w-4 h-4" />
-                  Enterprise Security
+                  Powered by Joy Services
                 </span>
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-                DDoS Protection
+                Layer 4 DDoS Protection
                 <br />
                 <span className="text-fire-gradient">That Never Backs Down</span>
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-                Multi-layer DDoS mitigation absorbing attacks up to 1Tbps. Your services stay online while our infrastructure neutralizes threats in real-time.
+                Enterprise-grade Layer 4 DDoS mitigation powered by Joy Services, absorbing attacks up to 1Tbps. Your services stay online while our infrastructure neutralizes threats in real-time.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/pro-vps">
-                  <Button size="lg" className="btn-fire text-base px-8">
-                    <span className="relative z-10 flex items-center gap-2">Get Protected Now<ArrowRight className="w-4 h-4" /></span>
-                  </Button>
-                </Link>
+                <Button size="lg" className="btn-fire text-base px-8" onClick={openPopup}>
+                  <span className="relative z-10 flex items-center gap-2">Get Protected Now<ArrowRight className="w-4 h-4" /></span>
+                </Button>
               </motion.div>
             </div>
           </div>
@@ -118,8 +115,8 @@ export default function DDoSProtection() {
           <div className="container-wide">
             <SectionHeader
               badge="How It Works"
-              title="6-Layer Protection Architecture"
-              description="Our DDoS mitigation operates at every level of the network stack."
+              title="5-Layer Protection Architecture"
+              description="Our Layer 4 DDoS mitigation operates at the network and transport layers of the stack. Powered by Joy Services."
             />
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
               {protectionLayers.map((layer, index) => (
@@ -145,17 +142,20 @@ export default function DDoSProtection() {
           </div>
         </section>
 
-        {/* Attack Types */}
+        {/* Attack Types - Layer 4 only */}
         <section className="section-padding bg-card/60">
           <div className="container-wide">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">Coverage</span>
+                <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">Layer 4 Coverage</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
-                  Protected Against<br /><span className="text-fire-gradient">All Attack Vectors</span>
+                  Protected Against<br /><span className="text-fire-gradient">Layer 4 Attack Vectors</span>
                 </h2>
-                <p className="text-muted-foreground mb-8">
-                  Our mitigation systems handle both known attack patterns and zero-day threats. Continuously updated to stay ahead of evolving DDoS techniques.
+                <p className="text-muted-foreground mb-4">
+                  Our Layer 4 mitigation systems handle both known network-level attack patterns and zero-day threats. Continuously updated to stay ahead of evolving DDoS techniques.
+                </p>
+                <p className="text-sm text-primary font-medium mb-8">
+                  DDoS Protection powered by Joy Services
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {attackTypes.map((attack) => (
@@ -210,7 +210,7 @@ export default function DDoSProtection() {
                 <h3 className="text-lg font-semibold text-foreground mb-4">Never Suspended — Guaranteed</h3>
                 <ul className="space-y-3">
                   {[
-                    "Premium DDoS mitigation up to 1Tbps",
+                    "Premium Layer 4 DDoS mitigation up to 1Tbps",
                     "Dedicated filtering capacity per VPS",
                     "Zero suspension policy under any attack size",
                     "Isolated from shared infrastructure attacks",
@@ -233,7 +233,7 @@ export default function DDoSProtection() {
                 <h3 className="text-lg font-semibold text-foreground mb-4">Standard Protection</h3>
                 <ul className="space-y-3">
                   {[
-                    "Standard DDoS mitigation up to 500Gbps",
+                    "Standard Layer 4 DDoS mitigation",
                     "Shared filtering infrastructure",
                     "Protection against common attack vectors",
                     "Automatic mitigation for known patterns",

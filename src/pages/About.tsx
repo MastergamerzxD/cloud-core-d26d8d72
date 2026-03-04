@@ -5,6 +5,7 @@ import { Target, Lightbulb, Shield, Users, ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 const values = [
   {
@@ -29,7 +30,24 @@ const values = [
   },
 ];
 
+const founders = [
+  {
+    name: "Ahaan Gupta",
+    role: "Founder & CEO",
+    description: "Visionary leader driving Cloud on Fire's mission to revolutionize VPS hosting in India.",
+    initials: "AG",
+  },
+  {
+    name: "Yashwanth",
+    role: "Co-Founder & Operations Supervisor",
+    description: "Ensuring seamless operations and world-class infrastructure delivery across all services.",
+    initials: "Y",
+  },
+];
+
 export default function About() {
+  const { openPopup } = useLaunchPopup();
+
   return (
     <>
       <Helmet>
@@ -74,8 +92,43 @@ export default function About() {
           </div>
         </section>
 
-        {/* Story */}
+        {/* Founders */}
         <section className="section-padding bg-card/60">
+          <div className="container-wide">
+            <SectionHeader
+              badge="Leadership"
+              title="Meet Our Founders"
+              description="The people behind Cloud on Fire's vision and execution."
+            />
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {founders.map((founder, index) => (
+                <motion.div
+                  key={founder.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  className="glass-card p-8 text-center group hover:border-primary/30 transition-all duration-300"
+                >
+                  {/* Avatar */}
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-fire-red flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
+                    <span className="text-2xl font-bold text-primary-foreground">{founder.initials}</span>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-foreground mb-1">{founder.name}</h3>
+                  <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full mb-4">
+                    {founder.role}
+                  </span>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{founder.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Story */}
+        <section className="section-padding">
           <div className="container-wide">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -101,8 +154,7 @@ export default function About() {
                   </p>
                   <p>
                     Today, Cloud on Fire powers hundreds of game servers, high-traffic websites, 
-                    and critical applications. Our infrastructure handles millions of requests 
-                    and absorbs thousands of DDoS attacks every month.
+                    and critical applications across India.
                   </p>
                 </div>
               </motion.div>
@@ -124,12 +176,12 @@ export default function About() {
                     <div className="text-sm text-muted-foreground">Support Available</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-bold text-fire-gradient mb-2">1000+</div>
-                    <div className="text-sm text-muted-foreground">Active VPS</div>
-                  </div>
-                  <div>
                     <div className="text-4xl font-bold text-fire-gradient mb-2">India</div>
                     <div className="text-sm text-muted-foreground">Based & Operated</div>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-fire-gradient mb-2">Apr '26</div>
+                    <div className="text-sm text-muted-foreground">Launch Date</div>
                   </div>
                 </div>
               </motion.div>
@@ -138,7 +190,7 @@ export default function About() {
         </section>
 
         {/* Values */}
-        <section className="section-padding">
+        <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
               badge="Our Values"
@@ -168,7 +220,7 @@ export default function About() {
         </section>
 
         {/* CTA */}
-        <section className="section-padding bg-card/60">
+        <section className="section-padding">
           <div className="container-wide">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -185,14 +237,12 @@ export default function About() {
                 for their hosting needs.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/pricing">
-                  <Button size="lg" className="btn-fire">
-                    <span className="relative z-10 flex items-center gap-2">
-                      View Plans
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </Button>
-                </Link>
+                <Button size="lg" className="btn-fire" onClick={openPopup}>
+                  <span className="relative z-10 flex items-center gap-2">
+                    View Plans
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Button>
                 <Link to="/contact">
                   <Button size="lg" variant="outline">
                     Contact Us

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { LaunchPopupProvider } from "@/hooks/useLaunchPopup";
 import PasswordProtection from "@/components/auth/PasswordProtection";
 import Index from "./pages/Index";
 import ProVPS from "./pages/ProVPS";
@@ -17,6 +18,7 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Status from "./pages/Status";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,21 +31,24 @@ const App = () => (
         <Sonner />
         <PasswordProtection>
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/pro-vps" element={<ProVPS />} />
-              <Route path="/budget-vps" element={<BudgetVPS />} />
-              <Route path="/compare" element={<Compare />} />
-              <Route path="/ddos-protection" element={<DDoSProtection />} />
-              <Route path="/infrastructure" element={<Infrastructure />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/why-us" element={<WhyUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <LaunchPopupProvider>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/pro-vps" element={<ProVPS />} />
+                <Route path="/budget-vps" element={<BudgetVPS />} />
+                <Route path="/compare" element={<Compare />} />
+                <Route path="/ddos-protection" element={<DDoSProtection />} />
+                <Route path="/infrastructure" element={<Infrastructure />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/why-us" element={<WhyUs />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/status" element={<Status />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </LaunchPopupProvider>
           </BrowserRouter>
         </PasswordProtection>
       </TooltipProvider>
