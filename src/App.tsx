@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LaunchPopupProvider } from "@/hooks/useLaunchPopup";
 import PasswordProtection from "@/components/auth/PasswordProtection";
+import LoadingScreen from "@/components/LoadingScreen";
 import Index from "./pages/Index";
 import ProVPS from "./pages/ProVPS";
 import BudgetVPS from "./pages/BudgetVPS";
