@@ -159,21 +159,6 @@ export default function LiveAttackAnimation() {
           />
         </div>
 
-
-        {/* Traffic bar */}
-        <div className="mt-4">
-          <div className="flex justify-between text-xs text-muted-foreground mb-2">
-            <span>Incoming Malicious Traffic</span>
-            <span className="text-destructive font-medium">{trafficLevel.toFixed(0)} Gbps</span>
-          </div>
-          <div className="h-2 bg-secondary rounded-full overflow-hidden">
-            <motion.div
-              animate={{ width: `${trafficLevel}%` }}
-              transition={{ duration: 0.5 }}
-              className="h-full bg-gradient-to-r from-destructive via-primary to-green-500 rounded-full"
-            />
-          </div>
-        </div>
       </div>
     </div>
   );
