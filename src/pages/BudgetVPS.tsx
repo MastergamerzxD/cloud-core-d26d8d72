@@ -6,6 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import PricingCard from "@/components/ui/PricingCard";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 const features = [
   {
@@ -87,6 +88,7 @@ const plans = [
 ];
 
 export default function BudgetVPS() {
+  const { openPopup } = useLaunchPopup();
   return (
     <>
       <Helmet>
@@ -151,7 +153,7 @@ export default function BudgetVPS() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
               >
-                <Button size="lg" className="btn-fire text-base px-8">
+                <Button size="lg" className="btn-fire text-base px-8" onClick={openPopup}>
                   <span className="relative z-10 flex items-center gap-2">
                     View Plans
                     <ArrowRight className="w-4 h-4" />
