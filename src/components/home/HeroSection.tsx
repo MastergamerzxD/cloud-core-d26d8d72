@@ -77,7 +77,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-4 sm:mb-6"
             >
-              <div className="h-[2.8em] sm:h-[2.4em] md:h-[2.4em] lg:h-[2.4em] xl:h-[2.4em] overflow-hidden">
+              <div className="min-h-[3.5em] sm:min-h-[2.8em] md:min-h-[2.8em] flex items-end mb-2 sm:mb-3">
                 <AnimatePresence mode="wait">
                   <motion.h1
                     key={currentTextIndex}
@@ -85,13 +85,13 @@ export default function HeroSection() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -40, opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1]"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-fire-gradient leading-[1.15]"
                   >
                     {rotatingTexts[currentTextIndex]}
                   </motion.h1>
                 </AnimatePresence>
               </div>
-              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-fire-gradient leading-[1.1]">
+              <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.15]">
                 Built for Stability.
               </span>
             </motion.div>
