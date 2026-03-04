@@ -159,45 +159,6 @@ export default function LiveAttackAnimation() {
           />
         </div>
 
-        {/* Live stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="glass-card p-3 rounded-xl bg-secondary/30">
-            <div className="flex items-center gap-2 mb-1">
-              <AlertTriangle className="w-3 h-3 text-destructive" />
-              <span className="text-[10px] sm:text-xs text-muted-foreground">Attacks Detected</span>
-            </div>
-            <div className="text-lg sm:text-xl font-bold text-foreground">
-              {stats.totalAttacks.toLocaleString()}
-            </div>
-          </div>
-          <div className="glass-card p-3 rounded-xl bg-secondary/30">
-            <div className="flex items-center gap-2 mb-1">
-              <Shield className="w-3 h-3 text-primary" />
-              <span className="text-[10px] sm:text-xs text-muted-foreground">Blocked</span>
-            </div>
-            <div className="text-lg sm:text-xl font-bold text-green-500">
-              {stats.blocked.toLocaleString()}
-            </div>
-          </div>
-          <div className="glass-card p-3 rounded-xl bg-secondary/30">
-            <div className="flex items-center gap-2 mb-1">
-              <Zap className="w-3 h-3 text-primary" />
-              <span className="text-[10px] sm:text-xs text-muted-foreground">Attack Type</span>
-            </div>
-            <div className="text-sm sm:text-base font-bold text-foreground truncate">
-              {currentAttack}
-            </div>
-          </div>
-          <div className="glass-card p-3 rounded-xl bg-secondary/30">
-            <div className="flex items-center gap-2 mb-1">
-              <CheckCircle className="w-3 h-3 text-green-500" />
-              <span className="text-[10px] sm:text-xs text-muted-foreground">Mitigation Rate</span>
-            </div>
-            <div className="text-lg sm:text-xl font-bold text-green-500">
-              {stats.mitigated.toFixed(1)}%
-            </div>
-          </div>
-        </div>
 
         {/* Traffic bar */}
         <div className="mt-4">

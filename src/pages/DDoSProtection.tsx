@@ -73,7 +73,7 @@ export default function DDoSProtection() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                 <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-8">
                   <Shield className="w-4 h-4" />
-                  Powered by Joy Services
+                  Enterprise Security
                 </span>
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
@@ -84,7 +84,7 @@ export default function DDoSProtection() {
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-                Enterprise-grade Layer 4 DDoS mitigation powered by Joy Services, absorbing attacks up to 1Tbps. Your services stay online while our infrastructure neutralizes threats in real-time.
+                Enterprise-grade Layer 4 DDoS mitigation absorbing attacks up to 1Tbps. Your services stay online while our infrastructure neutralizes threats in real-time.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -101,7 +101,7 @@ export default function DDoSProtection() {
           <div className="container-wide">
             <SectionHeader
               badge="Live Demo"
-              title="Watch Attacks Get Mitigated in Real-Time"
+              title="How Attacks Get Mitigated"
               description="See how our multi-layer defense system detects and neutralizes DDoS attacks before they reach your server."
             />
             <div className="max-w-5xl mx-auto">
@@ -116,7 +116,7 @@ export default function DDoSProtection() {
             <SectionHeader
               badge="How It Works"
               title="5-Layer Protection Architecture"
-              description="Our Layer 4 DDoS mitigation operates at the network and transport layers of the stack. Powered by Joy Services."
+              description="Our Layer 4 DDoS mitigation operates at the network and transport layers of the stack."
             />
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
               {protectionLayers.map((layer, index) => (
@@ -151,11 +151,8 @@ export default function DDoSProtection() {
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
                   Protected Against<br /><span className="text-fire-gradient">Layer 4 Attack Vectors</span>
                 </h2>
-                <p className="text-muted-foreground mb-4">
+                <p className="text-muted-foreground mb-8">
                   Our Layer 4 mitigation systems handle both known network-level attack patterns and zero-day threats. Continuously updated to stay ahead of evolving DDoS techniques.
-                </p>
-                <p className="text-sm text-primary font-medium mb-8">
-                  DDoS Protection powered by Joy Services
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {attackTypes.map((attack) => (
