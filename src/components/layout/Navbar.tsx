@@ -17,6 +17,7 @@ const navigation = [
     ],
   },
   { name: "DDoS Protection", href: "/ddos-protection" },
+  { name: "Blog", href: "/blog" },
   { name: "Infrastructure", href: "/infrastructure" },
   {
     name: "Company",

@@ -12,6 +12,7 @@ const footerLinks = {
     { name: "About Us", href: "/about" },
     { name: "Why Cloud on Fire", href: "/why-us" },
     { name: "Infrastructure", href: "/infrastructure" },
+    { name: "Blog", href: "/blog" },
     { name: "FAQ", href: "/faq" },
   ],
   support: [
