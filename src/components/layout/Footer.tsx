@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Flame, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const footerLinks = {
   products: [
@@ -38,10 +39,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 lg:gap-12">
           <div className="col-span-2 sm:col-span-3 lg:col-span-2 mb-4 sm:mb-0">
             <Link to="/" className="flex items-center gap-2 mb-4 sm:mb-6">
-              <Flame className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
-              <span className="text-lg sm:text-xl font-bold text-foreground">
-                Cloud on <span className="text-fire-gradient">Fire</span>
-              </span>
+              <img src={logo} alt="Cloud on Fire" className="h-10 sm:h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-sm">
               Delhi-based VPS hosting company delivering enterprise-grade virtual private servers 

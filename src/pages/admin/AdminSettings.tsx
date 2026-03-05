@@ -25,11 +25,18 @@ export default function AdminSettings() {
 
   const handleSave = async () => {
     setSaving(true);
-    const keys = ["site_title", "site_logo", "footer_text", "social_facebook", "social_twitter", "social_instagram", "social_linkedin", "announcement_banner"];
-    for (const key of keys) {
-      await supabase.from("site_settings").update({ value: settings[key] || "", updated_at: new Date().toISOString() }).eq("key", key);
+    try {
+      const keys = ["site_title", "site_logo", "footer_text", "social_facebook", "social_twitter", "social_instagram", "social_linkedin", "announcement_banner"];
+      for (const key of keys) {
+        await supabase.from("site_settings").upsert(
+          { key, value: settings[key] || "", updated_at: new Date().toISOString() },
+          { onConflict: "key" }
+        );
+      }
+      toast({ title: "Settings saved!" });
+    } catch (err: any) {
+      toast({ title: "Error saving", description: err.message, variant: "destructive" });
     }
-    toast({ title: "Settings saved!" });
     setSaving(false);
   };
 

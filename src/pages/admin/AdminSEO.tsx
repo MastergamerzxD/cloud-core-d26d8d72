@@ -26,11 +26,18 @@ export default function AdminSEO() {
 
   const handleSave = async () => {
     setSaving(true);
-    const keys = ["site_meta_title", "site_meta_description", "og_image"];
-    for (const key of keys) {
-      await supabase.from("site_settings").update({ value: settings[key] || "", updated_at: new Date().toISOString() }).eq("key", key);
+    try {
+      const keys = ["site_meta_title", "site_meta_description", "og_image"];
+      for (const key of keys) {
+        await supabase.from("site_settings").upsert(
+          { key, value: settings[key] || "", updated_at: new Date().toISOString() },
+          { onConflict: "key" }
+        );
+      }
+      toast({ title: "SEO settings saved!" });
+    } catch (err: any) {
+      toast({ title: "Error saving", description: err.message, variant: "destructive" });
     }
-    toast({ title: "SEO settings saved!" });
     setSaving(false);
   };
 

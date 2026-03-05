@@ -1,7 +1,8 @@
 import {
   LayoutDashboard, FileText, BookOpen, Image, Megaphone,
-  Search, ArrowRightLeft, Mail, Settings, LogOut, Flame
+  Search, ArrowRightLeft, Mail, Settings, LogOut
 } from "lucide-react";
+import logoImg from "@/assets/logo.png";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
@@ -35,7 +36,7 @@ export function AdminSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel className="px-4 py-6">
             <div className="flex items-center gap-2">
-              <Flame className="h-5 w-5 text-primary shrink-0" />
+              <img src={logoImg} alt="Cloud on Fire" className="h-6 w-auto shrink-0" />
               {!collapsed && <span className="font-bold text-foreground">Admin Panel</span>}
             </div>
           </SidebarGroupLabel>

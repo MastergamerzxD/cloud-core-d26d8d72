@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Flame } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
+import logo from "@/assets/logo.png";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -59,13 +60,7 @@ export default function Navbar() {
       <nav className="container-wide">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="relative">
-              <Flame className="w-8 h-8 text-primary transition-transform duration-300 group-hover:scale-110" />
-              <div className="absolute inset-0 blur-lg bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-            <span className="text-xl font-bold text-foreground">
-              Cloud on <span className="text-fire-gradient">Fire</span>
-            </span>
+            <img src={logo} alt="Cloud on Fire" className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">
