@@ -10,16 +10,15 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const load = async () => {
-      const [postsRes, pagesRes, annRes] = await Promise.all([
+      const [postsRes, pagesRes, annRes, allPostsViews] = await Promise.all([
         supabase.from("blog_posts").select("id, title, status, views, created_at").order("created_at", { ascending: false }).limit(5),
         supabase.from("pages").select("id", { count: "exact", head: true }),
         supabase.from("announcements").select("id", { count: "exact", head: true }),
+        supabase.from("blog_posts").select("views"),
       ]);
 
       const posts = postsRes.data || [];
-      const totalViews = posts.reduce((sum: number, p: any) => sum + (p.views || 0), 0);
-
-      // Get total post count
+      const totalViews = (allPostsViews.data || []).reduce((sum: number, p: any) => sum + (p.views || 0), 0);
       const { count: postCount } = await supabase.from("blog_posts").select("id", { count: "exact", head: true });
 
       setStats({
