@@ -10,9 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const { signIn, signUp, user, isAdmin } = useAdminAuth();
+  const { signIn, user, isAdmin } = useAdminAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -25,14 +24,11 @@ export default function AdminLogin() {
     e.preventDefault();
     setSubmitting(true);
 
-    const result = isSignUp ? await signUp(email, password) : await signIn(email, password);
+    const result = await signIn(email, password);
 
     if (result.error) {
       toast({ title: "Error", description: result.error, variant: "destructive" });
-    } else if (isSignUp) {
-      toast({ title: "Check your email", description: "Please verify your email address to continue." });
     } else {
-      // After login, check if admin
       navigate("/admin", { replace: true });
     }
     setSubmitting(false);
@@ -51,7 +47,7 @@ export default function AdminLogin() {
             <Flame className="h-10 w-10 text-primary" />
           </div>
           <CardTitle className="text-2xl">Admin Panel</CardTitle>
-          <CardDescription>{isSignUp ? "Create your admin account" : "Sign in to manage your website"}</CardDescription>
+          <CardDescription>Sign in to manage your website</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -72,18 +68,9 @@ export default function AdminLogin() {
             />
             <Button type="submit" className="w-full" disabled={submitting}>
               {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isSignUp ? "Create Account" : "Sign In"}
+              Sign In
             </Button>
           </form>
-          <div className="mt-4 text-center">
-            <button
-              type="button"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsSignUp(!isSignUp)}
-            >
-              {isSignUp ? "Already have an account? Sign in" : "Need an account? Sign up"}
-            </button>
-          </div>
         </CardContent>
       </Card>
     </div>
