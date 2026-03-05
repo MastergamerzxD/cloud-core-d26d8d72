@@ -4,8 +4,9 @@ import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Flame, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import logo from "@/assets/logo.png";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -44,7 +45,7 @@ export default function AdminLogin() {
       <Card className="w-full max-w-md relative border-border bg-card/80 backdrop-blur-xl">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
-            <Flame className="h-10 w-10 text-primary" />
+            <img src={logo} alt="Cloud on Fire" className="h-14 w-auto mx-auto" />
           </div>
           <CardTitle className="text-2xl">Admin Panel</CardTitle>
           <CardDescription>Sign in to manage your website</CardDescription>

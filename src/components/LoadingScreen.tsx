@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +36,7 @@ export default function LoadingScreen() {
               }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Flame className="w-16 h-16 text-primary" />
+              <img src={logo} alt="Cloud on Fire" className="h-16 w-auto" />
             </motion.div>
 
             <motion.div
