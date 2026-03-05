@@ -33,46 +33,80 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    let initialDone = false;
+    let mounted = true;
+    let authRequestId = 0;
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_, session) => {
-      const u = session?.user ?? null;
+    const applyAuthState = (u: User | null) => {
+      const currentRequest = ++authRequestId;
       setUser(u);
-      if (u) {
-        const admin = await checkAdmin(u.id);
-        setIsAdmin(admin);
-      } else {
+
+      if (!u) {
         setIsAdmin(false);
+        setLoading(false);
+        return;
       }
-      setLoading(false);
+
+      setLoading(true);
+      void checkAdmin(u.id)
+        .then((admin) => {
+          if (!mounted || currentRequest !== authRequestId) return;
+          setIsAdmin(admin);
+        })
+        .catch(() => {
+          if (!mounted || currentRequest !== authRequestId) return;
+          setIsAdmin(false);
+        })
+        .finally(() => {
+          if (!mounted || currentRequest !== authRequestId) return;
+          setLoading(false);
+        });
+    };
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      applyAuthState(session?.user ?? null);
     });
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (initialDone) return;
-      initialDone = true;
-      const u = session?.user ?? null;
-      setUser(u);
-      if (u) {
-        const admin = await checkAdmin(u.id);
-        setIsAdmin(admin);
-      }
-      setLoading(false);
-    }).catch(() => {
-      setLoading(false);
-    });
+    void supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        if (!mounted) return;
+        applyAuthState(session?.user ?? null);
+      })
+      .catch(() => {
+        if (!mounted) return;
+        setUser(null);
+        setIsAdmin(false);
+        setLoading(false);
+      });
 
-    // Safety timeout to prevent infinite loading
-    const timeout = setTimeout(() => setLoading(false), 5000);
+    const timeout = setTimeout(() => {
+      if (mounted) setLoading(false);
+    }, 7000);
 
     return () => {
+      mounted = false;
       subscription.unsubscribe();
       clearTimeout(timeout);
     };
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error?.message ?? null };
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) return { error: error.message };
+
+    const signedInUser = data.user;
+    if (!signedInUser) return { error: "Unable to validate your account." };
+
+    const admin = await checkAdmin(signedInUser.id);
+    if (!admin) {
+      await supabase.auth.signOut();
+      setUser(null);
+      setIsAdmin(false);
+      return { error: "This account does not have admin access." };
+    }
+
+    setIsAdmin(true);
+    return { error: null };
   };
 
   const signUp = async (email: string, password: string) => {
