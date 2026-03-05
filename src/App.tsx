@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LaunchPopupProvider } from "@/hooks/useLaunchPopup";
 import { AdminAuthProvider } from "@/hooks/useAdminAuth";
-import PasswordProtection from "@/components/auth/PasswordProtection";
+
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
 import LoadingScreen from "@/components/LoadingScreen";
 import Index from "./pages/Index";
@@ -47,7 +47,6 @@ const App = () => (
         <Toaster />
         <Sonner />
         <LoadingScreen />
-        <PasswordProtection>
           <BrowserRouter>
             <AdminAuthProvider>
               <LaunchPopupProvider>
@@ -88,7 +87,6 @@ const App = () => (
               </LaunchPopupProvider>
             </AdminAuthProvider>
           </BrowserRouter>
-        </PasswordProtection>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
