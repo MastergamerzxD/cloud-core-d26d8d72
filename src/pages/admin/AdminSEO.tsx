@@ -167,8 +167,8 @@ export default function AdminSEO() {
                 </div>
                 <Field label="Organization Description" k="org_description" placeholder="India's leading VPS hosting provider..." multi />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Field label="Contact Email" k="org_email" placeholder="support@cloudonfire.in" />
-                  <Field label="Contact Phone" k="org_phone" placeholder="+91-XXXXXXXXXX" />
+                  <Field label="Contact Email" k="org_email" placeholder="hello@cloudonfire.com" />
+                  <Field label="Contact Phone" k="org_phone" placeholder="+91 8766215705" />
                 </div>
               </CardContent>
             </Card>
