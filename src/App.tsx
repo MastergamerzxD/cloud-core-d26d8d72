@@ -39,6 +39,7 @@ import AdminSEO from "./pages/admin/AdminSEO";
 import AdminRedirects from "./pages/admin/AdminRedirects";
 import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminSettings from "./pages/admin/AdminSettings";
+import AdminAI from "./pages/admin/AdminAI";
 
 const queryClient = new QueryClient();
 
@@ -85,6 +86,7 @@ const App = () => (
                   <Route path="/admin/redirects" element={<AdminProtectedRoute><AdminRedirects /></AdminProtectedRoute>} />
                   <Route path="/admin/newsletter" element={<AdminProtectedRoute><AdminNewsletter /></AdminProtectedRoute>} />
                   <Route path="/admin/settings" element={<AdminProtectedRoute><AdminSettings /></AdminProtectedRoute>} />
+                  <Route path="/admin/ai" element={<AdminProtectedRoute><AdminAI /></AdminProtectedRoute>} />
 
                   <Route path="*" element={<NotFound />} />
                 </Routes>
