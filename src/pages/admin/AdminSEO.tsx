@@ -465,7 +465,7 @@ export default function AdminSEO() {
                         </div>
                         <div className="p-3 bg-background rounded border border-border">
                           <p className="text-blue-400 text-base font-medium truncate">{liveTitle}</p>
-                          <p className="text-green-500 text-xs font-mono">https://cloudonfire.in{page.path}</p>
+                          <p className="text-green-500 text-xs font-mono">https://cloudonfire.com{page.path}</p>
                           <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">{liveDesc}</p>
                         </div>
                         <div className="flex gap-4 text-xs">
@@ -557,7 +557,7 @@ export default function AdminSEO() {
                   <Field label="Organization Name" k="org_name" placeholder="Cloud on Fire" />
                   <Field label="Legal Name" k="org_legal_name" placeholder="Cloud on Fire Pvt. Ltd." />
                   <Field label="Founding Year" k="org_founding_year" placeholder="2024" />
-                  <Field label="Logo URL" k="org_logo_url" placeholder="https://cloudonfire.in/logo.png" />
+                  <Field label="Logo URL" k="org_logo_url" placeholder="https://cloudonfire.com/logo.png" />
                 </div>
                 <Field label="Organization Description" k="org_description" placeholder="India's leading VPS hosting provider..." multi />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
