@@ -5,6 +5,7 @@ import AnnouncementBanner from "./AnnouncementBanner";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import GlobalSEO from "@/components/GlobalSEO";
 import PublicChatWidget from "@/components/PublicChatWidget";
+import VisitorTracker from "@/components/VisitorTracker";
 
 interface LayoutProps {
   children: ReactNode;
@@ -20,6 +21,7 @@ export default function Layout({ children }: LayoutProps) {
       <main className="flex-1 pt-16 md:pt-20">{children}</main>
       <Footer />
       <PublicChatWidget />
+      <VisitorTracker />
     </div>
   );
 }
