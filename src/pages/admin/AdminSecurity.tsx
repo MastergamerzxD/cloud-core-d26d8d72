@@ -10,10 +10,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Shield, Ban, Clock, Trash2, Plus, AlertTriangle, Activity } from "lucide-react";
+import { Shield, Ban, Clock, Trash2, Plus, AlertTriangle, Activity, Lock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 export default function AdminSecurity() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [storedPassword, setStoredPassword] = useState("");
   const [blockedIps, setBlockedIps] = useState<any[]>([]);
   const [securityLogs, setSecurityLogs] = useState<any[]>([]);
   const [visitorLogs, setVisitorLogs] = useState<any[]>([]);
@@ -23,6 +27,27 @@ export default function AdminSecurity() {
   const [newReason, setNewReason] = useState("");
   const [isPermanent, setIsPermanent] = useState(true);
   const [timeoutHours, setTimeoutHours] = useState("1");
+
+  // Load security password from settings
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "security_password")
+        .maybeSingle();
+      setStoredPassword(data?.value || "0703");
+    })();
+  }, []);
+
+  const handlePasswordSubmit = () => {
+    if (passwordInput === storedPassword) {
+      setAuthenticated(true);
+      setPasswordError("");
+    } else {
+      setPasswordError("Incorrect password. Access denied.");
+    }
+  };
 
   const loadData = useCallback(async () => {
     const [{ data: blocked }, { data: logs }, { data: vLogs }] = await Promise.all([
