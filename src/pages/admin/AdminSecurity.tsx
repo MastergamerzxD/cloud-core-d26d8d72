@@ -10,10 +10,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Shield, Ban, Clock, Trash2, Plus, AlertTriangle, Activity } from "lucide-react";
+import { Shield, Ban, Clock, Trash2, Plus, AlertTriangle, Activity, Lock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 export default function AdminSecurity() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [storedPassword, setStoredPassword] = useState("");
   const [blockedIps, setBlockedIps] = useState<any[]>([]);
   const [securityLogs, setSecurityLogs] = useState<any[]>([]);
   const [visitorLogs, setVisitorLogs] = useState<any[]>([]);
@@ -23,6 +27,27 @@ export default function AdminSecurity() {
   const [newReason, setNewReason] = useState("");
   const [isPermanent, setIsPermanent] = useState(true);
   const [timeoutHours, setTimeoutHours] = useState("1");
+
+  // Load security password from settings
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "security_password")
+        .maybeSingle();
+      setStoredPassword(data?.value || "0703");
+    })();
+  }, []);
+
+  const handlePasswordSubmit = () => {
+    if (passwordInput === storedPassword) {
+      setAuthenticated(true);
+      setPasswordError("");
+    } else {
+      setPasswordError("Incorrect password. Access denied.");
+    }
+  };
 
   const loadData = useCallback(async () => {
     const [{ data: blocked }, { data: logs }, { data: vLogs }] = await Promise.all([
@@ -96,6 +121,37 @@ export default function AdminSecurity() {
   const activeBans = blockedIps.filter((b) => b.is_permanent || !b.expires_at || new Date(b.expires_at) > new Date());
   const tempBans = blockedIps.filter((b) => !b.is_permanent && b.expires_at);
   const rateLimitEvents = securityLogs.filter((l) => l.event_type === "rate_limit");
+
+  // Password Gate
+  if (!authenticated) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <Card className="w-full max-w-md bg-card border-border">
+            <CardHeader className="text-center">
+              <Lock className="h-12 w-12 mx-auto text-primary mb-2" />
+              <CardTitle className="text-xl">Security Access</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">Enter the security password to access the security panel</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>Password</Label>
+                <Input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handlePasswordSubmit()}
+                  placeholder="Enter access password"
+                />
+              </div>
+              {passwordError && <p className="text-sm text-destructive">{passwordError}</p>}
+              <Button onClick={handlePasswordSubmit} className="w-full">Access Security</Button>
+            </CardContent>
+          </Card>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
