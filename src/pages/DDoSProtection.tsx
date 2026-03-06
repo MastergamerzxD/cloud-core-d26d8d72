@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Shield, ArrowRight, Check, Layers, Clock, Zap, Activity } from "lucide-react";
@@ -48,18 +48,13 @@ export default function DDoSProtection() {
 
   return (
     <>
-      <Helmet>
-        <title>DDoS Protection India – Enterprise Anti-DDoS VPS Hosting | Cloud on Fire</title>
-        <meta name="description" content="Best DDoS protected VPS hosting in India. Enterprise-grade Layer 4 DDoS mitigation up to 1Tbps. Pro VPS never suspended under attack. Real-time ML-based threat monitoring. Cloud on Fire." />
-        <meta name="keywords" content="DDoS protection India, anti-DDoS VPS hosting, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, best DDoS protection hosting" />
-        <link rel="canonical" href="https://cloudonfire.in/ddos-protection" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://cloudonfire.in/ddos-protection" />
-        <meta property="og:title" content="DDoS Protection India – Enterprise Anti-DDoS | Cloud on Fire" />
-        <meta property="og:description" content="Layer 4 DDoS mitigation up to 1Tbps. Best DDoS protected hosting in India." />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="DDoS Protection India | Cloud on Fire" />
-      </Helmet>
+      <SEOHead
+        seoPrefix="ddos"
+        title="DDoS Protection India – Enterprise Anti-DDoS VPS Hosting | Cloud on Fire"
+        description="Best DDoS protected VPS hosting in India. Enterprise-grade Layer 4 DDoS mitigation up to 1Tbps. Pro VPS never suspended under attack. Real-time ML-based threat monitoring. Cloud on Fire."
+        keywords="DDoS protection India, anti-DDoS VPS hosting, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, best DDoS protection hosting"
+        canonical="/ddos-protection"
+      />
       <Layout>
         {/* Hero */}
         <section className="relative min-h-[60vh] flex items-center section-padding overflow-hidden">

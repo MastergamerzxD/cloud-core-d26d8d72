@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Shield, Zap, Server, Clock, Check, ArrowRight, Flame } from "lucide-react";
@@ -98,22 +98,14 @@ export default function ProVPS() {
   const { openPopup } = useLaunchPopup();
   return (
     <>
-      <Helmet>
-        <title>Pro VPS India – Best Gaming VPS Server Hosting | From ₹299/mo | Cloud on Fire</title>
-        <meta
-          name="description"
-          content="Best gaming VPS in India from ₹299/month. Dedicated CPU cores, premium DDoS protection (never suspended), NVMe Gen4 storage. Perfect for Minecraft, FiveM, CS2, GTA V, Rust servers. Cloud on Fire Pro VPS."
-        />
-        <meta name="keywords" content="best gaming VPS India, pro VPS hosting, Minecraft server hosting India, FiveM server India, CS2 server hosting, GTA V server, dedicated VPS India, game server hosting India, high performance VPS, Cloud on Fire Pro VPS, best game hosting company India, Rust server India" />
-        <link rel="canonical" href="https://cloudonfire.in/pro-vps" />
-        <meta property="og:type" content="product" />
-        <meta property="og:url" content="https://cloudonfire.in/pro-vps" />
-        <meta property="og:title" content="Pro VPS India - Gaming VPS Server Hosting | Cloud on Fire" />
-        <meta property="og:description" content="Gaming VPS with dedicated resources and premium DDoS protection. Never suspended under attacks. From ₹299/month." />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Pro VPS - Gaming VPS India | Cloud on Fire" />
-        <meta name="twitter:description" content="Dedicated gaming VPS with premium DDoS protection from ₹299/month." />
-      </Helmet>
+      <SEOHead
+        seoPrefix="pro_vps"
+        title="Pro VPS India – Best Gaming VPS Server Hosting | From ₹299/mo | Cloud on Fire"
+        description="Best gaming VPS in India from ₹299/month. Dedicated CPU cores, premium DDoS protection (never suspended), NVMe Gen4 storage. Perfect for Minecraft, FiveM, CS2, GTA V, Rust servers. Cloud on Fire Pro VPS."
+        keywords="best gaming VPS India, pro VPS hosting, Minecraft server hosting India, FiveM server India, CS2 server hosting, GTA V server, dedicated VPS India, game server hosting India, high performance VPS, Cloud on Fire Pro VPS, best game hosting company India, Rust server India"
+        canonical="/pro-vps"
+        ogType="product"
+      />
       <Layout>
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center section-padding overflow-hidden">
