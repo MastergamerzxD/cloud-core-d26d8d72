@@ -135,7 +135,9 @@ export type Database = {
       }
       media: {
         Row: {
+          alt_text: string | null
           created_at: string | null
+          description: string | null
           id: string
           name: string
           size: number | null
@@ -144,7 +146,9 @@ export type Database = {
           url: string
         }
         Insert: {
+          alt_text?: string | null
           created_at?: string | null
+          description?: string | null
           id?: string
           name: string
           size?: number | null
@@ -153,7 +157,9 @@ export type Database = {
           url: string
         }
         Update: {
+          alt_text?: string | null
           created_at?: string | null
+          description?: string | null
           id?: string
           name?: string
           size?: number | null

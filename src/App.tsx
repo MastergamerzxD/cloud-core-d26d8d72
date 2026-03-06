@@ -25,6 +25,8 @@ import Status from "./pages/Status";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import MediaGallery from "./pages/MediaGallery";
+import DynamicPage from "./pages/DynamicPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBlogList from "./pages/admin/AdminBlogList";
@@ -67,6 +69,8 @@ const App = () => (
                   <Route path="/status" element={<Status />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/:slug" element={<BlogPost />} />
+                  <Route path="/media" element={<MediaGallery />} />
+                  <Route path="/page/:slug" element={<DynamicPage />} />
 
                   {/* Admin routes */}
                   <Route path="/admin/login" element={<AdminLogin />} />

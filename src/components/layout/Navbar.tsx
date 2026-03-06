@@ -18,8 +18,15 @@ const navigation = [
     ],
   },
   { name: "DDoS Protection", href: "/ddos-protection" },
-  { name: "Blog", href: "/blog" },
   { name: "Infrastructure", href: "/infrastructure" },
+  {
+    name: "Resources",
+    href: "#",
+    children: [
+      { name: "Media Gallery", href: "/media", description: "Browse our images & resources" },
+      { name: "Blog", href: "/blog", description: "News, tutorials & insights" },
+    ],
+  },
   {
     name: "Company",
     href: "#",
