@@ -59,22 +59,22 @@ export default function Infrastructure() {
       />
       <Layout>
         {/* Hero */}
-        <section className="relative min-h-[60vh] flex items-center section-padding overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+        <section className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center section-padding overflow-hidden">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] h-[300px] sm:h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
           <div className="container-wide relative">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-8">
-                  <Server className="w-4 h-4" />
+                <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-4 sm:mb-8">
+                  <Server className="w-3 h-3 sm:w-4 sm:h-4" />
                   Enterprise Infrastructure
                 </span>
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6">
                 Powered by <span className="text-fire-gradient">Yotta Data Centers</span>
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                className="text-sm sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Our infrastructure runs on India's most advanced data centers — Yotta's Tier-3+ certified facilities in Delhi and Mumbai with enterprise-grade hardware at every level.
               </motion.p>
             </div>
@@ -158,7 +158,7 @@ export default function Infrastructure() {
 
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
                 className="relative">
-                <div className="glass-card p-8 aspect-square flex flex-col justify-center">
+                <div className="glass-card p-5 sm:p-8 aspect-auto sm:aspect-square flex flex-col justify-center">
                   <div className="space-y-4">
                     {[...Array(5)].map((_, i) => (
                       <div key={i} className="flex items-center gap-4">

@@ -58,10 +58,10 @@ export default function Contact() {
               <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
                 Contact
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
                 Get in Touch
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-sm sm:text-lg text-muted-foreground">
                 Have questions or need help? We're here for you. 
                 Reach out through any of the channels below.
               </p>

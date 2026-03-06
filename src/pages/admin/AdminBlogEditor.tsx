@@ -91,13 +91,13 @@ export default function AdminBlogEditor() {
   return (
     <AdminLayout>
       <div className="space-y-6 max-w-4xl">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-foreground">{isNew ? "New Post" : "Edit Post"}</h1>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={() => handleSave("draft")} disabled={saving}>Save Draft</Button>
-            <Button onClick={() => handleSave("published")} disabled={saving}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground">{isNew ? "New Post" : "Edit Post"}</h1>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <Button variant="outline" onClick={() => handleSave("draft")} disabled={saving} className="flex-1 sm:flex-auto text-xs sm:text-sm">Save Draft</Button>
+            <Button onClick={() => handleSave("published")} disabled={saving} className="flex-1 sm:flex-auto text-xs sm:text-sm">
               {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              <Eye className="mr-2 h-4 w-4" />Publish
+              <Eye className="mr-1 sm:mr-2 h-4 w-4" />Publish
             </Button>
           </div>
         </div>

@@ -98,12 +98,12 @@ export default function WhyUs() {
               <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
                 Why Us
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
                 Why Developers Choose
                 <br />
                 <span className="text-fire-gradient">Cloud on Fire</span>
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-sm sm:text-lg text-muted-foreground">
                 We're not the cheapest, and we're not trying to be. We're building 
                 infrastructure for developers who need reliability, performance, 
                 and support they can count on.
@@ -147,7 +147,7 @@ export default function WhyUs() {
                     </ul>
                   </div>
                   <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                    <div className="glass-card aspect-video flex items-center justify-center">
+                    <div className="glass-card aspect-video flex items-center justify-center hidden sm:flex">
                       <reason.icon className="w-24 h-24 text-primary/20" />
                     </div>
                   </div>

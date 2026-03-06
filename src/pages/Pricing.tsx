@@ -139,12 +139,12 @@ export default function Pricing() {
               <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
                 Pricing
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
                 Transparent Pricing
                 <br />
                 <span className="text-fire-gradient">No Hidden Fees</span>
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-sm sm:text-lg text-muted-foreground">
                 All prices in INR. Billed monthly. No setup fees, no surprises. 
                 DDoS protection included on all plans.
               </p>

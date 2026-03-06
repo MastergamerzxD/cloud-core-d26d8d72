@@ -70,12 +70,12 @@ export default function About() {
               <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
                 About Us
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
                 Building Infrastructure
                 <br />
                 <span className="text-fire-gradient">That Developers Trust</span>
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-sm sm:text-lg text-muted-foreground">
                 Cloud on Fire was founded with a simple mission: provide enterprise-grade 
                 hosting infrastructure that's accessible, affordable, and reliable for 
                 developers and businesses in India.
