@@ -79,15 +79,15 @@ export default function Compare() {
               transition={{ duration: 0.6 }}
               className="max-w-3xl mx-auto text-center mb-16"
             >
-              <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
+              <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-3 sm:mb-4">
                 Compare Plans
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
                 Pro VPS vs Budget VPS
                 <br />
                 <span className="text-fire-gradient">Side-by-Side Comparison</span>
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-sm sm:text-lg text-muted-foreground">
                 Choose the right VPS for your workload. Compare performance, protection, 
                 and pricing to make an informed decision.
               </p>
@@ -157,29 +157,29 @@ export default function Compare() {
                 <h2 className="text-xl font-semibold text-foreground mb-6">{category.title}</h2>
                 <div className="glass-card overflow-hidden">
                   {/* Header */}
-                  <div className="grid grid-cols-3 gap-4 p-4 bg-secondary/30 border-b border-border/50">
-                    <div className="text-sm font-medium text-muted-foreground">Feature</div>
-                    <div className="text-center">
-                      <span className="text-sm font-semibold text-primary">Pro VPS</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="text-sm font-semibold text-secondary-foreground">Budget VPS</span>
-                    </div>
-                  </div>
+                   <div className="grid grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 bg-secondary/30 border-b border-border/50">
+                     <div className="text-[10px] sm:text-sm font-medium text-muted-foreground">Feature</div>
+                     <div className="text-center">
+                       <span className="text-[10px] sm:text-sm font-semibold text-primary">Pro VPS</span>
+                     </div>
+                     <div className="text-center">
+                       <span className="text-[10px] sm:text-sm font-semibold text-secondary-foreground">Budget VPS</span>
+                     </div>
+                   </div>
 
                   {/* Rows */}
-                  {category.items.map((item, index) => (
-                    <div
-                      key={item.feature}
-                      className={`grid grid-cols-3 gap-4 p-4 ${
-                        index !== category.items.length - 1 ? "border-b border-border/30" : ""
-                      }`}
-                    >
-                      <div className="text-sm text-foreground">{item.feature}</div>
-                      <div className="text-center text-foreground">{renderValue(item.pro)}</div>
-                      <div className="text-center text-muted-foreground">{renderValue(item.budget)}</div>
-                    </div>
-                  ))}
+                   {category.items.map((item, index) => (
+                     <div
+                       key={item.feature}
+                       className={`grid grid-cols-3 gap-2 sm:gap-4 p-2.5 sm:p-4 ${
+                         index !== category.items.length - 1 ? "border-b border-border/30" : ""
+                       }`}
+                     >
+                       <div className="text-[10px] sm:text-sm text-foreground leading-tight">{item.feature}</div>
+                       <div className="text-center text-foreground text-[10px] sm:text-sm">{renderValue(item.pro)}</div>
+                       <div className="text-center text-muted-foreground text-[10px] sm:text-sm">{renderValue(item.budget)}</div>
+                     </div>
+                   ))}
                 </div>
               </motion.div>
             ))}

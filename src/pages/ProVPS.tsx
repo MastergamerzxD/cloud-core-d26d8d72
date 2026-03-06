@@ -108,8 +108,8 @@ export default function ProVPS() {
       />
       <Layout>
         {/* Hero */}
-        <section className="relative min-h-[70vh] flex items-center section-padding overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/15 rounded-full blur-[100px] pointer-events-none" />
+        <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center section-padding overflow-hidden">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] h-[300px] sm:h-[400px] bg-primary/15 rounded-full blur-[100px] pointer-events-none" />
           
           <div className="container-wide relative">
             <div className="max-w-4xl mx-auto text-center">
@@ -118,8 +118,8 @@ export default function ProVPS() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-8">
-                  <Flame className="w-4 h-4" />
+                <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-4 sm:mb-8">
+                  <Flame className="w-3 h-3 sm:w-4 sm:h-4" />
                   Professional-Grade VPS
                 </span>
               </motion.div>
@@ -128,7 +128,7 @@ export default function ProVPS() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6"
               >
                 Pro VPS
                 <br />
@@ -139,7 +139,7 @@ export default function ProVPS() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+                className="text-sm sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10"
               >
                 High-performance VPS with dedicated resources, premium DDoS protection, 
                 and a zero-suspension policy. Engineered for gaming servers, high-traffic 
@@ -150,16 +150,16 @@ export default function ProVPS() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
               >
-                <Button size="lg" className="btn-fire text-base px-8" onClick={openPopup}>
+                <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
                   <span className="relative z-10 flex items-center gap-2">
                     View Plans
                     <ArrowRight className="w-4 h-4" />
                   </span>
                 </Button>
-                <Link to="/compare">
-                  <Button size="lg" variant="outline" className="text-base px-8">
+                <Link to="/compare" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
                     Compare with Budget VPS
                   </Button>
                 </Link>

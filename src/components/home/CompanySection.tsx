@@ -53,18 +53,18 @@ export default function CompanySection() {
               <MapPin className="w-3 h-3" />
               Delhi, India
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
               India's Most Reliable
               <br />
               <span className="text-fire-gradient">VPS Hosting Provider</span>
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6">
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">
               Cloud on Fire is a Delhi-based VPS hosting company delivering enterprise-grade 
               virtual private servers across India. We operate out of Yotta's world-class 
               data centers in Delhi and Mumbai, ensuring sub-millisecond latency for your 
               applications.
             </p>
-            <p className="text-muted-foreground leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
               Whether you're hosting game servers, running SaaS applications, deploying 
               trading bots, or managing high-traffic websites — our infrastructure is 
               engineered for stability, speed, and unmatched DDoS protection.

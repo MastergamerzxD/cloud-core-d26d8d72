@@ -57,30 +57,30 @@ export default function DDoSProtection() {
       />
       <Layout>
         {/* Hero */}
-        <section className="relative min-h-[60vh] flex items-center section-padding overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+        <section className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center section-padding overflow-hidden">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] h-[300px] sm:h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
           
           <div className="container-wide relative">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-8">
-                  <Shield className="w-4 h-4" />
+                <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-4 sm:mb-8">
+                  <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
                   Enterprise Security
                 </span>
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6">
                 Layer 4 DDoS Protection
                 <br />
                 <span className="text-fire-gradient">That Never Backs Down</span>
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+                className="text-sm sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10">
                 Enterprise-grade Layer 4 DDoS mitigation absorbing attacks up to 1Tbps. Your services stay online while our infrastructure neutralizes threats in real-time.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" className="btn-fire text-base px-8" onClick={openPopup}>
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
                   <span className="relative z-10 flex items-center gap-2">Get Protected Now<ArrowRight className="w-4 h-4" /></span>
                 </Button>
               </motion.div>
@@ -157,9 +157,9 @@ export default function DDoSProtection() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-                className="glass-card p-8">
-                <div className="text-center mb-8">
-                  <div className="text-5xl font-bold text-fire-gradient mb-2">1 Tbps</div>
+                className="glass-card p-5 sm:p-8">
+                <div className="text-center mb-6 sm:mb-8">
+                  <div className="text-3xl sm:text-5xl font-bold text-fire-gradient mb-2">1 Tbps</div>
                   <div className="text-muted-foreground">Maximum Attack Absorption</div>
                 </div>
                 <div className="space-y-6">
