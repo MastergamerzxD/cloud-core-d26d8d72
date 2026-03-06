@@ -67,7 +67,7 @@ export default function Navbar() {
       <nav className="container-wide">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2.5 group">
-            <img src={logoSymbol} alt="Cloud on Fire" className="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105" />
+            <img src={logoSymbol} alt="Cloud on Fire" className="h-14 md:h-16 w-auto transition-transform duration-300 group-hover:scale-105" />
             <span className="text-lg md:text-xl font-bold tracking-tight text-foreground">
               Cloud<span className="text-primary">on</span>Fire
             </span>
