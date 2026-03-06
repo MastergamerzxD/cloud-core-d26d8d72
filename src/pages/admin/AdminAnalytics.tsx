@@ -23,6 +23,8 @@ export default function AdminAnalytics() {
   const [browserData, setBrowserData] = useState<any[]>([]);
   const [countryData, setCountryData] = useState<any[]>([]);
   const [mapPoints, setMapPoints] = useState<any[]>([]);
+  const [timeoutDialog, setTimeoutDialog] = useState<{ open: boolean; ip: string; sessionId: string }>({ open: false, ip: "", sessionId: "" });
+  const [timeoutHours, setTimeoutHours] = useState("1");
 
   const loadData = useCallback(async () => {
     const now = new Date();
