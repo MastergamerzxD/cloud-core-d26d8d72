@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Save, Globe, Share2, Code2, MapPin, FileText, Sparkles } from "lucide-react";
+import { Loader2, Save, Globe, Share2, Code2, MapPin, FileText, Sparkles, Eye, EyeOff, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   AISEOGenerator,
@@ -18,6 +19,75 @@ import {
   AISEOAudit,
   AIPageSEOButton,
 } from "@/components/admin/AISEOTools";
+
+// Hardcoded defaults from page components — the "live" values when no admin override is set
+const PAGE_SEO_DEFAULTS: Record<string, { title: string; description: string; keywords: string }> = {
+  home: {
+    title: "Cloud on Fire – Best VPS Hosting Company in India | Gaming VPS from ₹299/mo",
+    description: "India's #1 high-performance VPS hosting provider. Gaming VPS from ₹299/month with enterprise DDoS protection up to 1Tbps, NVMe Gen4 storage, Yotta data centers, and 99.9% uptime. Best hosting company in India for Minecraft, FiveM, CS2, and web hosting.",
+    keywords: "best VPS hosting company in India, best hosting company in India, best game hosting company in India, gaming VPS India, cheap VPS India, DDoS protected VPS, cloud server India, game server hosting, Minecraft server hosting India, FiveM server hosting, CS2 server India, budget VPS, Delhi VPS hosting, Mumbai VPS, NVMe VPS India, Cloud on Fire, best VPS provider India, Indian VPS hosting",
+  },
+  pro_vps: {
+    title: "Pro VPS India – Best Gaming VPS Server Hosting | From ₹299/mo | Cloud on Fire",
+    description: "Best gaming VPS in India from ₹299/month. Dedicated CPU cores, premium DDoS protection (never suspended), NVMe Gen4 storage. Perfect for Minecraft, FiveM, CS2, GTA V, Rust servers. Cloud on Fire Pro VPS.",
+    keywords: "best gaming VPS India, pro VPS hosting, Minecraft server hosting India, FiveM server India, CS2 server hosting, GTA V server, dedicated VPS India, game server hosting India, high performance VPS, Cloud on Fire Pro VPS, best game hosting company India, Rust server India",
+  },
+  budget_vps: {
+    title: "Budget VPS India – Cheapest VPS Hosting | From ₹499/mo | Cloud on Fire",
+    description: "Cheapest VPS hosting in India from ₹499/month. DDoS protection included, NVMe storage, unlimited bandwidth. Best affordable VPS for websites, WordPress, Discord bots, and development. Cloud on Fire Budget VPS.",
+    keywords: "cheapest VPS India, budget VPS hosting, affordable VPS India, WordPress VPS India, development server, Discord bot hosting, website VPS India, cheap cloud server India, best budget hosting India, Cloud on Fire Budget VPS",
+  },
+  compare: {
+    title: "Compare VPS Plans India – Pro vs Budget VPS Hosting | Cloud on Fire",
+    description: "Compare Cloud on Fire Pro VPS vs Budget VPS plans side-by-side. Detailed comparison of CPU, RAM, DDoS protection, pricing, and features. Find the best VPS hosting plan in India for your needs.",
+    keywords: "VPS comparison India, Pro VPS vs Budget VPS, best VPS plan India, gaming VPS comparison, VPS features comparison, Cloud on Fire plans, VPS hosting plans India",
+  },
+  ddos: {
+    title: "DDoS Protection India – Enterprise Anti-DDoS VPS Hosting | Cloud on Fire",
+    description: "Best DDoS protected VPS hosting in India. Enterprise-grade Layer 4 DDoS mitigation up to 1Tbps. Pro VPS never suspended under attack. Real-time ML-based threat monitoring. Cloud on Fire.",
+    keywords: "DDoS protection India, anti-DDoS VPS hosting, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, best DDoS protection hosting",
+  },
+  infrastructure: {
+    title: "VPS Infrastructure India – Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire",
+    description: "Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. AMD EPYC 7003 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India.",
+    keywords: "Yotta data center India, VPS infrastructure India, AMD EPYC VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure",
+  },
+  about: {
+    title: "About Cloud on Fire – Best VPS Hosting Company in India | Our Story",
+    description: "Cloud on Fire is India's performance-focused VPS hosting company. Enterprise-grade infrastructure accessible to developers and businesses. Founded to deliver the best hosting experience in India.",
+    keywords: "about Cloud on Fire, best VPS hosting company India, Indian hosting provider, VPS company India, Cloud on Fire story, who is Cloud on Fire",
+  },
+  why_us: {
+    title: "Why Cloud on Fire – Best VPS Hosting Provider in India | Performance & Reliability",
+    description: "Why Cloud on Fire is the best VPS hosting provider in India. Performance engineering, enterprise DDoS protection, 24/7 expert support, transparent INR pricing, and infrastructure built for Indian developers.",
+    keywords: "why Cloud on Fire, best VPS provider India, most reliable VPS hosting India, VPS support India, transparent VPS pricing INR, best hosting provider India, Cloud on Fire advantages",
+  },
+  faq: {
+    title: "VPS Hosting FAQ India – Questions Answered | Cloud on Fire",
+    description: "Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Pro VPS vs Budget VPS, DDoS protection, billing, payment methods, server specs, and support.",
+    keywords: "VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing, Cloud on Fire FAQ, best VPS FAQ, gaming VPS FAQ",
+  },
+  contact: {
+    title: "Contact Cloud on Fire – VPS Hosting Support India | 24/7 Expert Help",
+    description: "Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support with under 15 minute response for Pro VPS. Best hosting support in India.",
+    keywords: "Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support India, 24/7 VPS support",
+  },
+  blog: {
+    title: "Blog – VPS Hosting News, Tutorials & Guides | Cloud on Fire India",
+    description: "Latest news, tutorials, and expert guides about VPS hosting in India, cloud infrastructure, DDoS protection, gaming server optimization, and more from Cloud on Fire.",
+    keywords: "VPS hosting blog India, Cloud on Fire blog, hosting tutorials, DDoS protection guides, gaming server tips, cloud infrastructure news",
+  },
+  media: {
+    title: "Media Gallery - Cloud on Fire",
+    description: "Browse our media gallery including product images, infrastructure photos, and more.",
+    keywords: "",
+  },
+  status: {
+    title: "Service Status – Cloud on Fire VPS Hosting India | System Uptime",
+    description: "Check the real-time status of Cloud on Fire VPS hosting services. System uptime monitoring for Pro VPS, Budget VPS, DDoS protection, and control panel.",
+    keywords: "Cloud on Fire status, VPS uptime India, hosting status page, server status",
+  },
+};
 
 const PAGE_SEO_KEYS = [
   { page: "Home", prefix: "home", path: "/" },
@@ -39,9 +109,14 @@ export default function AdminSEO() {
   const [settings, setSettings] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [expandedPages, setExpandedPages] = useState<string[]>([]);
+  const initialLoadDone = useRef(false);
   const { toast } = useToast();
 
   useEffect(() => {
+    if (initialLoadDone.current) return;
+    initialLoadDone.current = true;
+
     supabase.from("site_settings").select("*").then(({ data }) => {
       const map: Record<string, string> = {};
       (data || []).forEach((s: any) => { map[s.key] = s.value || ""; });
@@ -49,6 +124,10 @@ export default function AdminSEO() {
       setLoading(false);
     });
   }, []);
+
+  const updateSetting = (key: string, value: string) => {
+    setSettings(prev => ({ ...prev, [key]: value }));
+  };
 
   const handleSave = async () => {
     setSaving(true);
@@ -76,7 +155,7 @@ export default function AdminSEO() {
 
       const { error } = await supabase.from("site_settings").upsert(upserts, { onConflict: "key" });
       if (error) throw error;
-      toast({ title: "SEO settings saved!" });
+      toast({ title: "SEO settings saved!", description: "Changes will apply on next page load for visitors." });
     } catch (err: any) {
       toast({ title: "Error saving", description: err.message, variant: "destructive" });
     }
@@ -89,28 +168,56 @@ export default function AdminSEO() {
     <div className="space-y-2">
       <Label className="text-sm">{label}</Label>
       {multi ? (
-        <Textarea value={settings[k] || ""} onChange={(e) => setSettings({ ...settings, [k]: e.target.value })} placeholder={placeholder} rows={3} />
+        <Textarea value={settings[k] || ""} onChange={(e) => updateSetting(k, e.target.value)} placeholder={placeholder} rows={3} />
       ) : (
-        <Input value={settings[k] || ""} onChange={(e) => setSettings({ ...settings, [k]: e.target.value })} placeholder={placeholder} />
+        <Input value={settings[k] || ""} onChange={(e) => updateSetting(k, e.target.value)} placeholder={placeholder} />
       )}
     </div>
   );
 
   const handleApplyGlobalSEO = (data: any) => {
-    const updated = { ...settings };
-    if (data.meta_title) updated.site_meta_title = data.meta_title;
-    if (data.meta_description) updated.site_meta_description = data.meta_description;
-    setSettings(updated);
+    if (data.meta_title) updateSetting("site_meta_title", data.meta_title);
+    if (data.meta_description) updateSetting("site_meta_description", data.meta_description);
     toast({ title: "AI SEO applied to global settings!" });
   };
 
   const handleApplyPageSEO = (prefix: string, data: { title: string; description: string; keywords: string }) => {
-    const updated = { ...settings };
-    if (data.title) updated[`seo_${prefix}_title`] = data.title;
-    if (data.description) updated[`seo_${prefix}_description`] = data.description;
-    if (data.keywords) updated[`seo_${prefix}_keywords`] = data.keywords;
-    setSettings(updated);
+    if (data.title) updateSetting(`seo_${prefix}_title`, data.title);
+    if (data.description) updateSetting(`seo_${prefix}_description`, data.description);
+    if (data.keywords) updateSetting(`seo_${prefix}_keywords`, data.keywords);
     toast({ title: "AI SEO applied!", description: "Review and save to persist changes." });
+  };
+
+  const togglePage = (prefix: string) => {
+    setExpandedPages(prev => prev.includes(prefix) ? prev.filter(p => p !== prefix) : [...prev, prefix]);
+  };
+
+  const expandAll = () => setExpandedPages(PAGE_SEO_KEYS.map(p => p.prefix));
+  const collapseAll = () => setExpandedPages([]);
+
+  const getLiveTitle = (prefix: string) => settings[`seo_${prefix}_title`] || PAGE_SEO_DEFAULTS[prefix]?.title || "Not set";
+  const getLiveDescription = (prefix: string) => settings[`seo_${prefix}_description`] || PAGE_SEO_DEFAULTS[prefix]?.description || "Not set";
+  const getLiveKeywords = (prefix: string) => settings[`seo_${prefix}_keywords`] || PAGE_SEO_DEFAULTS[prefix]?.keywords || "";
+  const hasOverride = (prefix: string) => !!(settings[`seo_${prefix}_title`] || settings[`seo_${prefix}_description`] || settings[`seo_${prefix}_keywords`]);
+
+  const resetToDefault = (prefix: string) => {
+    updateSetting(`seo_${prefix}_title`, "");
+    updateSetting(`seo_${prefix}_description`, "");
+    updateSetting(`seo_${prefix}_keywords`, "");
+    toast({ title: "Reset to defaults", description: "Save to apply changes." });
+  };
+
+  const titleLenStatus = (title: string) => {
+    if (!title) return { color: "text-red-500", text: "Missing" };
+    if (title.length < 30) return { color: "text-yellow-500", text: "Too short" };
+    if (title.length > 60) return { color: "text-yellow-500", text: "Too long" };
+    return { color: "text-green-500", text: "Good" };
+  };
+  const descLenStatus = (desc: string) => {
+    if (!desc) return { color: "text-red-500", text: "Missing" };
+    if (desc.length < 70) return { color: "text-yellow-500", text: "Too short" };
+    if (desc.length > 160) return { color: "text-yellow-500", text: "Too long" };
+    return { color: "text-green-500", text: "Good" };
   };
 
   return (
@@ -148,46 +255,173 @@ export default function AdminSEO() {
                 <Field label="Default OG Image URL" k="og_image" placeholder="https://cloudonfire.in/og-image.jpg" />
               </CardContent>
             </Card>
-
-            {/* AI SEO Generator in Global tab */}
             <AISEOGenerator onApply={handleApplyGlobalSEO} />
-            <AISEOScore
-              pageTitle="Global Site"
-              metaTitle={settings.site_meta_title}
-              metaDescription={settings.site_meta_description}
-            />
+            <AISEOScore pageTitle="Global Site" metaTitle={settings.site_meta_title} metaDescription={settings.site_meta_description} />
           </TabsContent>
 
-          {/* Per-Page SEO */}
-          <TabsContent value="pages" className="space-y-4 max-w-3xl">
+          {/* Per-Page SEO — Enhanced */}
+          <TabsContent value="pages" className="space-y-4 max-w-4xl">
+            {/* Overview table */}
             <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle>Per-Page Meta Overrides</CardTitle>
-                <CardDescription>Customize the meta title, description, and keywords for each page. Leave blank to use the hardcoded defaults. Changes apply on next page load.</CardDescription>
+                <CardTitle className="flex items-center gap-2"><Eye className="h-5 w-5" />Live Meta Titles Overview</CardTitle>
+                <CardDescription>Current live meta titles for every page. Green = ideal length (30-60 chars). Yellow = needs adjustment. Admin overrides shown with a badge.</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                {PAGE_SEO_KEYS.map((page) => (
-                  <div key={page.prefix} className="p-4 border border-border rounded-lg space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-medium text-foreground">{page.page}</h3>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-muted-foreground font-mono">{page.path}</span>
-                        <AIPageSEOButton
-                          pageName={page.page}
-                          metaTitle={settings[`seo_${page.prefix}_title`] || ""}
-                          metaDescription={settings[`seo_${page.prefix}_description`] || ""}
-                          keywords={settings[`seo_${page.prefix}_keywords`] || ""}
-                          onApply={(data) => handleApplyPageSEO(page.prefix, data)}
-                        />
+              <CardContent>
+                <div className="space-y-1">
+                  {PAGE_SEO_KEYS.map((page) => {
+                    const liveTitle = getLiveTitle(page.prefix);
+                    const status = titleLenStatus(liveTitle);
+                    const override = hasOverride(page.prefix);
+                    return (
+                      <div
+                        key={page.prefix}
+                        className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-muted/30 transition-colors border border-transparent hover:border-border cursor-pointer"
+                        onClick={() => togglePage(page.prefix)}
+                      >
+                        <div className="w-32 shrink-0">
+                          <span className="text-sm font-medium text-foreground">{page.page}</span>
+                          <span className="block text-xs text-muted-foreground font-mono">{page.path}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-foreground truncate" title={liveTitle}>{liveTitle}</p>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className={`text-xs font-medium ${status.color}`}>{liveTitle.length}c · {status.text}</span>
+                          {override ? <Badge variant="default" className="text-xs">Custom</Badge> : <Badge variant="outline" className="text-xs">Default</Badge>}
+                        </div>
                       </div>
-                    </div>
-                    <Field label="Meta Title" k={`seo_${page.prefix}_title`} placeholder={`Custom title for ${page.page}`} />
-                    <Field label="Meta Description" k={`seo_${page.prefix}_description`} placeholder="Custom meta description..." multi />
-                    <Field label="Keywords" k={`seo_${page.prefix}_keywords`} placeholder="keyword1, keyword2, keyword3" />
-                  </div>
-                ))}
+                    );
+                  })}
+                </div>
               </CardContent>
             </Card>
+
+            {/* Expand/Collapse controls */}
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={expandAll}><ChevronDown className="mr-1 h-3 w-3" />Expand All</Button>
+              <Button variant="outline" size="sm" onClick={collapseAll}><ChevronUp className="mr-1 h-3 w-3" />Collapse All</Button>
+            </div>
+
+            {/* Per-page editors */}
+            {PAGE_SEO_KEYS.map((page) => {
+              const defaults = PAGE_SEO_DEFAULTS[page.prefix];
+              const expanded = expandedPages.includes(page.prefix);
+              const override = hasOverride(page.prefix);
+              const liveTitle = getLiveTitle(page.prefix);
+              const liveDesc = getLiveDescription(page.prefix);
+              const titleStatus = titleLenStatus(liveTitle);
+              const descStatus = descLenStatus(liveDesc);
+
+              return (
+                <Card key={page.prefix} className="bg-card border-border">
+                  <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/20 transition-colors" onClick={() => togglePage(page.prefix)}>
+                    <div className="flex items-center gap-3">
+                      {expanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
+                      <div>
+                        <h3 className="font-medium text-foreground">{page.page}</h3>
+                        <span className="text-xs text-muted-foreground font-mono">{page.path}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-xs ${titleStatus.color}`}>Title: {titleStatus.text}</span>
+                      <span className={`text-xs ${descStatus.color}`}>Desc: {descStatus.text}</span>
+                      {override ? <Badge variant="default" className="text-xs">Custom SEO</Badge> : <Badge variant="outline" className="text-xs">Using Defaults</Badge>}
+                    </div>
+                  </div>
+
+                  {expanded && (
+                    <CardContent className="pt-0 space-y-4 border-t border-border">
+                      {/* Google SERP preview */}
+                      <div className="p-3 rounded-lg bg-muted/30 border border-border space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-xs font-semibold flex items-center gap-1.5"><Eye className="h-3 w-3" />LIVE ON WEBSITE (Google Preview)</Label>
+                          {override && (
+                            <Button variant="ghost" size="sm" className="h-6 px-2 text-xs" onClick={(e) => { e.stopPropagation(); resetToDefault(page.prefix); }}>
+                              <RotateCcw className="mr-1 h-3 w-3" />Reset to Default
+                            </Button>
+                          )}
+                        </div>
+                        <div className="p-3 bg-background rounded border border-border">
+                          <p className="text-blue-400 text-base font-medium truncate">{liveTitle}</p>
+                          <p className="text-green-500 text-xs font-mono">https://cloudonfire.in{page.path}</p>
+                          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">{liveDesc}</p>
+                        </div>
+                        <div className="flex gap-4 text-xs">
+                          <span className={titleStatus.color}>Title: {liveTitle.length}/60 chars ({titleStatus.text})</span>
+                          <span className={descStatus.color}>Description: {liveDesc.length}/160 chars ({descStatus.text})</span>
+                        </div>
+                      </div>
+
+                      {/* Hardcoded default reference */}
+                      <div className="p-3 rounded-lg bg-muted/10 border border-dashed border-border space-y-1">
+                        <Label className="text-xs font-semibold text-muted-foreground flex items-center gap-1.5"><EyeOff className="h-3 w-3" />HARDCODED DEFAULT (fallback when no custom override)</Label>
+                        <p className="text-xs text-muted-foreground"><span className="font-medium">Title:</span> {defaults?.title || "None"}</p>
+                        <p className="text-xs text-muted-foreground"><span className="font-medium">Description:</span> {defaults?.description || "None"}</p>
+                        {defaults?.keywords && <p className="text-xs text-muted-foreground"><span className="font-medium">Keywords:</span> {defaults.keywords}</p>}
+                      </div>
+
+                      {/* Editable override fields */}
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-sm font-semibold">Custom SEO Override</Label>
+                          <AIPageSEOButton
+                            pageName={page.page}
+                            metaTitle={settings[`seo_${page.prefix}_title`] || defaults?.title || ""}
+                            metaDescription={settings[`seo_${page.prefix}_description`] || defaults?.description || ""}
+                            keywords={settings[`seo_${page.prefix}_keywords`] || defaults?.keywords || ""}
+                            onApply={(data) => handleApplyPageSEO(page.prefix, data)}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <Label className="text-xs">Meta Title</Label>
+                            <span className={`text-xs ${(settings[`seo_${page.prefix}_title`] || "").length > 60 ? "text-yellow-500" : "text-muted-foreground"}`}>
+                              {(settings[`seo_${page.prefix}_title`] || "").length}/60
+                            </span>
+                          </div>
+                          <Input
+                            value={settings[`seo_${page.prefix}_title`] || ""}
+                            onChange={(e) => updateSetting(`seo_${page.prefix}_title`, e.target.value)}
+                            placeholder={defaults?.title || `Custom title for ${page.page}`}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <Label className="text-xs">Meta Description</Label>
+                            <span className={`text-xs ${(settings[`seo_${page.prefix}_description`] || "").length > 160 ? "text-yellow-500" : "text-muted-foreground"}`}>
+                              {(settings[`seo_${page.prefix}_description`] || "").length}/160
+                            </span>
+                          </div>
+                          <Textarea
+                            value={settings[`seo_${page.prefix}_description`] || ""}
+                            onChange={(e) => updateSetting(`seo_${page.prefix}_description`, e.target.value)}
+                            placeholder={defaults?.description || "Custom meta description..."}
+                            rows={3}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="text-xs">Keywords</Label>
+                          <Input
+                            value={settings[`seo_${page.prefix}_keywords`] || ""}
+                            onChange={(e) => updateSetting(`seo_${page.prefix}_keywords`, e.target.value)}
+                            placeholder={defaults?.keywords || "keyword1, keyword2, keyword3"}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Per-page AI SEO score */}
+                      <AISEOScore
+                        pageTitle={page.page}
+                        metaTitle={liveTitle}
+                        metaDescription={liveDesc}
+                        keywords={getLiveKeywords(page.prefix)}
+                      />
+                    </CardContent>
+                  )}
+                </Card>
+              );
+            })}
           </TabsContent>
 
           {/* Schema / Structured Data */}
@@ -227,8 +461,6 @@ export default function AdminSEO() {
                 <Field label="Country" k="org_address_country" placeholder="IN" />
               </CardContent>
             </Card>
-
-            {/* AI Schema Generator */}
             <AISchemaGenerator />
           </TabsContent>
 
@@ -267,8 +499,6 @@ export default function AdminSEO() {
                 <Field label="OG Locale" k="default_og_locale" placeholder="en_IN" />
               </CardContent>
             </Card>
-
-            {/* AI OG Image Suggestions */}
             <AIOGImageSuggestions />
           </TabsContent>
 
