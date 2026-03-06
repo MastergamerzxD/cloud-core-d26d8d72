@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/layout/Layout";
 import NotFound from "./NotFound";
@@ -29,10 +29,11 @@ export default function DynamicPage() {
 
   return (
     <Layout>
-      <Helmet>
-        <title>{page.seo_title || page.title} - Cloud on Fire</title>
-        {page.seo_description && <meta name="description" content={page.seo_description} />}
-      </Helmet>
+      <SEOHead
+        title={`${page.seo_title || page.title} - Cloud on Fire`}
+        description={page.seo_description || ""}
+        canonical={`/page/${slug}`}
+      />
       <section className="section-padding">
         <div className="container-wide max-w-4xl">
           <h1 className="text-section-title font-bold text-foreground mb-8">{page.title}</h1>
