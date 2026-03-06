@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
-import logo from "@/assets/logo.png";
+import logoSymbol from "@/assets/logo-symbol.png";
 
 const navigation = [
   { name: "Home", href: "/" },
