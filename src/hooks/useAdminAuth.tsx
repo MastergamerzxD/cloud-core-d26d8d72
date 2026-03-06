@@ -83,7 +83,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     let mounted = true;
     let authRequestId = 0;
 
-    const applyAuthState = (u: User | null) => {
+    const applyAuthState = (u: User | null, isInitial = false) => {
       const currentRequest = ++authRequestId;
       setUser(u);
 
@@ -93,7 +93,11 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      setLoading(true);
+      // Only show loading spinner on initial load, not on token refreshes
+      // This prevents unmounting admin pages when switching browser tabs
+      if (isInitial) {
+        setLoading(true);
+      }
       void checkAdmin(u.id)
         .then((admin) => {
           if (!mounted || currentRequest !== authRequestId) return;
@@ -110,13 +114,14 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     };
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      applyAuthState(session?.user ?? null);
+      // Token refresh and other events should not trigger full loading state
+      applyAuthState(session?.user ?? null, false);
     });
 
     void supabase.auth.getSession()
       .then(({ data: { session } }) => {
         if (!mounted) return;
-        applyAuthState(session?.user ?? null);
+        applyAuthState(session?.user ?? null, true);
       })
       .catch(() => {
         if (!mounted) return;
