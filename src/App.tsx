@@ -55,6 +55,7 @@ const App = () => (
         <Sonner />
         <LoadingScreen />
           <BrowserRouter>
+            <SEOSettingsProvider>
             <AdminAuthProvider>
               <LaunchPopupProvider>
                 <Routes>
