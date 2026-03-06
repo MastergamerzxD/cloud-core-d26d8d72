@@ -16,8 +16,9 @@ export default function Status() {
   return (
     <>
       <Helmet>
-        <title>Service Status - Cloud on Fire | System Status</title>
-        <meta name="description" content="Check the current status of Cloud on Fire services. Real-time system status and uptime monitoring." />
+        <title>Service Status – Cloud on Fire VPS Hosting India | System Uptime</title>
+        <meta name="description" content="Check the real-time status of Cloud on Fire VPS hosting services. System uptime monitoring for Pro VPS, Budget VPS, DDoS protection, and control panel." />
+        <meta name="keywords" content="Cloud on Fire status, VPS uptime India, hosting status page, server status" />
         <link rel="canonical" href="https://cloudonfire.in/status" />
       </Helmet>
       <Layout>

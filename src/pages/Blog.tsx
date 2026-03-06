@@ -20,8 +20,14 @@ export default function Blog() {
   return (
     <Layout>
       <Helmet>
-        <title>Blog - Cloud on Fire</title>
-        <meta name="description" content="Latest news, tutorials, and insights about VPS hosting, cloud infrastructure, and DDoS protection." />
+        <title>Blog – VPS Hosting News, Tutorials & Guides | Cloud on Fire India</title>
+        <meta name="description" content="Latest news, tutorials, and expert guides about VPS hosting in India, cloud infrastructure, DDoS protection, gaming server optimization, and more from Cloud on Fire." />
+        <meta name="keywords" content="VPS hosting blog India, Cloud on Fire blog, hosting tutorials, DDoS protection guides, gaming server tips, cloud infrastructure news" />
+        <link rel="canonical" href="https://cloudonfire.in/blog" />
+        <meta property="og:type" content="blog" />
+        <meta property="og:url" content="https://cloudonfire.in/blog" />
+        <meta property="og:title" content="Blog – VPS Hosting News & Tutorials | Cloud on Fire" />
+        <meta property="og:description" content="Expert guides and news about VPS hosting, gaming servers, and cloud infrastructure in India." />
       </Helmet>
 
       <section className="section-padding">
