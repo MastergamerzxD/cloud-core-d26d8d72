@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "./AdminSidebar";
+import AdminAIChat from "./AdminAIChat";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </header>
           <main className="flex-1 overflow-auto p-4 md:p-6">{children}</main>
         </div>
+        <AdminAIChat />
       </div>
     </SidebarProvider>
   );

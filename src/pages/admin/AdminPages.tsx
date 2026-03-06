@@ -5,13 +5,19 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import { Plus, Edit, Trash2, Sparkles, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAIGenerate } from "@/hooks/useAIGenerate";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function AdminPages() {
   const [pages, setPages] = useState<any[]>([]);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { generating, generatePage } = useAIGenerate();
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiOpen, setAiOpen] = useState(false);
 
   const load = async () => {
     const { data } = await supabase.from("pages").select("*").order("created_at", { ascending: false });
@@ -32,7 +38,37 @@ export default function AdminPages() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-foreground">Pages</h1>
-          <Button onClick={() => navigate("/admin/pages/new")}><Plus className="mr-2 h-4 w-4" />New Page</Button>
+          <div className="flex gap-2">
+            <Dialog open={aiOpen} onOpenChange={setAiOpen}>
+              <DialogTrigger asChild>
+                <Button variant="secondary"><Sparkles className="mr-2 h-4 w-4" />Generate with AI</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader><DialogTitle>Generate Page with AI</DialogTitle></DialogHeader>
+                <Textarea
+                  placeholder='E.g. "Create a landing page for Rust game server hosting"'
+                  value={aiPrompt}
+                  onChange={(e) => setAiPrompt(e.target.value)}
+                  className="min-h-[100px]"
+                />
+                <Button
+                  disabled={generating || !aiPrompt.trim()}
+                  onClick={async () => {
+                    const id = await generatePage(aiPrompt);
+                    if (id) {
+                      setAiOpen(false);
+                      setAiPrompt("");
+                      load();
+                      navigate(`/admin/pages/${id}`);
+                    }
+                  }}
+                >
+                  {generating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Generating...</> : <><Sparkles className="mr-2 h-4 w-4" />Generate</>}
+                </Button>
+              </DialogContent>
+            </Dialog>
+            <Button onClick={() => navigate("/admin/pages/new")}><Plus className="mr-2 h-4 w-4" />New Page</Button>
+          </div>
         </div>
         <Card className="bg-card border-border">
           <CardContent className="p-0">
