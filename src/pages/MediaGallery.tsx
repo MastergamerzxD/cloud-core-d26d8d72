@@ -31,17 +31,17 @@ export default function MediaGallery() {
           {media.length === 0 ? (
             <p className="text-muted-foreground">No media available yet.</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {media.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => setSelected(item)}
-                  className="group relative aspect-square overflow-hidden rounded-xl border border-border bg-card hover:border-primary/50 transition-colors"
+                  className="group relative overflow-hidden rounded-xl border border-border bg-card hover:border-primary/50 transition-colors"
                 >
                   <img
                     src={item.url}
                     alt={item.alt_text || item.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-3">
