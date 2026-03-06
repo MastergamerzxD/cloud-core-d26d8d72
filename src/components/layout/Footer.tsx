@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const footerLinks = {
@@ -48,11 +48,15 @@ export default function Footer() {
             <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
               <div className="flex items-center gap-2 sm:gap-3">
                 <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-                <span>support@cloudonfire.in</span>
+                <a href="mailto:hello@cloudonfire.com" className="hover:text-primary transition-colors">hello@cloudonfire.com</a>
+              </div>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+                <a href="tel:+918766215705" className="hover:text-primary transition-colors">+91 8766215705</a>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-                <span>Delhi, India</span>
+                <span>India</span>
               </div>
             </div>
           </div>
