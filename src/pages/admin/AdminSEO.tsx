@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Save, Globe, Share2, Code2, MapPin, FileText, Sparkles, Eye, EyeOff, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
+import { Loader2, Save, Globe, Share2, Code2, MapPin, FileText, Sparkles, Eye, EyeOff, ChevronDown, ChevronUp, RotateCcw, Type, ImageIcon } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   AISEOGenerator,
@@ -236,6 +236,7 @@ export default function AdminSEO() {
         <Tabs defaultValue="global" className="space-y-6">
           <TabsList className="bg-muted/50 border border-border flex-wrap h-auto gap-1 p-1">
             <TabsTrigger value="global" className="gap-2"><Globe className="h-4 w-4" />Global SEO</TabsTrigger>
+            <TabsTrigger value="meta" className="gap-2"><Type className="h-4 w-4" />Meta Titles & Images</TabsTrigger>
             <TabsTrigger value="pages" className="gap-2"><FileText className="h-4 w-4" />Per-Page SEO</TabsTrigger>
             <TabsTrigger value="schema" className="gap-2"><Code2 className="h-4 w-4" />Schema / Structured Data</TabsTrigger>
             <TabsTrigger value="social" className="gap-2"><Share2 className="h-4 w-4" />Social & Verification</TabsTrigger>
@@ -257,6 +258,125 @@ export default function AdminSEO() {
             </Card>
             <AISEOGenerator onApply={handleApplyGlobalSEO} />
             <AISEOScore pageTitle="Global Site" metaTitle={settings.site_meta_title} metaDescription={settings.site_meta_description} />
+          </TabsContent>
+
+          {/* ── Meta Titles & Images Tab ── */}
+          <TabsContent value="meta" className="space-y-6 max-w-5xl">
+            <Card className="bg-card border-border">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Type className="h-5 w-5" />Page Meta Titles</CardTitle>
+                <CardDescription>Edit the meta title for every page. Titles appear in browser tabs, Google results, and social shares. Use AI to optimize each one.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-0 divide-y divide-border">
+                {PAGE_SEO_KEYS.map((page) => {
+                  const currentTitle = settings[`seo_${page.prefix}_title`] || "";
+                  const liveTitle = currentTitle || PAGE_SEO_DEFAULTS[page.prefix]?.title || "Not set";
+                  const status = titleLenStatus(liveTitle);
+                  const isCustom = !!currentTitle;
+
+                  return (
+                    <div key={page.prefix} className="py-4 space-y-2">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="shrink-0 w-36">
+                          <span className="text-sm font-semibold text-foreground">{page.page}</span>
+                          <span className="block text-xs text-muted-foreground font-mono">{page.path}</span>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className={`text-xs font-medium ${status.color}`}>{liveTitle.length}c · {status.text}</span>
+                          {isCustom ? <Badge variant="default" className="text-xs">Custom</Badge> : <Badge variant="outline" className="text-xs">Default</Badge>}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Input
+                          value={currentTitle}
+                          onChange={(e) => updateSetting(`seo_${page.prefix}_title`, e.target.value)}
+                          placeholder={PAGE_SEO_DEFAULTS[page.prefix]?.title || `Meta title for ${page.page}`}
+                          className="flex-1"
+                        />
+                        <AIPageSEOButton
+                          pageName={page.page}
+                          metaTitle={liveTitle}
+                          metaDescription={settings[`seo_${page.prefix}_description`] || PAGE_SEO_DEFAULTS[page.prefix]?.description || ""}
+                          keywords={settings[`seo_${page.prefix}_keywords`] || PAGE_SEO_DEFAULTS[page.prefix]?.keywords || ""}
+                          onApply={(data) => handleApplyPageSEO(page.prefix, data)}
+                        />
+                        {isCustom && (
+                          <Button variant="ghost" size="icon" className="shrink-0 h-10 w-10" onClick={() => updateSetting(`seo_${page.prefix}_title`, "")} title="Reset to default">
+                            <RotateCcw className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                      {/* SERP mini-preview */}
+                      <div className="p-2 rounded bg-muted/20 border border-border">
+                        <p className="text-blue-400 text-sm font-medium truncate">{liveTitle}</p>
+                        <p className="text-green-500 text-xs font-mono">https://cloudonfire.in{page.path}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </CardContent>
+            </Card>
+
+            {/* Per-page OG Images */}
+            <Card className="bg-card border-border">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><ImageIcon className="h-5 w-5" />Page OG / Social Images</CardTitle>
+                <CardDescription>Set a custom Open Graph image for each page. These appear as thumbnails on Discord, Facebook, Twitter, etc. Leave blank to use the global OG image.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-0 divide-y divide-border">
+                <div className="py-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-sm font-semibold">Global OG Image (fallback for all pages)</Label>
+                    {settings.og_image ? <Badge variant="default" className="text-xs">Set</Badge> : <Badge variant="outline" className="text-xs">Not set</Badge>}
+                  </div>
+                  <Input
+                    value={settings.og_image || ""}
+                    onChange={(e) => updateSetting("og_image", e.target.value)}
+                    placeholder="https://cloudonfire.in/og-image.jpg"
+                  />
+                  {settings.og_image && (
+                    <div className="mt-2 rounded border border-border overflow-hidden max-w-xs">
+                      <img src={settings.og_image} alt="Global OG" className="w-full h-auto" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                    </div>
+                  )}
+                </div>
+                {PAGE_SEO_KEYS.map((page) => {
+                  const ogKey = `seo_${page.prefix}_og_image`;
+                  const currentOg = settings[ogKey] || "";
+                  return (
+                    <div key={page.prefix} className="py-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="text-sm font-semibold text-foreground">{page.page}</span>
+                          <span className="ml-2 text-xs text-muted-foreground font-mono">{page.path}</span>
+                        </div>
+                        {currentOg ? <Badge variant="default" className="text-xs">Custom</Badge> : <Badge variant="outline" className="text-xs">Using Global</Badge>}
+                      </div>
+                      <div className="flex gap-2">
+                        <Input
+                          value={currentOg}
+                          onChange={(e) => updateSetting(ogKey, e.target.value)}
+                          placeholder="https://cloudonfire.in/og-image.jpg (leave blank for global)"
+                          className="flex-1"
+                        />
+                        {currentOg && (
+                          <Button variant="ghost" size="icon" className="shrink-0 h-10 w-10" onClick={() => updateSetting(ogKey, "")} title="Reset to global">
+                            <RotateCcw className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                      {currentOg && (
+                        <div className="mt-1 rounded border border-border overflow-hidden max-w-xs">
+                          <img src={currentOg} alt={`${page.page} OG`} className="w-full h-auto" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </CardContent>
+            </Card>
+
+            <AIOGImageSuggestions />
           </TabsContent>
 
           {/* Per-Page SEO — Enhanced */}
