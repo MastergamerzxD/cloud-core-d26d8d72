@@ -100,6 +100,7 @@ const App = () => (
                 </Routes>
               </LaunchPopupProvider>
             </AdminAuthProvider>
+            </SEOSettingsProvider>
           </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
