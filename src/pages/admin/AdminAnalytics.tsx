@@ -4,8 +4,13 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Users, Globe, Monitor, Eye, TrendingUp, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Users, Globe, Monitor, Eye, TrendingUp, MapPin, Ban, Clock, XCircle } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Legend } from "recharts";
+import { toast } from "@/hooks/use-toast";
 
 const COLORS = ["hsl(24, 95%, 53%)", "hsl(38, 92%, 50%)", "hsl(4, 90%, 58%)", "hsl(200, 80%, 50%)", "hsl(150, 60%, 45%)", "hsl(280, 60%, 55%)"];
 
@@ -18,6 +23,8 @@ export default function AdminAnalytics() {
   const [browserData, setBrowserData] = useState<any[]>([]);
   const [countryData, setCountryData] = useState<any[]>([]);
   const [mapPoints, setMapPoints] = useState<any[]>([]);
+  const [timeoutDialog, setTimeoutDialog] = useState<{ open: boolean; ip: string; sessionId: string }>({ open: false, ip: "", sessionId: "" });
+  const [timeoutHours, setTimeoutHours] = useState("1");
 
   const loadData = useCallback(async () => {
     const now = new Date();
@@ -110,6 +117,37 @@ export default function AdminAnalytics() {
 
   const activePages = [...new Set(liveVisitors.map((v) => v.current_page))];
 
+  const handleBlockIp = async (ip: string) => {
+    const { error } = await supabase.from("blocked_ips").insert({
+      ip_address: ip, reason: "Blocked from analytics dashboard", is_permanent: true,
+    });
+    if (!error) {
+      await supabase.from("security_logs").insert({ event_type: "ip_block", ip_address: ip, details: "Blocked from live visitors" });
+      toast({ title: "IP Blocked", description: `${ip} has been permanently blocked` });
+    }
+  };
+
+  const handleTimeout = async () => {
+    const { ip } = timeoutDialog;
+    const hours = parseInt(timeoutHours) || 1;
+    const { error } = await supabase.from("blocked_ips").insert({
+      ip_address: ip, reason: "Temporary timeout from analytics", is_permanent: false,
+      expires_at: new Date(Date.now() + hours * 3600000).toISOString(),
+    });
+    if (!error) {
+      await supabase.from("security_logs").insert({ event_type: "ip_timeout", ip_address: ip, details: `${hours}h timeout` });
+      toast({ title: "Timeout Applied", description: `${ip} blocked for ${hours} hour(s)` });
+    }
+    setTimeoutDialog({ open: false, ip: "", sessionId: "" });
+  };
+
+  const handleTerminate = async (sessionId: string, ip: string) => {
+    await supabase.from("visitor_sessions").delete().eq("session_id", sessionId);
+    await supabase.from("security_logs").insert({ event_type: "session_terminate", ip_address: ip, details: `Session ${sessionId} terminated` });
+    toast({ title: "Session Terminated", description: `Session for ${ip} has been ended` });
+    loadData();
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -186,6 +224,7 @@ export default function AdminAnalytics() {
                       <TableHead>OS</TableHead>
                       <TableHead>Current Page</TableHead>
                       <TableHead>Last Seen</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -204,6 +243,19 @@ export default function AdminAnalytics() {
                         <TableCell className="text-sm font-medium">{v.current_page}</TableCell>
                         <TableCell className="text-xs text-muted-foreground">
                           {new Date(v.last_seen_at).toLocaleTimeString()}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1">
+                            <Button variant="ghost" size="sm" title="Block IP" onClick={() => handleBlockIp(v.ip_address)}>
+                              <Ban className="h-3.5 w-3.5 text-destructive" />
+                            </Button>
+                            <Button variant="ghost" size="sm" title="Timeout" onClick={() => setTimeoutDialog({ open: true, ip: v.ip_address, sessionId: v.session_id })}>
+                              <Clock className="h-3.5 w-3.5 text-primary" />
+                            </Button>
+                            <Button variant="ghost" size="sm" title="Terminate Session" onClick={() => handleTerminate(v.session_id, v.ip_address)}>
+                              <XCircle className="h-3.5 w-3.5 text-destructive" />
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -339,6 +391,21 @@ export default function AdminAnalytics() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
+
+        {/* Timeout Dialog */}
+        <Dialog open={timeoutDialog.open} onOpenChange={(open) => !open && setTimeoutDialog({ open: false, ip: "", sessionId: "" })}>
+          <DialogContent>
+            <DialogHeader><DialogTitle>Temporary Timeout</DialogTitle></DialogHeader>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground">Block <span className="font-mono">{timeoutDialog.ip}</span> temporarily</p>
+              <div>
+                <Label>Duration (hours)</Label>
+                <Input type="number" value={timeoutHours} onChange={(e) => setTimeoutHours(e.target.value)} min="1" />
+              </div>
+              <Button onClick={handleTimeout} className="w-full">Apply Timeout</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </AdminLayout>
   );

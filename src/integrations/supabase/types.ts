@@ -41,6 +41,36 @@ export type Database = {
         }
         Relationships: []
       }
+      blocked_ips: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          expires_at: string | null
+          id: string
+          ip_address: string
+          is_permanent: boolean
+          reason: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address: string
+          is_permanent?: boolean
+          reason?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address?: string
+          is_permanent?: boolean
+          reason?: string | null
+        }
+        Relationships: []
+      }
       blog_categories: {
         Row: {
           created_at: string | null
@@ -277,6 +307,48 @@ export type Database = {
         }
         Relationships: []
       }
+      security_logs: {
+        Row: {
+          browser: string | null
+          country: string | null
+          created_at: string
+          details: string | null
+          device_type: string | null
+          event_type: string
+          id: string
+          ip_address: string | null
+          os: string | null
+          page: string | null
+          session_id: string | null
+        }
+        Insert: {
+          browser?: string | null
+          country?: string | null
+          created_at?: string
+          details?: string | null
+          device_type?: string | null
+          event_type: string
+          id?: string
+          ip_address?: string | null
+          os?: string | null
+          page?: string | null
+          session_id?: string | null
+        }
+        Update: {
+          browser?: string | null
+          country?: string | null
+          created_at?: string
+          details?: string | null
+          device_type?: string | null
+          event_type?: string
+          id?: string
+          ip_address?: string | null
+          os?: string | null
+          page?: string | null
+          session_id?: string | null
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           id: string
@@ -313,6 +385,51 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      visitor_logs: {
+        Row: {
+          browser: string | null
+          country: string | null
+          created_at: string
+          device_type: string | null
+          duration_seconds: number | null
+          id: string
+          ip_address: string | null
+          os: string | null
+          pages_visited: string[] | null
+          session_end: string | null
+          session_id: string
+          session_start: string
+        }
+        Insert: {
+          browser?: string | null
+          country?: string | null
+          created_at?: string
+          device_type?: string | null
+          duration_seconds?: number | null
+          id?: string
+          ip_address?: string | null
+          os?: string | null
+          pages_visited?: string[] | null
+          session_end?: string | null
+          session_id: string
+          session_start?: string
+        }
+        Update: {
+          browser?: string | null
+          country?: string | null
+          created_at?: string
+          device_type?: string | null
+          duration_seconds?: number | null
+          id?: string
+          ip_address?: string | null
+          os?: string | null
+          pages_visited?: string[] | null
+          session_end?: string | null
+          session_id?: string
+          session_start?: string
         }
         Relationships: []
       }
