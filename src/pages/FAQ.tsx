@@ -122,12 +122,12 @@ export default function FAQ() {
   return (
     <>
       <Helmet>
-        <title>FAQ - VPS Hosting Questions Answered | Cloud on Fire India</title>
-        <meta 
-          name="description" 
-          content="Find answers to frequently asked questions about Cloud on Fire VPS hosting. Learn about Pro VPS, Budget VPS, DDoS protection, billing, payment methods, and technical specifications." 
+        <title>VPS Hosting FAQ India – Questions Answered | Cloud on Fire</title>
+        <meta
+          name="description"
+          content="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Pro VPS vs Budget VPS, DDoS protection, billing, payment methods, server specs, and support."
         />
-        <meta name="keywords" content="VPS FAQ, VPS hosting questions, DDoS protection FAQ, VPS billing, Cloud on Fire FAQ" />
+        <meta name="keywords" content="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing, Cloud on Fire FAQ, best VPS FAQ, gaming VPS FAQ" />
         <link rel="canonical" href="https://cloudonfire.in/faq" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://cloudonfire.in/faq" />

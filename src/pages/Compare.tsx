@@ -63,12 +63,12 @@ export default function Compare() {
   return (
     <>
       <Helmet>
-        <title>Compare VPS Plans India - Pro vs Budget VPS | Cloud on Fire</title>
-        <meta 
-          name="description" 
-          content="Compare Cloud on Fire Pro VPS vs Budget VPS plans. Detailed comparison of performance, DDoS protection, pricing, and features. Find the best VPS for your needs in India." 
+        <title>Compare VPS Plans India – Pro vs Budget VPS Hosting | Cloud on Fire</title>
+        <meta
+          name="description"
+          content="Compare Cloud on Fire Pro VPS vs Budget VPS plans side-by-side. Detailed comparison of CPU, RAM, DDoS protection, pricing, and features. Find the best VPS hosting plan in India for your needs."
         />
-        <meta name="keywords" content="VPS comparison India, Pro VPS vs Budget VPS, gaming VPS comparison, best VPS India, VPS features comparison" />
+        <meta name="keywords" content="VPS comparison India, Pro VPS vs Budget VPS, best VPS plan India, gaming VPS comparison, VPS features comparison, Cloud on Fire plans, VPS hosting plans India" />
         <link rel="canonical" href="https://cloudonfire.in/compare" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://cloudonfire.in/compare" />

@@ -79,12 +79,12 @@ export default function WhyUs() {
   return (
     <>
       <Helmet>
-        <title>Why Cloud on Fire - Best VPS Hosting Provider India | Reliability & Performance</title>
-        <meta 
-          name="description" 
-          content="Why choose Cloud on Fire? Performance engineering, enterprise DDoS protection, reliable infrastructure, 24/7 expert support, and transparent INR pricing for Indian developers." 
+        <title>Why Cloud on Fire – Best VPS Hosting Provider in India | Performance & Reliability</title>
+        <meta
+          name="description"
+          content="Why Cloud on Fire is the best VPS hosting provider in India. Performance engineering, enterprise DDoS protection, 24/7 expert support, transparent INR pricing, and infrastructure built for Indian developers."
         />
-        <meta name="keywords" content="why Cloud on Fire, best VPS provider India, reliable VPS hosting, VPS support, transparent VPS pricing" />
+        <meta name="keywords" content="why Cloud on Fire, best VPS provider India, most reliable VPS hosting India, VPS support India, transparent VPS pricing INR, best hosting provider India, Cloud on Fire advantages" />
         <link rel="canonical" href="https://cloudonfire.in/why-us" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://cloudonfire.in/why-us" />

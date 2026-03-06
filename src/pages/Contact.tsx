@@ -39,12 +39,12 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact Us - Cloud on Fire VPS Support | 24/7 Expert Help</title>
-        <meta 
-          name="description" 
-          content="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support available. Response time under 15 minutes for Pro VPS customers." 
+        <title>Contact Cloud on Fire – VPS Hosting Support India | 24/7 Expert Help</title>
+        <meta
+          name="description"
+          content="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support with under 15 minute response for Pro VPS. Best hosting support in India."
         />
-        <meta name="keywords" content="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support" />
+        <meta name="keywords" content="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support India, 24/7 VPS support" />
         <link rel="canonical" href="https://cloudonfire.in/contact" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://cloudonfire.in/contact" />

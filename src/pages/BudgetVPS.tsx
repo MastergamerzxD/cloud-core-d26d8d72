@@ -92,12 +92,12 @@ export default function BudgetVPS() {
   return (
     <>
       <Helmet>
-        <title>Budget VPS India - Cheap VPS Hosting | From ₹499/mo | Cloud on Fire</title>
-        <meta 
-          name="description" 
-          content="Affordable VPS hosting in India from ₹499/month. DDoS protection included. Perfect for websites, WordPress, bots, and development servers. NVMe storage, unlimited bandwidth." 
+        <title>Budget VPS India – Cheapest VPS Hosting | From ₹499/mo | Cloud on Fire</title>
+        <meta
+          name="description"
+          content="Cheapest VPS hosting in India from ₹499/month. DDoS protection included, NVMe storage, unlimited bandwidth. Best affordable VPS for websites, WordPress, Discord bots, and development. Cloud on Fire Budget VPS."
         />
-        <meta name="keywords" content="cheap VPS India, budget VPS, affordable VPS hosting, WordPress VPS India, development server, Discord bot hosting, website hosting VPS" />
+        <meta name="keywords" content="cheapest VPS India, budget VPS hosting, affordable VPS India, WordPress VPS India, development server, Discord bot hosting, website VPS India, cheap cloud server India, best budget hosting India, Cloud on Fire Budget VPS" />
         <link rel="canonical" href="https://cloudonfire.in/budget-vps" />
         <meta property="og:type" content="product" />
         <meta property="og:url" content="https://cloudonfire.in/budget-vps" />

@@ -99,12 +99,12 @@ export default function ProVPS() {
   return (
     <>
       <Helmet>
-        <title>Pro VPS India - Gaming VPS Server Hosting | From ₹299/mo | Cloud on Fire</title>
-        <meta 
-          name="description" 
-          content="Pro VPS for gaming servers and high-traffic apps in India. Dedicated CPU cores, premium DDoS protection, never suspended under attacks. Minecraft, FiveM, CS2 servers from ₹299/month." 
+        <title>Pro VPS India – Best Gaming VPS Server Hosting | From ₹299/mo | Cloud on Fire</title>
+        <meta
+          name="description"
+          content="Best gaming VPS in India from ₹299/month. Dedicated CPU cores, premium DDoS protection (never suspended), NVMe Gen4 storage. Perfect for Minecraft, FiveM, CS2, GTA V, Rust servers. Cloud on Fire Pro VPS."
         />
-        <meta name="keywords" content="gaming VPS India, pro VPS, Minecraft server hosting India, FiveM server, dedicated VPS, game server hosting, CS2 server, Valorant server, high performance VPS" />
+        <meta name="keywords" content="best gaming VPS India, pro VPS hosting, Minecraft server hosting India, FiveM server India, CS2 server hosting, GTA V server, dedicated VPS India, game server hosting India, high performance VPS, Cloud on Fire Pro VPS, best game hosting company India, Rust server India" />
         <link rel="canonical" href="https://cloudonfire.in/pro-vps" />
         <meta property="og:type" content="product" />
         <meta property="og:url" content="https://cloudonfire.in/pro-vps" />
