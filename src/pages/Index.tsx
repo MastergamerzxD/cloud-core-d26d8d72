@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/home/HeroSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
@@ -58,31 +58,14 @@ export default function Index() {
 
   return (
     <>
-      <Helmet>
-        <title>Cloud on Fire – Best VPS Hosting Company in India | Gaming VPS from ₹299/mo</title>
-        <meta
-          name="description"
-          content="India's #1 high-performance VPS hosting provider. Gaming VPS from ₹299/month with enterprise DDoS protection up to 1Tbps, NVMe Gen4 storage, Yotta data centers, and 99.9% uptime. Best hosting company in India for Minecraft, FiveM, CS2, and web hosting."
-        />
-        <meta name="keywords" content="best VPS hosting company in India, best hosting company in India, best game hosting company in India, gaming VPS India, cheap VPS India, DDoS protected VPS, cloud server India, game server hosting, Minecraft server hosting India, FiveM server hosting, CS2 server India, budget VPS, Delhi VPS hosting, Mumbai VPS, NVMe VPS India, Cloud on Fire, best VPS provider India, Indian VPS hosting" />
-        <link rel="canonical" href="https://cloudonfire.in/" />
-
-        {/* OG */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://cloudonfire.in/" />
-        <meta property="og:title" content="Cloud on Fire – Best VPS Hosting Company in India | Gaming VPS from ₹299/mo" />
-        <meta property="og:description" content="India's #1 high-performance VPS hosting. Gaming VPS from ₹299/month with enterprise DDoS protection. Best hosting company in India." />
-        <meta property="og:site_name" content="Cloud on Fire" />
-        <meta property="og:locale" content="en_IN" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Cloud on Fire – Best VPS Hosting Company in India" />
-        <meta name="twitter:description" content="Gaming VPS from ₹299/month with enterprise DDoS protection. Never suspended under attacks. Best hosting company in India." />
-
-        {/* JSON-LD */}
-        <script type="application/ld+json">{JSON.stringify(homeJsonLd)}</script>
-      </Helmet>
+      <SEOHead
+        seoPrefix="home"
+        title="Cloud on Fire – Best VPS Hosting Company in India | Gaming VPS from ₹299/mo"
+        description="India's #1 high-performance VPS hosting provider. Gaming VPS from ₹299/month with enterprise DDoS protection up to 1Tbps, NVMe Gen4 storage, Yotta data centers, and 99.9% uptime. Best hosting company in India for Minecraft, FiveM, CS2, and web hosting."
+        keywords="best VPS hosting company in India, best hosting company in India, best game hosting company in India, gaming VPS India, cheap VPS India, DDoS protected VPS, cloud server India, game server hosting, Minecraft server hosting India, FiveM server hosting, CS2 server India, budget VPS, Delhi VPS hosting, Mumbai VPS, NVMe VPS India, Cloud on Fire, best VPS provider India, Indian VPS hosting"
+        canonical="/"
+        jsonLd={homeJsonLd}
+      />
       <Layout>
         <HeroSection />
         <CompanySection />

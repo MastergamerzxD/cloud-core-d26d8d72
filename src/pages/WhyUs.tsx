@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Zap, Shield, Clock, Wrench, HeartHandshake, Coins, ArrowRight, Check } from "lucide-react";
@@ -78,21 +78,13 @@ const reasons = [
 export default function WhyUs() {
   return (
     <>
-      <Helmet>
-        <title>Why Cloud on Fire – Best VPS Hosting Provider in India | Performance & Reliability</title>
-        <meta
-          name="description"
-          content="Why Cloud on Fire is the best VPS hosting provider in India. Performance engineering, enterprise DDoS protection, 24/7 expert support, transparent INR pricing, and infrastructure built for Indian developers."
-        />
-        <meta name="keywords" content="why Cloud on Fire, best VPS provider India, most reliable VPS hosting India, VPS support India, transparent VPS pricing INR, best hosting provider India, Cloud on Fire advantages" />
-        <link rel="canonical" href="https://cloudonfire.in/why-us" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://cloudonfire.in/why-us" />
-        <meta property="og:title" content="Why Cloud on Fire - Best VPS Provider" />
-        <meta property="og:description" content="Performance, reliability, and transparency. See why developers choose Cloud on Fire." />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Why Choose Cloud on Fire" />
-      </Helmet>
+      <SEOHead
+        seoPrefix="why_us"
+        title="Why Cloud on Fire – Best VPS Hosting Provider in India | Performance & Reliability"
+        description="Why Cloud on Fire is the best VPS hosting provider in India. Performance engineering, enterprise DDoS protection, 24/7 expert support, transparent INR pricing, and infrastructure built for Indian developers."
+        keywords="why Cloud on Fire, best VPS provider India, most reliable VPS hosting India, VPS support India, transparent VPS pricing INR, best hosting provider India, Cloud on Fire advantages"
+        canonical="/why-us"
+      />
       <Layout>
         {/* Hero */}
         <section className="relative section-padding">

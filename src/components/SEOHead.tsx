@@ -1,7 +1,12 @@
 import { Helmet } from "react-helmet-async";
+import { useSEOSettings } from "@/hooks/useSEOSettings";
 
 interface SEOHeadProps {
+  /** Admin settings prefix for this page (e.g. "home", "pro_vps") */
+  seoPrefix?: string;
+  /** Hardcoded fallback title */
   title: string;
+  /** Hardcoded fallback description */
   description: string;
   keywords?: string;
   canonical: string;
@@ -12,17 +17,35 @@ interface SEOHeadProps {
   twitterCard?: string;
 }
 
+/**
+ * Smart SEO head that merges admin panel overrides with hardcoded defaults.
+ * Admin settings always take priority when set.
+ */
 export default function SEOHead({
-  title,
-  description,
-  keywords,
+  seoPrefix,
+  title: defaultTitle,
+  description: defaultDescription,
+  keywords: defaultKeywords,
   canonical,
   ogType = "website",
-  ogImage,
+  ogImage: defaultOgImage,
   noindex = false,
   jsonLd,
   twitterCard = "summary_large_image",
 }: SEOHeadProps) {
+  const settings = useSEOSettings();
+
+  // Admin overrides take priority over hardcoded defaults
+  const adminTitle = seoPrefix ? settings[`seo_${seoPrefix}_title`] : "";
+  const adminDescription = seoPrefix ? settings[`seo_${seoPrefix}_description`] : "";
+  const adminKeywords = seoPrefix ? settings[`seo_${seoPrefix}_keywords`] : "";
+
+  const title = adminTitle || defaultTitle;
+  const description = adminDescription || defaultDescription;
+  const keywords = adminKeywords || defaultKeywords;
+  const ogImage = settings.og_image || defaultOgImage;
+  const twitterHandle = settings.twitter_handle || "";
+
   const fullCanonical = canonical.startsWith("http") ? canonical : `https://cloudonfire.in${canonical}`;
 
   return (
@@ -38,8 +61,7 @@ export default function SEOHead({
       <meta property="og:url" content={fullCanonical} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:site_name" content="Cloud on Fire" />
-      <meta property="og:locale" content="en_IN" />
+      <meta property="og:site_name" content={settings.org_name || "Cloud on Fire"} />
       {ogImage && <meta property="og:image" content={ogImage} />}
 
       {/* Twitter */}
@@ -47,6 +69,7 @@ export default function SEOHead({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       {ogImage && <meta name="twitter:image" content={ogImage} />}
+      {twitterHandle && <meta name="twitter:creator" content={twitterHandle} />}
 
       {/* JSON-LD */}
       {jsonLd && (

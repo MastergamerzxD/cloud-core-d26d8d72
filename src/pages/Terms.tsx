@@ -1,19 +1,16 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 
 export default function Terms() {
   return (
     <>
-      <Helmet>
-        <title>Terms of Service - Cloud on Fire VPS Hosting India</title>
-        <meta 
-          name="description" 
-          content="Terms of Service for Cloud on Fire VPS hosting. Read our policies on service usage, acceptable use, payment terms, SLA, refund policy, and customer responsibilities." 
-        />
-        <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href="https://cloudonfire.in/terms" />
-      </Helmet>
+      <SEOHead
+        title="Terms of Service - Cloud on Fire VPS Hosting India"
+        description="Terms of Service for Cloud on Fire VPS hosting. Read our policies on service usage, acceptable use, payment terms, SLA, refund policy, and customer responsibilities."
+        canonical="/terms"
+        noindex
+      />
       <Layout>
         <section className="section-padding">
           <div className="container-wide">

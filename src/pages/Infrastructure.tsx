@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Cpu, HardDrive, Network, Shield, Server, ArrowRight, Building2, Check } from "lucide-react";
@@ -50,18 +50,13 @@ const yottaFeatures = [
 export default function Infrastructure() {
   return (
     <>
-      <Helmet>
-        <title>VPS Infrastructure India – Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire</title>
-        <meta name="description" content="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. AMD EPYC 7003 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India." />
-        <meta name="keywords" content="Yotta data center India, VPS infrastructure India, AMD EPYC VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure" />
-        <link rel="canonical" href="https://cloudonfire.in/infrastructure" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://cloudonfire.in/infrastructure" />
-        <meta property="og:title" content="VPS Infrastructure – Yotta Data Centers India | Cloud on Fire" />
-        <meta property="og:description" content="Tier-3+ Yotta data centers in Delhi & Mumbai with AMD EPYC and NVMe Gen4." />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="VPS Infrastructure India | Cloud on Fire" />
-      </Helmet>
+      <SEOHead
+        seoPrefix="infrastructure"
+        title="VPS Infrastructure India – Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire"
+        description="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. AMD EPYC 7003 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India."
+        keywords="Yotta data center India, VPS infrastructure India, AMD EPYC VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure"
+        canonical="/infrastructure"
+      />
       <Layout>
         {/* Hero */}
         <section className="relative min-h-[60vh] flex items-center section-padding overflow-hidden">

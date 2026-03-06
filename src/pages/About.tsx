@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Target, Lightbulb, Shield, Users, ArrowRight } from "lucide-react";
@@ -50,18 +50,13 @@ export default function About() {
 
   return (
     <>
-      <Helmet>
-        <title>About Cloud on Fire – Best VPS Hosting Company in India | Our Story</title>
-        <meta name="description" content="Cloud on Fire is India's performance-focused VPS hosting company. Enterprise-grade infrastructure accessible to developers and businesses. Founded to deliver the best hosting experience in India." />
-        <meta name="keywords" content="about Cloud on Fire, best VPS hosting company India, Indian hosting provider, VPS company India, Cloud on Fire story, who is Cloud on Fire" />
-        <link rel="canonical" href="https://cloudonfire.in/about" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://cloudonfire.in/about" />
-        <meta property="og:title" content="About Cloud on Fire – Best VPS Hosting Company in India" />
-        <meta property="og:description" content="India's performance-focused VPS hosting company with enterprise infrastructure." />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Cloud on Fire" />
-      </Helmet>
+      <SEOHead
+        seoPrefix="about"
+        title="About Cloud on Fire – Best VPS Hosting Company in India | Our Story"
+        description="Cloud on Fire is India's performance-focused VPS hosting company. Enterprise-grade infrastructure accessible to developers and businesses. Founded to deliver the best hosting experience in India."
+        keywords="about Cloud on Fire, best VPS hosting company India, Indian hosting provider, VPS company India, Cloud on Fire story, who is Cloud on Fire"
+        canonical="/about"
+      />
       <Layout>
         {/* Hero */}
         <section className="relative section-padding">

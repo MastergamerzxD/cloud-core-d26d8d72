@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { CheckCircle, Clock, Rocket } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -15,12 +15,13 @@ const services = [
 export default function Status() {
   return (
     <>
-      <Helmet>
-        <title>Service Status – Cloud on Fire VPS Hosting India | System Uptime</title>
-        <meta name="description" content="Check the real-time status of Cloud on Fire VPS hosting services. System uptime monitoring for Pro VPS, Budget VPS, DDoS protection, and control panel." />
-        <meta name="keywords" content="Cloud on Fire status, VPS uptime India, hosting status page, server status" />
-        <link rel="canonical" href="https://cloudonfire.in/status" />
-      </Helmet>
+      <SEOHead
+        seoPrefix="status"
+        title="Service Status – Cloud on Fire VPS Hosting India | System Uptime"
+        description="Check the real-time status of Cloud on Fire VPS hosting services. System uptime monitoring for Pro VPS, Budget VPS, DDoS protection, and control panel."
+        keywords="Cloud on Fire status, VPS uptime India, hosting status page, server status"
+        canonical="/status"
+      />
       <Layout>
         <section className="section-padding">
           <div className="container-wide">

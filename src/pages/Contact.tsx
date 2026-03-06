@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Mail, MessageCircle, Clock, MapPin } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -38,21 +38,13 @@ const contactMethods = [
 export default function Contact() {
   return (
     <>
-      <Helmet>
-        <title>Contact Cloud on Fire – VPS Hosting Support India | 24/7 Expert Help</title>
-        <meta
-          name="description"
-          content="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support with under 15 minute response for Pro VPS. Best hosting support in India."
-        />
-        <meta name="keywords" content="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support India, 24/7 VPS support" />
-        <link rel="canonical" href="https://cloudonfire.in/contact" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://cloudonfire.in/contact" />
-        <meta property="og:title" content="Contact Us - Cloud on Fire Support" />
-        <meta property="og:description" content="Get in touch with Cloud on Fire. 24/7 support, fast response times." />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Contact Cloud on Fire" />
-      </Helmet>
+      <SEOHead
+        seoPrefix="contact"
+        title="Contact Cloud on Fire – VPS Hosting Support India | 24/7 Expert Help"
+        description="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support with under 15 minute response for Pro VPS. Best hosting support in India."
+        keywords="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support India, 24/7 VPS support"
+        canonical="/contact"
+      />
       <Layout>
         {/* Hero */}
         <section className="section-padding">

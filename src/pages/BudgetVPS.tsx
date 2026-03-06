@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Shield, Server, Check, ArrowRight, Wallet, AlertTriangle } from "lucide-react";
@@ -91,22 +91,14 @@ export default function BudgetVPS() {
   const { openPopup } = useLaunchPopup();
   return (
     <>
-      <Helmet>
-        <title>Budget VPS India – Cheapest VPS Hosting | From ₹499/mo | Cloud on Fire</title>
-        <meta
-          name="description"
-          content="Cheapest VPS hosting in India from ₹499/month. DDoS protection included, NVMe storage, unlimited bandwidth. Best affordable VPS for websites, WordPress, Discord bots, and development. Cloud on Fire Budget VPS."
-        />
-        <meta name="keywords" content="cheapest VPS India, budget VPS hosting, affordable VPS India, WordPress VPS India, development server, Discord bot hosting, website VPS India, cheap cloud server India, best budget hosting India, Cloud on Fire Budget VPS" />
-        <link rel="canonical" href="https://cloudonfire.in/budget-vps" />
-        <meta property="og:type" content="product" />
-        <meta property="og:url" content="https://cloudonfire.in/budget-vps" />
-        <meta property="og:title" content="Budget VPS India - Cheap VPS Hosting | Cloud on Fire" />
-        <meta property="og:description" content="Affordable VPS hosting with DDoS protection from ₹499/month. Ideal for websites and development." />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Budget VPS - Cheap VPS India | Cloud on Fire" />
-        <meta name="twitter:description" content="Affordable VPS hosting from ₹499/month with DDoS protection included." />
-      </Helmet>
+      <SEOHead
+        seoPrefix="budget_vps"
+        title="Budget VPS India – Cheapest VPS Hosting | From ₹499/mo | Cloud on Fire"
+        description="Cheapest VPS hosting in India from ₹499/month. DDoS protection included, NVMe storage, unlimited bandwidth. Best affordable VPS for websites, WordPress, Discord bots, and development. Cloud on Fire Budget VPS."
+        keywords="cheapest VPS India, budget VPS hosting, affordable VPS India, WordPress VPS India, development server, Discord bot hosting, website VPS India, cheap cloud server India, best budget hosting India, Cloud on Fire Budget VPS"
+        canonical="/budget-vps"
+        ogType="product"
+      />
       <Layout>
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center section-padding overflow-hidden">

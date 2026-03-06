@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Check, X, ArrowRight } from "lucide-react";
@@ -62,21 +62,13 @@ const renderValue = (value: boolean | string) => {
 export default function Compare() {
   return (
     <>
-      <Helmet>
-        <title>Compare VPS Plans India – Pro vs Budget VPS Hosting | Cloud on Fire</title>
-        <meta
-          name="description"
-          content="Compare Cloud on Fire Pro VPS vs Budget VPS plans side-by-side. Detailed comparison of CPU, RAM, DDoS protection, pricing, and features. Find the best VPS hosting plan in India for your needs."
-        />
-        <meta name="keywords" content="VPS comparison India, Pro VPS vs Budget VPS, best VPS plan India, gaming VPS comparison, VPS features comparison, Cloud on Fire plans, VPS hosting plans India" />
-        <link rel="canonical" href="https://cloudonfire.in/compare" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://cloudonfire.in/compare" />
-        <meta property="og:title" content="Compare VPS Plans - Pro vs Budget | Cloud on Fire" />
-        <meta property="og:description" content="Detailed comparison between Pro VPS and Budget VPS. Find the perfect plan for your workload." />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Compare VPS Plans | Cloud on Fire" />
-      </Helmet>
+      <SEOHead
+        seoPrefix="compare"
+        title="Compare VPS Plans India – Pro vs Budget VPS Hosting | Cloud on Fire"
+        description="Compare Cloud on Fire Pro VPS vs Budget VPS plans side-by-side. Detailed comparison of CPU, RAM, DDoS protection, pricing, and features. Find the best VPS hosting plan in India for your needs."
+        keywords="VPS comparison India, Pro VPS vs Budget VPS, best VPS plan India, gaming VPS comparison, VPS features comparison, Cloud on Fire plans, VPS hosting plans India"
+        canonical="/compare"
+      />
       <Layout>
         {/* Hero */}
         <section className="relative section-padding">
