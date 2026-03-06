@@ -254,7 +254,7 @@ export default function AdminSEO() {
               <CardContent className="space-y-4">
                 <Field label="Default Meta Title" k="site_meta_title" placeholder="Cloud on Fire - Best VPS Hosting India" />
                 <Field label="Default Meta Description" k="site_meta_description" placeholder="India's #1 VPS hosting..." multi />
-                <Field label="Default OG Image URL" k="og_image" placeholder="https://cloudonfire.in/og-image.jpg" />
+                <Field label="Default OG Image URL" k="og_image" placeholder="https://cloudonfire.com/og-image.jpg" />
               </CardContent>
             </Card>
             <AISEOGenerator onApply={handleApplyGlobalSEO} />
@@ -310,7 +310,7 @@ export default function AdminSEO() {
                       {/* SERP mini-preview */}
                       <div className="p-2 rounded bg-muted/20 border border-border">
                         <p className="text-blue-400 text-sm font-medium truncate">{liveTitle}</p>
-                        <p className="text-green-500 text-xs font-mono">https://cloudonfire.in{page.path}</p>
+                        <p className="text-green-500 text-xs font-mono">https://cloudonfire.com{page.path}</p>
                       </div>
                     </div>
                   );
@@ -333,7 +333,7 @@ export default function AdminSEO() {
                   <Input
                     value={settings.og_image || ""}
                     onChange={(e) => updateSetting("og_image", e.target.value)}
-                    placeholder="https://cloudonfire.in/og-image.jpg"
+                    placeholder="https://cloudonfire.com/og-image.jpg"
                   />
                   {settings.og_image && (
                     <div className="mt-2 rounded border border-border overflow-hidden max-w-xs">
@@ -357,7 +357,7 @@ export default function AdminSEO() {
                         <Input
                           value={currentOg}
                           onChange={(e) => updateSetting(ogKey, e.target.value)}
-                          placeholder="https://cloudonfire.in/og-image.jpg (leave blank for global)"
+                          placeholder="https://cloudonfire.com/og-image.jpg (leave blank for global)"
                           className="flex-1"
                         />
                         {currentOg && (
@@ -465,7 +465,7 @@ export default function AdminSEO() {
                         </div>
                         <div className="p-3 bg-background rounded border border-border">
                           <p className="text-blue-400 text-base font-medium truncate">{liveTitle}</p>
-                          <p className="text-green-500 text-xs font-mono">https://cloudonfire.in{page.path}</p>
+                          <p className="text-green-500 text-xs font-mono">https://cloudonfire.com{page.path}</p>
                           <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">{liveDesc}</p>
                         </div>
                         <div className="flex gap-4 text-xs">
@@ -557,7 +557,7 @@ export default function AdminSEO() {
                   <Field label="Organization Name" k="org_name" placeholder="Cloud on Fire" />
                   <Field label="Legal Name" k="org_legal_name" placeholder="Cloud on Fire Pvt. Ltd." />
                   <Field label="Founding Year" k="org_founding_year" placeholder="2024" />
-                  <Field label="Logo URL" k="org_logo_url" placeholder="https://cloudonfire.in/logo.png" />
+                  <Field label="Logo URL" k="org_logo_url" placeholder="https://cloudonfire.com/logo.png" />
                 </div>
                 <Field label="Organization Description" k="org_description" placeholder="India's leading VPS hosting provider..." multi />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

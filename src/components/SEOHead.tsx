@@ -47,7 +47,7 @@ export default function SEOHead({
   const ogImage = adminOgImage || settings.og_image || defaultOgImage;
   const twitterHandle = settings.twitter_handle || "";
 
-  const fullCanonical = canonical.startsWith("http") ? canonical : `https://cloudonfire.in${canonical}`;
+  const fullCanonical = canonical.startsWith("http") ? canonical : `https://cloudonfire.com${canonical}`;
 
   return (
     <Helmet>
