@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Users, Globe, Monitor, Eye, TrendingUp, MapPin, Ban, Clock, XCircle } from "lucide-react";
+import { Users, Globe, Monitor, Eye, TrendingUp, MapPin, Ban, Clock, XCircle, Lock } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Legend } from "recharts";
 import { toast } from "@/hooks/use-toast";
 
