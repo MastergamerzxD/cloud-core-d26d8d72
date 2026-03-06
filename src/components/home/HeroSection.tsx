@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Zap, Server, Globe, Cpu, HardDrive, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
+import logoBannerDark from "@/assets/logo-banner-dark.png";
 
 const floatingFeatures = [
   { icon: Shield, label: "DDoS Protected", delay: 0 },
@@ -155,74 +156,18 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative hidden lg:block"
           >
-            {/* Main dashboard card */}
-            <div className="relative">
-              <div className="glass-card p-6 rounded-2xl border-primary/20">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-fire-red flex items-center justify-center">
-                      <Server className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-foreground">Pro VPS Server</div>
-                      <div className="text-xs text-muted-foreground">Mumbai, India</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-xs text-green-500 font-medium">Online</span>
-                  </div>
-                </div>
-
-                {/* Stats grid */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="glass-card p-4 rounded-xl bg-secondary/30">
-                    <div className="text-xs text-muted-foreground mb-1">CPU Usage</div>
-                    <div className="text-xl font-bold text-foreground">23%</div>
-                    <div className="mt-2 h-1.5 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full w-[23%] bg-gradient-to-r from-primary to-fire-red rounded-full" />
-                    </div>
-                  </div>
-                  <div className="glass-card p-4 rounded-xl bg-secondary/30">
-                    <div className="text-xs text-muted-foreground mb-1">Memory</div>
-                    <div className="text-xl font-bold text-foreground">4.2 GB</div>
-                    <div className="mt-2 h-1.5 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full w-[52%] bg-gradient-to-r from-primary to-fire-red rounded-full" />
-                    </div>
-                  </div>
-                  <div className="glass-card p-4 rounded-xl bg-secondary/30">
-                    <div className="text-xs text-muted-foreground mb-1">Storage</div>
-                    <div className="text-xl font-bold text-foreground">45 GB</div>
-                    <div className="mt-2 h-1.5 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full w-[45%] bg-gradient-to-r from-primary to-fire-red rounded-full" />
-                    </div>
-                  </div>
-                  <div className="glass-card p-4 rounded-xl bg-secondary/30">
-                    <div className="text-xs text-muted-foreground mb-1">Network</div>
-                    <div className="text-xl font-bold text-foreground">1.2 Gbps</div>
-                    <div className="mt-2 h-1.5 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full w-[12%] bg-gradient-to-r from-primary to-fire-red rounded-full" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* DDoS Status */}
-                <div className="glass-card p-4 rounded-xl bg-primary/5 border border-primary/20">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Shield className="w-5 h-5 text-primary" />
-                      <div>
-                        <div className="text-sm font-medium text-foreground">DDoS Protection Active</div>
-                        <div className="text-xs text-muted-foreground">All systems protected</div>
-                      </div>
-                    </div>
-                    <div className="px-2 py-1 bg-green-500/20 text-green-500 text-xs font-medium rounded-full">
-                      Protected
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Main banner */}
+            <div className="relative flex items-center justify-center">
+              <div className="absolute inset-0 bg-primary/10 rounded-3xl blur-[60px] pointer-events-none" />
+              <motion.img
+                src={logoBannerDark}
+                alt="Cloud on Fire"
+                className="relative w-full max-w-lg rounded-2xl"
+                animate={{ 
+                  scale: [1, 1.03, 1],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
 
               {/* Floating feature cards */}
               {floatingFeatures.map((feature, index) => (
@@ -237,7 +182,6 @@ export default function HeroSection() {
                     index === 2 ? "-left-8 bottom-24" :
                     "-right-6 bottom-16"
                   }`}
-                  style={{ animationDelay: `${index * 0.5}s` }}
                 >
                   <feature.icon className="w-4 h-4 text-primary" />
                   <span className="text-xs font-medium text-foreground whitespace-nowrap">{feature.label}</span>
