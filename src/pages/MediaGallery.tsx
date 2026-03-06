@@ -18,10 +18,12 @@ export default function MediaGallery() {
 
   return (
     <Layout>
-      <Helmet>
-        <title>Media Gallery - Cloud on Fire</title>
-        <meta name="description" content="Browse our media gallery including product images, infrastructure photos, and more." />
-      </Helmet>
+      <SEOHead
+        seoPrefix="media"
+        title="Media Gallery - Cloud on Fire"
+        description="Browse our media gallery including product images, infrastructure photos, and more."
+        canonical="/media"
+      />
 
       <section className="section-padding">
         <div className="container-wide">
