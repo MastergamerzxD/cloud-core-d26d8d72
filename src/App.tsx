@@ -42,6 +42,7 @@ import AdminSettings from "./pages/admin/AdminSettings";
 import AdminAI from "./pages/admin/AdminAI";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminSecurity from "./pages/admin/AdminSecurity";
+import AdminDDoS from "./pages/admin/AdminDDoS";
 
 const queryClient = new QueryClient();
 
@@ -91,6 +92,7 @@ const App = () => (
                   <Route path="/admin/ai" element={<AdminProtectedRoute><AdminAI /></AdminProtectedRoute>} />
                   <Route path="/admin/analytics" element={<AdminProtectedRoute><AdminAnalytics /></AdminProtectedRoute>} />
                   <Route path="/admin/security" element={<AdminProtectedRoute><AdminSecurity /></AdminProtectedRoute>} />
+                  <Route path="/admin/ddos" element={<AdminProtectedRoute><AdminDDoS /></AdminProtectedRoute>} />
 
                   <Route path="*" element={<NotFound />} />
                 </Routes>
