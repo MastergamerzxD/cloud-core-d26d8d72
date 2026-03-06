@@ -224,6 +224,7 @@ export default function AdminAnalytics() {
                       <TableHead>OS</TableHead>
                       <TableHead>Current Page</TableHead>
                       <TableHead>Last Seen</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
