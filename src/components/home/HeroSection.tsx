@@ -6,12 +6,6 @@ import { Button } from "@/components/ui/button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 import logoBannerDark from "@/assets/logo-banner-dark.png";
 
-const floatingFeatures = [
-  { icon: Shield, label: "DDoS Protected", delay: 0 },
-  { icon: Cpu, label: "Dedicated CPU", delay: 0.1 },
-  { icon: HardDrive, label: "NVMe Storage", delay: 0.2 },
-  { icon: Globe, label: "India Optimized", delay: 0.3 },
-];
 
 const rotatingTexts = [
   "High-Performance VPS",
@@ -169,24 +163,6 @@ export default function HeroSection() {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
 
-              {/* Floating feature cards */}
-              {floatingFeatures.map((feature, index) => (
-                <motion.div
-                  key={feature.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 + feature.delay }}
-                  className={`absolute glass-card px-3 py-2 rounded-lg flex items-center gap-2 ${
-                    index === 0 ? "-left-4 top-16" :
-                    index === 1 ? "-right-4 top-24" :
-                    index === 2 ? "-left-8 bottom-24" :
-                    "-right-6 bottom-16"
-                  }`}
-                >
-                  <feature.icon className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-medium text-foreground whitespace-nowrap">{feature.label}</span>
-                </motion.div>
-              ))}
             </div>
           </motion.div>
         </div>
