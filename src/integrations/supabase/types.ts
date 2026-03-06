@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_activity_logs: {
+        Row: {
+          action: string
+          browser: string | null
+          created_at: string
+          details: string | null
+          email: string | null
+          id: string
+          ip_address: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          browser?: string | null
+          created_at?: string
+          details?: string | null
+          email?: string | null
+          id?: string
+          ip_address?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          browser?: string | null
+          created_at?: string
+          details?: string | null
+          email?: string | null
+          id?: string
+          ip_address?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       announcements: {
         Row: {
           created_at: string | null
@@ -183,6 +216,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      login_attempts: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          ip_address: string | null
+          success: boolean
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          ip_address?: string | null
+          success?: boolean
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          ip_address?: string | null
+          success?: boolean
+        }
+        Relationships: []
       }
       media: {
         Row: {
@@ -388,6 +445,33 @@ export type Database = {
           key?: string
           updated_at?: string | null
           value?: string | null
+        }
+        Relationships: []
+      }
+      totp_secrets: {
+        Row: {
+          created_at: string
+          encrypted_secret: string
+          id: string
+          is_enabled: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          encrypted_secret: string
+          id?: string
+          is_enabled?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          encrypted_secret?: string
+          id?: string
+          is_enabled?: boolean
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

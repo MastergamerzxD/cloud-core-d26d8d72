@@ -8,13 +8,17 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Users, Globe, Monitor, Eye, TrendingUp, MapPin, Ban, Clock, XCircle } from "lucide-react";
+import { Users, Globe, Monitor, Eye, TrendingUp, MapPin, Ban, Clock, XCircle, Lock } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Legend } from "recharts";
 import { toast } from "@/hooks/use-toast";
 
 const COLORS = ["hsl(24, 95%, 53%)", "hsl(38, 92%, 50%)", "hsl(4, 90%, 58%)", "hsl(200, 80%, 50%)", "hsl(150, 60%, 45%)", "hsl(280, 60%, 55%)"];
 
 export default function AdminAnalytics() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [storedPassword, setStoredPassword] = useState("");
   const [liveVisitors, setLiveVisitors] = useState<any[]>([]);
   const [totalToday, setTotalToday] = useState(0);
   const [dailyData, setDailyData] = useState<any[]>([]);
@@ -25,6 +29,27 @@ export default function AdminAnalytics() {
   const [mapPoints, setMapPoints] = useState<any[]>([]);
   const [timeoutDialog, setTimeoutDialog] = useState<{ open: boolean; ip: string; sessionId: string }>({ open: false, ip: "", sessionId: "" });
   const [timeoutHours, setTimeoutHours] = useState("1");
+
+  // Load analytics password from settings
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "analytics_password")
+        .maybeSingle();
+      setStoredPassword(data?.value || "0703");
+    })();
+  }, []);
+
+  const handlePasswordSubmit = () => {
+    if (passwordInput === storedPassword) {
+      setAuthenticated(true);
+      setPasswordError("");
+    } else {
+      setPasswordError("Incorrect password. Access denied.");
+    }
+  };
 
   const loadData = useCallback(async () => {
     const now = new Date();
@@ -147,6 +172,37 @@ export default function AdminAnalytics() {
     toast({ title: "Session Terminated", description: `Session for ${ip} has been ended` });
     loadData();
   };
+
+  // Password Gate
+  if (!authenticated) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <Card className="w-full max-w-md bg-card border-border">
+            <CardHeader className="text-center">
+              <Lock className="h-12 w-12 mx-auto text-primary mb-2" />
+              <CardTitle className="text-xl">Analytics Access</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">Enter the security password to access visitor analytics</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>Password</Label>
+                <Input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handlePasswordSubmit()}
+                  placeholder="Enter access password"
+                />
+              </div>
+              {passwordError && <p className="text-sm text-destructive">{passwordError}</p>}
+              <Button onClick={handlePasswordSubmit} className="w-full">Access Analytics</Button>
+            </CardContent>
+          </Card>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
