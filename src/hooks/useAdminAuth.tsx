@@ -114,13 +114,14 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     };
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      applyAuthState(session?.user ?? null);
+      // Token refresh and other events should not trigger full loading state
+      applyAuthState(session?.user ?? null, false);
     });
 
     void supabase.auth.getSession()
       .then(({ data: { session } }) => {
         if (!mounted) return;
-        applyAuthState(session?.user ?? null);
+        applyAuthState(session?.user ?? null, true);
       })
       .catch(() => {
         if (!mounted) return;
