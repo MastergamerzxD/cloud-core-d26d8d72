@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
-import logo from "@/assets/logo.png";
+import logoSymbol from "@/assets/logo-symbol.png";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -66,8 +66,11 @@ export default function Navbar() {
     >
       <nav className="container-wide">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link to="/" className="flex items-center gap-2 group">
-            <img src={logo} alt="Cloud on Fire" className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <img src={logoSymbol} alt="Cloud on Fire" className="h-9 md:h-11 w-auto transition-transform duration-300 group-hover:scale-105" />
+            <span className="text-lg md:text-xl font-bold tracking-tight text-foreground">
+              Cloud<span className="text-primary">on</span>Fire
+            </span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">
