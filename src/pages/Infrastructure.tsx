@@ -51,19 +51,16 @@ export default function Infrastructure() {
   return (
     <>
       <Helmet>
-        <title>Infrastructure - Yotta Data Centers Delhi & Mumbai | Cloud on Fire</title>
-        <meta 
-          name="description" 
-          content="Cloud on Fire operates from Yotta's Tier-3+ data centers in Delhi and Mumbai. AMD EPYC processors, NVMe Gen4 storage, 10Gbps network, and 1Tbps DDoS protection." 
-        />
-        <meta name="keywords" content="Yotta data center, VPS infrastructure India, AMD EPYC VPS, NVMe VPS hosting, Delhi data center, Mumbai data center, enterprise VPS hardware" />
+        <title>VPS Infrastructure India – Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire</title>
+        <meta name="description" content="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. AMD EPYC 7003 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India." />
+        <meta name="keywords" content="Yotta data center India, VPS infrastructure India, AMD EPYC VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure" />
         <link rel="canonical" href="https://cloudonfire.in/infrastructure" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://cloudonfire.in/infrastructure" />
-        <meta property="og:title" content="Infrastructure - Yotta Data Centers | Cloud on Fire" />
-        <meta property="og:description" content="Tier-3+ Yotta data centers in Delhi & Mumbai with enterprise hardware." />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="VPS Infrastructure | Cloud on Fire" />
+        <meta property="og:title" content="VPS Infrastructure – Yotta Data Centers India | Cloud on Fire" />
+        <meta property="og:description" content="Tier-3+ Yotta data centers in Delhi & Mumbai with AMD EPYC and NVMe Gen4." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="VPS Infrastructure India | Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}
