@@ -1,38 +1,54 @@
 import { Helmet } from "react-helmet-async";
+import { useSEOSettings } from "@/hooks/useSEOSettings";
 
 /**
  * Injects global structured data (Organization + WebSite + SearchAction)
- * for Google Sitelinks and Knowledge Panel.
- * Rendered once in Layout.
+ * and verification meta tags using dynamic settings from admin panel.
  */
 export default function GlobalSEO() {
+  const s = useSEOSettings();
+
+  const orgName = s.org_name || "Cloud on Fire";
+  const orgLegalName = s.org_legal_name || "Cloud on Fire";
+  const orgDescription = s.org_description || "India's leading high-performance VPS hosting provider with enterprise-grade DDoS protection, NVMe storage, and Yotta data center infrastructure.";
+  const orgEmail = s.org_email || "hello@cloudonfire.com";
+  const orgPhone = s.org_phone || "+918766215705";
+  const orgLogo = s.org_logo_url || "https://cloudonfire.in/favicon.ico";
+  const orgFoundingYear = s.org_founding_year || "2024";
+
+  const sameAs = [
+    s.org_facebook, s.org_twitter, s.org_linkedin, s.org_instagram,
+  ].filter(Boolean);
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://cloudonfire.in/#organization",
-    name: "Cloud on Fire",
-    legalName: "Cloud on Fire",
+    name: orgName,
+    legalName: orgLegalName,
     url: "https://cloudonfire.in",
-    logo: "https://cloudonfire.in/favicon.ico",
-    description: "India's leading high-performance VPS hosting provider with enterprise-grade DDoS protection, NVMe storage, and Yotta data center infrastructure.",
-    foundingDate: "2024",
+    logo: orgLogo,
+    description: orgDescription,
+    foundingDate: orgFoundingYear,
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        email: "hello@cloudonfire.com",
-        telephone: "+918766215705",
+        email: orgEmail,
+        telephone: orgPhone,
         availableLanguage: ["English", "Hindi"],
         areaServed: "IN",
       },
     ],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Delhi",
-      addressRegion: "Delhi",
-      addressCountry: "IN",
+      streetAddress: s.org_address_street || "",
+      addressLocality: s.org_address_city || "Delhi",
+      addressRegion: s.org_address_state || "Delhi",
+      postalCode: s.org_address_zip || "",
+      addressCountry: s.org_address_country || "IN",
     },
-    sameAs: [],
+    sameAs,
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "INR",
@@ -46,9 +62,9 @@ export default function GlobalSEO() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": "https://cloudonfire.in/#website",
-    name: "Cloud on Fire",
+    name: orgName,
     url: "https://cloudonfire.in",
-    description: "Best VPS Hosting in India - Gaming VPS, Budget VPS, Enterprise DDoS Protection",
+    description: s.site_meta_description || "Best VPS Hosting in India - Gaming VPS, Budget VPS, Enterprise DDoS Protection",
     publisher: { "@id": "https://cloudonfire.in/#organization" },
     potentialAction: {
       "@type": "SearchAction",
@@ -83,6 +99,18 @@ export default function GlobalSEO() {
 
   return (
     <Helmet>
+      {/* Verification codes from admin panel */}
+      {s.google_site_verification && (
+        <meta name="google-site-verification" content={s.google_site_verification} />
+      )}
+      {s.bing_site_verification && (
+        <meta name="msvalidate.01" content={s.bing_site_verification} />
+      )}
+      {/* Default OG locale */}
+      <meta property="og:locale" content={s.default_og_locale || "en_IN"} />
+      {/* Twitter handle */}
+      {s.twitter_handle && <meta name="twitter:site" content={s.twitter_handle} />}
+      {/* Structured data */}
       <script type="application/ld+json">
         {JSON.stringify([organizationSchema, websiteSchema, siteNavigationSchema])}
       </script>
