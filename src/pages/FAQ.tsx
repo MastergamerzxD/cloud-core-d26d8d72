@@ -121,34 +121,24 @@ const faqCategories = [
 export default function FAQ() {
   return (
     <>
-      <Helmet>
-        <title>VPS Hosting FAQ India – Questions Answered | Cloud on Fire</title>
-        <meta
-          name="description"
-          content="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Pro VPS vs Budget VPS, DDoS protection, billing, payment methods, server specs, and support."
-        />
-        <meta name="keywords" content="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing, Cloud on Fire FAQ, best VPS FAQ, gaming VPS FAQ" />
-        <link rel="canonical" href="https://cloudonfire.in/faq" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://cloudonfire.in/faq" />
-        <meta property="og:title" content="FAQ - VPS Hosting Questions | Cloud on Fire" />
-        <meta property="og:description" content="Answers to common questions about Cloud on Fire VPS hosting services." />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="VPS FAQ | Cloud on Fire" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqCategories.flatMap(cat =>
-              cat.items.map(item => ({
-                "@type": "Question",
-                name: item.q,
-                acceptedAnswer: { "@type": "Answer", text: item.a },
-              }))
-            ),
-          })}
-        </script>
-      </Helmet>
+      <SEOHead
+        seoPrefix="faq"
+        title="VPS Hosting FAQ India – Questions Answered | Cloud on Fire"
+        description="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Pro VPS vs Budget VPS, DDoS protection, billing, payment methods, server specs, and support."
+        keywords="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing, Cloud on Fire FAQ, best VPS FAQ, gaming VPS FAQ"
+        canonical="/faq"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqCategories.flatMap(cat =>
+            cat.items.map(item => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            }))
+          ),
+        }}
+      />
       <Layout>
         {/* Hero */}
         <section className="section-padding">
