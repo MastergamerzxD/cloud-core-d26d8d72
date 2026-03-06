@@ -7,8 +7,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Save, Globe, Share2, Code2, MapPin, FileText } from "lucide-react";
+import { Loader2, Save, Globe, Share2, Code2, MapPin, FileText, Sparkles } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  AISEOGenerator,
+  AIKeywordSuggestions,
+  AISEOScore,
+  AISchemaGenerator,
+  AIOGImageSuggestions,
+  AISEOAudit,
+  AIPageSEOButton,
+} from "@/components/admin/AISEOTools";
 
 const PAGE_SEO_KEYS = [
   { page: "Home", prefix: "home", path: "/" },
@@ -45,17 +54,13 @@ export default function AdminSEO() {
     setSaving(true);
     try {
       const allKeys = [
-        // Global SEO
         "site_meta_title", "site_meta_description", "og_image",
-        // Organization schema
         "org_name", "org_legal_name", "org_founding_year", "org_description",
         "org_email", "org_phone", "org_address_street", "org_address_city",
         "org_address_state", "org_address_zip", "org_address_country",
         "org_logo_url", "org_facebook", "org_twitter", "org_linkedin", "org_instagram",
-        // Advanced SEO
         "google_site_verification", "bing_site_verification",
         "default_og_locale", "twitter_handle",
-        // Per-page SEO
         ...PAGE_SEO_KEYS.flatMap(p => [
           `seo_${p.prefix}_title`,
           `seo_${p.prefix}_description`,
@@ -63,7 +68,6 @@ export default function AdminSEO() {
         ]),
       ];
 
-      // Batch upserts
       const upserts = allKeys.map(key => ({
         key,
         value: settings[key] || "",
@@ -92,6 +96,23 @@ export default function AdminSEO() {
     </div>
   );
 
+  const handleApplyGlobalSEO = (data: any) => {
+    const updated = { ...settings };
+    if (data.meta_title) updated.site_meta_title = data.meta_title;
+    if (data.meta_description) updated.site_meta_description = data.meta_description;
+    setSettings(updated);
+    toast({ title: "AI SEO applied to global settings!" });
+  };
+
+  const handleApplyPageSEO = (prefix: string, data: { title: string; description: string; keywords: string }) => {
+    const updated = { ...settings };
+    if (data.title) updated[`seo_${prefix}_title`] = data.title;
+    if (data.description) updated[`seo_${prefix}_description`] = data.description;
+    if (data.keywords) updated[`seo_${prefix}_keywords`] = data.keywords;
+    setSettings(updated);
+    toast({ title: "AI SEO applied!", description: "Review and save to persist changes." });
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -106,11 +127,12 @@ export default function AdminSEO() {
         </div>
 
         <Tabs defaultValue="global" className="space-y-6">
-          <TabsList className="bg-muted/50 border border-border">
+          <TabsList className="bg-muted/50 border border-border flex-wrap h-auto gap-1 p-1">
             <TabsTrigger value="global" className="gap-2"><Globe className="h-4 w-4" />Global SEO</TabsTrigger>
             <TabsTrigger value="pages" className="gap-2"><FileText className="h-4 w-4" />Per-Page SEO</TabsTrigger>
             <TabsTrigger value="schema" className="gap-2"><Code2 className="h-4 w-4" />Schema / Structured Data</TabsTrigger>
             <TabsTrigger value="social" className="gap-2"><Share2 className="h-4 w-4" />Social & Verification</TabsTrigger>
+            <TabsTrigger value="ai" className="gap-2"><Sparkles className="h-4 w-4" />AI SEO Assistant</TabsTrigger>
           </TabsList>
 
           {/* Global SEO */}
@@ -126,6 +148,14 @@ export default function AdminSEO() {
                 <Field label="Default OG Image URL" k="og_image" placeholder="https://cloudonfire.in/og-image.jpg" />
               </CardContent>
             </Card>
+
+            {/* AI SEO Generator in Global tab */}
+            <AISEOGenerator onApply={handleApplyGlobalSEO} />
+            <AISEOScore
+              pageTitle="Global Site"
+              metaTitle={settings.site_meta_title}
+              metaDescription={settings.site_meta_description}
+            />
           </TabsContent>
 
           {/* Per-Page SEO */}
@@ -140,7 +170,16 @@ export default function AdminSEO() {
                   <div key={page.prefix} className="p-4 border border-border rounded-lg space-y-3">
                     <div className="flex items-center justify-between">
                       <h3 className="font-medium text-foreground">{page.page}</h3>
-                      <span className="text-xs text-muted-foreground font-mono">{page.path}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-muted-foreground font-mono">{page.path}</span>
+                        <AIPageSEOButton
+                          pageName={page.page}
+                          metaTitle={settings[`seo_${page.prefix}_title`] || ""}
+                          metaDescription={settings[`seo_${page.prefix}_description`] || ""}
+                          keywords={settings[`seo_${page.prefix}_keywords`] || ""}
+                          onApply={(data) => handleApplyPageSEO(page.prefix, data)}
+                        />
+                      </div>
                     </div>
                     <Field label="Meta Title" k={`seo_${page.prefix}_title`} placeholder={`Custom title for ${page.page}`} />
                     <Field label="Meta Description" k={`seo_${page.prefix}_description`} placeholder="Custom meta description..." multi />
@@ -188,6 +227,9 @@ export default function AdminSEO() {
                 <Field label="Country" k="org_address_country" placeholder="IN" />
               </CardContent>
             </Card>
+
+            {/* AI Schema Generator */}
+            <AISchemaGenerator />
           </TabsContent>
 
           {/* Social & Verification */}
@@ -225,6 +267,18 @@ export default function AdminSEO() {
                 <Field label="OG Locale" k="default_og_locale" placeholder="en_IN" />
               </CardContent>
             </Card>
+
+            {/* AI OG Image Suggestions */}
+            <AIOGImageSuggestions />
+          </TabsContent>
+
+          {/* AI SEO Assistant Tab */}
+          <TabsContent value="ai" className="space-y-6 max-w-3xl">
+            <AISEOGenerator onApply={handleApplyGlobalSEO} />
+            <AIKeywordSuggestions />
+            <AISEOAudit />
+            <AISchemaGenerator />
+            <AIOGImageSuggestions />
           </TabsContent>
         </Tabs>
 
