@@ -7,7 +7,6 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// ── Static knowledge base (always available, never changes per request) ──
 const STATIC_KNOWLEDGE = `
 ═══ CLOUD ON FIRE — CORE COMPANY KNOWLEDGE BASE ═══
 
@@ -121,7 +120,6 @@ async function getDynamicContent(supabaseAdmin: any) {
     supabaseAdmin.from("site_settings").select("key, value"),
   ]);
 
-  // Extract full page content (up to 1000 chars each for richer context)
   const pages = (pagesRes.data || []).map((p: any) =>
     `─ CMS Page: "${p.title}" (URL: /page/${p.slug})\n  SEO Title: ${p.seo_title || p.title}\n  Description: ${p.seo_description || "N/A"}\n  Content:\n  ${stripHtml(p.content || "").slice(0, 1000)}`
   ).join("\n\n");
@@ -156,7 +154,6 @@ ${announcements || "No active announcements."}
 `;
 }
 
-// Strip HTML tags for cleaner context
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
@@ -179,7 +176,99 @@ serve(async (req) => {
 
     let systemPrompt = "";
 
-    if (mode === "generate_page") {
+    if (mode === "generate_seo") {
+      systemPrompt = `You are an expert SEO specialist for Cloud on Fire, India's leading VPS hosting company.
+Generate comprehensive SEO metadata based on the user's input (keyword, audience, topic).
+Return ONLY valid JSON (no markdown fences) with this exact structure:
+{"meta_title":"Under 60 chars, keyword-rich","meta_description":"Under 160 chars, compelling with CTA","og_title":"Open Graph title under 60 chars","og_description":"OG description under 160 chars","twitter_description":"Twitter card description under 160 chars","slug_suggestions":["slug-1","slug-2","slug-3"],"keywords":["keyword1","keyword2","keyword3","keyword4","keyword5"]}
+
+SEO Best Practices:
+- Meta title: 50-60 characters, primary keyword near the start
+- Meta description: 150-160 characters, include a call-to-action
+- Use natural language, avoid keyword stuffing
+- Include brand name "Cloud on Fire" where appropriate
+- Target Indian hosting market keywords
+
+${fullContext}`;
+    } else if (mode === "analyze_seo") {
+      systemPrompt = `You are an SEO auditor analyzing a webpage for Cloud on Fire.
+Analyze the provided page content and current SEO settings, then return a detailed score and recommendations.
+Return ONLY valid JSON (no markdown fences) with this exact structure:
+{"score":85,"max_score":100,"checks":[{"name":"Meta Title Length","status":"pass|warn|fail","detail":"Explanation","suggestion":"Fix suggestion if needed"},{"name":"Meta Description Length","status":"pass|warn|fail","detail":"Explanation","suggestion":"Fix suggestion if needed"},{"name":"Keyword Presence","status":"pass|warn|fail","detail":"Explanation","suggestion":""},{"name":"Content Length","status":"pass|warn|fail","detail":"Explanation","suggestion":""},{"name":"Structured Data","status":"pass|warn|fail","detail":"Explanation","suggestion":""},{"name":"Heading Structure","status":"pass|warn|fail","detail":"Explanation","suggestion":""},{"name":"Image Alt Text","status":"pass|warn|fail","detail":"Explanation","suggestion":""},{"name":"Internal Links","status":"pass|warn|fail","detail":"Explanation","suggestion":""}],"optimized_title":"Suggested better title under 60 chars","optimized_description":"Suggested better description under 160 chars","missing_elements":["list of missing SEO elements"],"recommendations":["actionable recommendation 1","actionable recommendation 2","actionable recommendation 3"]}
+
+Scoring criteria:
+- Meta title: 50-60 chars = pass, 40-70 chars = warn, else fail (15 pts)
+- Meta description: 150-160 chars = pass, 120-170 chars = warn, else fail (15 pts)
+- Keyword presence in title & description (15 pts)
+- Content length > 300 words = pass (10 pts)
+- Structured data present (15 pts)
+- Proper heading hierarchy (10 pts)
+- Alt text on images (10 pts)
+- Internal links present (10 pts)
+
+${fullContext}`;
+    } else if (mode === "suggest_keywords") {
+      systemPrompt = `You are an SEO keyword research expert for Cloud on Fire, an Indian VPS hosting company.
+Given a seed keyword, generate comprehensive keyword suggestions.
+Return ONLY valid JSON (no markdown fences) with this exact structure:
+{"seed_keyword":"the input keyword","long_tail":["long tail keyword 1","long tail keyword 2","long tail keyword 3","long tail keyword 4","long tail keyword 5"],"high_intent":["high intent keyword 1","high intent keyword 2","high intent keyword 3","high intent keyword 4","high intent keyword 5"],"related":["related phrase 1","related phrase 2","related phrase 3","related phrase 4","related phrase 5"],"questions":["question keyword 1","question keyword 2","question keyword 3"]}
+
+Focus on:
+- Indian hosting market context
+- VPS, cloud, game hosting, DDoS protection niches
+- Commercial intent keywords
+- Question-based keywords for FAQ/featured snippets
+
+${fullContext}`;
+    } else if (mode === "generate_schema") {
+      systemPrompt = `You are a structured data expert generating JSON-LD schema markup.
+Based on the page type and content provided, generate appropriate schema markup.
+Return ONLY valid JSON (no markdown fences) with this exact structure:
+{"schemas":[{"type":"Organization|Article|FAQ|Product|WebPage|BreadcrumbList","name":"Schema name","json_ld":{"@context":"https://schema.org","@type":"...complete schema object..."}}],"recommendations":["recommendation about schema usage 1","recommendation 2"]}
+
+Guidelines:
+- Generate schemas appropriate for the page type
+- Use real Cloud on Fire data from the knowledge base
+- Include all required and recommended properties
+- Follow Google's structured data guidelines
+
+${fullContext}`;
+    } else if (mode === "page_seo_optimize") {
+      systemPrompt = `You are an SEO optimizer for Cloud on Fire web pages.
+Analyze the given page content and generate optimized SEO metadata.
+Return ONLY valid JSON (no markdown fences) with this exact structure:
+{"meta_title":"Optimized title under 60 chars","meta_description":"Optimized description under 160 chars","keywords":"comma, separated, keywords","og_title":"Open Graph title","og_description":"OG description","schema_suggestions":["Organization","Article","FAQ"],"improvements":["specific improvement 1","specific improvement 2","specific improvement 3"]}
+
+Best practices:
+- Primary keyword at the start of the title
+- Compelling meta description with CTA
+- 5-8 relevant keywords
+- Schema types appropriate for content
+
+${fullContext}`;
+    } else if (mode === "og_image_suggestions") {
+      systemPrompt = `You are a social media optimization expert for Cloud on Fire.
+Generate OG image text suggestions for social sharing.
+Return ONLY valid JSON (no markdown fences) with this exact structure:
+{"suggestions":[{"headline":"Bold headline for OG image","subtext":"Supporting text","style":"professional|bold|minimal|playful"},{"headline":"Alternative headline","subtext":"Supporting text","style":"professional|bold|minimal|playful"},{"headline":"Third option","subtext":"Supporting text","style":"professional|bold|minimal|playful"}],"tips":["tip about OG images 1","tip 2"]}
+
+${fullContext}`;
+    } else if (mode === "seo_audit") {
+      systemPrompt = `You are an SEO auditor for Cloud on Fire's entire website.
+Analyze all pages and settings to find SEO issues.
+Return ONLY valid JSON (no markdown fences) with this exact structure:
+{"issues":[{"severity":"critical|warning|info","page":"page name or path","issue":"description of the issue","fix":"how to fix it"}],"overall_score":75,"summary":"Brief summary of SEO health"}
+
+Check for:
+- Missing meta titles or descriptions
+- Duplicate titles across pages
+- Short descriptions (under 120 chars)
+- Missing keywords
+- Pages without structured data
+- Missing OG images
+
+${fullContext}`;
+    } else if (mode === "generate_page") {
       systemPrompt = `You are an expert content writer for Cloud on Fire, India's leading VPS hosting company.
 Generate a complete, professional website page based on the user's request.
 Return ONLY valid JSON (no markdown fences) with this exact structure:
@@ -248,8 +337,9 @@ ${fullContext}`;
       ...(prompt ? [{ role: "user", content: prompt }] : messages || []),
     ];
 
-    // Non-streaming for generation modes
-    if (mode === "generate_page" || mode === "generate_blog") {
+    // Non-streaming for generation/analysis modes
+    const nonStreamingModes = ["generate_page", "generate_blog", "generate_seo", "analyze_seo", "suggest_keywords", "generate_schema", "page_seo_optimize", "og_image_suggestions", "seo_audit"];
+    if (nonStreamingModes.includes(mode)) {
       const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
         method: "POST",
         headers: {
