@@ -40,7 +40,9 @@ export default function AdminMedia() {
       await supabase.from("media").insert({
         name: file.name, url: urlData.publicUrl, type: file.type,
         size: file.size, uploaded_by: user?.id,
-      });
+        alt_text: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
+        description: "",
+      } as any);
     }
 
     toast({ title: "Upload complete!" });
@@ -95,9 +97,11 @@ export default function AdminMedia() {
                   ) : (
                     <div className="flex items-center justify-center h-full text-muted-foreground text-xs">{item.type}</div>
                   )}
-                  <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                    <Button size="icon" variant="ghost" onClick={() => copyUrl(item.url)}><Copy className="h-4 w-4" /></Button>
-                    <Button size="icon" variant="ghost" className="text-destructive" onClick={() => handleDelete(item)}><Trash2 className="h-4 w-4" /></Button>
+                  <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                    <div className="flex gap-1">
+                      <Button size="icon" variant="ghost" onClick={() => copyUrl(item.url)}><Copy className="h-4 w-4" /></Button>
+                      <Button size="icon" variant="ghost" className="text-destructive" onClick={() => handleDelete(item)}><Trash2 className="h-4 w-4" /></Button>
+                    </div>
                   </div>
                 </div>
                 <CardContent className="p-2">

@@ -25,6 +25,8 @@ import Status from "./pages/Status";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import MediaGallery from "./pages/MediaGallery";
+import DynamicPage from "./pages/DynamicPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBlogList from "./pages/admin/AdminBlogList";
