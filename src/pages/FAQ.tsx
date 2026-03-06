@@ -139,32 +139,13 @@ export default function FAQ() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": [
-              {
+            mainEntity: faqCategories.flatMap(cat =>
+              cat.items.map(item => ({
                 "@type": "Question",
-                "name": "What is Cloud on Fire?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Cloud on Fire is a VPS hosting provider based in India, offering high-performance virtual private servers with enterprise-grade DDoS protection."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What's the difference between Pro VPS and Budget VPS?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Pro VPS offers dedicated CPU cores, premium DDoS protection (never suspended under attacks), and is optimized for gaming. Budget VPS uses shared resources and is ideal for websites and development."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is DDoS protection included?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes, DDoS protection is included on all VPS plans at no extra cost."
-                }
-              }
-            ]
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              }))
+            ),
           })}
         </script>
       </Helmet>
