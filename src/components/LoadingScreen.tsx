@@ -36,7 +36,7 @@ export default function LoadingScreen() {
               }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <img src={logo} alt="Cloud on Fire" className="h-16 w-auto" />
+              <img src={logo} alt="Cloud on Fire" className="h-28 w-auto" />
             </motion.div>
 
             <motion.div
