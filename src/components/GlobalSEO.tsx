@@ -13,7 +13,7 @@ export default function GlobalSEO() {
   const orgDescription = s.org_description || "India's leading high-performance VPS hosting provider with enterprise-grade DDoS protection, NVMe storage, and Yotta data center infrastructure.";
   const orgEmail = s.org_email || "hello@cloudonfire.com";
   const orgPhone = s.org_phone || "+918766215705";
-  const orgLogo = s.org_logo_url || "https://cloudonfire.in/favicon.ico";
+  const orgLogo = s.org_logo_url || "https://cloudonfire.com/favicon.ico";
   const orgFoundingYear = s.org_founding_year || "2024";
 
   const sameAs = [
@@ -23,10 +23,10 @@ export default function GlobalSEO() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://cloudonfire.in/#organization",
+    "@id": "https://cloudonfire.com/#organization",
     name: orgName,
     legalName: orgLegalName,
-    url: "https://cloudonfire.in",
+    url: "https://cloudonfire.com",
     logo: orgLogo,
     description: orgDescription,
     foundingDate: orgFoundingYear,
@@ -61,16 +61,16 @@ export default function GlobalSEO() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://cloudonfire.in/#website",
+    "@id": "https://cloudonfire.com/#website",
     name: orgName,
-    url: "https://cloudonfire.in",
+    url: "https://cloudonfire.com",
     description: s.site_meta_description || "Best VPS Hosting in India - Gaming VPS, Budget VPS, Enterprise DDoS Protection",
-    publisher: { "@id": "https://cloudonfire.in/#organization" },
+    publisher: { "@id": "https://cloudonfire.com/#organization" },
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://cloudonfire.in/blog?q={search_term_string}",
+        urlTemplate: "https://cloudonfire.com/blog?q={search_term_string}",
       },
       "query-input": "required name=search_term_string",
     },
@@ -84,16 +84,16 @@ export default function GlobalSEO() {
       "Infrastructure", "Blog", "About Us", "FAQ", "Contact", "Status"
     ],
     url: [
-      "https://cloudonfire.in/pro-vps",
-      "https://cloudonfire.in/budget-vps",
-      "https://cloudonfire.in/compare",
-      "https://cloudonfire.in/ddos-protection",
-      "https://cloudonfire.in/infrastructure",
-      "https://cloudonfire.in/blog",
-      "https://cloudonfire.in/about",
-      "https://cloudonfire.in/faq",
-      "https://cloudonfire.in/contact",
-      "https://cloudonfire.in/status",
+      "https://cloudonfire.com/pro-vps",
+      "https://cloudonfire.com/budget-vps",
+      "https://cloudonfire.com/compare",
+      "https://cloudonfire.com/ddos-protection",
+      "https://cloudonfire.com/infrastructure",
+      "https://cloudonfire.com/blog",
+      "https://cloudonfire.com/about",
+      "https://cloudonfire.com/faq",
+      "https://cloudonfire.com/contact",
+      "https://cloudonfire.com/status",
     ],
   };
 

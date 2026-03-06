@@ -15,15 +15,15 @@ export default function Index() {
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "@id": "https://cloudonfire.in/#webpage",
+      "@id": "https://cloudonfire.com/#webpage",
       name: "Cloud on Fire – Best VPS Hosting Company in India",
-      url: "https://cloudonfire.in/",
+      url: "https://cloudonfire.com/",
       description: "India's #1 high-performance VPS hosting provider. Gaming VPS from ₹299/month, enterprise DDoS protection up to 1Tbps, NVMe Gen4 storage, Yotta Tier-3+ data centers in Delhi & Mumbai, and 99.9% guaranteed uptime.",
-      isPartOf: { "@id": "https://cloudonfire.in/#website" },
-      about: { "@id": "https://cloudonfire.in/#organization" },
+      isPartOf: { "@id": "https://cloudonfire.com/#website" },
+      about: { "@id": "https://cloudonfire.com/#organization" },
       primaryImageOfPage: {
         "@type": "ImageObject",
-        url: "https://cloudonfire.in/favicon.ico",
+        url: "https://cloudonfire.com/favicon.ico",
       },
     },
     {
@@ -51,7 +51,7 @@ export default function Index() {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.in/" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
       ],
     },
   ];

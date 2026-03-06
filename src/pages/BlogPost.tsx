@@ -48,8 +48,8 @@ export default function BlogPost() {
           datePublished: post.publish_date,
           dateModified: post.updated_at || post.publish_date,
           author: { "@type": "Person", name: post.author_name || "Cloud on Fire" },
-          publisher: { "@type": "Organization", name: "Cloud on Fire", url: "https://cloudonfire.in" },
-          mainEntityOfPage: `https://cloudonfire.in/blog/${post.slug}`,
+          publisher: { "@type": "Organization", name: "Cloud on Fire", url: "https://cloudonfire.com" },
+          mainEntityOfPage: `https://cloudonfire.com/blog/${post.slug}`,
           keywords: post.tags?.join(", "),
         }}
       />

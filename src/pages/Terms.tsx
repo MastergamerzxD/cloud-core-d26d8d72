@@ -112,7 +112,7 @@ export default function Terms() {
                 <section>
                   <h2 className="text-2xl font-semibold text-foreground mb-4">10. Contact</h2>
                   <p className="text-muted-foreground">
-                    For questions about these Terms of Service, please contact us at legal@cloudonfire.in.
+                    For questions about these Terms of Service, please contact us at legal@cloudonfire.com.
                   </p>
                 </section>
               </div>

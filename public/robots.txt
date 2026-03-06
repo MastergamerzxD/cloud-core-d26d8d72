@@ -20,4 +20,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin
 
-Sitemap: https://cloudonfire.in/sitemap.xml
+Sitemap: https://cloudonfire.com/sitemap.xml
