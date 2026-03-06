@@ -30,6 +30,27 @@ export default function AdminAnalytics() {
   const [timeoutDialog, setTimeoutDialog] = useState<{ open: boolean; ip: string; sessionId: string }>({ open: false, ip: "", sessionId: "" });
   const [timeoutHours, setTimeoutHours] = useState("1");
 
+  // Load analytics password from settings
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "analytics_password")
+        .maybeSingle();
+      setStoredPassword(data?.value || "0703");
+    })();
+  }, []);
+
+  const handlePasswordSubmit = () => {
+    if (passwordInput === storedPassword) {
+      setAuthenticated(true);
+      setPasswordError("");
+    } else {
+      setPasswordError("Incorrect password. Access denied.");
+    }
+  };
+
   const loadData = useCallback(async () => {
     const now = new Date();
     const fiveMinAgo = new Date(now.getTime() - 5 * 60 * 1000).toISOString();
