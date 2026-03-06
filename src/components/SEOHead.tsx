@@ -39,11 +39,12 @@ export default function SEOHead({
   const adminTitle = seoPrefix ? settings[`seo_${seoPrefix}_title`] : "";
   const adminDescription = seoPrefix ? settings[`seo_${seoPrefix}_description`] : "";
   const adminKeywords = seoPrefix ? settings[`seo_${seoPrefix}_keywords`] : "";
+  const adminOgImage = seoPrefix ? settings[`seo_${seoPrefix}_og_image`] : "";
 
   const title = adminTitle || defaultTitle;
   const description = adminDescription || defaultDescription;
   const keywords = adminKeywords || defaultKeywords;
-  const ogImage = settings.og_image || defaultOgImage;
+  const ogImage = adminOgImage || settings.og_image || defaultOgImage;
   const twitterHandle = settings.twitter_handle || "";
 
   const fullCanonical = canonical.startsWith("http") ? canonical : `https://cloudonfire.in${canonical}`;

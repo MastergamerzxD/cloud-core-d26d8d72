@@ -144,6 +144,7 @@ export default function AdminSEO() {
           `seo_${p.prefix}_title`,
           `seo_${p.prefix}_description`,
           `seo_${p.prefix}_keywords`,
+          `seo_${p.prefix}_og_image`,
         ]),
       ];
 
