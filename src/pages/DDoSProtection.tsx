@@ -49,19 +49,16 @@ export default function DDoSProtection() {
   return (
     <>
       <Helmet>
-        <title>DDoS Protection India - Enterprise Anti-DDoS for VPS | Cloud on Fire</title>
-        <meta 
-          name="description" 
-          content="Enterprise-grade Layer 4 DDoS protection for VPS hosting in India. Multi-layer mitigation up to 1Tbps. Pro VPS never suspended under attack." 
-        />
-        <meta name="keywords" content="DDoS protection India, anti-DDoS VPS, DDoS mitigation, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection" />
+        <title>DDoS Protection India – Enterprise Anti-DDoS VPS Hosting | Cloud on Fire</title>
+        <meta name="description" content="Best DDoS protected VPS hosting in India. Enterprise-grade Layer 4 DDoS mitigation up to 1Tbps. Pro VPS never suspended under attack. Real-time ML-based threat monitoring. Cloud on Fire." />
+        <meta name="keywords" content="DDoS protection India, anti-DDoS VPS hosting, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, best DDoS protection hosting" />
         <link rel="canonical" href="https://cloudonfire.in/ddos-protection" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://cloudonfire.in/ddos-protection" />
-        <meta property="og:title" content="DDoS Protection - Enterprise Anti-DDoS | Cloud on Fire" />
-        <meta property="og:description" content="Layer 4 DDoS mitigation up to 1Tbps. Keep your services online during attacks." />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="DDoS Protection | Cloud on Fire" />
+        <meta property="og:title" content="DDoS Protection India – Enterprise Anti-DDoS | Cloud on Fire" />
+        <meta property="og:description" content="Layer 4 DDoS mitigation up to 1Tbps. Best DDoS protected hosting in India." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="DDoS Protection India | Cloud on Fire" />
       </Helmet>
       <Layout>
         {/* Hero */}

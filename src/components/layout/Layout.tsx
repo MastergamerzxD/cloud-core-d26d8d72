@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AnnouncementBanner from "./AnnouncementBanner";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
+import GlobalSEO from "@/components/GlobalSEO";
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,6 +12,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
+      <GlobalSEO />
       <AnimatedBackground />
       <Navbar />
       <AnnouncementBanner />
