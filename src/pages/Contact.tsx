@@ -13,13 +13,13 @@ const contactMethods = [
     icon: Mail,
     title: "Email Support",
     description: "For general inquiries and support requests",
-    value: "support@cloudonfire.in",
+    value: "hello@cloudonfire.com",
   },
   {
     icon: MessageCircle,
-    title: "Sales Inquiries",
-    description: "Talk to our sales team for custom solutions",
-    value: "sales@cloudonfire.in",
+    title: "Phone Support",
+    description: "Call us for immediate assistance",
+    value: "+91 8766215705",
   },
   {
     icon: Clock,

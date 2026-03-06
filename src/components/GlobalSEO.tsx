@@ -20,14 +20,8 @@ export default function GlobalSEO() {
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        email: "support@cloudonfire.in",
-        availableLanguage: ["English", "Hindi"],
-        areaServed: "IN",
-      },
-      {
-        "@type": "ContactPoint",
-        contactType: "sales",
-        email: "sales@cloudonfire.in",
+        email: "hello@cloudonfire.com",
+        telephone: "+918766215705",
         availableLanguage: ["English", "Hindi"],
         areaServed: "IN",
       },
