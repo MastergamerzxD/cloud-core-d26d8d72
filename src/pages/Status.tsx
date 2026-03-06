@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { CheckCircle, Clock, Rocket } from "lucide-react";
 import Layout from "@/components/layout/Layout";
