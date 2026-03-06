@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/layout/Layout";
 import { ArrowLeft } from "lucide-react";
@@ -32,34 +32,27 @@ export default function BlogPost() {
 
   return (
     <Layout>
-      <Helmet>
-        <title>{post.meta_title || post.title} - Cloud on Fire Blog</title>
-        {post.meta_description && <meta name="description" content={post.meta_description} />}
-        {post.canonical_url ? <link rel="canonical" href={post.canonical_url} /> : <link rel="canonical" href={`https://cloudonfire.in/blog/${post.slug}`} />}
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://cloudonfire.in/blog/${post.slug}`} />
-        <meta property="og:title" content={post.meta_title || post.title} />
-        {post.meta_description && <meta property="og:description" content={post.meta_description} />}
-        {post.featured_image && <meta property="og:image" content={post.featured_image} />}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.meta_title || post.title} />
-        {post.tags?.length > 0 && <meta name="keywords" content={post.tags.join(", ")} />}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.title,
-            description: post.meta_description || post.excerpt || "",
-            image: post.featured_image || undefined,
-            datePublished: post.publish_date,
-            dateModified: post.updated_at || post.publish_date,
-            author: { "@type": "Person", name: post.author_name || "Cloud on Fire" },
-            publisher: { "@type": "Organization", name: "Cloud on Fire", url: "https://cloudonfire.in" },
-            mainEntityOfPage: `https://cloudonfire.in/blog/${post.slug}`,
-            keywords: post.tags?.join(", "),
-          })}
-        </script>
-      </Helmet>
+      <SEOHead
+        title={`${post.meta_title || post.title} - Cloud on Fire Blog`}
+        description={post.meta_description || post.excerpt || ""}
+        keywords={post.tags?.join(", ") || ""}
+        canonical={post.canonical_url || `/blog/${post.slug}`}
+        ogType="article"
+        ogImage={post.featured_image}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.meta_description || post.excerpt || "",
+          image: post.featured_image || undefined,
+          datePublished: post.publish_date,
+          dateModified: post.updated_at || post.publish_date,
+          author: { "@type": "Person", name: post.author_name || "Cloud on Fire" },
+          publisher: { "@type": "Organization", name: "Cloud on Fire", url: "https://cloudonfire.in" },
+          mainEntityOfPage: `https://cloudonfire.in/blog/${post.slug}`,
+          keywords: post.tags?.join(", "),
+        }}
+      />
 
       <article className="section-padding">
         <div className="container-wide max-w-3xl mx-auto">

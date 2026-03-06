@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -105,37 +105,27 @@ const budgetPlans = [
 export default function Pricing() {
   return (
     <>
-      <Helmet>
-        <title>VPS Pricing India - Affordable VPS Plans from ₹299/mo | Cloud on Fire</title>
-        <meta 
-          name="description" 
-          content="Transparent VPS pricing in India. Pro VPS from ₹299/month, Budget VPS from ₹499/month. No hidden fees, no setup costs. DDoS protection included on all plans. Compare all VPS plans." 
-        />
-        <meta name="keywords" content="VPS pricing India, cheap VPS plans, gaming VPS price, VPS cost India, affordable server hosting, monthly VPS plans" />
-        <link rel="canonical" href="https://cloudonfire.in/pricing" />
-        <meta property="og:type" content="product" />
-        <meta property="og:url" content="https://cloudonfire.in/pricing" />
-        <meta property="og:title" content="VPS Pricing - Affordable Plans | Cloud on Fire" />
-        <meta property="og:description" content="VPS hosting from ₹299/month. Transparent pricing, no hidden fees, DDoS protection included." />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="VPS Pricing India | Cloud on Fire" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "Cloud on Fire VPS Hosting",
-            "description": "High-performance VPS hosting with DDoS protection",
-            "offers": {
-              "@type": "AggregateOffer",
-              "priceCurrency": "INR",
-              "lowPrice": "299",
-              "highPrice": "1199",
-              "offerCount": "6",
-              "availability": "https://schema.org/InStock"
-            }
-          })}
-        </script>
-      </Helmet>
+      <SEOHead
+        title="VPS Pricing India - Affordable VPS Plans from ₹299/mo | Cloud on Fire"
+        description="Transparent VPS pricing in India. Pro VPS from ₹299/month, Budget VPS from ₹499/month. No hidden fees, no setup costs. DDoS protection included on all plans. Compare all VPS plans."
+        keywords="VPS pricing India, cheap VPS plans, gaming VPS price, VPS cost India, affordable server hosting, monthly VPS plans"
+        canonical="/pricing"
+        ogType="product"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": "Cloud on Fire VPS Hosting",
+          "description": "High-performance VPS hosting with DDoS protection",
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "INR",
+            "lowPrice": "299",
+            "highPrice": "1199",
+            "offerCount": "6",
+            "availability": "https://schema.org/InStock"
+          }
+        }}
+      />
       <Layout>
         {/* Hero */}
         <section className="section-padding">
