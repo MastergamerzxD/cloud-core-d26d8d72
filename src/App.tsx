@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LaunchPopupProvider } from "@/hooks/useLaunchPopup";
 import { AdminAuthProvider } from "@/hooks/useAdminAuth";
+import { SEOSettingsProvider } from "@/hooks/useSEOSettings";
 
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
 import LoadingScreen from "@/components/LoadingScreen";
