@@ -4,8 +4,13 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Users, Globe, Monitor, Eye, TrendingUp, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Users, Globe, Monitor, Eye, TrendingUp, MapPin, Ban, Clock, XCircle } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Legend } from "recharts";
+import { toast } from "@/hooks/use-toast";
 
 const COLORS = ["hsl(24, 95%, 53%)", "hsl(38, 92%, 50%)", "hsl(4, 90%, 58%)", "hsl(200, 80%, 50%)", "hsl(150, 60%, 45%)", "hsl(280, 60%, 55%)"];
 
