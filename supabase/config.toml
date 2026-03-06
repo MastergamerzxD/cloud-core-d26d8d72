@@ -2,3 +2,6 @@ project_id = "kwqjuczfjbwzyjghxcrh"
 
 [functions.ai-chat]
 verify_jwt = false
+
+[functions.track-visit]
+verify_jwt = false
