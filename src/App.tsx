@@ -69,6 +69,8 @@ const App = () => (
                   <Route path="/status" element={<Status />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/:slug" element={<BlogPost />} />
+                  <Route path="/media" element={<MediaGallery />} />
+                  <Route path="/page/:slug" element={<DynamicPage />} />
 
                   {/* Admin routes */}
                   <Route path="/admin/login" element={<AdminLogin />} />
