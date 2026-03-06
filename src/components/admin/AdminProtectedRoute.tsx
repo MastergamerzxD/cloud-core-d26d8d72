@@ -3,7 +3,7 @@ import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Loader2 } from "lucide-react";
 
 export default function AdminProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, isAdmin, loading } = useAdminAuth();
+  const { user, isAdmin, loading, needs2FA } = useAdminAuth();
 
   if (loading) {
     return (
@@ -13,7 +13,11 @@ export default function AdminProtectedRoute({ children }: { children: React.Reac
     );
   }
 
-  if (!user || !isAdmin) {
+  if (!user || (!isAdmin && !needs2FA)) {
+    return <Navigate to="/admin/login" replace />;
+  }
+
+  if (needs2FA) {
     return <Navigate to="/admin/login" replace />;
   }
 
