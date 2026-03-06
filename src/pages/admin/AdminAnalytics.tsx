@@ -117,6 +117,37 @@ export default function AdminAnalytics() {
 
   const activePages = [...new Set(liveVisitors.map((v) => v.current_page))];
 
+  const handleBlockIp = async (ip: string) => {
+    const { error } = await supabase.from("blocked_ips").insert({
+      ip_address: ip, reason: "Blocked from analytics dashboard", is_permanent: true,
+    });
+    if (!error) {
+      await supabase.from("security_logs").insert({ event_type: "ip_block", ip_address: ip, details: "Blocked from live visitors" });
+      toast({ title: "IP Blocked", description: `${ip} has been permanently blocked` });
+    }
+  };
+
+  const handleTimeout = async () => {
+    const { ip } = timeoutDialog;
+    const hours = parseInt(timeoutHours) || 1;
+    const { error } = await supabase.from("blocked_ips").insert({
+      ip_address: ip, reason: "Temporary timeout from analytics", is_permanent: false,
+      expires_at: new Date(Date.now() + hours * 3600000).toISOString(),
+    });
+    if (!error) {
+      await supabase.from("security_logs").insert({ event_type: "ip_timeout", ip_address: ip, details: `${hours}h timeout` });
+      toast({ title: "Timeout Applied", description: `${ip} blocked for ${hours} hour(s)` });
+    }
+    setTimeoutDialog({ open: false, ip: "", sessionId: "" });
+  };
+
+  const handleTerminate = async (sessionId: string, ip: string) => {
+    await supabase.from("visitor_sessions").delete().eq("session_id", sessionId);
+    await supabase.from("security_logs").insert({ event_type: "session_terminate", ip_address: ip, details: `Session ${sessionId} terminated` });
+    toast({ title: "Session Terminated", description: `Session for ${ip} has been ended` });
+    loadData();
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -211,6 +242,19 @@ export default function AdminAnalytics() {
                         <TableCell className="text-sm font-medium">{v.current_page}</TableCell>
                         <TableCell className="text-xs text-muted-foreground">
                           {new Date(v.last_seen_at).toLocaleTimeString()}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1">
+                            <Button variant="ghost" size="sm" title="Block IP" onClick={() => handleBlockIp(v.ip_address)}>
+                              <Ban className="h-3.5 w-3.5 text-destructive" />
+                            </Button>
+                            <Button variant="ghost" size="sm" title="Timeout" onClick={() => setTimeoutDialog({ open: true, ip: v.ip_address, sessionId: v.session_id })}>
+                              <Clock className="h-3.5 w-3.5 text-primary" />
+                            </Button>
+                            <Button variant="ghost" size="sm" title="Terminate Session" onClick={() => handleTerminate(v.session_id, v.ip_address)}>
+                              <XCircle className="h-3.5 w-3.5 text-destructive" />
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}
