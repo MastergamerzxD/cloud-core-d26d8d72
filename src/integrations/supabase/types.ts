@@ -316,6 +316,60 @@ export type Database = {
         }
         Relationships: []
       }
+      visitor_sessions: {
+        Row: {
+          browser: string | null
+          city: string | null
+          country: string | null
+          country_code: string | null
+          created_at: string
+          current_page: string | null
+          device_type: string | null
+          id: string
+          ip_address: string | null
+          last_seen_at: string
+          latitude: number | null
+          longitude: number | null
+          os: string | null
+          referrer: string | null
+          session_id: string
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
+          created_at?: string
+          current_page?: string | null
+          device_type?: string | null
+          id?: string
+          ip_address?: string | null
+          last_seen_at?: string
+          latitude?: number | null
+          longitude?: number | null
+          os?: string | null
+          referrer?: string | null
+          session_id: string
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
+          created_at?: string
+          current_page?: string | null
+          device_type?: string | null
+          id?: string
+          ip_address?: string | null
+          last_seen_at?: string
+          latitude?: number | null
+          longitude?: number | null
+          os?: string | null
+          referrer?: string | null
+          session_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
