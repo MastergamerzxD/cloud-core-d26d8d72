@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, FileText, BookOpen, Image, Megaphone,
-  Search, ArrowRightLeft, Mail, Settings, LogOut, Bot, BarChart3
+  Search, ArrowRightLeft, Mail, Settings, LogOut, Bot, BarChart3, Shield
 } from "lucide-react";
 import logoImg from "@/assets/logo.png";
 import { NavLink } from "@/components/NavLink";
@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 const items = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
   { title: "Analytics", url: "/admin/analytics", icon: BarChart3 },
+  { title: "Security", url: "/admin/security", icon: Shield },
   { title: "AI Assistant", url: "/admin/ai", icon: Bot },
   { title: "Blog Posts", url: "/admin/blogs", icon: BookOpen },
   { title: "Pages", url: "/admin/pages", icon: FileText },

@@ -391,6 +391,21 @@ export default function AdminAnalytics() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
+
+        {/* Timeout Dialog */}
+        <Dialog open={timeoutDialog.open} onOpenChange={(open) => !open && setTimeoutDialog({ open: false, ip: "", sessionId: "" })}>
+          <DialogContent>
+            <DialogHeader><DialogTitle>Temporary Timeout</DialogTitle></DialogHeader>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground">Block <span className="font-mono">{timeoutDialog.ip}</span> temporarily</p>
+              <div>
+                <Label>Duration (hours)</Label>
+                <Input type="number" value={timeoutHours} onChange={(e) => setTimeoutHours(e.target.value)} min="1" />
+              </div>
+              <Button onClick={handleTimeout} className="w-full">Apply Timeout</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </AdminLayout>
   );
