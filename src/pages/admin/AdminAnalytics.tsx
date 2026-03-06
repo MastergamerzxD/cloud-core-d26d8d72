@@ -15,6 +15,10 @@ import { toast } from "@/hooks/use-toast";
 const COLORS = ["hsl(24, 95%, 53%)", "hsl(38, 92%, 50%)", "hsl(4, 90%, 58%)", "hsl(200, 80%, 50%)", "hsl(150, 60%, 45%)", "hsl(280, 60%, 55%)"];
 
 export default function AdminAnalytics() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [storedPassword, setStoredPassword] = useState("");
   const [liveVisitors, setLiveVisitors] = useState<any[]>([]);
   const [totalToday, setTotalToday] = useState(0);
   const [dailyData, setDailyData] = useState<any[]>([]);
