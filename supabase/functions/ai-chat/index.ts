@@ -20,12 +20,59 @@ async function getWebsiteContext(supabaseAdmin: any) {
   const announcements = (announcementsRes.data || []).map((a: any) => `Announcement: ${a.title} - ${a.description || ""}`).join("\n");
   const settings = (settingsRes.data || []).map((s: any) => `${s.key}: ${s.value || ""}`).join("\n");
 
-  return `=== WEBSITE KNOWLEDGE BASE ===
+  return `=== CLOUD ON FIRE — COMPLETE KNOWLEDGE BASE ===
 
-ABOUT: Cloud on Fire is a premium VPS hosting company based in India offering Pro VPS, Budget VPS, game server hosting, and DDoS protection services.
+COMPANY INFORMATION:
+- Company Name: Cloud on Fire
+- Industry: VPS Hosting, Cloud Infrastructure, Game Server Hosting
+- Location: India
+- Support Email: hello@cloudonfire.com
+- Phone Number: +91 8766215705
+- Website: https://cloudonfire.in
+- Founded: 2024
+- Tagline: India's leading high-performance VPS hosting provider
 
-WEBSITE PAGES:
-${pages || "No pages published yet."}
+PRODUCTS & SERVICES:
+1. Pro VPS (/pro-vps) — High-performance gaming VPS with NVMe SSDs, dedicated CPU cores, enterprise DDoS protection. Ideal for game servers (Minecraft, Rust, ARK, FiveM), web applications, and databases.
+2. Budget VPS (/budget-vps) — Cost-effective VPS hosting starting at affordable prices. Great for small websites, development, testing, and light workloads.
+3. DDoS Protection (/ddos-protection) — Enterprise-grade DDoS mitigation with always-on protection, automatic detection, and multi-layer filtering.
+4. Game Server Hosting — Optimized servers for Minecraft, Rust, ARK, FiveM, Valheim, and other popular games with low-latency Indian infrastructure.
+
+INFRASTRUCTURE (/infrastructure):
+- Data centers in India (Yotta NM1, Navi Mumbai)
+- NVMe SSD storage for maximum I/O performance
+- Premium network with low latency across India
+- 99.9% uptime SLA
+
+KEY DIFFERENTIATORS (/why-us):
+- Indian-based infrastructure for lowest latency in India
+- Enterprise-grade DDoS protection included
+- 24/7 expert support with < 15 minute response time for Pro VPS
+- NVMe storage on all plans
+- No overselling — dedicated resources
+
+CONTACT INFORMATION (/contact):
+- Email: hello@cloudonfire.com
+- Phone: +91 8766215705
+- Response time: < 15 minutes for Pro VPS customers
+- 24/7 support available
+
+OTHER PAGES:
+- About Us (/about) — Company story and mission
+- FAQ (/faq) — Frequently asked questions
+- Blog (/blog) — Technical articles and news
+- Media Gallery (/media) — Images and resources
+- Status (/status) — Service status page
+- Terms of Service (/terms)
+- Privacy Policy (/privacy)
+- Compare VPS (/compare) — Side-by-side plan comparison
+
+LAUNCH STATUS: Launching 15th April 2026
+
+=== DYNAMIC WEBSITE CONTENT ===
+
+PUBLISHED PAGES:
+${pages || "No custom pages published yet."}
 
 BLOG POSTS:
 ${posts || "No blog posts yet."}
@@ -34,11 +81,7 @@ ACTIVE ANNOUNCEMENTS:
 ${announcements || "No active announcements."}
 
 SITE SETTINGS:
-${settings || "No custom settings."}
-
-CONTACT: Visit /contact for contact information.
-PRODUCTS: Pro VPS (/pro-vps), Budget VPS (/budget-vps), DDoS Protection (/ddos-protection)
-INFRASTRUCTURE: /infrastructure for datacenter info`;
+${settings || "No custom settings."}`;
 }
 
 serve(async (req) => {
@@ -71,10 +114,16 @@ Generate a complete blog post based on the user's request. Return ONLY valid JSO
 Write engaging, SEO-optimized content about VPS hosting, cloud computing, gaming servers, etc.
 ${websiteContext}`;
     } else if (mode === "public") {
-      systemPrompt = `You are Cloud on Fire's AI assistant, helping visitors learn about our VPS hosting services.
-You are friendly, professional, and concise. Answer questions using ONLY the website knowledge below.
-If you don't know something, say "I don't have that information, but you can contact us at /contact for help."
-Never make up pricing, features, or information not in your knowledge base.
+      systemPrompt = `You are Cloud on Fire's AI assistant on the public website, helping visitors learn about our VPS hosting services.
+
+RULES:
+- Be friendly, professional, and concise.
+- Answer questions using ONLY the knowledge base below. Do NOT make up information.
+- When asked about contact information, ALWAYS provide: Email: hello@cloudonfire.com, Phone: +91 8766215705
+- When asked about services, describe our actual products with details from the knowledge base.
+- If you genuinely don't know the answer, say: "I don't have that specific information, but you can reach us at hello@cloudonfire.com or call +91 8766215705 for help!"
+- Never guess pricing unless it's explicitly in the knowledge base.
+- Keep responses concise but helpful — 2-4 sentences for simple questions, more for detailed ones.
 
 ${websiteContext}`;
     } else {
