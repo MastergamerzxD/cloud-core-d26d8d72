@@ -104,7 +104,7 @@ const faqCategories = [
     items: [
       {
         q: "How do I contact support?",
-        a: "You can contact support via email at support@cloudonfire.in or through the ticket system in your account dashboard. Pro VPS customers receive priority support.",
+        a: "You can contact support via email at hello@cloudonfire.com or call us at +91 8766215705. Pro VPS customers receive priority support with under 15 minute response times.",
       },
       {
         q: "What's the average response time?",
