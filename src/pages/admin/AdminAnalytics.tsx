@@ -148,6 +148,37 @@ export default function AdminAnalytics() {
     loadData();
   };
 
+  // Password Gate
+  if (!authenticated) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <Card className="w-full max-w-md bg-card border-border">
+            <CardHeader className="text-center">
+              <Lock className="h-12 w-12 mx-auto text-primary mb-2" />
+              <CardTitle className="text-xl">Analytics Access</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">Enter the security password to access visitor analytics</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>Password</Label>
+                <Input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handlePasswordSubmit()}
+                  placeholder="Enter access password"
+                />
+              </div>
+              {passwordError && <p className="text-sm text-destructive">{passwordError}</p>}
+              <Button onClick={handlePasswordSubmit} className="w-full">Access Analytics</Button>
+            </CardContent>
+          </Card>
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout>
       <div className="space-y-6">
