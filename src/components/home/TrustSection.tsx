@@ -5,7 +5,7 @@ const trustPoints = [
   {
     icon: Server,
     title: "Enterprise Hardware",
-    description: "Latest-gen Intel Xeon and AMD EPYC processors with ECC RAM",
+    description: "Intel Xeon Platinum 8168 processors with ECC RAM",
   },
   {
     icon: Shield,

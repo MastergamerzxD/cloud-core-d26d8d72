@@ -1,7 +1,7 @@
 import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Server, Check, ArrowRight, Wallet, AlertTriangle } from "lucide-react";
+import { Shield, Server, Check, ArrowRight, Wallet, AlertTriangle, Cpu, Zap } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import PricingCard from "@/components/ui/PricingCard";
@@ -12,7 +12,7 @@ const features = [
   {
     icon: Wallet,
     title: "Cost-Effective",
-    description: "Get reliable VPS hosting at competitive prices. Perfect for projects with moderate resource requirements.",
+    description: "Get reliable VPS hosting at India's most competitive prices. Perfect for projects with moderate resource requirements.",
   },
   {
     icon: Shield,
@@ -23,6 +23,11 @@ const features = [
     icon: Server,
     title: "NVMe Storage",
     description: "Fast NVMe storage for responsive application performance and quick data access.",
+  },
+  {
+    icon: Cpu,
+    title: "Intel Platinum 8168",
+    description: "Powered by Intel Xeon Platinum 8168 processors — 24 cores, 2.7GHz base clock, designed for enterprise-grade workloads with exceptional multi-threaded performance.",
   },
 ];
 
@@ -35,54 +40,100 @@ const useCases = [
   "WordPress Sites",
   "API Development",
   "Static File Hosting",
+  "App Hosting",
+  "Email Servers",
 ];
 
 const plans = [
   {
     name: "Budget Starter",
-    price: "₹499",
+    price: "₹199",
     description: "Entry-level budget VPS",
     type: "budget" as const,
     features: [
-      "2 vCPU Cores (Shared)",
+      "2 vCPU Cores",
       "4 GB DDR4 RAM",
-      "60 GB NVMe Storage",
-      "Unlimited Bandwidth",
+      "30 GB NVMe Storage",
+      "1000 GB Bandwidth",
       "DDoS Protection",
-      "1 IPv4 Address",
+      "1x IPv4 Address",
       "Standard Support",
     ],
   },
   {
     name: "Budget Plus",
-    price: "₹799",
+    price: "₹399",
     description: "Best value option",
     type: "budget" as const,
     popular: true,
     features: [
-      "4 vCPU Cores (Shared)",
-      "8 GB DDR4 RAM",
-      "120 GB NVMe Storage",
-      "Unlimited Bandwidth",
+      "4 vCPU Cores",
+      "6 GB DDR4 RAM",
+      "60 GB NVMe Storage",
+      "2000 GB Bandwidth",
       "DDoS Protection",
-      "1 IPv4 Address",
+      "1x IPv4 Address",
       "Standard Support",
     ],
   },
   {
     name: "Budget Pro",
-    price: "₹1,199",
-    description: "Maximum budget value",
+    price: "₹699",
+    description: "For growing projects",
     type: "budget" as const,
     features: [
-      "6 vCPU Cores (Shared)",
+      "6 vCPU Cores",
       "12 GB DDR4 RAM",
-      "200 GB NVMe Storage",
-      "Unlimited Bandwidth",
+      "100 GB NVMe Storage",
+      "4000 GB Bandwidth",
       "DDoS Protection",
-      "1 IPv4 Address",
+      "1x IPv4 Address",
       "Standard Support",
-      "Weekly Backups",
+    ],
+  },
+  {
+    name: "Budget Elite",
+    price: "₹899",
+    description: "High-resource workloads",
+    type: "budget" as const,
+    features: [
+      "8 vCPU Cores",
+      "20 GB DDR4 RAM",
+      "150 GB NVMe Storage",
+      "10,000 GB Bandwidth",
+      "DDoS Protection",
+      "1x IPv4 Address",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Ultra",
+    price: "₹1,199",
+    description: "Power user choice",
+    type: "budget" as const,
+    features: [
+      "10 vCPU Cores",
+      "32 GB DDR4 RAM",
+      "150 GB NVMe Storage",
+      "Unmetered Bandwidth",
+      "DDoS Protection",
+      "1x IPv4 Address",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Enterprise",
+    price: "₹1,899",
+    description: "Maximum budget power",
+    type: "budget" as const,
+    features: [
+      "20 vCPU Cores",
+      "64 GB DDR4 RAM",
+      "200 GB NVMe Storage",
+      "Unmetered Bandwidth",
+      "DDoS Protection",
+      "1x IPv4 Address",
+      "Standard Support",
     ],
   },
 ];
@@ -93,9 +144,9 @@ export default function BudgetVPS() {
     <>
       <SEOHead
         seoPrefix="budget_vps"
-        title="Budget VPS India – Cheapest VPS Hosting | From ₹499/mo | Cloud on Fire"
-        description="Cheapest VPS hosting in India from ₹499/month. DDoS protection included, NVMe storage, unlimited bandwidth. Best affordable VPS for websites, WordPress, Discord bots, and development. Cloud on Fire Budget VPS."
-        keywords="cheapest VPS India, budget VPS hosting, affordable VPS India, WordPress VPS India, development server, Discord bot hosting, website VPS India, cheap cloud server India, best budget hosting India, Cloud on Fire Budget VPS"
+        title="Budget VPS India – Cheapest VPS Hosting | From ₹199/mo | Cloud on Fire"
+        description="Cheapest VPS hosting in India from ₹199/month. Powered by Intel Xeon Platinum 8168 processors. DDoS protection included, NVMe storage. Best affordable VPS for websites, WordPress, Discord bots, and development. Cloud on Fire Budget VPS."
+        keywords="cheapest VPS India, budget VPS hosting, affordable VPS India, WordPress VPS India, development server, Discord bot hosting, website VPS India, cheap cloud server India, best budget hosting India, Cloud on Fire Budget VPS, Intel Platinum VPS"
         canonical="/budget-vps"
         ogType="product"
       />
@@ -134,9 +185,9 @@ export default function BudgetVPS() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-sm sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10"
               >
-                Cost-effective VPS hosting without compromising on reliability. 
-                Perfect for websites, development servers, and applications that 
-                don't require dedicated resources.
+                India's most affordable VPS hosting powered by Intel Xeon Platinum 8168 processors. 
+                Starting at just <span className="text-primary font-semibold">₹199/month</span> — perfect for 
+                websites, development servers, apps, and more.
               </motion.p>
 
               <motion.div
@@ -161,8 +212,49 @@ export default function BudgetVPS() {
           </div>
         </section>
 
+        {/* Intel Processor Section */}
+        <section className="py-8 sm:py-12">
+          <div className="container-wide">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="glass-card p-6 sm:p-8 border-l-4 border-l-primary"
+            >
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                  <Cpu className="w-7 h-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-foreground text-lg sm:text-xl mb-2">Powered by Intel® Xeon® Platinum 8168</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    Every Budget VPS runs on the Intel Xeon Platinum 8168 — a server-grade processor with 24 cores, 
+                    48 threads, and a 2.7GHz base clock (turbo up to 3.7GHz). With 33MB of L3 cache and support for 
+                    6-channel DDR4 memory, this processor delivers exceptional performance for web hosting, app hosting, 
+                    bot hosting, database workloads, and development environments.
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {[
+                      { label: "24 Cores", sublabel: "48 Threads" },
+                      { label: "2.7 GHz", sublabel: "Base Clock" },
+                      { label: "3.7 GHz", sublabel: "Turbo Boost" },
+                      { label: "33 MB", sublabel: "L3 Cache" },
+                    ].map((spec) => (
+                      <div key={spec.label} className="text-center bg-secondary/50 rounded-lg p-2 sm:p-3">
+                        <div className="text-sm sm:text-base font-bold text-foreground">{spec.label}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground">{spec.sublabel}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Transparency Notice */}
-        <section className="py-8">
+        <section className="pb-8">
           <div className="container-wide">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -196,7 +288,7 @@ export default function BudgetVPS() {
               description="Get essential features for your projects without breaking the bank."
             />
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
@@ -237,8 +329,8 @@ export default function BudgetVPS() {
                 </h2>
                 <p className="text-muted-foreground mb-8">
                   Budget VPS provides reliable performance for standard workloads. 
-                  It's the smart choice when you need dependable hosting without 
-                  premium pricing.
+                  Powered by Intel Platinum 8168 processors, it's the smart choice 
+                  when you need dependable hosting without premium pricing.
                 </p>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -264,6 +356,10 @@ export default function BudgetVPS() {
                 </div>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-3 border-b border-border/30">
+                    <span className="text-muted-foreground">Processor</span>
+                    <span className="font-semibold text-foreground">Intel Platinum 8168</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-b border-border/30">
                     <span className="text-muted-foreground">Avg. Response Time</span>
                     <span className="font-semibold text-foreground">&lt;5ms</span>
                   </div>
@@ -287,10 +383,10 @@ export default function BudgetVPS() {
             <SectionHeader
               badge="Pricing"
               title="Budget VPS Plans"
-              description="Affordable plans with DDoS protection included."
+              description="Affordable plans powered by Intel Platinum 8168 with DDoS protection included."
             />
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {plans.map((plan, index) => (
                 <PricingCard key={plan.name} {...plan} index={index} />
               ))}

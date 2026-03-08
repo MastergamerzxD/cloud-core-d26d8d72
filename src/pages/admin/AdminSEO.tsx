@@ -49,8 +49,8 @@ const PAGE_SEO_DEFAULTS: Record<string, { title: string; description: string; ke
   },
   infrastructure: {
     title: "VPS Infrastructure India – Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire",
-    description: "Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. AMD EPYC 7003 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India.",
-    keywords: "Yotta data center India, VPS infrastructure India, AMD EPYC VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure",
+    description: "Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. Intel Xeon Platinum 8168 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India.",
+    keywords: "Yotta data center India, VPS infrastructure India, Intel Platinum VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure",
   },
   about: {
     title: "About Cloud on Fire – Best VPS Hosting Company in India | Our Story",

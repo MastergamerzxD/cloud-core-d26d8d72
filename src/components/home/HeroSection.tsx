@@ -100,7 +100,7 @@ export default function HeroSection() {
             >
               Deploy game servers, high-traffic applications, and real-time workloads 
               on infrastructure that never compromises. India's most reliable VPS hosting 
-              starts at just <span className="text-primary font-semibold">₹299/month</span>.
+              starts at just <span className="text-primary font-semibold">₹199/month</span>.
             </motion.p>
 
             {/* CTAs */}
@@ -178,7 +178,7 @@ export default function HeroSection() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
               {[
                 { value: "99.9%", label: "Uptime SLA", sublabel: "Enterprise reliability" },
-                { value: "₹299", label: "Starting Price", sublabel: "No hidden fees" },
+                { value: "₹199", label: "Starting Price", sublabel: "No hidden fees" },
                 { value: "Apr '26", label: "Launch Date", sublabel: "Coming soon" },
                 { value: "24/7", label: "Expert Support", sublabel: "Always available" },
               ].map((stat, index) => (
