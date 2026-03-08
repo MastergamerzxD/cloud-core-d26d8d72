@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, FileText, BookOpen, Image, Megaphone,
-  Search, ArrowRightLeft, Mail, Settings, LogOut, Bot, BarChart3, Shield, Zap
+  ArrowRightLeft, Mail, Settings, LogOut, Bot, BarChart3, Shield, Zap
 } from "lucide-react";
 import logoImg from "@/assets/logo.png";
 import { NavLink } from "@/components/NavLink";
@@ -22,7 +22,6 @@ const items = [
   { title: "Pages", url: "/admin/pages", icon: FileText },
   { title: "Media", url: "/admin/media", icon: Image },
   { title: "Announcements", url: "/admin/announcements", icon: Megaphone },
-  { title: "SEO", url: "/admin/seo", icon: Search },
   { title: "Redirects", url: "/admin/redirects", icon: ArrowRightLeft },
   { title: "Newsletter", url: "/admin/newsletter", icon: Mail },
   { title: "Settings", url: "/admin/settings", icon: Settings },

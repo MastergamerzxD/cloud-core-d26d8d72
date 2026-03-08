@@ -1,60 +1,35 @@
 import { Helmet } from "react-helmet-async";
-import { useSEOSettings } from "@/hooks/useSEOSettings";
 
 /**
- * Injects global structured data (Organization + WebSite + SearchAction)
- * and verification meta tags using dynamic settings from admin panel.
+ * Static global structured data (Organization + WebSite + SearchAction).
+ * All values are hardcoded — no admin panel dependency.
  */
 export default function GlobalSEO() {
-  const s = useSEOSettings();
-
-  const orgName = s.org_name || "Cloud on Fire";
-  const orgLegalName = s.org_legal_name || "Cloud on Fire";
-  const orgDescription = s.org_description || "India's leading high-performance VPS hosting provider with enterprise-grade DDoS protection, NVMe storage, and Yotta data center infrastructure.";
-  const orgEmail = s.org_email || "hello@cloudonfire.com";
-  const orgPhone = s.org_phone || "+918766215705";
-  const orgLogo = s.org_logo_url || "https://cloudonfire.com/favicon.ico";
-  const orgFoundingYear = s.org_founding_year || "2024";
-
-  const sameAs = [
-    s.org_facebook, s.org_twitter, s.org_linkedin, s.org_instagram,
-  ].filter(Boolean);
-
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://cloudonfire.com/#organization",
-    name: orgName,
-    legalName: orgLegalName,
+    name: "Cloud on Fire",
+    legalName: "Cloud on Fire",
     url: "https://cloudonfire.com",
-    logo: orgLogo,
-    description: orgDescription,
-    foundingDate: orgFoundingYear,
+    logo: "https://cloudonfire.com/favicon.ico",
+    description: "India's leading high-performance VPS hosting provider with enterprise-grade DDoS protection, NVMe storage, and Yotta data center infrastructure.",
+    foundingDate: "2024",
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        email: orgEmail,
-        telephone: orgPhone,
+        email: "hello@cloudonfire.com",
+        telephone: "+918766215705",
         availableLanguage: ["English", "Hindi"],
         areaServed: "IN",
       },
     ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: s.org_address_street || "",
-      addressLocality: s.org_address_city || "Delhi",
-      addressRegion: s.org_address_state || "Delhi",
-      postalCode: s.org_address_zip || "",
-      addressCountry: s.org_address_country || "IN",
-    },
-    sameAs,
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "INR",
-      lowPrice: "299",
-      highPrice: "1199",
-      offerCount: "6",
+      addressLocality: "Delhi",
+      addressRegion: "Delhi",
+      addressCountry: "IN",
     },
   };
 
@@ -62,9 +37,9 @@ export default function GlobalSEO() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": "https://cloudonfire.com/#website",
-    name: orgName,
+    name: "Cloud on Fire",
     url: "https://cloudonfire.com",
-    description: s.site_meta_description || "Best VPS Hosting in India - Gaming VPS, Budget VPS, Enterprise DDoS Protection",
+    description: "Best VPS Hosting in India - Gaming VPS, Cloud RDP, Enterprise DDoS Protection",
     publisher: { "@id": "https://cloudonfire.com/#organization" },
     potentialAction: {
       "@type": "SearchAction",
@@ -80,13 +55,13 @@ export default function GlobalSEO() {
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
     name: [
-      "Pro VPS", "Budget VPS", "Compare VPS", "DDoS Protection",
-      "Infrastructure", "Blog", "About Us", "FAQ", "Contact", "Status"
+      "VPS Plans", "Gaming VPS", "Cloud RDP", "DDoS Protection",
+      "Infrastructure", "Blog", "About Us", "FAQ", "Contact", "Status",
     ],
     url: [
-      "https://cloudonfire.com/pro-vps",
-      "https://cloudonfire.com/budget-vps",
-      "https://cloudonfire.com/compare",
+      "https://cloudonfire.com/vps-plans",
+      "https://cloudonfire.com/gaming-vps",
+      "https://cloudonfire.com/rdp",
       "https://cloudonfire.com/ddos-protection",
       "https://cloudonfire.com/infrastructure",
       "https://cloudonfire.com/blog",
@@ -99,18 +74,7 @@ export default function GlobalSEO() {
 
   return (
     <Helmet>
-      {/* Verification codes from admin panel */}
-      {s.google_site_verification && (
-        <meta name="google-site-verification" content={s.google_site_verification} />
-      )}
-      {s.bing_site_verification && (
-        <meta name="msvalidate.01" content={s.bing_site_verification} />
-      )}
-      {/* Default OG locale */}
-      <meta property="og:locale" content={s.default_og_locale || "en_IN"} />
-      {/* Twitter handle */}
-      {s.twitter_handle && <meta name="twitter:site" content={s.twitter_handle} />}
-      {/* Structured data */}
+      <meta property="og:locale" content="en_IN" />
       <script type="application/ld+json">
         {JSON.stringify([organizationSchema, websiteSchema, siteNavigationSchema])}
       </script>
