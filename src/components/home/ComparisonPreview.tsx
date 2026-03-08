@@ -1,16 +1,34 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Check, X, ArrowRight } from "lucide-react";
+import { ArrowRight, Check, Server, Gamepad2, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 
-const comparisonData = [
-  { feature: "DDoS Protection", pro: true, budget: true },
-  { feature: "Dedicated Resources", pro: true, budget: false },
-  { feature: "Never Suspended Under Attack", pro: true, budget: false },
-  { feature: "NVMe Storage", pro: true, budget: true },
-  { feature: "24/7 Support", pro: true, budget: true },
-  { feature: "Optimized for Gaming", pro: true, budget: false },
+const products = [
+  {
+    icon: Server,
+    name: "VPS Plans",
+    description: "Cloud VPS for web apps, APIs, databases, and development environments.",
+    price: "From ₹199/mo",
+    href: "/vps-plans",
+    highlights: ["Intel Xeon Platinum 8168", "NVMe SSD Storage", "DDoS Protection", "6 plan tiers"],
+  },
+  {
+    icon: Gamepad2,
+    name: "Gaming VPS",
+    description: "Optimized for Minecraft, FiveM, GTA RP, and multiplayer game servers.",
+    price: "From ₹199/mo",
+    href: "/gaming-vps",
+    highlights: ["Gaming-optimized", "Advanced DDoS Protection", "Low-latency networking", "6 plan tiers"],
+  },
+  {
+    icon: Monitor,
+    name: "High Performance RDP",
+    description: "Cloud desktop access for development, trading, editing, and productivity.",
+    price: "Coming Soon",
+    href: "/rdp",
+    highlights: ["Windows RDP", "NVMe SSD Storage", "Enterprise CPUs", "3 plan tiers"],
+  },
 ];
 
 export default function ComparisonPreview() {
@@ -18,73 +36,44 @@ export default function ComparisonPreview() {
     <section className="section-padding bg-card/60">
       <div className="container-wide">
         <SectionHeader
-          badge="Compare Plans"
-          title="Find the Right VPS for Your Needs"
-          description="Choose between high-performance Pro VPS for demanding workloads or cost-effective Budget VPS for standard applications."
+          badge="Our Products"
+          title="Find the Right Plan for You"
+          description="Three product lineups designed for every workload — from cloud compute to gaming servers to remote desktops."
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="glass-card overflow-hidden">
-            {/* Header */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-6 border-b border-border/50 bg-secondary/30">
-              <div className="text-xs sm:text-sm font-medium text-muted-foreground">Feature</div>
-              <div className="text-center">
-                <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm font-semibold bg-primary/20 text-primary rounded-full">
-                  Pro VPS
-                </span>
-                <div className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1">From ₹299/mo</div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+          {products.map((product, index) => (
+            <motion.div
+              key={product.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="glass-card p-6 flex flex-col"
+            >
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <product.icon className="w-6 h-6 text-primary" />
               </div>
-              <div className="text-center">
-                <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm font-semibold bg-secondary text-secondary-foreground rounded-full">
-                  Budget
-                </span>
-                <div className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1">From ₹499/mo</div>
+              <h3 className="text-lg font-bold text-foreground mb-1">{product.name}</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-4 flex-1">{product.description}</p>
+              <div className="space-y-2 mb-5">
+                {product.highlights.map((h) => (
+                  <div key={h} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span>{h}</span>
+                  </div>
+                ))}
               </div>
-            </div>
-
-            {/* Rows */}
-            {comparisonData.map((row, index) => (
-              <div
-                key={row.feature}
-                className={`grid grid-cols-3 gap-2 sm:gap-4 p-2.5 sm:p-4 ${
-                  index !== comparisonData.length - 1 ? "border-b border-border/30" : ""
-                }`}
-              >
-                <div className="text-xs sm:text-sm text-foreground leading-tight">{row.feature}</div>
-                <div className="flex justify-center">
-                  {row.pro ? (
-                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                  ) : (
-                    <X className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/50" />
-                  )}
-                </div>
-                <div className="flex justify-center">
-                  {row.budget ? (
-                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                  ) : (
-                    <X className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/50" />
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="mt-8 text-center">
-            <Link to="/compare">
-              <Button variant="outline" className="group">
-                View Full Comparison
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </div>
-        </motion.div>
+              <div className="text-sm font-semibold text-primary mb-4">{product.price}</div>
+              <Link to={product.href}>
+                <Button variant="outline" size="sm" className="w-full group">
+                  Learn More
+                  <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

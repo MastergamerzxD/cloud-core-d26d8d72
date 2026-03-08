@@ -9,12 +9,12 @@ import logoSymbol from "@/assets/logo-symbol.png";
 const navigation = [
   { name: "Home", href: "/" },
   {
-    name: "VPS",
+    name: "Products",
     href: "#",
     children: [
-      { name: "Pro VPS", href: "/pro-vps", description: "High-performance gaming VPS" },
-      { name: "Budget VPS", href: "/budget-vps", description: "Cost-effective standard VPS" },
-      { name: "Compare VPS", href: "/compare", description: "Side-by-side comparison" },
+      { name: "VPS Plans", href: "/vps-plans", description: "Cloud VPS from ₹199/mo" },
+      { name: "Gaming VPS", href: "/gaming-vps", description: "Built for multiplayer performance" },
+      { name: "High Performance RDP", href: "/rdp", description: "Cloud desktop access" },
     ],
   },
   { name: "DDoS Protection", href: "/ddos-protection" },

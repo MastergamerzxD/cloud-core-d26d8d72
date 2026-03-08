@@ -11,9 +11,9 @@ import { SEOSettingsProvider } from "@/hooks/useSEOSettings";
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
 import LoadingScreen from "@/components/LoadingScreen";
 import Index from "./pages/Index";
-import ProVPS from "./pages/ProVPS";
-import BudgetVPS from "./pages/BudgetVPS";
-import Compare from "./pages/Compare";
+import VPSPlans from "./pages/VPSPlans";
+import GamingVPS from "./pages/GamingVPS";
+import RDP from "./pages/RDP";
 import DDoSProtection from "./pages/DDoSProtection";
 import Infrastructure from "./pages/Infrastructure";
 import About from "./pages/About";
@@ -61,9 +61,9 @@ const App = () => (
                 <Routes>
                   {/* Public routes */}
                   <Route path="/" element={<Index />} />
-                  <Route path="/pro-vps" element={<ProVPS />} />
-                  <Route path="/budget-vps" element={<BudgetVPS />} />
-                  <Route path="/compare" element={<Compare />} />
+                  <Route path="/vps-plans" element={<VPSPlans />} />
+                  <Route path="/gaming-vps" element={<GamingVPS />} />
+                  <Route path="/rdp" element={<RDP />} />
                   <Route path="/ddos-protection" element={<DDoSProtection />} />
                   <Route path="/infrastructure" element={<Infrastructure />} />
                   <Route path="/about" element={<About />} />

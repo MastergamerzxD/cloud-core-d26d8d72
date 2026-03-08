@@ -6,9 +6,9 @@ import PricingCard from "@/components/ui/PricingCard";
 
 const pricingPlans = [
   {
-    name: "Budget Starter",
+    name: "Starter",
     price: "₹199",
-    description: "Cheapest VPS in India",
+    description: "Cloud VPS starting point",
     type: "budget" as const,
     features: [
       "2 vCPU Cores",
@@ -21,22 +21,22 @@ const pricingPlans = [
     popular: false,
   },
   {
-    name: "Pro Starter",
-    price: "₹299",
-    description: "Perfect for game servers",
+    name: "Gamer Plus",
+    price: "₹399",
+    description: "Popular for game servers",
     type: "pro" as const,
     features: [
-      "2 vCPU Cores (Dedicated)",
-      "4 GB DDR4 ECC RAM",
-      "50 GB NVMe Storage",
-      "Unlimited Bandwidth",
-      "Premium DDoS Protection",
-      "Never Suspended Under Attack",
+      "4 vCPU Cores",
+      "6 GB DDR4 RAM",
+      "60 GB NVMe Storage",
+      "2000 GB Bandwidth",
+      "Advanced DDoS Protection",
+      "Gaming Support",
     ],
     popular: true,
   },
   {
-    name: "Budget Plus",
+    name: "Plus",
     price: "₹399",
     description: "Best value for websites & apps",
     type: "budget" as const,
@@ -68,10 +68,16 @@ export default function PricingPreview() {
           ))}
         </div>
 
-        <div className="mt-8 sm:mt-12 text-center">
-          <Link to="/pricing">
+        <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-3">
+          <Link to="/vps-plans">
             <Button variant="outline" size="lg" className="group text-sm sm:text-base">
-              View All Plans
+              View All VPS Plans
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+          <Link to="/gaming-vps">
+            <Button variant="outline" size="lg" className="group text-sm sm:text-base">
+              Gaming VPS
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
