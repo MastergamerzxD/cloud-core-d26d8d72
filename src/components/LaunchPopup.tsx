@@ -25,32 +25,32 @@ export default function LaunchPopup({ open, onOpenChange }: LaunchPopupProps) {
         </DialogHeader>
 
         <div className="space-y-3 mt-4">
-          <a href="tel:999999999" className="block">
+          <a href="tel:+918766215705" className="block">
             <Button variant="outline" className="w-full justify-start gap-3 h-12">
               <Phone className="w-5 h-5 text-primary" />
               <div className="text-left">
                 <div className="text-sm font-medium text-foreground">Call Us</div>
-                <div className="text-xs text-muted-foreground">999999999</div>
+                <div className="text-xs text-muted-foreground">+91 8766215705</div>
               </div>
             </Button>
           </a>
 
-          <a href="https://wa.me/999999999" target="_blank" rel="noopener noreferrer" className="block">
+          <a href="https://wa.me/918766215705" target="_blank" rel="noopener noreferrer" className="block">
             <Button variant="outline" className="w-full justify-start gap-3 h-12 border-green-500/30 hover:bg-green-500/10">
               <MessageCircle className="w-5 h-5 text-green-500" />
               <div className="text-left">
                 <div className="text-sm font-medium text-foreground">WhatsApp</div>
-                <div className="text-xs text-muted-foreground">Message us on WhatsApp</div>
+                <div className="text-xs text-muted-foreground">+91 8766215705</div>
               </div>
             </Button>
           </a>
 
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="block">
+          <a href="https://instagram.com/cloudonfire.in" target="_blank" rel="noopener noreferrer" className="block">
             <Button variant="outline" className="w-full justify-start gap-3 h-12 border-pink-500/30 hover:bg-pink-500/10">
               <Instagram className="w-5 h-5 text-pink-500" />
               <div className="text-left">
                 <div className="text-sm font-medium text-foreground">Follow on Instagram</div>
-                <div className="text-xs text-muted-foreground">Get the latest updates</div>
+                <div className="text-xs text-muted-foreground">@cloudonfire.in</div>
               </div>
             </Button>
           </a>
