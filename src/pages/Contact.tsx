@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import SectionHeader from "@/components/ui/SectionHeader";
 
 const contactMethods = [
   {
@@ -46,19 +45,19 @@ export default function Contact() {
         canonical="/contact"
       />
       <Layout>
-        {/* Hero */}
-        <section className="section-padding">
-          <div className="container-wide">
+        <section className="section-padding relative overflow-hidden">
+          <div className="absolute inset-0 network-grid-bg opacity-20 pointer-events-none" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[400px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+
+          <div className="container-wide relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-3xl mx-auto text-center mb-16"
+              className="max-w-3xl mx-auto text-center mb-12 sm:mb-16"
             >
-              <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
-                Contact
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
+              <span className="glow-badge-fire mb-6 inline-flex">Contact</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground leading-tight mb-4 sm:mb-6">
                 Get in Touch
               </h1>
               <p className="text-sm sm:text-lg text-muted-foreground">
@@ -67,7 +66,7 @@ export default function Contact() {
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
               {/* Contact Methods */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -75,19 +74,26 @@ export default function Contact() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-2xl font-bold text-foreground mb-8">Contact Information</h2>
-                <div className="space-y-6">
-                  {contactMethods.map((method) => (
-                    <div key={method.title} className="glass-card p-4 flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">Contact Information</h2>
+                <div className="space-y-4">
+                  {contactMethods.map((method, i) => (
+                    <motion.div 
+                      key={method.title}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                      className="glow-card !rounded-2xl p-5 flex items-start gap-4 group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
                         <method.icon className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-foreground">{method.title}</h3>
+                        <h3 className="font-bold text-foreground">{method.title}</h3>
                         <p className="text-sm text-muted-foreground mb-1">{method.description}</p>
-                        <span className="text-sm text-primary">{method.value}</span>
+                        <span className="text-sm text-primary font-medium">{method.value}</span>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -99,21 +105,21 @@ export default function Contact() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-2xl font-bold text-foreground mb-8">Send a Message</h2>
-                <form className="glass-card p-6 space-y-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">Send a Message</h2>
+                <form className="glow-card !rounded-2xl p-6 sm:p-8 space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name</Label>
-                      <Input id="name" placeholder="Your name" />
+                      <Input id="name" placeholder="Your name" className="bg-card/50 border-border/40" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="your@email.com" />
+                      <Input id="email" type="email" placeholder="your@email.com" className="bg-card/50 border-border/40" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="How can we help?" />
+                    <Input id="subject" placeholder="How can we help?" className="bg-card/50 border-border/40" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
@@ -121,9 +127,10 @@ export default function Contact() {
                       id="message"
                       placeholder="Tell us more about your inquiry..."
                       rows={5}
+                      className="bg-card/50 border-border/40"
                     />
                   </div>
-                  <Button type="submit" className="btn-fire w-full">
+                  <Button type="submit" className="btn-fire w-full h-11">
                     <span className="relative z-10">Send Message</span>
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">
