@@ -30,7 +30,7 @@ export default function Index() {
       "@context": "https://schema.org",
       "@type": "Product",
       name: "Cloud on Fire VPS Hosting",
-      description: "Best VPS hosting in India with enterprise DDoS protection. Pro VPS for gaming servers (Minecraft, FiveM, CS2, GTA V) and Budget VPS for websites, apps, and development.",
+      description: "Best VPS hosting in India with enterprise DDoS protection. VPS Plans, Gaming VPS, and High Performance RDP for websites, game servers, and cloud desktops.",
       brand: { "@type": "Brand", name: "Cloud on Fire" },
       offers: {
         "@type": "AggregateOffer",
