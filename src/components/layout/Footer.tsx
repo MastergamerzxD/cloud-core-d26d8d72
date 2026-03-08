@@ -5,9 +5,9 @@ import { useSEOSettings } from "@/hooks/useSEOSettings";
 
 const footerLinks = {
   products: [
-    { name: "Pro VPS", href: "/pro-vps" },
-    { name: "Budget VPS", href: "/budget-vps" },
-    { name: "Compare VPS", href: "/compare" },
+    { name: "VPS Plans", href: "/vps-plans" },
+    { name: "Gaming VPS", href: "/gaming-vps" },
+    { name: "High Performance RDP", href: "/rdp" },
     { name: "DDoS Protection", href: "/ddos-protection" },
   ],
   company: [
@@ -88,18 +88,11 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Social icons */}
             {socialLinks.length > 0 && (
               <div className="flex items-center gap-3 mt-4 sm:mt-6">
                 {socialLinks.map(({ url, icon: Icon, label }) => (
-                  <a
-                    key={label}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <a key={label} href={url} target="_blank" rel="noopener noreferrer" aria-label={label}
+                    className="text-muted-foreground hover:text-primary transition-colors">
                     <Icon />
                   </a>
                 ))}
