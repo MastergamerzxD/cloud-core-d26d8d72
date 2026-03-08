@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LaunchPopupProvider } from "@/hooks/useLaunchPopup";
 import { AdminAuthProvider } from "@/hooks/useAdminAuth";
-import { SEOSettingsProvider } from "@/hooks/useSEOSettings";
 
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -36,7 +35,6 @@ import AdminPages from "./pages/admin/AdminPages";
 import AdminPageEditor from "./pages/admin/AdminPageEditor";
 import AdminMedia from "./pages/admin/AdminMedia";
 import AdminAnnouncements from "./pages/admin/AdminAnnouncements";
-import AdminSEO from "./pages/admin/AdminSEO";
 import AdminRedirects from "./pages/admin/AdminRedirects";
 import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminSettings from "./pages/admin/AdminSettings";
@@ -55,7 +53,6 @@ const App = () => (
         <Sonner />
         <LoadingScreen />
           <BrowserRouter>
-            <SEOSettingsProvider>
             <AdminAuthProvider>
               <LaunchPopupProvider>
                 <Routes>
@@ -87,7 +84,6 @@ const App = () => (
                   <Route path="/admin/pages/:id" element={<AdminProtectedRoute><AdminPageEditor /></AdminProtectedRoute>} />
                   <Route path="/admin/media" element={<AdminProtectedRoute><AdminMedia /></AdminProtectedRoute>} />
                   <Route path="/admin/announcements" element={<AdminProtectedRoute><AdminAnnouncements /></AdminProtectedRoute>} />
-                  <Route path="/admin/seo" element={<AdminProtectedRoute><AdminSEO /></AdminProtectedRoute>} />
                   <Route path="/admin/redirects" element={<AdminProtectedRoute><AdminRedirects /></AdminProtectedRoute>} />
                   <Route path="/admin/newsletter" element={<AdminProtectedRoute><AdminNewsletter /></AdminProtectedRoute>} />
                   <Route path="/admin/settings" element={<AdminProtectedRoute><AdminSettings /></AdminProtectedRoute>} />
@@ -100,7 +96,6 @@ const App = () => (
                 </Routes>
               </LaunchPopupProvider>
             </AdminAuthProvider>
-            </SEOSettingsProvider>
           </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
