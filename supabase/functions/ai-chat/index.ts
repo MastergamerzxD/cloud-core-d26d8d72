@@ -31,7 +31,7 @@ CONTACT INFORMATION:
 
 1. PRO VPS (/pro-vps)
    - Target: Gamers, game server hosts, high-traffic websites, mission-critical applications
-   - CPU: Dedicated AMD EPYC 7003 series cores (no shared/oversold)
+   - CPU: Dedicated Intel Xeon Platinum 8168 cores (no shared/oversold)
    - Storage: NVMe Gen4 SSDs for maximum I/O
    - DDoS Protection: Enterprise-grade, always-on, never suspended under attack
    - Network: Premium low-latency network across India
@@ -65,7 +65,7 @@ CONTACT INFORMATION:
 ─── INFRASTRUCTURE (/infrastructure) ───
 - Primary Data Center: Yotta NM1, Navi Mumbai, India
 - Certification: Tier-3+ certified facility
-- Processors: AMD EPYC 7003 series
+- Processors: Intel Xeon Platinum 8168
 - Storage: NVMe Gen4 SSDs
 - Network: 10 Gbps+ uplinks, premium peering
 - DDoS Scrubbing: 1 Tbps capacity
