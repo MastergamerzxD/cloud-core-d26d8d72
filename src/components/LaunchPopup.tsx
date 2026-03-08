@@ -45,12 +45,12 @@ export default function LaunchPopup({ open, onOpenChange }: LaunchPopupProps) {
             </Button>
           </a>
 
-          <a href="https://instagram.com/cloudonfire.in" target="_blank" rel="noopener noreferrer" className="block">
+          <a href="https://instagram.com/cloudonfire_" target="_blank" rel="noopener noreferrer" className="block">
             <Button variant="outline" className="w-full justify-start gap-3 h-12 border-pink-500/30 hover:bg-pink-500/10">
               <Instagram className="w-5 h-5 text-pink-500" />
               <div className="text-left">
                 <div className="text-sm font-medium text-foreground">Follow on Instagram</div>
-                <div className="text-xs text-muted-foreground">@cloudonfire.in</div>
+                <div className="text-xs text-muted-foreground">@cloudonfire_</div>
               </div>
             </Button>
           </a>
