@@ -6,7 +6,7 @@ import PricingCard from "@/components/ui/PricingCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Cpu, HardDrive, Shield, Server, Globe, Database, Code, Gamepad2,
+  Cpu, HardDrive, Shield, Server, Globe, Database, Code, Gamepad2, ArrowRight, Zap,
 } from "lucide-react";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
@@ -112,6 +112,14 @@ const useCases = [
   { icon: Server, label: "API Services" },
 ];
 
+const processorSpecs = [
+  "24 physical cores per processor",
+  "48 threads with hyper-threading",
+  "Base clock 2.7 GHz with turbo boost",
+  "High-density virtualization environments",
+  "Enterprise hardware used in global datacenters",
+];
+
 export default function VPSPlans() {
   const { openPopup } = useLaunchPopup();
 
@@ -139,91 +147,134 @@ export default function VPSPlans() {
         }}
       />
       <Layout>
-        {/* Hero */}
-        <section className="section-padding">
-          <div className="container-wide">
+        {/* Hero with animated background */}
+        <section className="section-padding relative overflow-hidden">
+          {/* Animated glow orbs */}
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-blue/5 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-[100px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+          
+          {/* Network grid overlay */}
+          <div className="absolute inset-0 network-grid-bg opacity-50 pointer-events-none" />
+          
+          <div className="container-wide relative">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7 }}
               className="max-w-3xl mx-auto text-center mb-10"
             >
-              <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
+              <motion.span 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="glow-badge mb-6 inline-flex"
+              >
+                <Zap className="w-3.5 h-3.5" />
                 VPS Plans
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
+              </motion.span>
+              
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight mb-4 sm:mb-6">
                 Cloud VPS Hosting
                 <br />
-                <span className="text-fire-gradient">Starting at ₹199/mo</span>
+                <span className="text-neon-gradient">Starting at ₹199/mo</span>
               </h1>
-              <p className="text-sm sm:text-lg text-muted-foreground mb-6">
+              
+              <p className="text-sm sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
                 Enterprise cloud compute for web apps, APIs, databases, and development. 
-                All prices in INR, billed monthly. No setup fees.
+                All prices in INR, billed monthly. <span className="text-foreground font-medium">No setup fees, no surprises.</span>
               </p>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary">
-                  <Cpu className="w-3.5 h-3.5" /> Intel Xeon Platinum
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary">
-                  <HardDrive className="w-3.5 h-3.5" /> NVMe SSD
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary">
-                  <Shield className="w-3.5 h-3.5" /> DDoS Protected
-                </div>
+              
+              {/* Glowing hardware badges */}
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+                {[
+                  { icon: Cpu, label: "Intel Xeon Platinum", variant: "blue" },
+                  { icon: HardDrive, label: "NVMe SSD", variant: "purple" },
+                  { icon: Shield, label: "DDoS Protected", variant: "fire" },
+                ].map((badge, i) => (
+                  <motion.div
+                    key={badge.label}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+                    className={badge.variant === "fire" ? "glow-badge-fire" : "glow-badge"}
+                  >
+                    <badge.icon className="w-3.5 h-3.5" />
+                    {badge.label}
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
         </section>
 
+        {/* Gradient divider */}
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
         {/* Processor Highlight */}
-        <section className="pb-12 sm:pb-16">
+        <section className="py-12 sm:py-16 relative">
           <div className="container-wide max-w-5xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="glass-card p-6 sm:p-8"
+              className="glow-card p-6 sm:p-8 lg:p-10"
             >
+              {/* Top gradient bar */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue/50 to-transparent" />
+              
               <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
                 <div className="flex-shrink-0 flex items-center justify-center">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-blue-500/20 to-primary/20 flex items-center justify-center">
-                    <Cpu className="w-10 h-10 sm:w-12 sm:h-12 text-blue-400" />
-                  </div>
+                  <motion.div 
+                    className="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl flex items-center justify-center relative"
+                    style={{ background: "linear-gradient(135deg, hsl(217 91% 60% / 0.15), hsl(270 76% 60% / 0.1))" }}
+                    animate={{ boxShadow: ["0 0 20px hsl(217 91% 60% / 0.1)", "0 0 40px hsl(217 91% 60% / 0.25)", "0 0 20px hsl(217 91% 60% / 0.1)"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Cpu className="w-10 h-10 sm:w-14 sm:h-14 text-neon-blue" />
+                  </motion.div>
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2">
-                    Enterprise Cloud Compute Powered by Intel Xeon Platinum
+                  <h2 className="text-lg sm:text-2xl font-bold text-foreground mb-2">
+                    Enterprise Cloud Compute Powered by <span className="text-neon-gradient">Intel Xeon Platinum</span>
                   </h2>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    All Cloud on Fire VPS plans are powered by Intel Xeon Platinum 8168 processors, enterprise-grade CPUs designed for large scale cloud infrastructure.
+                  <p className="text-muted-foreground text-sm sm:text-base mb-5">
+                    All Cloud on Fire VPS plans are powered by Intel Xeon Platinum 8168 processors — enterprise-grade CPUs designed for large scale cloud infrastructure.
                   </p>
-                  <div className="grid sm:grid-cols-2 gap-2 text-xs sm:text-sm text-muted-foreground mb-4">
-                    {[
-                      "24 physical cores per processor",
-                      "48 threads with hyper-threading",
-                      "Base clock 2.7 GHz with turbo boost",
-                      "High-density virtualization environments",
-                      "Enterprise hardware used in global datacenters",
-                    ].map((spec) => (
-                      <div key={spec} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                  <div className="grid sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-muted-foreground mb-5">
+                    {processorSpecs.map((spec) => (
+                      <div key={spec} className="flex items-center gap-2.5">
+                        <div className="w-2 h-2 rounded-full bg-neon-blue/70 flex-shrink-0 shadow-[0_0_6px_hsl(217_91%_60%_/_0.5)]" />
                         <span>{spec}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground italic border-l-2 border-primary/50 pl-3">
-                    "These processors deliver exceptional stability and strong single-core performance, making them ideal for applications such as game servers, web hosting, databases, and scalable backend services."
-                  </p>
+                  <div className="relative p-4 rounded-lg border border-neon-blue/15 bg-neon-blue/5">
+                    <p className="text-xs sm:text-sm text-muted-foreground italic">
+                      "These processors deliver exceptional stability and strong single-core performance, making them ideal for game servers, web hosting, databases, and scalable backend services."
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
           </div>
         </section>
 
+        {/* Gradient divider */}
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
         {/* Plans */}
-        <section className="pb-16 sm:pb-20">
-          <div className="container-wide">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
+        <section className="py-16 sm:py-20 relative">
+          {/* Background glow behind plans */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/3 rounded-full blur-[200px] pointer-events-none" />
+          
+          <div className="container-wide relative">
+            <SectionHeader
+              badge="Choose Your Plan"
+              title="Powerful VPS Plans"
+              description="From entry-level to enterprise. Pick the plan that fits your workload."
+            />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
               {plans.map((plan, index) => (
                 <PricingCard key={plan.name} {...plan} index={index} />
               ))}
@@ -231,8 +282,11 @@ export default function VPSPlans() {
           </div>
         </section>
 
+        {/* Gradient divider */}
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
         {/* Use Cases */}
-        <section className="pb-16 sm:pb-20">
+        <section className="py-16 sm:py-20">
           <div className="container-wide">
             <SectionHeader
               badge="Use Cases"
@@ -240,41 +294,55 @@ export default function VPSPlans() {
               description="From lightweight apps to enterprise backends, our VPS infrastructure handles it all."
             />
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-3xl mx-auto">
-              {useCases.map((c) => (
+              {useCases.map((c, i) => (
                 <motion.div
                   key={c.label}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="flex items-center gap-2 px-4 py-3 bg-card border border-border/50 rounded-xl text-sm text-foreground"
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="glow-card flex items-center gap-3 px-5 py-3.5 cursor-default"
                 >
-                  <c.icon className="w-5 h-5 text-primary" />
-                  <span>{c.label}</span>
+                  <c.icon className="w-5 h-5 text-neon-blue" />
+                  <span className="text-sm text-foreground font-medium">{c.label}</span>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
+        {/* Gradient divider */}
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
         {/* CTA */}
-        <section className="section-padding bg-card/60">
-          <div className="container-wide text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-              Ready to Deploy?
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm sm:text-base">
-              Get started with a Cloud on Fire VPS in minutes. No setup fees, no hidden charges.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button className="btn-fire w-full sm:w-auto" size="lg" onClick={openPopup}>
-                <span className="relative z-10">Get Started</span>
-              </Button>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  Contact Sales
+        <section className="section-padding relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent pointer-events-none" />
+          <div className="container-wide relative text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Ready to <span className="text-fire-gradient">Deploy?</span>
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-sm sm:text-base">
+                Get started with a Cloud on Fire VPS in minutes. No setup fees, no hidden charges.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button className="btn-neon w-full sm:w-auto h-12 px-8 text-base" size="lg" onClick={openPopup}>
+                  <span className="relative z-10 flex items-center gap-2">
+                    Get Started Now
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
                 </Button>
-              </Link>
-            </div>
+                <Link to="/gaming-vps">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto h-12 px-8 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50">
+                    Explore Gaming VPS
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </section>
       </Layout>

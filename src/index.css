@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 /* Cloud on Fire Design System - Enterprise VPS Hosting
-   Dark theme with fire/orange accents, glassmorphism, premium feel
+   Dark theme with fire/orange accents, neon glows, premium feel
 */
 
 @layer base {
   :root {
-    /* Dark enterprise theme */
+    /* Deep navy background */
     --background: 222 47% 6%;
     --foreground: 210 40% 98%;
 
@@ -50,6 +50,11 @@
     --fire-yellow: 38 92% 50%;
     --fire-deep: 15 90% 45%;
     
+    /* Neon/Electric accent colors */
+    --neon-blue: 217 91% 60%;
+    --neon-cyan: 187 92% 55%;
+    --neon-purple: 270 76% 60%;
+    
     /* Glass effects */
     --glass-bg: 222 47% 10% / 0.6;
     --glass-border: 222 47% 20% / 0.3;
@@ -59,11 +64,15 @@
     --gradient-fire-soft: linear-gradient(135deg, hsl(24 95% 53% / 0.2), hsl(4 90% 58% / 0.1));
     --gradient-dark: linear-gradient(180deg, hsl(222 47% 6%), hsl(222 47% 4%));
     --gradient-glow: radial-gradient(ellipse at center, hsl(24 95% 53% / 0.15), transparent 70%);
+    --gradient-neon: linear-gradient(135deg, hsl(217 91% 60%), hsl(270 76% 60%), hsl(187 92% 55%));
+    --gradient-neon-soft: linear-gradient(135deg, hsl(217 91% 60% / 0.15), hsl(270 76% 60% / 0.1), hsl(187 92% 55% / 0.05));
 
     /* Shadows */
     --shadow-fire: 0 0 60px -15px hsl(24 95% 53% / 0.4);
     --shadow-card: 0 25px 50px -12px hsl(222 47% 2% / 0.8);
     --shadow-glow: 0 0 40px hsl(24 95% 53% / 0.3);
+    --shadow-neon: 0 0 30px hsl(217 91% 60% / 0.3), 0 0 60px hsl(217 91% 60% / 0.1);
+    --shadow-neon-strong: 0 0 20px hsl(217 91% 60% / 0.4), 0 0 40px hsl(270 76% 60% / 0.2), 0 0 80px hsl(187 92% 55% / 0.1);
 
     --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 210 40% 98%;
@@ -141,15 +150,89 @@
     @apply absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none;
   }
 
+  /* Glow card - enhanced glass with neon border glow */
+  .glow-card {
+    @apply relative overflow-hidden rounded-xl backdrop-blur-xl transition-all duration-500;
+    background: linear-gradient(135deg, hsl(222 47% 10% / 0.8), hsl(222 47% 8% / 0.9));
+    border: 1px solid hsl(217 91% 60% / 0.15);
+    box-shadow: var(--shadow-card);
+  }
+
+  .glow-card::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl pointer-events-none opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, hsl(217 91% 60% / 0.08), hsl(270 76% 60% / 0.05), transparent);
+  }
+
+  .glow-card:hover {
+    border-color: hsl(217 91% 60% / 0.35);
+    box-shadow: var(--shadow-neon), var(--shadow-card);
+    transform: translateY(-4px);
+  }
+
+  .glow-card:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Popular glow card - stronger neon */
+  .glow-card-popular {
+    border-color: hsl(24 95% 53% / 0.4);
+    box-shadow: var(--shadow-fire), var(--shadow-card);
+  }
+
+  .glow-card-popular::after {
+    content: '';
+    @apply absolute -inset-px rounded-xl pointer-events-none;
+    background: linear-gradient(135deg, hsl(24 95% 53% / 0.3), hsl(4 90% 58% / 0.15), hsl(24 95% 53% / 0.3));
+    z-index: -1;
+    filter: blur(1px);
+  }
+
+  .glow-card-popular:hover {
+    border-color: hsl(24 95% 53% / 0.6);
+    box-shadow: 0 0 40px hsl(24 95% 53% / 0.4), 0 0 80px hsl(24 95% 53% / 0.15), var(--shadow-card);
+  }
+
+  /* Glowing badge */
+  .glow-badge {
+    @apply relative inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide;
+    background: linear-gradient(135deg, hsl(217 91% 60% / 0.15), hsl(270 76% 60% / 0.1));
+    border: 1px solid hsl(217 91% 60% / 0.3);
+    color: hsl(217 91% 60%);
+    box-shadow: 0 0 15px hsl(217 91% 60% / 0.15), inset 0 0 15px hsl(217 91% 60% / 0.05);
+  }
+
+  .glow-badge-fire {
+    background: linear-gradient(135deg, hsl(24 95% 53% / 0.15), hsl(4 90% 58% / 0.1));
+    border: 1px solid hsl(24 95% 53% / 0.3);
+    color: hsl(24 95% 53%);
+    box-shadow: 0 0 15px hsl(24 95% 53% / 0.15), inset 0 0 15px hsl(24 95% 53% / 0.05);
+  }
+
   /* Fire gradient text */
   .text-fire-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(38 92% 50%), hsl(24 95% 53%), hsl(4 90% 58%));
   }
 
+  /* Neon gradient text */
+  .text-neon-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(217 91% 60%), hsl(270 76% 60%), hsl(187 92% 55%));
+  }
+
   /* Fire glow effect */
   .fire-glow {
     box-shadow: var(--shadow-fire);
+  }
+
+  /* Neon glow effect */
+  .neon-glow {
+    box-shadow: var(--shadow-neon);
+  }
+
+  .neon-glow-strong {
+    box-shadow: var(--shadow-neon-strong);
   }
 
   /* Animated border */
@@ -164,6 +247,53 @@
   }
 
   .animated-border:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Gradient divider */
+  .gradient-divider {
+    @apply relative h-px w-full;
+    background: linear-gradient(90deg, transparent, hsl(217 91% 60% / 0.4), hsl(270 76% 60% / 0.3), hsl(217 91% 60% / 0.4), transparent);
+  }
+
+  .gradient-divider-fire {
+    background: linear-gradient(90deg, transparent, hsl(24 95% 53% / 0.5), hsl(4 90% 58% / 0.3), hsl(24 95% 53% / 0.5), transparent);
+  }
+
+  /* Network grid animated background */
+  .network-grid-bg {
+    background-image:
+      linear-gradient(hsl(217 91% 60% / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(217 91% 60% / 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-drift 20s linear infinite;
+  }
+
+  @keyframes grid-drift {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+
+  /* Neon CTA button */
+  .btn-neon {
+    @apply relative inline-flex items-center justify-center px-8 py-3 font-semibold rounded-lg overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(270 76% 60%), hsl(187 92% 55%));
+    color: hsl(210 40% 98%);
+    box-shadow: 0 0 20px hsl(217 91% 60% / 0.3);
+  }
+
+  .btn-neon:hover {
+    box-shadow: 0 0 30px hsl(217 91% 60% / 0.5), 0 0 60px hsl(270 76% 60% / 0.2);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .btn-neon::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(187 92% 55%), hsl(217 91% 60%), hsl(270 76% 60%));
+  }
+
+  .btn-neon:hover::before {
     @apply opacity-100;
   }
 
@@ -235,6 +365,14 @@
     25% { transform: translate(10%, 10%) scale(1.1); }
     50% { transform: translate(-5%, 20%) scale(0.95); }
     75% { transform: translate(-10%, 5%) scale(1.05); }
+  }
+
+  /* Particle dots animation */
+  @keyframes particle-float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+    25% { transform: translateY(-20px) translateX(10px); opacity: 0.7; }
+    50% { transform: translateY(-10px) translateX(-5px); opacity: 0.5; }
+    75% { transform: translateY(-30px) translateX(15px); opacity: 0.4; }
   }
 }
 
