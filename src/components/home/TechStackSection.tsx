@@ -3,7 +3,7 @@ import { Cpu, HardDrive, Network, Shield, Server, Monitor, Database, Lock } from
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const techItems = [
-  { icon: Cpu, label: "AMD EPYC™ 7003", sublabel: "Enterprise Processors" },
+  { icon: Cpu, label: "Intel Platinum 8168", sublabel: "Enterprise Processors" },
   { icon: HardDrive, label: "NVMe Gen4 SSD", sublabel: "7GB/s Read Speed" },
   { icon: Network, label: "10Gbps Uplink", sublabel: "Premium Bandwidth" },
   { icon: Shield, label: "1Tbps DDoS", sublabel: "Always-On Protection" },
@@ -57,7 +57,7 @@ export default function TechStackSection() {
               { value: "Delhi & Mumbai", label: "Data Center Locations" },
               { value: "Unlimited", label: "Bandwidth on All Plans" },
               { value: "Linux & Windows", label: "OS Support" },
-              { value: "₹299/mo", label: "Starting Price" },
+              { value: "₹199/mo", label: "Starting Price" },
             ].map((item, i) => (
               <div key={item.label} className="relative">
                 {i > 0 && (

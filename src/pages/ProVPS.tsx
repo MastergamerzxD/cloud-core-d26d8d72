@@ -1,7 +1,7 @@
 import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Zap, Server, Clock, Check, ArrowRight, Flame } from "lucide-react";
+import { Shield, Zap, Server, Clock, Check, ArrowRight, Flame, Cpu } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import PricingCard from "@/components/ui/PricingCard";
@@ -20,9 +20,9 @@ const features = [
     description: "Isolated CPU cores and RAM allocation. Your resources are never shared with other customers.",
   },
   {
-    icon: Server,
-    title: "NVMe Storage",
-    description: "Enterprise-grade NVMe SSDs with sustained read/write speeds for demanding applications.",
+    icon: Cpu,
+    title: "Intel Xeon Platinum 8168",
+    description: "Enterprise-grade Intel Platinum 8168 processors with 24 cores, 3.7GHz turbo — delivering exceptional single-thread and multi-thread performance for gaming and real-time workloads.",
   },
   {
     icon: Clock,
@@ -101,15 +101,18 @@ export default function ProVPS() {
       <SEOHead
         seoPrefix="pro_vps"
         title="Pro VPS India – Best Gaming VPS Server Hosting | From ₹299/mo | Cloud on Fire"
-        description="Best gaming VPS in India from ₹299/month. Dedicated CPU cores, premium DDoS protection (never suspended), NVMe Gen4 storage. Perfect for Minecraft, FiveM, CS2, GTA V, Rust servers. Cloud on Fire Pro VPS."
-        keywords="best gaming VPS India, pro VPS hosting, Minecraft server hosting India, FiveM server India, CS2 server hosting, GTA V server, dedicated VPS India, game server hosting India, high performance VPS, Cloud on Fire Pro VPS, best game hosting company India, Rust server India"
+        description="Best gaming VPS in India from ₹299/month. Intel Xeon Platinum 8168 processors, dedicated CPU cores, premium DDoS protection (never suspended), NVMe Gen4 storage. Perfect for Minecraft, FiveM, CS2, GTA V, Rust servers. Cloud on Fire Pro VPS."
+        keywords="best gaming VPS India, pro VPS hosting, Minecraft server hosting India, FiveM server India, CS2 server hosting, GTA V server, dedicated VPS India, game server hosting India, high performance VPS, Cloud on Fire Pro VPS, best game hosting company India, Rust server India, Intel Platinum VPS"
         canonical="/pro-vps"
         ogType="product"
       />
       <Layout>
-        {/* Hero */}
+        {/* Hero - Fire Theme */}
         <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center section-padding overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] h-[300px] sm:h-[400px] bg-primary/15 rounded-full blur-[100px] pointer-events-none" />
+          {/* Fire-themed glows */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] sm:w-[700px] h-[300px] sm:h-[500px] bg-primary/15 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/3 right-1/4 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-fire-red/10 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute bottom-1/4 left-1/3 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-fire-yellow/8 rounded-full blur-[90px] pointer-events-none" />
           
           <div className="container-wide relative">
             <div className="max-w-4xl mx-auto text-center">
@@ -132,7 +135,7 @@ export default function ProVPS() {
               >
                 Pro VPS
                 <br />
-                <span className="text-fire-gradient">Built for Performance</span>
+                <span className="text-fire-gradient">Built for Performance 🔥</span>
               </motion.h1>
 
               <motion.p
@@ -141,9 +144,9 @@ export default function ProVPS() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-sm sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10"
               >
-                High-performance VPS with dedicated resources, premium DDoS protection, 
-                and a zero-suspension policy. Engineered for gaming servers, high-traffic 
-                applications, and mission-critical workloads.
+                High-performance VPS powered by Intel Xeon Platinum 8168 processors with dedicated resources, 
+                premium DDoS protection, and a zero-suspension policy. Engineered for gaming servers, 
+                high-traffic applications, and mission-critical workloads.
               </motion.p>
 
               <motion.div
@@ -159,7 +162,7 @@ export default function ProVPS() {
                   </span>
                 </Button>
                 <Link to="/compare" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
+                  <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12 border-primary/30 hover:border-primary/50 hover:bg-primary/5">
                     Compare with Budget VPS
                   </Button>
                 </Link>
@@ -168,11 +171,55 @@ export default function ProVPS() {
           </div>
         </section>
 
+        {/* Intel Processor Section - Fire Themed */}
+        <section className="py-8 sm:py-12">
+          <div className="container-wide">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="glass-card p-6 sm:p-8 border border-primary/30 fire-glow"
+            >
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="w-14 h-14 rounded-xl bg-gradient-fire flex items-center justify-center shrink-0">
+                  <Cpu className="w-7 h-7 text-primary-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-foreground text-lg sm:text-xl mb-2">
+                    Intel® Xeon® Platinum 8168 — <span className="text-fire-gradient">The Heart of Pro VPS</span>
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    The Intel Xeon Platinum 8168 is a server-class powerhouse with 24 cores, 48 threads, and a 
+                    turbo clock of 3.7GHz. Its massive 33MB L3 cache and 6-channel DDR4 memory support make it 
+                    ideal for gaming servers like Minecraft, FiveM, CS2, and Rust — where single-thread performance 
+                    and low latency are critical. This processor also excels at high-traffic web applications, 
+                    real-time APIs, streaming, and database-heavy workloads.
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {[
+                      { label: "24 Cores", sublabel: "48 Threads" },
+                      { label: "3.7 GHz", sublabel: "Turbo Boost" },
+                      { label: "33 MB", sublabel: "L3 Cache" },
+                      { label: "Dedicated", sublabel: "CPU Cores" },
+                    ].map((spec) => (
+                      <div key={spec.label} className="text-center bg-primary/10 border border-primary/20 rounded-lg p-2 sm:p-3">
+                        <div className="text-sm sm:text-base font-bold text-fire-gradient">{spec.label}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground">{spec.sublabel}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Features */}
         <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
-              badge="Pro Features"
+              badge="🔥 Pro Features"
               title="Why Choose Pro VPS?"
               description="Built for demanding workloads that require consistent, high-performance infrastructure."
             />
@@ -185,7 +232,7 @@ export default function ProVPS() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="glass-card p-6"
+                  className="glass-card p-6 border-primary/10 hover:border-primary/30 transition-colors"
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <feature.icon className="w-6 h-6 text-primary" />
@@ -214,11 +261,12 @@ export default function ProVPS() {
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
                   Perfect for Gaming &
                   <br />
-                  <span className="text-fire-gradient">High-Performance Workloads</span>
+                  <span className="text-fire-gradient">High-Performance Workloads 🔥</span>
                 </h2>
                 <p className="text-muted-foreground mb-8">
-                  Pro VPS is specifically engineered for applications that demand consistent 
-                  low-latency performance and cannot afford downtime during attacks.
+                  Pro VPS is specifically engineered with Intel Platinum 8168 processors for applications 
+                  that demand consistent low-latency performance and cannot afford downtime during attacks. 
+                  Whether it's a 100-player Minecraft server or a high-traffic SaaS app, Pro VPS delivers.
                 </p>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -236,13 +284,17 @@ export default function ProVPS() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="glass-card p-8"
+                className="glass-card p-8 border-primary/20"
               >
                 <div className="text-center mb-6">
                   <div className="text-5xl font-bold text-fire-gradient mb-2">99.99%</div>
                   <div className="text-muted-foreground">Uptime for Pro VPS</div>
                 </div>
                 <div className="space-y-4">
+                  <div className="flex justify-between items-center py-3 border-b border-border/30">
+                    <span className="text-muted-foreground">Processor</span>
+                    <span className="font-semibold text-primary">Intel Platinum 8168</span>
+                  </div>
                   <div className="flex justify-between items-center py-3 border-b border-border/30">
                     <span className="text-muted-foreground">Avg. Response Time</span>
                     <span className="font-semibold text-foreground">&lt;1ms</span>
@@ -253,7 +305,7 @@ export default function ProVPS() {
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-muted-foreground">Suspension Policy</span>
-                    <span className="font-semibold text-primary">Never</span>
+                    <span className="font-semibold text-primary">Never 🔥</span>
                   </div>
                 </div>
               </motion.div>
@@ -265,9 +317,9 @@ export default function ProVPS() {
         <section className="section-padding bg-card/60">
           <div className="container-wide">
             <SectionHeader
-              badge="Pricing"
+              badge="🔥 Pricing"
               title="Pro VPS Plans"
-              description="All plans include premium DDoS protection and dedicated resources."
+              description="All plans include Intel Platinum 8168, premium DDoS protection, and dedicated resources."
             />
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">

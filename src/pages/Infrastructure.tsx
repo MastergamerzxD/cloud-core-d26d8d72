@@ -11,8 +11,8 @@ const specs = [
   {
     icon: Cpu,
     title: "Enterprise Processors",
-    description: "Latest-generation AMD EPYC 7003 series processors with high single-thread performance optimized for gaming and real-time applications.",
-    details: ["AMD EPYC™ 7003 Series", "High clock speeds (up to 3.7GHz)", "Large L3 cache (256MB)", "PCIe Gen4 support"],
+    description: "Intel Xeon Platinum 8168 processors with 24 cores, turbo up to 3.7GHz — optimized for gaming and real-time applications.",
+    details: ["Intel® Xeon® Platinum 8168", "24 Cores / 48 Threads", "Turbo up to 3.7GHz", "33MB L3 Cache"],
   },
   {
     icon: HardDrive,
@@ -53,8 +53,8 @@ export default function Infrastructure() {
       <SEOHead
         seoPrefix="infrastructure"
         title="VPS Infrastructure India – Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire"
-        description="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. AMD EPYC 7003 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India."
-        keywords="Yotta data center India, VPS infrastructure India, AMD EPYC VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure"
+        description="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. Intel Xeon Platinum 8168 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India."
+        keywords="Yotta data center India, VPS infrastructure India, Intel Platinum VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure"
         canonical="/infrastructure"
       />
       <Layout>

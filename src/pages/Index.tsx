@@ -35,8 +35,8 @@ export default function Index() {
       offers: {
         "@type": "AggregateOffer",
         priceCurrency: "INR",
-        lowPrice: "299",
-        highPrice: "1199",
+        lowPrice: "199",
+        highPrice: "1899",
         offerCount: "6",
         availability: "https://schema.org/PreOrder",
       },

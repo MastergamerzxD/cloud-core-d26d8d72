@@ -127,15 +127,15 @@ export default function Compare() {
                   <span className="px-3 py-1 text-sm font-semibold bg-secondary text-secondary-foreground rounded-full">
                     Budget VPS
                   </span>
-                  <span className="text-sm text-muted-foreground">From ₹499/mo</span>
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  Cost-Effective Standard VPS
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Reliable hosting at competitive prices. DDoS protection included. 
-                  Best for websites, bots, and development servers.
-                </p>
+                   <span className="text-sm text-muted-foreground">From ₹199/mo</span>
+                 </div>
+                 <h3 className="text-lg font-semibold text-foreground mb-2">
+                   Cost-Effective Standard VPS
+                 </h3>
+                 <p className="text-sm text-muted-foreground mb-4">
+                   India's cheapest VPS hosting. DDoS protection included. 
+                   Best for websites, bots, and development servers.
+                 </p>
                 <Link to="/budget-vps">
                   <Button variant="outline" className="w-full">
                     Explore Budget VPS

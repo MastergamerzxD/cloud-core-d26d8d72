@@ -58,46 +58,87 @@ const proPlans = [
 const budgetPlans = [
   {
     name: "Budget Starter",
-    price: "₹499",
+    price: "₹199",
     description: "Entry-level budget VPS",
     type: "budget" as const,
     features: [
-      "2 vCPU Cores (Shared)",
+      "2 vCPU Cores",
       "4 GB DDR4 RAM",
-      "60 GB NVMe Storage",
-      "Unlimited Bandwidth",
+      "30 GB NVMe Storage",
+      "1000 GB Bandwidth",
       "DDoS Protection",
       "Standard Support",
     ],
   },
   {
     name: "Budget Plus",
-    price: "₹799",
+    price: "₹399",
     description: "Best value option",
     type: "budget" as const,
     popular: true,
     features: [
-      "4 vCPU Cores (Shared)",
-      "8 GB DDR4 RAM",
-      "120 GB NVMe Storage",
-      "Unlimited Bandwidth",
+      "4 vCPU Cores",
+      "6 GB DDR4 RAM",
+      "60 GB NVMe Storage",
+      "2000 GB Bandwidth",
       "DDoS Protection",
       "Standard Support",
     ],
   },
   {
     name: "Budget Pro",
-    price: "₹1,199",
-    description: "Maximum budget value",
+    price: "₹699",
+    description: "For growing projects",
     type: "budget" as const,
     features: [
-      "6 vCPU Cores (Shared)",
+      "6 vCPU Cores",
       "12 GB DDR4 RAM",
-      "200 GB NVMe Storage",
-      "Unlimited Bandwidth",
+      "100 GB NVMe Storage",
+      "4000 GB Bandwidth",
       "DDoS Protection",
       "Standard Support",
-      "Weekly Backups",
+    ],
+  },
+  {
+    name: "Budget Elite",
+    price: "₹899",
+    description: "High-resource workloads",
+    type: "budget" as const,
+    features: [
+      "8 vCPU Cores",
+      "20 GB DDR4 RAM",
+      "150 GB NVMe Storage",
+      "10,000 GB Bandwidth",
+      "DDoS Protection",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Ultra",
+    price: "₹1,199",
+    description: "Power user choice",
+    type: "budget" as const,
+    features: [
+      "10 vCPU Cores",
+      "32 GB DDR4 RAM",
+      "150 GB NVMe Storage",
+      "Unmetered Bandwidth",
+      "DDoS Protection",
+      "Standard Support",
+    ],
+  },
+  {
+    name: "Budget Enterprise",
+    price: "₹1,899",
+    description: "Maximum budget power",
+    type: "budget" as const,
+    features: [
+      "20 vCPU Cores",
+      "64 GB DDR4 RAM",
+      "200 GB NVMe Storage",
+      "Unmetered Bandwidth",
+      "DDoS Protection",
+      "Standard Support",
     ],
   },
 ];
@@ -106,8 +147,8 @@ export default function Pricing() {
   return (
     <>
       <SEOHead
-        title="VPS Pricing India - Affordable VPS Plans from ₹299/mo | Cloud on Fire"
-        description="Transparent VPS pricing in India. Pro VPS from ₹299/month, Budget VPS from ₹499/month. No hidden fees, no setup costs. DDoS protection included on all plans. Compare all VPS plans."
+        title="VPS Pricing India - Affordable VPS Plans from ₹199/mo | Cloud on Fire"
+        description="Transparent VPS pricing in India. Budget VPS from ₹199/month, Pro VPS from ₹299/month. Intel Xeon Platinum 8168 processors. No hidden fees, no setup costs. DDoS protection included on all plans."
         keywords="VPS pricing India, cheap VPS plans, gaming VPS price, VPS cost India, affordable server hosting, monthly VPS plans"
         canonical="/pricing"
         ogType="product"
@@ -115,13 +156,13 @@ export default function Pricing() {
           "@context": "https://schema.org",
           "@type": "Product",
           "name": "Cloud on Fire VPS Hosting",
-          "description": "High-performance VPS hosting with DDoS protection",
+          "description": "High-performance VPS hosting with Intel Platinum 8168 and DDoS protection",
           "offers": {
             "@type": "AggregateOffer",
             "priceCurrency": "INR",
-            "lowPrice": "299",
-            "highPrice": "1199",
-            "offerCount": "6",
+            "lowPrice": "199",
+            "highPrice": "1899",
+            "offerCount": "9",
             "availability": "https://schema.org/InStock"
           }
         }}
@@ -146,7 +187,7 @@ export default function Pricing() {
               </h1>
               <p className="text-sm sm:text-lg text-muted-foreground">
                 All prices in INR. Billed monthly. No setup fees, no surprises. 
-                DDoS protection included on all plans.
+                All plans powered by Intel Xeon Platinum 8168 processors with DDoS protection included.
               </p>
             </motion.div>
           </div>
@@ -175,10 +216,10 @@ export default function Pricing() {
             <SectionHeader
               badge="Budget VPS"
               title="Cost-Effective Standard VPS"
-              description="Reliable hosting for websites, bots, and development servers."
+              description="Reliable hosting for websites, bots, and development servers. Starting from ₹199/mo."
             />
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {budgetPlans.map((plan, index) => (
                 <PricingCard key={plan.name} {...plan} index={index} />
               ))}
@@ -211,6 +252,10 @@ export default function Pricing() {
                 {
                   q: "What's your refund policy?",
                   a: "We offer a 7-day money-back guarantee on all plans. No questions asked.",
+                },
+                {
+                  q: "What processor do you use?",
+                  a: "All our VPS plans — both Pro and Budget — are powered by Intel Xeon Platinum 8168 processors with 24 cores and turbo up to 3.7GHz.",
                 },
               ].map((item) => (
                 <motion.div
