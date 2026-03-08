@@ -67,6 +67,11 @@ export default {
           yellow: "hsl(var(--fire-yellow))",
           deep: "hsl(var(--fire-deep))",
         },
+        neon: {
+          blue: "hsl(var(--neon-blue))",
+          cyan: "hsl(var(--neon-cyan))",
+          purple: "hsl(var(--neon-purple))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -114,6 +119,14 @@ export default {
           "0%, 100%": { opacity: "0.03" },
           "50%": { opacity: "0.08" },
         },
+        "glow-pulse": {
+          "0%, 100%": { boxShadow: "0 0 20px hsl(217 91% 60% / 0.2)" },
+          "50%": { boxShadow: "0 0 40px hsl(217 91% 60% / 0.4), 0 0 80px hsl(270 76% 60% / 0.15)" },
+        },
+        "border-glow": {
+          "0%, 100%": { borderColor: "hsl(217 91% 60% / 0.2)" },
+          "50%": { borderColor: "hsl(217 91% 60% / 0.5)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -126,11 +139,14 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "shimmer": "shimmer 3s linear infinite",
         "grid-fade": "grid-fade 8s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+        "border-glow": "border-glow 4s ease-in-out infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-fire": "linear-gradient(135deg, hsl(var(--fire-yellow)), hsl(var(--fire-orange)), hsl(var(--fire-red)))",
         "gradient-fire-soft": "linear-gradient(135deg, hsl(var(--fire-orange) / 0.2), hsl(var(--fire-red) / 0.1))",
+        "gradient-neon": "linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-purple)), hsl(var(--neon-cyan)))",
       },
     },
   },
