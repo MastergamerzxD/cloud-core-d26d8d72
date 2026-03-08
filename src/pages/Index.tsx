@@ -19,28 +19,32 @@ export default function Index() {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "@id": "https://cloudonfire.com/#webpage",
-      name: "Cloud on Fire – Best VPS Hosting Company in India",
+      name: "Cloud on Fire — High Performance VPS Hosting in India",
       url: "https://cloudonfire.com/",
-      description: "India's #1 high-performance VPS hosting provider. Gaming VPS from ₹299/month, enterprise DDoS protection up to 1Tbps, NVMe Gen4 storage, Yotta Tier-3+ data centers in Delhi & Mumbai, and 99.9% guaranteed uptime.",
+      description: "Deploy powerful VPS servers in India with NVMe SSD storage, Intel Xeon Platinum processors, and advanced DDoS protection. Gaming VPS from ₹299/month. Perfect for developers, gaming servers, and scalable cloud workloads.",
       isPartOf: { "@id": "https://cloudonfire.com/#website" },
       about: { "@id": "https://cloudonfire.com/#organization" },
       primaryImageOfPage: {
         "@type": "ImageObject",
-        url: "https://cloudonfire.com/favicon.ico",
+        url: "https://cloudonfire.com/images/logo-schema.png",
+        width: 512,
+        height: 512,
       },
     },
     {
       "@context": "https://schema.org",
       "@type": "Product",
       name: "Cloud on Fire VPS Hosting",
-      description: "Best VPS hosting in India with enterprise DDoS protection. VPS Plans, Gaming VPS, and High Performance RDP for websites, game servers, and cloud desktops.",
+      description: "High performance VPS hosting in India with enterprise DDoS protection. VPS Plans starting ₹199/mo, Gaming VPS from ₹299/mo, and Cloud RDP for remote desktops.",
       brand: { "@type": "Brand", name: "Cloud on Fire" },
+      category: "Cloud VPS Hosting",
+      image: "https://cloudonfire.com/images/logo-schema.png",
       offers: {
         "@type": "AggregateOffer",
         priceCurrency: "INR",
         lowPrice: "199",
-        highPrice: "1899",
-        offerCount: "6",
+        highPrice: "1999",
+        offerCount: "12",
         availability: "https://schema.org/PreOrder",
       },
       aggregateRating: {
@@ -55,6 +59,44 @@ export default function Index() {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is VPS hosting?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "VPS (Virtual Private Server) hosting provides dedicated resources on a virtual server, offering more power and control than shared hosting. Cloud on Fire VPS plans include Intel Xeon Platinum processors, NVMe SSD storage, and DDoS protection starting at ₹199/month.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is gaming VPS hosting?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Gaming VPS hosting is a virtual server optimized for running multiplayer game servers like Minecraft, FiveM, and Hytale. Cloud on Fire Gaming VPS includes advanced DDoS protection, low latency networking, and unmetered bandwidth starting at ₹299/month.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I host a Minecraft server on a VPS?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, Cloud on Fire Gaming VPS is optimized for Minecraft server hosting. Our Intel Xeon Platinum processors deliver stable 20 TPS performance even with modpacks and large player counts. Plans start at ₹299/month with DDoS protection included.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is NVMe VPS hosting?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "NVMe VPS hosting uses NVMe SSD storage instead of traditional SATA SSDs, providing up to 7x faster read/write speeds. All Cloud on Fire VPS plans include NVMe Gen4 storage for maximum disk performance.",
+          },
+        },
       ],
     },
   ];

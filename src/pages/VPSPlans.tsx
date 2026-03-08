@@ -133,27 +133,50 @@ export default function VPSPlans() {
         ogType="product"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
         jsonLd={[
-          {
+          ...plans.map((plan) => ({
             "@context": "https://schema.org",
             "@type": "Product",
-            name: "Cloud on Fire VPS Hosting",
-            description: "High performance cloud VPS hosting in India powered by Intel Xeon Platinum processors with NVMe SSD storage and DDoS protection.",
+            name: `${plan.name} VPS Plan`,
+            description: plan.description,
             brand: { "@type": "Brand", name: "Cloud on Fire" },
+            category: "Cloud VPS Hosting",
+            image: "https://cloudonfire.com/images/logo-schema.png",
             offers: {
-              "@type": "AggregateOffer",
+              "@type": "Offer",
               priceCurrency: "INR",
-              lowPrice: "199",
-              highPrice: "1899",
-              offerCount: "6",
+              price: plan.price.replace(/[₹,]/g, ""),
               availability: "https://schema.org/PreOrder",
+              seller: { "@type": "Organization", name: "Cloud on Fire" },
+              priceValidUntil: "2027-12-31",
             },
-          },
+          })),
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
               { "@type": "ListItem", position: 2, name: "VPS Plans", item: "https://cloudonfire.com/vps-plans" },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What processor does Cloud on Fire VPS use?",
+                acceptedAnswer: { "@type": "Answer", text: "All Cloud on Fire VPS plans are powered by Intel Xeon Platinum 8168 processors with 24 cores, 48 threads, and turbo boost up to 3.7GHz — enterprise-grade CPUs designed for cloud infrastructure." },
+              },
+              {
+                "@type": "Question",
+                name: "Is DDoS protection included with VPS plans?",
+                acceptedAnswer: { "@type": "Answer", text: "Yes, all VPS plans include DDoS protection at no extra cost. Protection levels vary between standard and premium tiers." },
+              },
+              {
+                "@type": "Question",
+                name: "What is the cheapest VPS plan available?",
+                acceptedAnswer: { "@type": "Answer", text: "The Starter VPS plan begins at ₹199/month and includes 2 vCPU cores, 4 GB DDR4 RAM, 30 GB NVMe storage, and DDoS protection." },
+              },
             ],
           },
         ]}

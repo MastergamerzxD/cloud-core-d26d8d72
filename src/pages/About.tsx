@@ -56,6 +56,24 @@ export default function About() {
         keywords="about Cloud on Fire, VPS hosting company India, Indian hosting provider, Cloud on Fire team, Cloud on Fire story"
         canonical="/about"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            name: "About Cloud on Fire",
+            url: "https://cloudonfire.com/about",
+            description: "Learn about Cloud on Fire — India's performance-focused VPS hosting company founded to deliver enterprise-grade infrastructure at accessible prices.",
+            mainEntity: { "@id": "https://cloudonfire.com/#organization" },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "About", item: "https://cloudonfire.com/about" },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero */}

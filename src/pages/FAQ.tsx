@@ -67,17 +67,27 @@ export default function FAQ() {
         keywords="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing India, Cloud on Fire FAQ, gaming VPS FAQ"
         canonical="/faq"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqCategories.flatMap(cat =>
-            cat.items.map(item => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            }))
-          ),
-        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqCategories.flatMap(cat =>
+              cat.items.map(item => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              }))
+            ),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "FAQ", item: "https://cloudonfire.com/faq" },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero */}

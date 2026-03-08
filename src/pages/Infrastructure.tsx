@@ -56,6 +56,23 @@ export default function Infrastructure() {
         keywords="VPS infrastructure India, Yotta data center, Intel Xeon VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware"
         canonical="/infrastructure"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Cloud on Fire Infrastructure",
+            url: "https://cloudonfire.com/infrastructure",
+            description: "Enterprise-grade VPS infrastructure powered by Yotta Tier-3+ data centers in Delhi and Mumbai with Intel Xeon Platinum processors and NVMe Gen4 storage.",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "Infrastructure", item: "https://cloudonfire.com/infrastructure" },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero */}

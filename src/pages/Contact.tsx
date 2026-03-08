@@ -43,6 +43,24 @@ export default function Contact() {
         keywords="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support India, 24/7 VPS support"
         canonical="/contact"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            name: "Contact Cloud on Fire",
+            url: "https://cloudonfire.com/contact",
+            description: "Get in touch with Cloud on Fire for VPS hosting support, sales, and technical inquiries.",
+            mainEntity: { "@id": "https://cloudonfire.com/#organization" },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "Contact", item: "https://cloudonfire.com/contact" },
+            ],
+          },
+        ]}
       />
       <Layout>
         <section className="section-padding relative overflow-hidden">

@@ -20,6 +20,14 @@ export default function Status() {
         description="Check the real-time status of Cloud on Fire VPS hosting services. System uptime monitoring for Pro VPS, Budget VPS, DDoS protection, and control panel."
         keywords="Cloud on Fire status, VPS uptime India, hosting status page, server status"
         canonical="/status"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+            { "@type": "ListItem", position: 2, name: "Status", item: "https://cloudonfire.com/status" },
+          ],
+        }}
       />
       <Layout>
         <section className="section-padding">
