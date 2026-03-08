@@ -84,14 +84,41 @@ export default function RDP() {
         keywords="cloud RDP India, remote desktop hosting, Windows RDP server, cloud desktop India, high performance RDP, remote workstation India, Cloud on Fire RDP"
         canonical="/rdp"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
-            { "@type": "ListItem", position: 2, name: "Cloud RDP", item: "https://cloudonfire.com/rdp" },
-          ],
-        }}
+        jsonLd={[
+          ...rdpPlans.map((plan) => ({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: `${plan.name} — Cloud RDP`,
+            description: plan.description,
+            brand: { "@type": "Brand", name: "Cloud on Fire" },
+            category: "Cloud RDP Hosting",
+            image: "https://cloudonfire.com/images/logo-schema.png",
+          })),
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "Cloud RDP", item: "https://cloudonfire.com/rdp" },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is Cloud RDP?",
+                acceptedAnswer: { "@type": "Answer", text: "Cloud RDP is a remote desktop service that lets you access a powerful Windows cloud workstation from anywhere. Cloud on Fire RDP runs on Intel Xeon Platinum processors with NVMe storage and full administrator access." },
+              },
+              {
+                "@type": "Question",
+                name: "What can I use Cloud RDP for?",
+                acceptedAnswer: { "@type": "Answer", text: "Cloud RDP is ideal for coding and development, video editing, trading software, running business applications, and accessing a personal cloud desktop from any device." },
+              },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero */}

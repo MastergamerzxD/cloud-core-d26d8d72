@@ -26,6 +26,24 @@ export default function Blog() {
         canonical="/blog"
         ogType="blog"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Cloud on Fire Blog",
+            url: "https://cloudonfire.com/blog",
+            description: "Latest news, tutorials, and expert guides about VPS hosting, gaming servers, and cloud infrastructure from Cloud on Fire.",
+            isPartOf: { "@id": "https://cloudonfire.com/#website" },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://cloudonfire.com/blog" },
+            ],
+          },
+        ]}
       />
 
       <section className="section-padding">

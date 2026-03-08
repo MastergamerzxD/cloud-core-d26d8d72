@@ -33,25 +33,51 @@ export default function BlogPost() {
   return (
     <Layout>
       <SEOHead
-        title={`${post.meta_title || post.title} - Cloud on Fire Blog`}
+        title={`${post.meta_title || post.title} — Cloud on Fire Blog`}
         description={post.meta_description || post.excerpt || ""}
         keywords={post.tags?.join(", ") || ""}
         canonical={post.canonical_url || `/blog/${post.slug}`}
         ogType="article"
         ogImage={post.featured_image}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: post.title,
-          description: post.meta_description || post.excerpt || "",
-          image: post.featured_image || undefined,
-          datePublished: post.publish_date,
-          dateModified: post.updated_at || post.publish_date,
-          author: { "@type": "Person", name: post.author_name || "Cloud on Fire" },
-          publisher: { "@type": "Organization", name: "Cloud on Fire", url: "https://cloudonfire.com" },
-          mainEntityOfPage: `https://cloudonfire.com/blog/${post.slug}`,
-          keywords: post.tags?.join(", "),
-        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.meta_description || post.excerpt || "",
+            image: post.featured_image || "https://cloudonfire.com/images/logo-schema.png",
+            datePublished: post.publish_date,
+            dateModified: post.updated_at || post.publish_date,
+            author: {
+              "@type": "Person",
+              name: post.author_name || "Cloud on Fire",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Cloud on Fire",
+              url: "https://cloudonfire.com",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://cloudonfire.com/images/logo-schema.png",
+              },
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `https://cloudonfire.com/blog/${post.slug}`,
+            },
+            keywords: post.tags?.join(", "),
+            inLanguage: "en-IN",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://cloudonfire.com/blog" },
+              { "@type": "ListItem", position: 3, name: post.title, item: `https://cloudonfire.com/blog/${post.slug}` },
+            ],
+          },
+        ]}
       />
 
       <article className="section-padding">

@@ -181,27 +181,55 @@ export default function GamingVPS() {
         ogType="product"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
         jsonLd={[
-          {
+          ...gamingPlans.map((plan) => ({
             "@context": "https://schema.org",
             "@type": "Product",
-            name: "Cloud on Fire Gaming VPS",
-            description: "Gaming VPS hosting optimized for Minecraft, FiveM, and multiplayer game servers with advanced DDoS protection and low latency networking in India.",
+            name: `${plan.name} — Gaming VPS`,
+            description: plan.description,
             brand: { "@type": "Brand", name: "Cloud on Fire" },
+            category: "Gaming VPS Hosting",
+            image: "https://cloudonfire.com/images/logo-schema.png",
             offers: {
-              "@type": "AggregateOffer",
+              "@type": "Offer",
               priceCurrency: "INR",
-              lowPrice: "299",
-              highPrice: "1999",
-              offerCount: "6",
+              price: plan.price.replace(/[₹,]/g, ""),
               availability: "https://schema.org/PreOrder",
+              seller: { "@type": "Organization", name: "Cloud on Fire" },
+              priceValidUntil: "2027-12-31",
             },
-          },
+          })),
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
               { "@type": "ListItem", position: 2, name: "Gaming VPS", item: "https://cloudonfire.com/gaming-vps" },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Can I host a Minecraft server on Cloud on Fire?",
+                acceptedAnswer: { "@type": "Answer", text: "Yes. Cloud on Fire Gaming VPS is optimized for Minecraft server hosting. Our Intel Xeon Platinum processors deliver stable 20 TPS even with modpacks, plugins, and large player counts. Plans start at ₹299/month." },
+              },
+              {
+                "@type": "Question",
+                name: "Can I host a FiveM server on Cloud on Fire?",
+                acceptedAnswer: { "@type": "Answer", text: "Yes. Our Gaming VPS supports FiveM servers with heavy scripts, custom vehicles, and 64+ player slots. Advanced DDoS protection ensures your roleplay community stays online." },
+              },
+              {
+                "@type": "Question",
+                name: "Is DDoS protection included for gaming VPS?",
+                acceptedAnswer: { "@type": "Answer", text: "Yes, all Gaming VPS plans include advanced DDoS protection at no extra cost with up to 1Tbps mitigation capacity. Your game servers stay online during attacks." },
+              },
+              {
+                "@type": "Question",
+                name: "What games can I host on Cloud on Fire Gaming VPS?",
+                acceptedAnswer: { "@type": "Answer", text: "You can host Minecraft, FiveM (GTA RP), Hytale, Rust, CS2, ARK, Valheim, and any other game server that runs on Linux or Windows VPS. Our infrastructure is optimized for low-latency multiplayer gaming." },
+              },
             ],
           },
         ]}

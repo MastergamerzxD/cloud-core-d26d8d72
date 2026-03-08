@@ -1,10 +1,13 @@
 import { Helmet } from "react-helmet-async";
 
 /**
- * Static global structured data (Organization + WebSite + SearchAction).
+ * Static global structured data (Organization + WebSite + SearchAction + ImageObject).
  * All values are hardcoded — no admin panel dependency.
  */
 export default function GlobalSEO() {
+  const logoUrl = "https://cloudonfire.com/images/logo-schema.png";
+  const ogImageUrl = "https://cloudonfire.com/images/og-logo.jpg";
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -12,16 +15,45 @@ export default function GlobalSEO() {
     name: "Cloud on Fire",
     legalName: "Cloud on Fire",
     url: "https://cloudonfire.com",
-    logo: "https://cloudonfire.com/images/og-logo.jpg",
-    image: "https://cloudonfire.com/images/og-logo.jpg",
+    logo: {
+      "@type": "ImageObject",
+      "@id": "https://cloudonfire.com/#logo",
+      url: logoUrl,
+      contentUrl: logoUrl,
+      caption: "Cloud on Fire logo",
+      width: 512,
+      height: 512,
+    },
+    image: {
+      "@type": "ImageObject",
+      url: ogImageUrl,
+      width: 1200,
+      height: 630,
+    },
     description:
-      "India's leading high-performance VPS hosting provider offering gaming VPS, cloud RDP, and enterprise-grade DDoS protection with Intel Xeon Platinum processors, NVMe SSD storage, and Yotta Tier-3+ data centers in Delhi & Mumbai.",
+      "High-performance cloud infrastructure platform offering VPS hosting, gaming VPS, cloud RDP, and advanced DDoS protection. Powered by Intel Xeon Platinum processors, NVMe SSD storage, and Yotta Tier-3+ data centers in Delhi & Mumbai, India.",
     foundingDate: "2024",
+    numberOfEmployees: { "@type": "QuantitativeValue", minValue: 2 },
+    areaServed: {
+      "@type": "Country",
+      name: "India",
+    },
+    knowsAbout: [
+      "VPS Hosting",
+      "Gaming VPS",
+      "Cloud RDP",
+      "DDoS Protection",
+      "Cloud Infrastructure",
+      "Game Server Hosting",
+      "Minecraft Server Hosting",
+      "FiveM Server Hosting",
+    ],
     sameAs: [
       "https://discord.gg/cloudonfire",
       "https://twitter.com/cloudonfire_",
       "https://instagram.com/cloudonfire_",
       "https://youtube.com/@cloudonfire",
+      "https://linkedin.com/company/cloudonfire",
     ],
     contactPoint: [
       {
@@ -31,10 +63,24 @@ export default function GlobalSEO() {
         telephone: "+918766215705",
         availableLanguage: ["English", "Hindi"],
         areaServed: "IN",
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          opens: "00:00",
+          closes: "23:59",
+        },
       },
       {
         "@type": "ContactPoint",
         contactType: "sales",
+        email: "hello@cloudonfire.com",
+        telephone: "+918766215705",
+        availableLanguage: ["English", "Hindi"],
+        areaServed: "IN",
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "technical support",
         email: "hello@cloudonfire.com",
         telephone: "+918766215705",
         availableLanguage: ["English", "Hindi"],
@@ -54,10 +100,12 @@ export default function GlobalSEO() {
     "@type": "WebSite",
     "@id": "https://cloudonfire.com/#website",
     name: "Cloud on Fire",
+    alternateName: "CloudOnFire",
     url: "https://cloudonfire.com",
     description:
       "Best VPS Hosting in India — Gaming VPS, Cloud RDP, Enterprise DDoS Protection",
     publisher: { "@id": "https://cloudonfire.com/#organization" },
+    inLanguage: "en-IN",
     potentialAction: {
       "@type": "SearchAction",
       target: {

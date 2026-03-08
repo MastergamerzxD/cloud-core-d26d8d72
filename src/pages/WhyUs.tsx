@@ -87,6 +87,14 @@ export default function WhyUs() {
         keywords="why Cloud on Fire, best VPS provider India, reliable VPS hosting India, VPS support India, transparent VPS pricing, best hosting provider India"
         canonical="/why-us"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+            { "@type": "ListItem", position: 2, name: "Why Us", item: "https://cloudonfire.com/why-us" },
+          ],
+        }}
       />
       <Layout>
         {/* Hero */}

@@ -54,14 +54,26 @@ export default function DDoSProtection() {
         keywords="DDoS protection India, anti-DDoS VPS, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, Cloud on Fire DDoS"
         canonical="/ddos-protection"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
-            { "@type": "ListItem", position: 2, name: "DDoS Protection", item: "https://cloudonfire.com/ddos-protection" },
-          ],
-        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "Cloud on Fire DDoS Protection",
+            description: "Enterprise-grade Layer 4 DDoS mitigation service with up to 1Tbps attack absorption capacity. Included on all VPS and Gaming VPS plans.",
+            provider: { "@id": "https://cloudonfire.com/#organization" },
+            serviceType: "DDoS Protection",
+            areaServed: { "@type": "Country", name: "India" },
+            brand: { "@type": "Brand", name: "Cloud on Fire" },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "DDoS Protection", item: "https://cloudonfire.com/ddos-protection" },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero */}
