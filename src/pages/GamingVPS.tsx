@@ -171,25 +171,37 @@ export default function GamingVPS() {
   return (
     <>
       <SEOHead
-        title="Gaming VPS India - Minecraft, FiveM Server Hosting from ₹299/mo | Cloud on Fire"
-        description="Gaming VPS built for multiplayer performance. Host Minecraft, FiveM, GTA RP servers on Intel Xeon Platinum 8168 with advanced DDoS protection. Starting ₹299/month."
-        keywords="gaming VPS India, Minecraft server hosting, FiveM server, GTA RP hosting, game server India, multiplayer VPS"
+        title="Gaming VPS Hosting for Minecraft & FiveM | Low Latency Servers India — Cloud on Fire"
+        description="Gaming VPS optimized for multiplayer performance. Host Minecraft, FiveM, Hytale, and modded game servers on Intel Xeon Platinum with advanced DDoS protection. Starting at ₹299/month in India."
+        keywords="gaming VPS India, Minecraft server hosting India, FiveM server hosting, game server India, multiplayer VPS, low latency gaming VPS, DDoS protected game server, Hytale server hosting, Cloud on Fire gaming"
         canonical="/gaming-vps"
         ogType="product"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Product",
-          "name": "Cloud on Fire Gaming VPS",
-          "description": "Gaming VPS optimized for multiplayer game servers with advanced DDoS protection",
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "INR",
-            "lowPrice": "299",
-            "highPrice": "1999",
-            "offerCount": "6",
-            "availability": "https://schema.org/InStock"
-          }
-        }}
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "Cloud on Fire Gaming VPS",
+            description: "Gaming VPS hosting optimized for Minecraft, FiveM, and multiplayer game servers with advanced DDoS protection and low latency networking in India.",
+            brand: { "@type": "Brand", name: "Cloud on Fire" },
+            offers: {
+              "@type": "AggregateOffer",
+              priceCurrency: "INR",
+              lowPrice: "299",
+              highPrice: "1999",
+              offerCount: "6",
+              availability: "https://schema.org/PreOrder",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "Gaming VPS", item: "https://cloudonfire.com/gaming-vps" },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero - Gaming themed */}

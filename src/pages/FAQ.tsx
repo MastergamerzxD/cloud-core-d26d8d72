@@ -62,11 +62,11 @@ export default function FAQ() {
   return (
     <>
       <SEOHead
-        seoPrefix="faq"
-        title="VPS Hosting FAQ India – Questions Answered | Cloud on Fire"
-        description="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Pro VPS vs Budget VPS, DDoS protection, billing, payment methods, server specs, and support."
-        keywords="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing, Cloud on Fire FAQ, best VPS FAQ, gaming VPS FAQ"
+        title="VPS Hosting FAQ India — Common Questions Answered | Cloud on Fire"
+        description="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Learn about Pro VPS vs Budget VPS, DDoS protection, billing, payment methods, server specs, and support."
+        keywords="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing India, Cloud on Fire FAQ, gaming VPS FAQ"
         canonical="/faq"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "FAQPage",

@@ -19,9 +19,8 @@ export default function MediaGallery() {
   return (
     <Layout>
       <SEOHead
-        seoPrefix="media"
-        title="Media Gallery - Cloud on Fire"
-        description="Browse our media gallery including product images, infrastructure photos, and more."
+        title="Media Gallery — Cloud on Fire VPS Hosting India"
+        description="Browse Cloud on Fire media gallery including product images, infrastructure photos, data center visuals, and more."
         canonical="/media"
       />
 

@@ -20,12 +20,12 @@ export default function Blog() {
   return (
     <Layout>
       <SEOHead
-        seoPrefix="blog"
-        title="Blog – VPS Hosting News, Tutorials & Guides | Cloud on Fire India"
+        title="Blog — VPS Hosting News, Tutorials & Guides | Cloud on Fire India"
         description="Latest news, tutorials, and expert guides about VPS hosting in India, cloud infrastructure, DDoS protection, gaming server optimization, and more from Cloud on Fire."
         keywords="VPS hosting blog India, Cloud on Fire blog, hosting tutorials, DDoS protection guides, gaming server tips, cloud infrastructure news"
         canonical="/blog"
         ogType="blog"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
       />
 
       <section className="section-padding">

@@ -49,11 +49,19 @@ export default function DDoSProtection() {
   return (
     <>
       <SEOHead
-        seoPrefix="ddos"
-        title="DDoS Protection India – Enterprise Anti-DDoS VPS Hosting | Cloud on Fire"
-        description="Best DDoS protected VPS hosting in India. Enterprise-grade Layer 4 DDoS mitigation up to 1Tbps. Pro VPS never suspended under attack. Real-time ML-based threat monitoring. Cloud on Fire."
-        keywords="DDoS protection India, anti-DDoS VPS hosting, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, best DDoS protection hosting"
+        title="Advanced DDoS Protection for Game Servers & VPS Hosting — Cloud on Fire"
+        description="Enterprise-grade Layer 4 DDoS mitigation up to 1Tbps for VPS and game servers in India. Pro VPS never suspended under attack. Real-time threat detection and automatic mitigation included on all plans."
+        keywords="DDoS protection India, anti-DDoS VPS, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, Cloud on Fire DDoS"
         canonical="/ddos-protection"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+            { "@type": "ListItem", position: 2, name: "DDoS Protection", item: "https://cloudonfire.com/ddos-protection" },
+          ],
+        }}
       />
       <Layout>
         {/* Hero */}

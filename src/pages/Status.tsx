@@ -16,8 +16,7 @@ export default function Status() {
   return (
     <>
       <SEOHead
-        seoPrefix="status"
-        title="Service Status – Cloud on Fire VPS Hosting India | System Uptime"
+        title="Service Status — Cloud on Fire VPS Hosting India | System Uptime"
         description="Check the real-time status of Cloud on Fire VPS hosting services. System uptime monitoring for Pro VPS, Budget VPS, DDoS protection, and control panel."
         keywords="Cloud on Fire status, VPS uptime India, hosting status page, server status"
         canonical="/status"

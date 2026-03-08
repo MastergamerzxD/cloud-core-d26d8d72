@@ -38,11 +38,11 @@ export default function Contact() {
   return (
     <>
       <SEOHead
-        seoPrefix="contact"
-        title="Contact Cloud on Fire – VPS Hosting Support India | 24/7 Expert Help"
-        description="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support with under 15 minute response for Pro VPS. Best hosting support in India."
+        title="Contact Cloud on Fire — VPS Hosting Support India | 24/7 Expert Help"
+        description="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support with under 15 minute response for Pro VPS customers. Email, phone, and live chat available."
         keywords="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support India, 24/7 VPS support"
         canonical="/contact"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
       />
       <Layout>
         <section className="section-padding relative overflow-hidden">
