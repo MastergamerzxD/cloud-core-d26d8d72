@@ -9,6 +9,10 @@ import PricingPreview from "@/components/home/PricingPreview";
 import InfrastructureSection from "@/components/home/InfrastructureSection";
 import CTASection from "@/components/home/CTASection";
 
+const Divider = ({ variant = "neon" }: { variant?: "neon" | "fire" }) => (
+  <div className={`${variant === "fire" ? "gradient-divider-fire" : "gradient-divider"} mx-auto max-w-4xl`} />
+);
+
 export default function Index() {
   const homeJsonLd = [
     {
@@ -67,12 +71,19 @@ export default function Index() {
       />
       <Layout>
         <HeroSection />
+        <Divider variant="fire" />
         <ReviewsSection />
+        <Divider />
         <ServicesGrid />
+        <Divider variant="fire" />
         <GamesSection />
+        <Divider />
         <FeaturesSection />
+        <Divider variant="fire" />
         <PricingPreview />
+        <Divider />
         <InfrastructureSection />
+        <Divider variant="fire" />
         <CTASection />
       </Layout>
     </>
