@@ -19,18 +19,18 @@ export default function SectionHeader({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""} mb-8 sm:mb-12 lg:mb-16`}
+      className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""} mb-10 sm:mb-14 lg:mb-18`}
     >
       {badge && (
-        <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-3 sm:mb-4">
+        <span className="glow-badge text-[10px] sm:text-xs mb-4 sm:mb-5 inline-flex">
           {badge}
         </span>
       )}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-foreground leading-tight tracking-tight">
         {title}
       </h2>
       {description && (
-        <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed px-2 sm:px-0">
+        <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed px-2 sm:px-0">
           {description}
         </p>
       )}
