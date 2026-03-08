@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, HardDrive, Wifi, Shield } from "lucide-react";
+import { Cpu, HardDrive, Wifi, Shield, Clock, Gauge } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const features = [
@@ -37,6 +37,14 @@ const features = [
   },
 ];
 
+const statsBar = [
+  { icon: Clock, value: "99.99%", label: "Uptime SLA" },
+  { icon: Cpu, value: "Xeon Platinum", label: "Enterprise CPUs" },
+  { icon: HardDrive, value: "NVMe Gen4", label: "SSD Storage" },
+  { icon: Shield, value: "1Tbps", label: "DDoS Mitigation" },
+  { icon: Gauge, value: "10Gbps", label: "Network Uplink" },
+];
+
 export default function FeaturesSection() {
   return (
     <section className="section-padding relative overflow-hidden">
@@ -44,12 +52,30 @@ export default function FeaturesSection() {
 
       <div className="container-wide relative">
         <SectionHeader
-          badge="Performance"
+          badge="⚡ Performance"
           title="Performance Built for Scale"
           description="Every component of our platform is engineered for maximum throughput, reliability, and security."
         />
 
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-5xl mx-auto">
+        {/* Infrastructure stats bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glow-card p-4 sm:p-6 !rounded-2xl mb-8 sm:mb-12"
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+            {statsBar.map((stat, i) => (
+              <div key={i} className="text-center">
+                <stat.icon className="w-5 h-5 text-primary mx-auto mb-2 opacity-70" />
+                <div className="text-lg sm:text-xl font-extrabold text-fire-gradient">{stat.value}</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}

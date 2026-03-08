@@ -41,21 +41,21 @@ export default function ReviewsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="glow-card glow-card-popular p-6 sm:p-8 flex flex-col items-center justify-center text-center !rounded-2xl"
+            className="glow-card glow-card-popular p-8 sm:p-10 flex flex-col items-center justify-center text-center !rounded-2xl"
           >
-            <div className="flex items-center gap-1 mb-3">
+            <div className="flex items-center gap-1.5 mb-4">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 sm:w-7 sm:h-7 fill-primary text-primary" />
+                <Star key={i} className="w-7 h-7 sm:w-8 sm:h-8 fill-primary text-primary drop-shadow-[0_0_6px_hsl(24_95%_53%_/_0.5)]" />
               ))}
             </div>
-            <div className="text-5xl sm:text-6xl font-extrabold text-fire-gradient mb-2">4.9</div>
+            <div className="text-6xl sm:text-7xl font-black text-fire-gradient mb-2 tracking-tight">4.9</div>
             <p className="text-sm sm:text-base text-muted-foreground mb-1">out of 5.0</p>
-            <p className="text-lg sm:text-xl font-bold text-foreground mt-2">We're Rated Excellent</p>
-            <p className="text-xs text-muted-foreground mt-1">Based on 150+ verified reviews</p>
+            <p className="text-xl sm:text-2xl font-bold text-foreground mt-3">We're Rated Excellent</p>
+            <p className="text-xs text-muted-foreground mt-2">Based on 150+ verified reviews</p>
           </motion.div>
 
           {/* Review cards grid */}
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
             {reviews.map((review, index) => (
               <motion.div
                 key={review.name}
@@ -63,11 +63,11 @@ export default function ReviewsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="glow-card p-5 !rounded-2xl group"
+                className="glow-card p-5 sm:p-6 !rounded-2xl group"
               >
                 <div className="flex items-center gap-1 mb-3">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-primary text-primary" />
+                    <Star key={i} className="w-4 h-4 fill-primary text-primary" />
                   ))}
                 </div>
                 <p className="text-sm text-foreground/90 leading-relaxed mb-4 italic">
