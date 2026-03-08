@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Zap, Cpu, HardDrive, Rocket } from "lucide-react";
@@ -32,6 +32,17 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
+  // Memoize particles to avoid re-renders
+  const particles = useMemo(() => 
+    [...Array(12)].map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: 3 + Math.random() * 4,
+      delay: Math.random() * 3,
+    })), []
+  );
+
   return (
     <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center section-padding overflow-hidden">
       {/* Animated network grid */}
@@ -42,24 +53,14 @@ export default function HeroSection() {
       <div className="absolute top-1/3 left-1/4 w-[200px] sm:w-[350px] h-[200px] sm:h-[350px] bg-neon-blue/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-neon-purple/4 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Floating particles */}
-      {[...Array(20)].map((_, i) => (
+      {/* Floating particles - reduced count */}
+      {particles.map((p) => (
         <motion.div
-          key={i}
+          key={p.id}
           className="absolute w-1 h-1 rounded-full bg-primary/30"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.6, 0.2],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 4,
-            repeat: Infinity,
-            delay: Math.random() * 3,
-          }}
+          style={{ left: p.left, top: p.top }}
+          animate={{ y: [0, -30, 0], opacity: [0.2, 0.6, 0.2] }}
+          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay }}
         />
       ))}
 
@@ -104,9 +105,8 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 leading-relaxed"
             >
-              Deploy game servers, high-traffic applications, and real-time workloads 
-              on infrastructure that never compromises. India's most reliable VPS hosting 
-              starts at just <span className="text-primary font-semibold">₹199/month</span>.
+              Deploy <Link to="/gaming-vps" className="text-primary hover:underline font-medium">game servers</Link>, high-traffic applications, and real-time workloads 
+              on infrastructure that never compromises. India's most reliable <Link to="/vps-plans" className="text-primary hover:underline font-medium">VPS hosting</Link> starts at just <span className="text-primary font-semibold">₹199/month</span>.
             </motion.p>
 
             <motion.div
@@ -153,12 +153,12 @@ export default function HeroSection() {
           >
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 bg-primary/10 rounded-3xl blur-[60px] pointer-events-none" />
-              <motion.img
+              <img
                 src={logoBannerDark}
-                alt="Cloud on Fire"
+                alt="Cloud on Fire — high performance VPS hosting platform India"
                 className="relative w-full max-w-lg rounded-2xl"
-                animate={{ scale: [1, 1.03, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                width={512}
+                height={512}
               />
             </div>
           </motion.div>

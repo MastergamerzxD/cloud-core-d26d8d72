@@ -288,6 +288,13 @@ export default function RDP() {
                   </Button>
                 </Link>
               </div>
+              {/* Internal links */}
+              <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                <Link to="/vps-plans" className="hover:text-primary transition-colors">Standard VPS hosting →</Link>
+                <Link to="/gaming-vps" className="hover:text-primary transition-colors">Gaming VPS hosting →</Link>
+                <Link to="/ddos-protection" className="hover:text-primary transition-colors">DDoS protection →</Link>
+                <Link to="/infrastructure" className="hover:text-primary transition-colors">Infrastructure details →</Link>
+              </div>
             </motion.div>
           </div>
         </section>

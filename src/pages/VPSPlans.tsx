@@ -377,6 +377,13 @@ export default function VPSPlans() {
                   </Button>
                 </Link>
               </div>
+              {/* Internal links */}
+              <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                <Link to="/gaming-vps" className="hover:text-primary transition-colors">Gaming VPS for Minecraft & FiveM →</Link>
+                <Link to="/rdp" className="hover:text-primary transition-colors">Cloud RDP remote desktop →</Link>
+                <Link to="/ddos-protection" className="hover:text-primary transition-colors">DDoS protection →</Link>
+                <Link to="/why-us" className="hover:text-primary transition-colors">Why choose Cloud on Fire →</Link>
+              </div>
             </motion.div>
           </div>
         </section>

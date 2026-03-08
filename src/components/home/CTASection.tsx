@@ -58,6 +58,14 @@ export default function CTASection() {
           <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-muted-foreground">
             Launching 15th April 2026 • No credit card required • 24/7 support
           </p>
+
+          {/* Internal links for SEO */}
+          <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+            <Link to="/gaming-vps" className="hover:text-primary transition-colors">Gaming VPS hosting →</Link>
+            <Link to="/rdp" className="hover:text-primary transition-colors">Cloud RDP servers →</Link>
+            <Link to="/ddos-protection" className="hover:text-primary transition-colors">DDoS protection →</Link>
+            <Link to="/why-us" className="hover:text-primary transition-colors">Why Cloud on Fire →</Link>
+          </div>
         </motion.div>
       </div>
     </section>

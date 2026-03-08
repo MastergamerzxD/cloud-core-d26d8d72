@@ -270,6 +270,39 @@ export default function DDoSProtection() {
             </div>
           </div>
         </section>
+
+        {/* Internal linking CTA */}
+        <div className="gradient-divider mx-auto max-w-4xl" />
+        <section className="section-padding">
+          <div className="container-wide text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+              Protected Hosting <span className="text-fire-gradient">For Every Workload</span>
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-sm sm:text-base">
+              All Cloud on Fire services include DDoS protection. Choose your platform:
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+              <Link to="/vps-plans">
+                <Button variant="outline" size="lg" className="group text-sm">
+                  VPS hosting plans
+                  <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link to="/gaming-vps">
+                <Button variant="outline" size="lg" className="group text-sm">
+                  Gaming VPS with advanced DDoS
+                  <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link to="/rdp">
+                <Button variant="outline" size="lg" className="group text-sm">
+                  Cloud RDP servers
+                  <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
       </Layout>
     </>
   );

@@ -1,17 +1,23 @@
+import { lazy, Suspense } from "react";
 import SEOHead from "@/components/SEOHead";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/home/HeroSection";
 import ReviewsSection from "@/components/home/ReviewsSection";
 import ServicesGrid from "@/components/home/ServicesGrid";
-import GamesSection from "@/components/home/GamesSection";
-import FeaturesSection from "@/components/home/FeaturesSection";
-import PricingPreview from "@/components/home/PricingPreview";
-import InfrastructureSection from "@/components/home/InfrastructureSection";
-import CTASection from "@/components/home/CTASection";
+
+// Lazy load below-fold sections for better Core Web Vitals
+const GamesSection = lazy(() => import("@/components/home/GamesSection"));
+const FeaturesSection = lazy(() => import("@/components/home/FeaturesSection"));
+const PricingPreview = lazy(() => import("@/components/home/PricingPreview"));
+const InfrastructureSection = lazy(() => import("@/components/home/InfrastructureSection"));
+const TrustBadgesSection = lazy(() => import("@/components/home/TrustBadgesSection"));
+const CTASection = lazy(() => import("@/components/home/CTASection"));
 
 const Divider = ({ variant = "neon" }: { variant?: "neon" | "fire" }) => (
   <div className={`${variant === "fire" ? "gradient-divider-fire" : "gradient-divider"} mx-auto max-w-4xl`} />
 );
+
+const SectionFallback = () => <div className="min-h-[200px]" />;
 
 export default function Index() {
   const homeJsonLd = [
@@ -105,7 +111,7 @@ export default function Index() {
     <>
       <SEOHead
         title="Cloud on Fire — High Performance VPS Hosting in India | Gaming VPS & Cloud RDP"
-        description="Deploy powerful VPS servers in India with NVMe SSD storage, Intel Xeon Platinum processors, and advanced DDoS protection. Gaming VPS from ₹299/mo. Perfect for developers, gaming servers, and scalable cloud workloads."
+        description="Deploy powerful VPS servers in India powered by Intel Xeon processors, NVMe SSD storage, and advanced DDoS protection. Gaming VPS from ₹299/mo. Ideal for developers, gaming servers, and scalable cloud workloads."
         keywords="VPS hosting India, gaming VPS India, Minecraft server hosting India, cloud VPS India, high performance VPS, DDoS protected VPS, cloud server India, game server hosting, best VPS hosting company in India, Cloud on Fire"
         canonical="/"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
@@ -118,15 +124,29 @@ export default function Index() {
         <Divider />
         <ServicesGrid />
         <Divider variant="fire" />
-        <GamesSection />
+        <Suspense fallback={<SectionFallback />}>
+          <GamesSection />
+        </Suspense>
         <Divider />
-        <FeaturesSection />
+        <Suspense fallback={<SectionFallback />}>
+          <FeaturesSection />
+        </Suspense>
         <Divider variant="fire" />
-        <PricingPreview />
+        <Suspense fallback={<SectionFallback />}>
+          <PricingPreview />
+        </Suspense>
         <Divider />
-        <InfrastructureSection />
+        <Suspense fallback={<SectionFallback />}>
+          <InfrastructureSection />
+        </Suspense>
         <Divider variant="fire" />
-        <CTASection />
+        <Suspense fallback={<SectionFallback />}>
+          <TrustBadgesSection />
+        </Suspense>
+        <Divider />
+        <Suspense fallback={<SectionFallback />}>
+          <CTASection />
+        </Suspense>
       </Layout>
     </>
   );
