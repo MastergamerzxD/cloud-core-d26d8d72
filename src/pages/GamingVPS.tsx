@@ -13,14 +13,14 @@ import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 const gamingPlans = [
   {
     name: "Gamer Start",
-    price: "₹199",
+    price: "₹299",
     description: "Entry-level game hosting",
     type: "pro" as const,
     features: [
       "2 vCPU Cores",
       "4 GB DDR4 RAM",
       "30 GB NVMe Storage",
-      "1000 GB Bandwidth",
+      "Unmetered Bandwidth",
       "Advanced DDoS Protection",
       "1x IPv4 Address",
       "Gaming Support",
@@ -28,7 +28,7 @@ const gamingPlans = [
   },
   {
     name: "Gamer Plus",
-    price: "₹399",
+    price: "₹499",
     description: "Popular for small servers",
     type: "pro" as const,
     popular: true,
@@ -36,7 +36,7 @@ const gamingPlans = [
       "4 vCPU Cores",
       "6 GB DDR4 RAM",
       "60 GB NVMe Storage",
-      "2000 GB Bandwidth",
+      "Unmetered Bandwidth",
       "Advanced DDoS Protection",
       "1x IPv4 Address",
       "Gaming Support",
@@ -44,14 +44,14 @@ const gamingPlans = [
   },
   {
     name: "Gamer Pro",
-    price: "₹699",
+    price: "₹799",
     description: "For modded servers",
     type: "pro" as const,
     features: [
       "6 vCPU Cores",
       "12 GB DDR4 RAM",
       "100 GB NVMe Storage",
-      "4000 GB Bandwidth",
+      "Unmetered Bandwidth",
       "Advanced DDoS Protection",
       "1x IPv4 Address",
       "Gaming Support",
@@ -59,14 +59,14 @@ const gamingPlans = [
   },
   {
     name: "Gamer Elite",
-    price: "₹899",
+    price: "₹999",
     description: "Large player counts",
     type: "pro" as const,
     features: [
       "8 vCPU Cores",
       "20 GB DDR4 RAM",
       "150 GB NVMe Storage",
-      "10,000 GB Bandwidth",
+      "Unmetered Bandwidth",
       "Advanced DDoS Protection",
       "1x IPv4 Address",
       "Priority Gaming Support",
@@ -74,7 +74,7 @@ const gamingPlans = [
   },
   {
     name: "Gamer Ultimate",
-    price: "₹1,199",
+    price: "₹1,399",
     description: "Community networks",
     type: "pro" as const,
     features: [
@@ -89,7 +89,7 @@ const gamingPlans = [
   },
   {
     name: "Gamer Enterprise",
-    price: "₹1,899",
+    price: "₹1,999",
     description: "Maximum gaming power",
     type: "pro" as const,
     features: [
