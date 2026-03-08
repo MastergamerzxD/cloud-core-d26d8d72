@@ -5,6 +5,7 @@ import { Zap, Shield, Clock, Wrench, HeartHandshake, Coins, ArrowRight, Check } 
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
 const reasons = [
   {
@@ -76,6 +77,8 @@ const reasons = [
 ];
 
 export default function WhyUs() {
+  const { openPopup } = useLaunchPopup();
+
   return (
     <>
       <SEOHead
@@ -87,23 +90,27 @@ export default function WhyUs() {
       />
       <Layout>
         {/* Hero */}
-        <section className="relative section-padding">
-          <div className="container-wide">
+        <section className="relative section-padding overflow-hidden">
+          <div className="absolute inset-0 network-grid-bg opacity-20 pointer-events-none" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+
+          <div className="container-wide relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="max-w-3xl mx-auto text-center"
             >
-              <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
+              <span className="glow-badge-fire mb-6 inline-flex">
+                <Zap className="w-3.5 h-3.5" />
                 Why Us
               </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight mb-4 sm:mb-6">
                 Why Developers Choose
                 <br />
                 <span className="text-fire-gradient">Cloud on Fire</span>
               </h1>
-              <p className="text-sm sm:text-lg text-muted-foreground">
+              <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 We're not the cheapest, and we're not trying to be. We're building 
                 infrastructure for developers who need reliability, performance, 
                 and support they can count on.
@@ -112,10 +119,12 @@ export default function WhyUs() {
           </div>
         </section>
 
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
         {/* Reasons */}
-        <section className="section-padding bg-card/60">
+        <section className="section-padding">
           <div className="container-wide">
-            <div className="space-y-16">
+            <div className="space-y-8 sm:space-y-12 max-w-6xl mx-auto">
               {reasons.map((reason, index) => (
                 <motion.div
                   key={reason.title}
@@ -123,32 +132,27 @@ export default function WhyUs() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className={`grid lg:grid-cols-2 gap-12 items-center ${
-                    index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                  }`}
+                  className="glow-card !rounded-2xl p-6 sm:p-8 lg:p-10"
                 >
-                  <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <reason.icon className="w-6 h-6 text-primary" />
+                  <div className={`grid lg:grid-cols-[1fr_1.2fr] gap-8 items-center ${index % 2 === 1 ? "lg:[direction:rtl] lg:*:[direction:ltr]" : ""}`}>
+                    <div>
+                      <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                        <reason.icon className="w-7 h-7 text-primary" />
+                      </div>
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3">
+                        {reason.title}
+                      </h2>
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                        {reason.description}
+                      </p>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                      {reason.title}
-                    </h2>
-                    <p className="text-muted-foreground mb-6">
-                      {reason.description}
-                    </p>
-                    <ul className="space-y-3">
+                    <div className="space-y-3">
                       {reason.points.map((point) => (
-                        <li key={point} className="flex items-start gap-3">
+                        <div key={point} className="flex items-start gap-3 p-3 rounded-xl bg-card/50 border border-border/30">
                           <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                          <span className="text-muted-foreground">{point}</span>
-                        </li>
+                          <span className="text-sm text-muted-foreground">{point}</span>
+                        </div>
                       ))}
-                    </ul>
-                  </div>
-                  <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                    <div className="glass-card aspect-video flex items-center justify-center hidden sm:flex">
-                      <reason.icon className="w-24 h-24 text-primary/20" />
                     </div>
                   </div>
                 </motion.div>
@@ -157,30 +161,40 @@ export default function WhyUs() {
           </div>
         </section>
 
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
         {/* CTA */}
-        <section className="section-padding">
-          <div className="container-wide">
+        <section className="section-padding relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent pointer-events-none" />
+          <div className="container-wide relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-2xl mx-auto text-center"
+              className="glow-card glow-card-popular !rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto text-center"
             >
-              <h2 className="text-3xl font-bold text-foreground mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Ready to Get Started?
               </h2>
-              <p className="text-muted-foreground mb-8">
+              <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
                 Experience the Cloud on Fire difference. Deploy your first VPS in minutes.
               </p>
-              <Link to="/pricing">
-                <Button size="lg" className="btn-fire">
-                  <span className="relative z-10 flex items-center gap-2">
-                    View Pricing
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Button>
-              </Link>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link to="/vps-plans">
+                  <Button size="lg" className="btn-fire w-full sm:w-auto h-12 px-8">
+                    <span className="relative z-10 flex items-center gap-2">
+                      View Plans
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </Button>
+                </Link>
+                <Link to="/contact">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 border-neon-blue/30 text-neon-blue hover:bg-neon-blue/10 hover:border-neon-blue/50">
+                    Contact Us
+                  </Button>
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>

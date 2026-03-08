@@ -6,7 +6,7 @@ import PricingCard from "@/components/ui/PricingCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Cpu, HardDrive, Shield, Server, Monitor, Code, Play, TrendingUp, Gamepad2, Lock, Wifi,
+  Cpu, HardDrive, Shield, Monitor, Code, Play, TrendingUp, Gamepad2, Lock, Wifi, ArrowRight, Zap,
 } from "lucide-react";
 
 const rdpPlans = [
@@ -67,12 +67,12 @@ const useCases = [
 ];
 
 const keyFeatures = [
-  { icon: Cpu, label: "Enterprise Intel Xeon CPUs" },
-  { icon: HardDrive, label: "NVMe SSD Storage" },
-  { icon: Wifi, label: "High-speed Cloud Networking" },
-  { icon: Lock, label: "Secure Remote Desktop Access" },
-  { icon: Server, label: "Stable Datacenter Infrastructure" },
-  { icon: Shield, label: "DDoS Protection Included" },
+  { icon: Cpu, label: "Enterprise Intel Xeon CPUs", description: "Intel Xeon Platinum 8168 processors for workstation-level performance." },
+  { icon: HardDrive, label: "NVMe SSD Storage", description: "Enterprise NVMe Gen4 drives with up to 7GB/s read speeds." },
+  { icon: Wifi, label: "High-speed Networking", description: "10Gbps uplinks with optimized routing for smooth remote access." },
+  { icon: Lock, label: "Secure Remote Access", description: "Encrypted RDP connections with enterprise-grade security." },
+  { icon: Monitor, label: "Windows Server", description: "Licensed Windows Server with full administrator access." },
+  { icon: Shield, label: "DDoS Protection", description: "Always-on enterprise DDoS mitigation included on every plan." },
 ];
 
 export default function RDP() {
@@ -86,89 +86,124 @@ export default function RDP() {
       />
       <Layout>
         {/* Hero */}
-        <section className="section-padding">
-          <div className="container-wide">
+        <section className="section-padding relative overflow-hidden">
+          <div className="absolute inset-0 network-grid-bg opacity-30 pointer-events-none" />
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-blue/5 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-[100px] pointer-events-none" />
+
+          <div className="container-wide relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="max-w-3xl mx-auto text-center mb-10"
             >
-              <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">
+              <motion.span
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="glow-badge mb-6 inline-flex"
+              >
+                <Monitor className="w-3.5 h-3.5" />
                 High Performance RDP
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
+              </motion.span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight mb-4 sm:mb-6">
                 Cloud Desktop
                 <br />
-                <span className="text-fire-gradient">Access From Anywhere</span>
+                <span className="text-neon-gradient">Access From Anywhere</span>
               </h1>
-              <p className="text-sm sm:text-lg text-muted-foreground mb-6">
-                Cloud on Fire RDP provides a powerful cloud desktop that can be accessed from anywhere. 
-                Each RDP instance runs on enterprise infrastructure powered by Intel Xeon Platinum 8168 processors, 
-                delivering workstation-level performance in the cloud.
+              <p className="text-sm sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+                Cloud on Fire RDP provides a powerful cloud desktop accessible from anywhere. 
+                Each instance runs on enterprise infrastructure powered by Intel Xeon Platinum 8168, 
+                delivering <span className="text-foreground font-medium">workstation-level performance in the cloud.</span>
               </p>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary">
-                  <Cpu className="w-3.5 h-3.5" /> Intel Xeon Platinum
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary">
-                  <HardDrive className="w-3.5 h-3.5" /> NVMe SSD
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary">
-                  <Monitor className="w-3.5 h-3.5" /> Windows RDP
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Use Cases */}
-        <section className="pb-12 sm:pb-16">
-          <div className="container-wide">
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-3xl mx-auto">
-              {useCases.map((c) => (
-                <motion.div
-                  key={c.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-2 px-4 py-3 bg-card border border-border/50 rounded-xl text-sm text-foreground"
-                >
-                  <c.icon className="w-5 h-5 text-primary" />
-                  <span>{c.label}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Key Features */}
-        <section className="pb-12 sm:pb-16">
-          <div className="container-wide max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="glass-card p-6 sm:p-8"
-            >
-              <h2 className="text-lg sm:text-xl font-bold text-foreground mb-6 text-center">
-                Enterprise Infrastructure Features
-              </h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {keyFeatures.map((feature) => (
-                  <div key={feature.label} className="flex items-center gap-3 p-3 bg-card/50 rounded-lg border border-border/30">
-                    <feature.icon className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-sm text-foreground">{feature.label}</span>
-                  </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                {[
+                  { icon: Cpu, label: "Intel Xeon Platinum" },
+                  { icon: HardDrive, label: "NVMe SSD" },
+                  { icon: Monitor, label: "Windows RDP" },
+                ].map((badge, i) => (
+                  <motion.div
+                    key={badge.label}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+                    className="glow-badge"
+                  >
+                    <badge.icon className="w-3.5 h-3.5" />
+                    {badge.label}
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Plans */}
-        <section className="section-padding bg-card/60">
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
+        {/* Use Cases */}
+        <section className="py-12 sm:py-16">
           <div className="container-wide">
+            <SectionHeader
+              badge="Use Cases"
+              title="Built for Every Workflow"
+              description="From personal desktops to professional workstations."
+            />
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-3xl mx-auto">
+              {useCases.map((c, i) => (
+                <motion.div
+                  key={c.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="glow-card flex items-center gap-3 px-5 py-3.5 !rounded-xl cursor-default"
+                >
+                  <c.icon className="w-5 h-5 text-neon-blue" />
+                  <span className="text-sm text-foreground font-medium">{c.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
+        {/* Key Features */}
+        <section className="py-16 sm:py-20">
+          <div className="container-wide">
+            <SectionHeader
+              badge="Features"
+              title="Enterprise Infrastructure Features"
+              description="Every RDP instance runs on the same enterprise hardware powering our VPS platform."
+            />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+              {keyFeatures.map((feature, i) => (
+                <motion.div
+                  key={feature.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="glow-card p-6 !rounded-2xl group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <feature.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-base font-bold text-foreground mb-2">{feature.label}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
+        {/* Plans */}
+        <section className="py-16 sm:py-24 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-neon-blue/3 rounded-full blur-[200px] pointer-events-none" />
+          <div className="container-wide relative">
             <SectionHeader
               badge="RDP Plans"
               title="High Performance RDP Plans"
@@ -185,20 +220,39 @@ export default function RDP() {
           </div>
         </section>
 
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
         {/* CTA */}
-        <section className="section-padding">
-          <div className="container-wide text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-              Interested in Cloud RDP?
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm sm:text-base">
-              Get notified when our RDP plans launch. Contact us for early access or custom requirements.
-            </p>
-            <Link to="/contact">
-              <Button variant="outline" size="lg">
-                Contact Sales
-              </Button>
-            </Link>
+        <section className="section-padding relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent pointer-events-none" />
+          <div className="container-wide relative text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Interested in <span className="text-neon-gradient">Cloud RDP?</span>
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-sm sm:text-base">
+                Get notified when our RDP plans launch. Contact us for early access or custom requirements.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link to="/contact">
+                  <Button size="lg" className="btn-neon w-full sm:w-auto h-12 px-8">
+                    <span className="relative z-10 flex items-center gap-2">
+                      Contact Sales
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </Button>
+                </Link>
+                <Link to="/vps-plans">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto h-12 px-8 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50">
+                    Explore VPS Plans
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </section>
       </Layout>

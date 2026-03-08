@@ -12,27 +12,27 @@ const protectionLayers = [
   {
     icon: Layers,
     title: "Edge Network Filtering",
-    description: "All incoming traffic passes through our edge network where volumetric attacks are filtered before they reach our core infrastructure. We analyze traffic patterns in real-time using ML-based anomaly detection.",
+    description: "All incoming traffic passes through our edge network where volumetric attacks are filtered before they reach our core infrastructure.",
   },
   {
     icon: Shield,
     title: "Volumetric Attack Mitigation",
-    description: "Our scrubbing centers absorb and neutralize large-scale volumetric attacks up to 1Tbps. Legitimate traffic passes through unaffected while malicious packets are dropped at the network edge.",
+    description: "Our scrubbing centers absorb and neutralize large-scale volumetric attacks up to 1Tbps. Legitimate traffic passes through unaffected.",
   },
   {
     icon: Clock,
     title: "Rate Limiting & Throttling",
-    description: "Intelligent rate limiting prevents resource exhaustion attacks. Dynamic thresholds adapt to traffic patterns, ensuring legitimate users are never blocked during mitigation.",
+    description: "Intelligent rate limiting prevents resource exhaustion attacks. Dynamic thresholds adapt to traffic patterns automatically.",
   },
   {
     icon: Zap,
     title: "Instant Auto-Mitigation",
-    description: "Attack detection and mitigation begins in under 1 second. No manual intervention needed — our systems automatically identify and neutralize threats 24/7/365.",
+    description: "Attack detection and mitigation begins in under 1 second. No manual intervention needed — fully automated 24/7/365.",
   },
   {
     icon: Activity,
     title: "Real-Time Monitoring",
-    description: "Continuous monitoring of all network traffic with instant alerts. Our NOC team monitors traffic anomalies round the clock and fine-tunes protection rules as needed.",
+    description: "Continuous monitoring of all network traffic with instant alerts. Our NOC team fine-tunes protection rules round the clock.",
   },
 ];
 
@@ -58,18 +58,19 @@ export default function DDoSProtection() {
       <Layout>
         {/* Hero */}
         <section className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center section-padding overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] h-[300px] sm:h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute inset-0 network-grid-bg opacity-30 pointer-events-none" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[150px] pointer-events-none" />
           
           <div className="container-wide relative">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-4 sm:mb-8">
-                  <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="glow-badge-fire mb-6 inline-flex">
+                  <Shield className="w-3.5 h-3.5" />
                   Enterprise Security
                 </span>
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6">
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.1] mb-4 sm:mb-6">
                 Layer 4 DDoS Protection
                 <br />
                 <span className="text-fire-gradient">That Never Backs Down</span>
@@ -88,8 +89,10 @@ export default function DDoSProtection() {
           </div>
         </section>
 
-        {/* Live Attack Mitigation Demo */}
-        <section className="section-padding bg-card/60">
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
+        {/* Live Attack Demo */}
+        <section className="section-padding">
           <div className="container-wide">
             <SectionHeader
               badge="Live Demo"
@@ -102,6 +105,8 @@ export default function DDoSProtection() {
           </div>
         </section>
 
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
         {/* Protection Architecture */}
         <section className="section-padding">
           <div className="container-wide">
@@ -110,7 +115,7 @@ export default function DDoSProtection() {
               title="5-Layer Protection Architecture"
               description="Our Layer 4 DDoS mitigation operates at the network and transport layers of the stack."
             />
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
               {protectionLayers.map((layer, index) => (
                 <motion.div
                   key={layer.title}
@@ -118,15 +123,15 @@ export default function DDoSProtection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="glass-card p-6 rounded-xl"
+                  className="glow-card !rounded-2xl p-6 group"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <layer.icon className="w-5 h-5 text-primary" />
                     </div>
                     <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Layer {index + 1}</span>
                   </div>
-                  <h3 className="text-base font-semibold text-foreground mb-2">{layer.title}</h3>
+                  <h3 className="text-base font-bold text-foreground mb-2">{layer.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{layer.description}</p>
                 </motion.div>
               ))}
@@ -134,16 +139,18 @@ export default function DDoSProtection() {
           </div>
         </section>
 
-        {/* Attack Types - Layer 4 only */}
-        <section className="section-padding bg-card/60">
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
+        {/* Attack Types */}
+        <section className="section-padding">
           <div className="container-wide">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-4">Layer 4 Coverage</span>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
+                <span className="glow-badge mb-6 inline-flex">Layer 4 Coverage</span>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
                   Protected Against<br /><span className="text-fire-gradient">Layer 4 Attack Vectors</span>
                 </h2>
-                <p className="text-muted-foreground mb-8">
+                <p className="text-sm sm:text-base text-muted-foreground mb-8 leading-relaxed">
                   Our Layer 4 mitigation systems handle both known network-level attack patterns and zero-day threats. Continuously updated to stay ahead of evolving DDoS techniques.
                 </p>
                 <div className="grid grid-cols-2 gap-3">
@@ -157,9 +164,9 @@ export default function DDoSProtection() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-                className="glass-card p-5 sm:p-8">
+                className="glow-card !rounded-2xl p-6 sm:p-8">
                 <div className="text-center mb-6 sm:mb-8">
-                  <div className="text-3xl sm:text-5xl font-bold text-fire-gradient mb-2">1 Tbps</div>
+                  <div className="text-4xl sm:text-5xl font-extrabold text-fire-gradient mb-2">1 Tbps</div>
                   <div className="text-muted-foreground">Maximum Attack Absorption</div>
                 </div>
                 <div className="space-y-6">
@@ -185,18 +192,20 @@ export default function DDoSProtection() {
           </div>
         </section>
 
-        {/* Pro vs Budget Protection */}
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
+        {/* Pro vs Budget */}
         <section className="section-padding">
           <div className="container-wide">
             <SectionHeader badge="Protection Levels" title="Pro VPS vs Budget VPS Protection" description="Understand the critical difference in DDoS handling between our VPS tiers." />
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-                className="glass-card p-6 border-primary/30">
+                className="glow-card glow-card-popular !rounded-2xl p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="px-3 py-1 text-sm font-semibold bg-primary/20 text-primary rounded-full">Pro VPS</span>
                   <span className="px-2 py-0.5 text-[10px] font-bold bg-green-500/20 text-green-500 rounded-full">RECOMMENDED</span>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Never Suspended — Guaranteed</h3>
+                <h3 className="text-lg font-bold text-foreground mb-4">Never Suspended — Guaranteed</h3>
                 <ul className="space-y-3">
                   {[
                     "Premium Layer 4 DDoS mitigation up to 1Tbps",
@@ -215,11 +224,11 @@ export default function DDoSProtection() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-                className="glass-card p-6">
+                className="glow-card !rounded-2xl p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="px-3 py-1 text-sm font-semibold bg-secondary text-secondary-foreground rounded-full">Budget VPS</span>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Standard Protection</h3>
+                <h3 className="text-lg font-bold text-foreground mb-4">Standard Protection</h3>
                 <ul className="space-y-3">
                   {[
                     "Standard Layer 4 DDoS mitigation",
@@ -238,11 +247,6 @@ export default function DDoSProtection() {
                   </li>
                 </ul>
               </motion.div>
-            </div>
-            <div className="text-center mt-12">
-              <Link to="/compare">
-                <Button variant="outline" size="lg">View Full Comparison<ArrowRight className="w-4 h-4 ml-2" /></Button>
-              </Link>
             </div>
           </div>
         </section>
