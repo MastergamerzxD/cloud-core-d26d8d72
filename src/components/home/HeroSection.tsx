@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Shield, Zap, Server, Globe, Cpu, HardDrive, Rocket } from "lucide-react";
+import { ArrowRight, Shield, Zap, Cpu, HardDrive, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 import logoBannerDark from "@/assets/logo-banner-dark.png";
@@ -13,6 +13,12 @@ const rotatingTexts = [
   "Made by Gamers, for Gamers",
   "Made by People, for the People",
   "Enterprise-Grade Infrastructure",
+];
+
+const featureBadges = [
+  { icon: Cpu, label: "Intel Xeon Platinum", color: "neon-blue" },
+  { icon: HardDrive, label: "NVMe Gen4 SSD", color: "neon-cyan" },
+  { icon: Shield, label: "DDoS Protection", color: "primary" },
 ];
 
 export default function HeroSection() {
@@ -28,23 +34,47 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center section-padding overflow-hidden">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] lg:w-[900px] h-[400px] sm:h-[500px] lg:h-[700px] bg-primary/8 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/3 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-fire-red/5 rounded-full blur-[80px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/3 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-fire-yellow/5 rounded-full blur-[90px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black_40%,transparent_100%)]" />
+      {/* Animated network grid */}
+      <div className="absolute inset-0 network-grid-bg opacity-30" />
       
+      {/* Glowing orbs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] sm:w-[700px] lg:w-[1000px] h-[400px] sm:h-[600px] lg:h-[800px] bg-primary/6 rounded-full blur-[120px] sm:blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[200px] sm:w-[350px] h-[200px] sm:h-[350px] bg-neon-blue/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-neon-purple/4 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Floating particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-primary/30"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 4,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+          }}
+        />
+      ))}
+
       <div className="container-wide relative">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-center lg:text-left">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-2 sm:mb-3">
+              <span className="glow-badge-fire text-xs sm:text-sm mb-2 sm:mb-3">
                 <Rocket className="w-3 h-3 sm:w-4 sm:h-4" />
                 Launching 15th April 2026
               </span>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}>
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-full mb-4 sm:mb-6">
+              <span className="glow-badge text-xs sm:text-sm mb-4 sm:mb-6">
                 <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
                 Enterprise-Grade DDoS Protection Included
               </span>
@@ -83,40 +113,40 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10"
             >
+              <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
+                <span className="relative z-10 flex items-center gap-2">
+                  Deploy Server
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </Button>
               <Link to="/vps-plans" className="w-full sm:w-auto">
-                <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
-                  <span className="relative z-10 flex items-center gap-2">
-                    Explore VPS Plans
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Button>
-              </Link>
-              <Link to="/gaming-vps" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 border-border/50 hover:border-primary/50 hover:bg-primary/5 w-full sm:w-auto h-11 sm:h-12">
-                  Gaming VPS
+                <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 border-neon-blue/30 text-neon-blue hover:border-neon-blue/60 hover:bg-neon-blue/5 w-full sm:w-auto h-11 sm:h-12">
+                  Explore Plans
                 </Button>
               </Link>
             </motion.div>
 
+            {/* Feature badges */}
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3"
             >
-              <div className="flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span>99.9% Uptime</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-primary" />
-                <span>DDoS Protected</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-primary" />
-                <span>NVMe Storage</span>
-              </div>
+              {featureBadges.map((badge, i) => (
+                <motion.div
+                  key={badge.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                  className="glow-card px-3 py-2 flex items-center gap-2 !rounded-lg"
+                >
+                  <badge.icon className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-xs font-medium text-foreground/80">{badge.label}</span>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
 
+          {/* Logo visual */}
           <motion.div
             initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
             className="relative hidden lg:block"
@@ -134,11 +164,12 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
+        {/* Stats bar card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-12 sm:mt-16 lg:mt-20"
         >
-          <div className="glass-card p-4 sm:p-6 rounded-2xl">
+          <div className="glow-card p-4 sm:p-6 !rounded-2xl">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
               {[
                 { value: "99.9%", label: "Uptime SLA", sublabel: "Enterprise reliability" },

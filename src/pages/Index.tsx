@@ -1,13 +1,12 @@
 import SEOHead from "@/components/SEOHead";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/home/HeroSection";
+import ReviewsSection from "@/components/home/ReviewsSection";
+import ServicesGrid from "@/components/home/ServicesGrid";
+import GamesSection from "@/components/home/GamesSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
-import CompanySection from "@/components/home/CompanySection";
-import TechStackSection from "@/components/home/TechStackSection";
-import UseCasesSection from "@/components/home/UseCasesSection";
-import ComparisonPreview from "@/components/home/ComparisonPreview";
-import TrustSection from "@/components/home/TrustSection";
 import PricingPreview from "@/components/home/PricingPreview";
+import InfrastructureSection from "@/components/home/InfrastructureSection";
 import CTASection from "@/components/home/CTASection";
 
 export default function Index() {
@@ -68,13 +67,12 @@ export default function Index() {
       />
       <Layout>
         <HeroSection />
-        <CompanySection />
+        <ReviewsSection />
+        <ServicesGrid />
+        <GamesSection />
         <FeaturesSection />
-        <TechStackSection />
-        <UseCasesSection />
-        <ComparisonPreview />
-        <TrustSection />
         <PricingPreview />
+        <InfrastructureSection />
         <CTASection />
       </Layout>
     </>
