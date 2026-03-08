@@ -79,8 +79,8 @@ export default function RDP() {
   return (
     <>
       <SEOHead
-        title="Cloud RDP Servers in India | High Performance Remote Desktop Hosting — Cloud on Fire"
-        description="High performance cloud RDP servers in India powered by Intel Xeon Platinum processors and NVMe SSD storage. Access a powerful Windows cloud desktop from anywhere for development, trading, and editing."
+        title="Cloud RDP Servers | Remote Desktop Hosting | Cloud on Fire"
+        description="High performance remote desktop servers powered by Intel Xeon Platinum processors for development, remote work, and software workloads."
         keywords="cloud RDP India, remote desktop hosting, Windows RDP server, cloud desktop India, high performance RDP, remote workstation India, Cloud on Fire RDP"
         canonical="/rdp"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"

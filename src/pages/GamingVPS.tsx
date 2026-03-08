@@ -10,6 +10,7 @@ import {
   ArrowRight, Activity, Server, Sword, Users, Gauge,
 } from "lucide-react";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
+import ServerPlanCalculator from "@/components/tools/ServerPlanCalculator";
 import minecraftImg from "@/assets/game-minecraft.jpg";
 import fivemImg from "@/assets/game-fivem.jpg";
 import hytaleImg from "@/assets/game-hytale.jpg";
@@ -186,8 +187,8 @@ export default function GamingVPS() {
   return (
     <>
       <SEOHead
-        title="Gaming VPS Hosting for Minecraft & FiveM | Low Latency Servers India — Cloud on Fire"
-        description="Gaming VPS optimized for multiplayer performance. Host Minecraft, FiveM, Hytale, and modded game servers on Intel Xeon Platinum with advanced DDoS protection. Starting at ₹299/month in India."
+        title="Gaming VPS Hosting | Minecraft, FiveM, Multiplayer Servers | Cloud on Fire"
+        description="High performance gaming VPS optimized for multiplayer servers including Minecraft, FiveM and modded game environments."
         keywords="gaming VPS India, Minecraft server hosting India, FiveM server hosting, game server India, multiplayer VPS, low latency gaming VPS, DDoS protected game server, Hytale server hosting, Cloud on Fire gaming"
         canonical="/gaming-vps"
         ogType="product"
@@ -529,6 +530,12 @@ export default function GamingVPS() {
             </motion.div>
           </div>
         </section>
+
+        {/* Gradient divider */}
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
+        {/* Plan Calculator */}
+        <ServerPlanCalculator variant="gaming" />
 
         {/* Gradient divider */}
         <div className="gradient-divider-fire mx-auto max-w-4xl" />

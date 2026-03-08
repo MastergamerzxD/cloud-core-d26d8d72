@@ -6,6 +6,8 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import WorldMap from "@/components/infrastructure/WorldMap";
+import InfraTransparencyCards from "@/components/infrastructure/InfraTransparencyCards";
+import LatencyTestTool from "@/components/tools/LatencyTestTool";
 
 const specs = [
   {
@@ -51,9 +53,9 @@ export default function Infrastructure() {
   return (
     <>
       <SEOHead
-        title="VPS Infrastructure India — Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire"
-        description="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi and Mumbai. Intel Xeon Platinum processors, NVMe Gen4 storage, 10Gbps+ networking, and 1Tbps DDoS mitigation capacity."
-        keywords="VPS infrastructure India, Yotta data center, Intel Xeon VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware"
+        title="Cloud Infrastructure | Enterprise Hardware & Network | Cloud on Fire"
+        description="Explore the infrastructure behind Cloud on Fire including enterprise processors, NVMe storage, and advanced network architecture."
+        keywords="VPS infrastructure India, Yotta data center, Intel Xeon VPS, NVMe Gen4 VPS, Delhi data center, enterprise VPS hardware"
         canonical="/infrastructure"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
         jsonLd={[
@@ -211,6 +213,16 @@ export default function Infrastructure() {
             </div>
           </div>
         </section>
+
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
+        {/* Infrastructure Transparency Cards */}
+        <InfraTransparencyCards />
+
+        <div className="gradient-divider mx-auto max-w-4xl" />
+
+        {/* Latency Test Tool */}
+        <LatencyTestTool variant="full" />
 
         <div className="gradient-divider-fire mx-auto max-w-4xl" />
 

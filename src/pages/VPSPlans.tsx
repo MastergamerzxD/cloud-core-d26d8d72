@@ -9,6 +9,7 @@ import {
   Cpu, HardDrive, Shield, Server, Globe, Database, Code, Gamepad2, ArrowRight, Zap,
 } from "lucide-react";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
+import ServerPlanCalculator from "@/components/tools/ServerPlanCalculator";
 
 const plans = [
   {
@@ -126,8 +127,8 @@ export default function VPSPlans() {
   return (
     <>
       <SEOHead
-        title="High Performance VPS Hosting in India | NVMe Cloud Servers — Cloud on Fire"
-        description="Enterprise cloud VPS hosting in India starting from ₹199/month. Intel Xeon Platinum processors, NVMe SSD storage, advanced DDoS protection included. No hidden fees, no setup charges."
+        title="VPS Hosting in India | NVMe Cloud Servers | Cloud on Fire"
+        description="Deploy powerful VPS servers with NVMe storage and enterprise processors. Ideal for web applications, databases, and scalable workloads."
         keywords="VPS hosting India, cloud VPS India, cheap VPS India, NVMe VPS hosting, VPS plans India, high performance VPS, server hosting India, Cloud on Fire VPS"
         canonical="/vps-plans"
         ogType="product"
@@ -319,6 +320,12 @@ export default function VPSPlans() {
 
         {/* Gradient divider */}
         <div className="gradient-divider mx-auto max-w-4xl" />
+
+        {/* Plan Calculator */}
+        <ServerPlanCalculator variant="vps" />
+
+        {/* Gradient divider */}
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
 
         {/* Use Cases */}
         <section className="py-16 sm:py-20">
