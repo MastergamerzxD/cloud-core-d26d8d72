@@ -13,6 +13,7 @@ import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 import minecraftImg from "@/assets/game-minecraft.jpg";
 import fivemImg from "@/assets/game-fivem.jpg";
 import hytaleImg from "@/assets/game-hytale.jpg";
+import rustImg from "@/assets/game-rust.jpg";
 
 const gamingPlans = [
   {
@@ -141,6 +142,17 @@ const gameCards = [
     borderAccent: "border-cyan-500/30 hover:border-cyan-400/60",
     glowColor: "hover:shadow-[0_0_40px_hsl(187_92%_55%_/_0.2)]",
     iconColor: "text-cyan-400",
+  },
+  {
+    title: "Rust Servers",
+    image: rustImg,
+    alt: "Rust survival game server hosting on Cloud on Fire gaming VPS India with DDoS protection",
+    description: "Host large Rust maps with intense PvP, base building, and raids. DDoS-protected for uninterrupted gameplay.",
+    icon: Sword,
+    accent: "from-red-500/30 to-orange-600/20",
+    borderAccent: "border-red-500/30 hover:border-red-400/60",
+    glowColor: "hover:shadow-[0_0_40px_hsl(4_90%_58%_/_0.2)]",
+    iconColor: "text-red-400",
   },
 ];
 
@@ -314,7 +326,7 @@ export default function GamingVPS() {
               description="Host the most popular multiplayer games with enterprise infrastructure designed for gaming workloads."
             />
             
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 max-w-6xl mx-auto">
               {gameCards.map((card, index) => (
                 <motion.div
                   key={card.title}
@@ -556,7 +568,7 @@ export default function GamingVPS() {
                 Ready to Launch Your <span className="text-fire-gradient">Game Server?</span>
               </h2>
               <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-sm sm:text-base">
-                Deploy a high-performance gaming VPS in minutes. Built for Minecraft, FiveM, and more.
+                Deploy a high-performance gaming VPS in minutes. Built for Minecraft, FiveM, Rust, and more.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button className="btn-fire w-full sm:w-auto h-12 px-8 text-base" size="lg" onClick={openPopup}>
@@ -570,6 +582,13 @@ export default function GamingVPS() {
                     Compare VPS Plans
                   </Button>
                 </Link>
+              </div>
+              {/* Internal links */}
+              <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                <Link to="/vps-plans" className="hover:text-primary transition-colors">Standard VPS hosting →</Link>
+                <Link to="/rdp" className="hover:text-primary transition-colors">Cloud RDP servers →</Link>
+                <Link to="/ddos-protection" className="hover:text-primary transition-colors">DDoS protection details →</Link>
+                <Link to="/infrastructure" className="hover:text-primary transition-colors">Our infrastructure →</Link>
               </div>
             </motion.div>
           </div>

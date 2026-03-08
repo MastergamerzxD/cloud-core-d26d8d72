@@ -253,17 +253,25 @@ export default function About() {
                 for their hosting needs.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" className="btn-fire w-full sm:w-auto h-12 px-8" onClick={openPopup}>
-                  <span className="relative z-10 flex items-center gap-2">
-                    View Plans
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Button>
-                <Link to="/contact">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 border-neon-blue/30 text-neon-blue hover:bg-neon-blue/10 hover:border-neon-blue/50">
-                    Contact Us
+                <Link to="/vps-plans">
+                  <Button size="lg" className="btn-fire w-full sm:w-auto h-12 px-8">
+                    <span className="relative z-10 flex items-center gap-2">
+                      View VPS Hosting Plans
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
                   </Button>
                 </Link>
+                <Link to="/gaming-vps">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50">
+                    Explore Gaming VPS
+                  </Button>
+                </Link>
+              </div>
+              <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                <Link to="/why-us" className="hover:text-primary transition-colors">Why choose us →</Link>
+                <Link to="/infrastructure" className="hover:text-primary transition-colors">Our infrastructure →</Link>
+                <Link to="/ddos-protection" className="hover:text-primary transition-colors">DDoS protection →</Link>
+                <Link to="/contact" className="hover:text-primary transition-colors">Contact us →</Link>
               </div>
             </motion.div>
           </div>

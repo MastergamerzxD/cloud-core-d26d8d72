@@ -8,11 +8,12 @@ const services = [
   {
     icon: Server,
     name: "VPS Hosting",
-    description: "Deploy high-performance cloud VPS for web apps, APIs, databases, and development workloads.",
+    description: "Deploy high-performance cloud VPS for web apps, APIs, databases, and development workloads. Starting at ₹199/month.",
     href: "/vps-plans",
     gradient: "from-neon-blue/20 to-neon-purple/10",
     iconColor: "text-neon-blue",
     iconBg: "bg-neon-blue/15 group-hover:bg-neon-blue/25",
+    anchor: "Explore VPS hosting plans",
   },
   {
     icon: Gamepad2,
@@ -22,6 +23,7 @@ const services = [
     gradient: "from-primary/20 to-fire-red/10",
     iconColor: "text-primary",
     iconBg: "bg-primary/15 group-hover:bg-primary/25",
+    anchor: "Explore gaming VPS hosting",
   },
   {
     icon: Monitor,
@@ -31,6 +33,7 @@ const services = [
     gradient: "from-neon-cyan/20 to-neon-blue/10",
     iconColor: "text-neon-cyan",
     iconBg: "bg-neon-cyan/15 group-hover:bg-neon-cyan/25",
+    anchor: "Explore cloud RDP servers",
   },
   {
     icon: Shield,
@@ -40,6 +43,7 @@ const services = [
     gradient: "from-neon-purple/20 to-neon-blue/10",
     iconColor: "text-neon-purple",
     iconBg: "bg-neon-purple/15 group-hover:bg-neon-purple/25",
+    anchor: "Learn about DDoS protection",
   },
 ];
 
@@ -74,7 +78,7 @@ export default function ServicesGrid() {
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">{service.name}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-5">{service.description}</p>
-                <Link to={service.href}>
+                <Link to={service.href} aria-label={service.anchor}>
                   <Button variant="ghost" size="sm" className="px-0 text-primary hover:text-primary/80 hover:bg-transparent group/btn">
                     Learn More
                     <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover/btn:translate-x-1" />
