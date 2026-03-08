@@ -112,6 +112,7 @@ const gameCards = [
   {
     title: "Minecraft Servers",
     image: minecraftImg,
+    alt: "Minecraft server hosting on Cloud on Fire gaming VPS India",
     description: "Host SMP worlds, modpacks, and large Minecraft communities with powerful server performance and low latency.",
     icon: Sword,
     accent: "from-green-500/30 to-emerald-600/20",
@@ -122,6 +123,7 @@ const gameCards = [
   {
     title: "FiveM Servers",
     image: fivemImg,
+    alt: "FiveM GTA RP server hosting on Cloud on Fire gaming VPS India",
     description: "Run high-performance FiveM servers with heavy scripts, custom maps, and large roleplay communities.",
     icon: Play,
     accent: "from-purple-500/30 to-cyan-500/20",
@@ -132,6 +134,7 @@ const gameCards = [
   {
     title: "Hytale Servers",
     image: hytaleImg,
+    alt: "Hytale game server hosting on Cloud on Fire gaming VPS India",
     description: "Prepare for the next generation sandbox multiplayer experience with powerful infrastructure optimized for Hytale worlds.",
     icon: Layers,
     accent: "from-cyan-500/30 to-blue-500/20",
@@ -171,25 +174,37 @@ export default function GamingVPS() {
   return (
     <>
       <SEOHead
-        title="Gaming VPS India - Minecraft, FiveM Server Hosting from ₹299/mo | Cloud on Fire"
-        description="Gaming VPS built for multiplayer performance. Host Minecraft, FiveM, GTA RP servers on Intel Xeon Platinum 8168 with advanced DDoS protection. Starting ₹299/month."
-        keywords="gaming VPS India, Minecraft server hosting, FiveM server, GTA RP hosting, game server India, multiplayer VPS"
+        title="Gaming VPS Hosting for Minecraft & FiveM | Low Latency Servers India — Cloud on Fire"
+        description="Gaming VPS optimized for multiplayer performance. Host Minecraft, FiveM, Hytale, and modded game servers on Intel Xeon Platinum with advanced DDoS protection. Starting at ₹299/month in India."
+        keywords="gaming VPS India, Minecraft server hosting India, FiveM server hosting, game server India, multiplayer VPS, low latency gaming VPS, DDoS protected game server, Hytale server hosting, Cloud on Fire gaming"
         canonical="/gaming-vps"
         ogType="product"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Product",
-          "name": "Cloud on Fire Gaming VPS",
-          "description": "Gaming VPS optimized for multiplayer game servers with advanced DDoS protection",
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "INR",
-            "lowPrice": "299",
-            "highPrice": "1999",
-            "offerCount": "6",
-            "availability": "https://schema.org/InStock"
-          }
-        }}
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "Cloud on Fire Gaming VPS",
+            description: "Gaming VPS hosting optimized for Minecraft, FiveM, and multiplayer game servers with advanced DDoS protection and low latency networking in India.",
+            brand: { "@type": "Brand", name: "Cloud on Fire" },
+            offers: {
+              "@type": "AggregateOffer",
+              priceCurrency: "INR",
+              lowPrice: "299",
+              highPrice: "1999",
+              offerCount: "6",
+              availability: "https://schema.org/PreOrder",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "Gaming VPS", item: "https://cloudonfire.com/gaming-vps" },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero - Gaming themed */}
@@ -285,7 +300,7 @@ export default function GamingVPS() {
                   <div className="relative h-44 sm:h-48 overflow-hidden">
                     <img 
                       src={card.image} 
-                      alt={card.title}
+                      alt={card.alt}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-t ${card.accent} to-transparent`} />

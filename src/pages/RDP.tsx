@@ -79,10 +79,19 @@ export default function RDP() {
   return (
     <>
       <SEOHead
-        title="High Performance RDP India - Cloud Desktop | Cloud on Fire"
-        description="High performance cloud RDP desktop powered by Intel Xeon Platinum 8168. Access a powerful cloud workstation from anywhere for development, trading, editing, and more."
-        keywords="RDP India, cloud desktop, remote desktop, Windows RDP, cloud workstation, high performance RDP"
+        title="Cloud RDP Servers in India | High Performance Remote Desktop Hosting — Cloud on Fire"
+        description="High performance cloud RDP servers in India powered by Intel Xeon Platinum processors and NVMe SSD storage. Access a powerful Windows cloud desktop from anywhere for development, trading, and editing."
+        keywords="cloud RDP India, remote desktop hosting, Windows RDP server, cloud desktop India, high performance RDP, remote workstation India, Cloud on Fire RDP"
         canonical="/rdp"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+            { "@type": "ListItem", position: 2, name: "Cloud RDP", item: "https://cloudonfire.com/rdp" },
+          ],
+        }}
       />
       <Layout>
         {/* Hero */}

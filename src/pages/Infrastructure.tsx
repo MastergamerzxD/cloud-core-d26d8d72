@@ -51,11 +51,11 @@ export default function Infrastructure() {
   return (
     <>
       <SEOHead
-        seoPrefix="infrastructure"
-        title="VPS Infrastructure India – Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire"
-        description="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi & Mumbai. Intel Xeon Platinum 8168 processors, NVMe Gen4 storage, 10Gbps+ network, 1Tbps DDoS scrubbing. Best VPS infrastructure in India."
-        keywords="Yotta data center India, VPS infrastructure India, Intel Platinum VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware, best VPS infrastructure"
+        title="VPS Infrastructure India — Yotta Tier-3+ Data Centers Delhi & Mumbai | Cloud on Fire"
+        description="Cloud on Fire operates from Yotta's Tier-3+ certified data centers in Delhi and Mumbai. Intel Xeon Platinum processors, NVMe Gen4 storage, 10Gbps+ networking, and 1Tbps DDoS mitigation capacity."
+        keywords="VPS infrastructure India, Yotta data center, Intel Xeon VPS, NVMe Gen4 VPS, Delhi data center, Mumbai data center, Tier 3 data center India, enterprise VPS hardware"
         canonical="/infrastructure"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
       />
       <Layout>
         {/* Hero */}

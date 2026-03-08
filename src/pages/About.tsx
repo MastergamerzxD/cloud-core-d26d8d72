@@ -51,11 +51,11 @@ export default function About() {
   return (
     <>
       <SEOHead
-        seoPrefix="about"
-        title="About Cloud on Fire – Best VPS Hosting Company in India | Our Story"
-        description="Cloud on Fire is India's performance-focused VPS hosting company. Enterprise-grade infrastructure accessible to developers and businesses. Founded to deliver the best hosting experience in India."
-        keywords="about Cloud on Fire, best VPS hosting company India, Indian hosting provider, VPS company India, Cloud on Fire story, who is Cloud on Fire"
+        title="About Cloud on Fire — India's Performance-Focused VPS Hosting Company"
+        description="Cloud on Fire is India's performance-focused VPS hosting company. Enterprise-grade infrastructure with Intel Xeon Platinum processors, NVMe storage, and DDoS protection — accessible to developers and businesses."
+        keywords="about Cloud on Fire, VPS hosting company India, Indian hosting provider, Cloud on Fire team, Cloud on Fire story"
         canonical="/about"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
       />
       <Layout>
         {/* Hero */}

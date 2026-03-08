@@ -126,25 +126,37 @@ export default function VPSPlans() {
   return (
     <>
       <SEOHead
-        title="VPS Plans India - Cloud VPS from ₹199/mo | Cloud on Fire"
-        description="Enterprise cloud VPS hosting in India starting from ₹199/month. Intel Xeon Platinum 8168 processors, NVMe storage, DDoS protection included. No hidden fees."
-        keywords="VPS plans India, cloud VPS hosting, cheap VPS India, VPS pricing, server hosting India"
+        title="High Performance VPS Hosting in India | NVMe Cloud Servers — Cloud on Fire"
+        description="Enterprise cloud VPS hosting in India starting from ₹199/month. Intel Xeon Platinum processors, NVMe SSD storage, advanced DDoS protection included. No hidden fees, no setup charges."
+        keywords="VPS hosting India, cloud VPS India, cheap VPS India, NVMe VPS hosting, VPS plans India, high performance VPS, server hosting India, Cloud on Fire VPS"
         canonical="/vps-plans"
         ogType="product"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Product",
-          "name": "Cloud on Fire VPS Plans",
-          "description": "Enterprise cloud VPS hosting powered by Intel Xeon Platinum 8168",
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "INR",
-            "lowPrice": "199",
-            "highPrice": "1899",
-            "offerCount": "6",
-            "availability": "https://schema.org/InStock"
-          }
-        }}
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "Cloud on Fire VPS Hosting",
+            description: "High performance cloud VPS hosting in India powered by Intel Xeon Platinum processors with NVMe SSD storage and DDoS protection.",
+            brand: { "@type": "Brand", name: "Cloud on Fire" },
+            offers: {
+              "@type": "AggregateOffer",
+              priceCurrency: "INR",
+              lowPrice: "199",
+              highPrice: "1899",
+              offerCount: "6",
+              availability: "https://schema.org/PreOrder",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
+              { "@type": "ListItem", position: 2, name: "VPS Plans", item: "https://cloudonfire.com/vps-plans" },
+            ],
+          },
+        ]}
       />
       <Layout>
         {/* Hero with animated background */}

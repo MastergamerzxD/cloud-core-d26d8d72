@@ -62,11 +62,11 @@ export default function Index() {
   return (
     <>
       <SEOHead
-        seoPrefix="home"
-        title="Cloud on Fire – Best VPS Hosting Company in India | Gaming VPS from ₹299/mo"
-        description="India's #1 high-performance VPS hosting provider. Gaming VPS from ₹299/month with enterprise DDoS protection up to 1Tbps, NVMe Gen4 storage, Yotta data centers, and 99.9% uptime. Best hosting company in India for Minecraft, FiveM, CS2, and web hosting."
-        keywords="best VPS hosting company in India, best hosting company in India, best game hosting company in India, gaming VPS India, cheap VPS India, DDoS protected VPS, cloud server India, game server hosting, Minecraft server hosting India, FiveM server hosting, CS2 server India, budget VPS, Delhi VPS hosting, Mumbai VPS, NVMe VPS India, Cloud on Fire, best VPS provider India, Indian VPS hosting"
+        title="Cloud on Fire — High Performance VPS Hosting in India | Gaming VPS & Cloud RDP"
+        description="Deploy powerful VPS servers in India with NVMe SSD storage, Intel Xeon Platinum processors, and advanced DDoS protection. Gaming VPS from ₹299/mo. Perfect for developers, gaming servers, and scalable cloud workloads."
+        keywords="VPS hosting India, gaming VPS India, Minecraft server hosting India, cloud VPS India, high performance VPS, DDoS protected VPS, cloud server India, game server hosting, best VPS hosting company in India, Cloud on Fire"
         canonical="/"
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
         jsonLd={homeJsonLd}
       />
       <Layout>
