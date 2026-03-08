@@ -112,6 +112,7 @@ const gameCards = [
   {
     title: "Minecraft Servers",
     image: minecraftImg,
+    alt: "Minecraft server hosting on Cloud on Fire gaming VPS India",
     description: "Host SMP worlds, modpacks, and large Minecraft communities with powerful server performance and low latency.",
     icon: Sword,
     accent: "from-green-500/30 to-emerald-600/20",
@@ -122,6 +123,7 @@ const gameCards = [
   {
     title: "FiveM Servers",
     image: fivemImg,
+    alt: "FiveM GTA RP server hosting on Cloud on Fire gaming VPS India",
     description: "Run high-performance FiveM servers with heavy scripts, custom maps, and large roleplay communities.",
     icon: Play,
     accent: "from-purple-500/30 to-cyan-500/20",
@@ -132,6 +134,7 @@ const gameCards = [
   {
     title: "Hytale Servers",
     image: hytaleImg,
+    alt: "Hytale game server hosting on Cloud on Fire gaming VPS India",
     description: "Prepare for the next generation sandbox multiplayer experience with powerful infrastructure optimized for Hytale worlds.",
     icon: Layers,
     accent: "from-cyan-500/30 to-blue-500/20",
@@ -297,7 +300,7 @@ export default function GamingVPS() {
                   <div className="relative h-44 sm:h-48 overflow-hidden">
                     <img 
                       src={card.image} 
-                      alt={card.title}
+                      alt={card.alt}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-t ${card.accent} to-transparent`} />
