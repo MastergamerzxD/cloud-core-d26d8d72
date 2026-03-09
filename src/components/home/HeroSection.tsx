@@ -19,6 +19,7 @@ const featureBadges = [
   { icon: Cpu, label: "Intel Xeon Platinum", color: "neon-blue" },
   { icon: HardDrive, label: "NVMe Gen4 SSD", color: "neon-cyan" },
   { icon: Shield, label: "DDoS Protection", color: "primary" },
+  { icon: Rocket, label: "Instant Deployment", color: "primary" },
 ];
 
 export default function HeroSection() {

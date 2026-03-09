@@ -8,6 +8,12 @@ import { Link } from "react-router-dom";
 import {
   Cpu, HardDrive, Shield, Monitor, Code, Play, TrendingUp, Gamepad2, Lock, Wifi, ArrowRight, Zap,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const rdpPlans = [
   {
@@ -257,6 +263,37 @@ export default function RDP() {
         </section>
 
         <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
+        {/* FAQ Section */}
+        <section className="py-16 sm:py-20">
+          <div className="container-wide max-w-3xl">
+            <SectionHeader
+              badge="FAQ"
+              title="RDP Questions"
+              description="Common questions about Cloud on Fire remote desktop servers."
+            />
+            <Accordion type="single" collapsible className="space-y-3">
+              {[
+                { q: "What is Cloud RDP?", a: "Cloud RDP is a remote desktop service that lets you access a powerful Windows cloud workstation from anywhere. Cloud on Fire RDP runs on Intel Xeon Platinum processors with NVMe storage and full administrator access." },
+                { q: "What can I use Cloud RDP for?", a: "Cloud RDP is ideal for coding and development, video editing, trading software, running business applications, and accessing a personal cloud desktop from any device." },
+                { q: "Is a Windows license included?", a: "Yes, all RDP plans include a licensed Windows Server installation with full administrator access at no additional cost." },
+                { q: "Can I install my own software?", a: "Yes, you get full administrator access to your cloud desktop. You can install any software that runs on Windows Server." },
+                { q: "How do I connect to my RDP server?", a: "You can connect using the built-in Remote Desktop Connection client on Windows, or any RDP client on macOS, Linux, iOS, or Android." },
+              ].map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="glow-card !rounded-xl px-6 border-border/30">
+                  <AccordionTrigger className="text-sm sm:text-base font-semibold text-foreground hover:no-underline py-4">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        <div className="gradient-divider mx-auto max-w-4xl" />
 
         {/* CTA */}
         <section className="section-padding relative overflow-hidden">
