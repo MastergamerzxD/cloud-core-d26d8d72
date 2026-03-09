@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import WorldMap from "@/components/infrastructure/WorldMap";
 import InfraTransparencyCards from "@/components/infrastructure/InfraTransparencyCards";
+import InfraArchitectureDiagram from "@/components/infrastructure/InfraArchitectureDiagram";
 import LatencyTestTool from "@/components/tools/LatencyTestTool";
 
 const specs = [
@@ -220,6 +221,11 @@ export default function Infrastructure() {
         <InfraTransparencyCards />
 
         <div className="gradient-divider mx-auto max-w-4xl" />
+
+        {/* Architecture Diagram */}
+        <InfraArchitectureDiagram />
+
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
 
         {/* Latency Test Tool */}
         <LatencyTestTool variant="full" />
