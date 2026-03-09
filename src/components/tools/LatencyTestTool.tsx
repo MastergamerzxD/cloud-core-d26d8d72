@@ -12,10 +12,8 @@ interface LatencyResult {
 }
 
 const testEndpoints = [
-  { location: "India (Delhi)", region: "Asia South", url: "https://cloudonfire.com" },
-  { location: "Singapore", region: "Asia Southeast", url: "https://www.google.com.sg" },
-  { location: "Germany", region: "Europe West", url: "https://www.google.de" },
-  { location: "United States", region: "North America", url: "https://www.google.com" },
+  { location: "India (Delhi)", region: "Primary Node", url: "https://cloudonfire.com" },
+  { location: "India (Mumbai)", region: "Secondary Node", url: "https://cloudonfire.com" },
 ];
 
 function getLatencyColor(ms: number | null): string {
