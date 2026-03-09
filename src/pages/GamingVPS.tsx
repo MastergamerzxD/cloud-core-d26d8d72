@@ -11,6 +11,12 @@ import {
 } from "lucide-react";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 import ServerPlanCalculator from "@/components/tools/ServerPlanCalculator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import minecraftImg from "@/assets/game-minecraft.jpg";
 import fivemImg from "@/assets/game-fivem.jpg";
 import hytaleImg from "@/assets/game-hytale.jpg";
@@ -561,6 +567,39 @@ export default function GamingVPS() {
 
         {/* Gradient divider */}
         <div className="gradient-divider mx-auto max-w-4xl" />
+
+        {/* FAQ Section */}
+        <section className="py-16 sm:py-20">
+          <div className="container-wide max-w-3xl">
+            <SectionHeader
+              badge="FAQ"
+              title="Gaming VPS Questions"
+              description="Common questions about hosting game servers on Cloud on Fire."
+            />
+            <Accordion type="single" collapsible className="space-y-3">
+              {[
+                { q: "Can I host a Minecraft server on Cloud on Fire?", a: "Yes. Cloud on Fire Gaming VPS is optimized for Minecraft server hosting. Our Intel Xeon Platinum processors deliver stable 20 TPS even with modpacks, plugins, and large player counts. Plans start at ₹299/month." },
+                { q: "Can I host a FiveM server on Cloud on Fire?", a: "Yes. Our Gaming VPS supports FiveM servers with heavy scripts, custom vehicles, and 64+ player slots. Advanced DDoS protection ensures your roleplay community stays online." },
+                { q: "What is a Gaming VPS?", a: "A Gaming VPS is a virtual private server optimized specifically for running multiplayer game servers. It includes unmetered bandwidth, advanced DDoS protection, and hardware tuned for real-time gaming workloads." },
+                { q: "Is DDoS protection included for gaming VPS?", a: "Yes, all Gaming VPS plans include advanced DDoS protection at no extra cost. Your game servers stay online during attacks with automatic traffic filtering." },
+                { q: "What games can I host?", a: "You can host Minecraft, FiveM (GTA RP), Hytale, Rust, CS2, ARK, Valheim, and any other game server that runs on Linux or Windows VPS." },
+                { q: "How quickly are game servers deployed?", a: "Gaming VPS servers are provisioned within minutes. You'll receive full root access to install and configure your game server software." },
+              ].map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="glow-card !rounded-xl px-6 border-border/30">
+                  <AccordionTrigger className="text-sm sm:text-base font-semibold text-foreground hover:no-underline py-4">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        {/* Gradient divider */}
+        <div className="gradient-divider-fire mx-auto max-w-4xl" />
 
         {/* CTA */}
         <section className="section-padding relative overflow-hidden">

@@ -10,6 +10,12 @@ import {
 } from "lucide-react";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 import ServerPlanCalculator from "@/components/tools/ServerPlanCalculator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const plans = [
   {
@@ -355,6 +361,39 @@ export default function VPSPlans() {
 
         {/* Gradient divider */}
         <div className="gradient-divider-fire mx-auto max-w-4xl" />
+
+        {/* FAQ Section */}
+        <section className="py-16 sm:py-20">
+          <div className="container-wide max-w-3xl">
+            <SectionHeader
+              badge="FAQ"
+              title="Frequently Asked Questions"
+              description="Common questions about our VPS hosting plans."
+            />
+            <Accordion type="single" collapsible className="space-y-3">
+              {[
+                { q: "What is a VPS server?", a: "A VPS (Virtual Private Server) is a virtualized server with dedicated CPU, RAM, and storage resources. Unlike shared hosting, your VPS operates independently, giving you full root access and the ability to install any software you need." },
+                { q: "What processor does Cloud on Fire VPS use?", a: "All Cloud on Fire VPS plans are powered by Intel Xeon Platinum 8168 processors with 24 cores, 48 threads, and turbo boost up to 3.7GHz — enterprise-grade CPUs designed for cloud infrastructure." },
+                { q: "Is DDoS protection included with VPS plans?", a: "Yes, all VPS plans include DDoS protection at no extra cost. Our infrastructure monitors and filters malicious traffic to keep your server online." },
+                { q: "What is the cheapest VPS plan available?", a: "The Starter VPS plan begins at ₹199/month and includes 2 vCPU cores, 4 GB DDR4 RAM, 30 GB NVMe storage, and DDoS protection." },
+                { q: "How quickly are servers deployed?", a: "VPS servers are provisioned and ready to use within minutes of order confirmation. You'll receive full root access credentials via email." },
+                { q: "Can I upgrade my VPS plan later?", a: "Yes, you can upgrade your VPS plan at any time. Resource upgrades are applied without data loss or extended downtime." },
+              ].map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="glow-card !rounded-xl px-6 border-border/30">
+                  <AccordionTrigger className="text-sm sm:text-base font-semibold text-foreground hover:no-underline py-4">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        {/* Gradient divider */}
+        <div className="gradient-divider mx-auto max-w-4xl" />
 
         {/* CTA */}
         <section className="section-padding relative overflow-hidden">
