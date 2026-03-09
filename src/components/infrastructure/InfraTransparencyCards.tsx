@@ -5,8 +5,8 @@ import SectionHeader from "@/components/ui/SectionHeader";
 const cards = [
   {
     icon: Cpu,
-    title: "Compute",
-    description: "Intel Xeon Platinum 8168 processors optimized for high performance workloads. 24 cores, 48 threads, and turbo boost up to 3.7 GHz deliver reliable compute power for every application.",
+    title: "Compute Infrastructure",
+    description: "Cloud on Fire servers are powered by Intel Xeon Platinum 8168 processors — enterprise-grade CPUs with 24 cores, 48 threads, and turbo boost up to 3.7 GHz. Designed for high-performance workloads and scalable cloud deployments.",
     color: "text-neon-blue",
     bg: "bg-neon-blue/10",
     border: "border-neon-blue/20",
@@ -14,8 +14,8 @@ const cards = [
   },
   {
     icon: HardDrive,
-    title: "Storage",
-    description: "High speed NVMe SSD storage optimized for low latency workloads. Enterprise-grade drives deliver sustained read and write performance with RAID protection for data integrity.",
+    title: "Storage Architecture",
+    description: "All servers use enterprise NVMe SSD storage designed for fast data access, low latency applications, and sustained I/O performance. RAID protection ensures data integrity across all workloads.",
     color: "text-neon-purple",
     bg: "bg-neon-purple/10",
     border: "border-neon-purple/20",
@@ -23,8 +23,8 @@ const cards = [
   },
   {
     icon: Network,
-    title: "Networking",
-    description: "Enterprise network backbone with advanced DDoS mitigation. Multiple Tier-1 transit providers with BGP-optimized routing ensure the lowest possible latency across India and beyond.",
+    title: "Network Protection",
+    description: "Infrastructure includes an enterprise network backbone with advanced DDoS mitigation at the network level. Multiple Tier-1 transit providers with BGP-optimized routing maintain service availability and low latency.",
     color: "text-neon-cyan",
     bg: "bg-neon-cyan/10",
     border: "border-neon-cyan/20",
@@ -37,9 +37,9 @@ export default function InfraTransparencyCards() {
     <section className="py-16 sm:py-20">
       <div className="container-wide">
         <SectionHeader
-          badge="Technology"
-          title="Real Infrastructure, Real Performance"
-          description="Transparent details about the technology powering Cloud on Fire."
+          badge="Infrastructure Transparency"
+          title="Built on Enterprise Hardware"
+          description="Cloud on Fire focuses on performance-driven infrastructure using enterprise hardware and optimized networking. No exaggerated claims — just clear technical capabilities."
         />
         <div className="grid sm:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
           {cards.map((card, index) => (
