@@ -7,15 +7,21 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// In-memory rate limit store
-const rateLimitMap = new Map<string, { count: number; windowStart: number }>();
+// Search engine crawler patterns - always allowed
+const CRAWLER_PATTERNS = [
+  /googlebot/i, /googlebot-image/i, /googlebot-mobile/i,
+  /google-inspectiontool/i, /adsbot-google/i, /mediapartners-google/i,
+  /bingbot/i, /msnbot/i, /duckduckbot/i, /applebot/i,
+  /yandexbot/i, /baiduspider/i, /slurp/i, /facebot/i,
+  /twitterbot/i, /linkedinbot/i, /pinterest/i,
+];
 
-// Known bot patterns
+// Known bot/suspicious patterns (for detection logging only)
 const BOT_PATTERNS = [
   /curl\//i, /wget\//i, /python-requests/i, /scrapy/i, /httpclient/i,
   /java\//i, /okhttp/i, /go-http-client/i, /headlesschrome/i,
   /phantomjs/i, /selenium/i, /puppeteer/i, /playwright/i,
-  /bot/i, /crawler/i, /spider/i, /scraper/i,
+  /scraper/i,
 ];
 
 serve(async (req) => {
@@ -35,19 +41,7 @@ serve(async (req) => {
                req.headers.get("x-real-ip") ||
                "unknown";
 
-    // --- Load settings ---
-    const { data: settings } = await supabaseAdmin
-      .from("site_settings")
-      .select("key, value")
-      .in("key", ["ddos_emergency_mode", "ddos_rate_limit_rpm", "ddos_auto_ban_minutes", "ddos_spike_threshold"]);
-
-    const cfg = (settings || []).reduce((a: any, r: any) => ({ ...a, [r.key]: r.value }), {});
-    const emergencyMode = cfg.ddos_emergency_mode === "true";
-    const rateWindow = 10_000; // 10s window
-    const rateMax = emergencyMode ? 5 : Math.max(1, Math.floor((parseInt(cfg.ddos_rate_limit_rpm) || 60) / 6));
-    const autoBanMs = (parseInt(cfg.ddos_auto_ban_minutes) || 5) * 60 * 1000;
-
-    // --- Check blocked IP ---
+    // --- Check MANUALLY blocked IP (admin-initiated only) ---
     const { data: blocked } = await supabaseAdmin
       .from("blocked_ips")
       .select("id, is_permanent, expires_at")
@@ -67,29 +61,7 @@ serve(async (req) => {
       }
     }
 
-    // --- Bot detection ---
-    const ua = user_agent || "";
-    if (!ua || BOT_PATTERNS.some((p) => p.test(ua))) {
-      // In emergency mode, block all bots. Otherwise, just log known bots.
-      if (emergencyMode || BOT_PATTERNS.some((p) => p.test(ua))) {
-        await supabaseAdmin.from("security_logs").insert({
-          event_type: "bot_blocked", ip_address: ip,
-          details: `Bot detected: ${ua.substring(0, 100)}`,
-        });
-        if (emergencyMode) {
-          await supabaseAdmin.from("blocked_ips").insert({
-            ip_address: ip, reason: "Bot detected (emergency mode)",
-            is_permanent: false, expires_at: new Date(Date.now() + autoBanMs).toISOString(),
-          });
-          return new Response(JSON.stringify({ blocked: true }), {
-            status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" },
-          });
-        }
-      }
-    }
-
-    // --- Check blocked country ---
-    // We'll do geo lookup first for country blocking
+    // --- Check MANUALLY blocked country ---
     let city = "Unknown", country = "Unknown", country_code = "", latitude = 0, longitude = 0;
     try {
       const geoResp = await fetch(`http://ip-api.com/json/${ip}?fields=city,country,countryCode,lat,lon`);
@@ -112,7 +84,7 @@ serve(async (req) => {
       if (blockedCountry) {
         await supabaseAdmin.from("security_logs").insert({
           event_type: "country_blocked", ip_address: ip,
-          details: `Blocked country: ${country} (${country_code})`,
+          details: `Blocked country (manual rule): ${country} (${country_code})`,
           country,
         });
         return new Response(JSON.stringify({ blocked: true, message: "Access restricted" }), {
@@ -121,27 +93,27 @@ serve(async (req) => {
       }
     }
 
-    // --- Rate limiting ---
-    const now = Date.now();
-    const entry = rateLimitMap.get(ip);
-    if (entry && (now - entry.windowStart) < rateWindow) {
-      entry.count++;
-      if (entry.count > rateMax) {
-        await supabaseAdmin.from("blocked_ips").insert({
-          ip_address: ip, reason: "Rate limit exceeded (auto-blocked)",
-          is_permanent: false, expires_at: new Date(now + autoBanMs).toISOString(),
-        });
-        await supabaseAdmin.from("security_logs").insert({
-          event_type: "rate_limit", ip_address: ip,
-          details: `Exceeded ${rateMax} requests in ${rateWindow / 1000}s`,
-        });
-        return new Response(JSON.stringify({ blocked: true }), {
-          status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-    } else {
-      rateLimitMap.set(ip, { count: 1, windowStart: now });
+    // --- Passive monitoring: detect crawlers and bots, log only, never block ---
+    const ua = user_agent || "";
+    const isCrawler = CRAWLER_PATTERNS.some((p) => p.test(ua));
+    const isBot = !isCrawler && BOT_PATTERNS.some((p) => p.test(ua));
+
+    if (isCrawler) {
+      await supabaseAdmin.from("security_logs").insert({
+        event_type: "crawler_detected", ip_address: ip,
+        details: `Search engine crawler: ${ua.substring(0, 150)}`,
+        page, country,
+      });
+    } else if (isBot || !ua) {
+      await supabaseAdmin.from("security_logs").insert({
+        event_type: "bot_detected", ip_address: ip,
+        details: `Bot/script detected: ${(ua || "empty user-agent").substring(0, 150)}`,
+        page, country,
+      });
     }
+
+    // --- Passive rate monitoring (log high activity, never block) ---
+    // No automatic rate limiting or IP banning
 
     // --- Device/browser parsing ---
     let device_type = "desktop";
