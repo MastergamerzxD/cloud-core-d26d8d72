@@ -13,9 +13,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Shield, Ban, Clock, Trash2, Plus, AlertTriangle, Activity, Zap,
-  Globe, Bot, Lock, XCircle, TrendingUp, MapPin
+  Globe, Bot, Lock, XCircle, TrendingUp, MapPin, Search, Eye
 } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { toast } from "@/hooks/use-toast";
 
 const COUNTRIES = [
@@ -43,11 +43,8 @@ export default function AdminDDoS() {
   const [blockedCountries, setBlockedCountries] = useState<any[]>([]);
   const [liveVisitors, setLiveVisitors] = useState<any[]>([]);
   const [emergencyMode, setEmergencyMode] = useState(false);
-  const [rateLimitRpm, setRateLimitRpm] = useState("60");
-  const [autoBanMinutes, setAutoBanMinutes] = useState("5");
-  const [spikeThreshold, setSpikeThreshold] = useState("200");
-  const [blockedOverTime, setBlockedOverTime] = useState<any[]>([]);
-  const [topSuspiciousIps, setTopSuspiciousIps] = useState<any[]>([]);
+  const [eventsOverTime, setEventsOverTime] = useState<any[]>([]);
+  const [topDetectedIps, setTopDetectedIps] = useState<any[]>([]);
 
   // Dialogs
   const [addIpOpen, setAddIpOpen] = useState(false);
@@ -92,9 +89,7 @@ export default function AdminDDoS() {
       supabase.from("security_logs").select("*").order("created_at", { ascending: false }).limit(200),
       supabase.from("blocked_countries").select("*").order("country_name"),
       supabase.from("visitor_sessions").select("*").gte("last_seen_at", fiveMinAgo).order("last_seen_at", { ascending: false }),
-      supabase.from("site_settings").select("key, value").in("key", [
-        "ddos_emergency_mode", "ddos_rate_limit_rpm", "ddos_auto_ban_minutes", "ddos_spike_threshold"
-      ]),
+      supabase.from("site_settings").select("key, value").in("key", ["ddos_emergency_mode"]),
     ]);
 
     setBlockedIps(blocked || []);
@@ -104,11 +99,8 @@ export default function AdminDDoS() {
 
     const s = (settings || []).reduce((acc: any, r: any) => ({ ...acc, [r.key]: r.value }), {});
     setEmergencyMode(s.ddos_emergency_mode === "true");
-    setRateLimitRpm(s.ddos_rate_limit_rpm || "60");
-    setAutoBanMinutes(s.ddos_auto_ban_minutes || "5");
-    setSpikeThreshold(s.ddos_spike_threshold || "200");
 
-    // Blocked over time (last 7 days)
+    // Events over time (last 7 days)
     const allLogs = logs || [];
     const days: any[] = [];
     for (let i = 6; i >= 0; i--) {
@@ -119,17 +111,17 @@ export default function AdminDDoS() {
       const end = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
       const count = allLogs.filter((l: any) => {
         const t = new Date(l.created_at);
-        return t >= start && t < end && (l.event_type === "rate_limit" || l.event_type === "ip_block" || l.event_type === "bot_blocked");
+        return t >= start && t < end;
       }).length;
-      days.push({ date: dayStr, blocked: count });
+      days.push({ date: dayStr, events: count });
     }
-    setBlockedOverTime(days);
+    setEventsOverTime(days);
 
-    // Top suspicious IPs
+    // Top detected IPs
     const ipCounts: Record<string, number> = {};
-    allLogs.filter((l: any) => l.event_type === "rate_limit" || l.event_type === "bot_blocked")
+    allLogs.filter((l: any) => l.event_type === "bot_detected" || l.event_type === "crawler_detected" || l.event_type === "suspicious_activity_detected")
       .forEach((l: any) => { ipCounts[l.ip_address || "unknown"] = (ipCounts[l.ip_address || "unknown"] || 0) + 1; });
-    setTopSuspiciousIps(
+    setTopDetectedIps(
       Object.entries(ipCounts).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([ip, count]) => ({ ip, count }))
     );
   }, [authenticated]);
@@ -150,18 +142,9 @@ export default function AdminDDoS() {
     await saveSetting("ddos_emergency_mode", String(newVal));
     await supabase.from("security_logs").insert({
       event_type: newVal ? "emergency_enabled" : "emergency_disabled",
-      details: `Emergency DDoS Protection Mode ${newVal ? "activated" : "deactivated"}`,
+      details: `Emergency Mode ${newVal ? "activated" : "deactivated"} (manual action only)`,
     });
-    toast({ title: newVal ? "Emergency Mode Activated" : "Emergency Mode Deactivated" });
-  };
-
-  const saveRateLimits = async () => {
-    await Promise.all([
-      saveSetting("ddos_rate_limit_rpm", rateLimitRpm),
-      saveSetting("ddos_auto_ban_minutes", autoBanMinutes),
-      saveSetting("ddos_spike_threshold", spikeThreshold),
-    ]);
-    toast({ title: "Rate Limits Saved" });
+    toast({ title: newVal ? "Emergency Mode Activated" : "Emergency Mode Deactivated", description: "Manual blocking controls only." });
   };
 
   const blockIp = async () => {
@@ -214,16 +197,16 @@ export default function AdminDDoS() {
 
   const handleTimeoutVisitor = async (ip: string) => {
     await supabase.from("blocked_ips").insert({
-      ip_address: ip, reason: "Temporary timeout", is_permanent: false,
-      expires_at: new Date(Date.now() + parseInt(autoBanMinutes) * 60000).toISOString(),
+      ip_address: ip, reason: "Temporary timeout (manual)", is_permanent: false,
+      expires_at: new Date(Date.now() + 5 * 60000).toISOString(),
     });
-    toast({ title: "Timeout Applied", description: `${ip} blocked for ${autoBanMinutes} min` });
+    toast({ title: "Timeout Applied", description: `${ip} blocked for 5 min` });
     loadData();
   };
 
   const handleTerminate = async (sessionId: string, ip: string) => {
     await supabase.from("visitor_sessions").delete().eq("session_id", sessionId);
-    await supabase.from("security_logs").insert({ event_type: "session_terminate", ip_address: ip, details: `Session terminated` });
+    await supabase.from("security_logs").insert({ event_type: "session_terminate", ip_address: ip, details: "Session terminated" });
     toast({ title: "Session Terminated" });
     loadData();
   };
@@ -231,12 +214,20 @@ export default function AdminDDoS() {
   const filteredLogs = securityLogs.filter((l) => {
     if (!logFilter) return true;
     const q = logFilter.toLowerCase();
-    return (l.ip_address || "").toLowerCase().includes(q) || (l.details || "").toLowerCase().includes(q);
+    return (l.ip_address || "").toLowerCase().includes(q) || (l.details || "").toLowerCase().includes(q) || (l.event_type || "").toLowerCase().includes(q);
   });
 
   const activeBans = blockedIps.filter((b) => b.is_permanent || !b.expires_at || new Date(b.expires_at) > new Date());
-  const rateLimitEvents = securityLogs.filter((l) => l.event_type === "rate_limit").length;
-  const botEvents = securityLogs.filter((l) => l.event_type === "bot_blocked").length;
+  const botEvents = securityLogs.filter((l) => l.event_type === "bot_detected").length;
+  const crawlerEvents = securityLogs.filter((l) => l.event_type === "crawler_detected").length;
+  const crawlerLogs = securityLogs.filter((l) => l.event_type === "crawler_detected");
+
+  const getEventBadgeVariant = (eventType: string) => {
+    if (eventType === "crawler_detected") return "secondary" as const;
+    if (eventType === "bot_detected" || eventType === "suspicious_activity_detected") return "default" as const;
+    if (eventType === "ip_block" || eventType === "country_blocked" || eventType === "emergency_enabled") return "destructive" as const;
+    return "secondary" as const;
+  };
 
   // Password Gate
   if (!authenticated) {
@@ -272,13 +263,22 @@ export default function AdminDDoS() {
   return (
     <AdminLayout>
       <div className="space-y-6">
+        {/* Passive Mode Banner */}
+        <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 flex items-center gap-3">
+          <Eye className="h-5 w-5 text-primary shrink-0" />
+          <div className="flex-1">
+            <p className="font-semibold text-primary">Passive Monitoring Mode</p>
+            <p className="text-sm text-muted-foreground">Traffic is monitored and logged but never automatically blocked. Only manual admin actions will block traffic.</p>
+          </div>
+        </div>
+
         {/* Emergency Banner */}
         {emergencyMode && (
           <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-4 flex items-center gap-3">
             <AlertTriangle className="h-5 w-5 text-destructive shrink-0" />
             <div className="flex-1">
-              <p className="font-semibold text-destructive">Emergency DDoS Protection Mode Active</p>
-              <p className="text-sm text-destructive/80">Strict rate limiting, aggressive bot filtering, and reduced thresholds are in effect.</p>
+              <p className="font-semibold text-destructive">Emergency Mode Active</p>
+              <p className="text-sm text-destructive/80">Manual blocking controls are highlighted. No automatic blocking is applied.</p>
             </div>
             <Button variant="outline" size="sm" onClick={toggleEmergency}>Disable</Button>
           </div>
@@ -302,10 +302,10 @@ export default function AdminDDoS() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Protection</p>
-                  <p className="text-lg font-bold text-foreground mt-1">{emergencyMode ? "Emergency" : "Active"}</p>
+                  <p className="text-xs text-muted-foreground">Mode</p>
+                  <p className="text-lg font-bold text-foreground mt-1">Monitoring</p>
                 </div>
-                <Shield className="h-7 w-7 text-primary opacity-80" />
+                <Eye className="h-7 w-7 text-primary opacity-80" />
               </div>
             </CardContent>
           </Card>
@@ -313,7 +313,7 @@ export default function AdminDDoS() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Blocked IPs</p>
+                  <p className="text-xs text-muted-foreground">Manual Blocks</p>
                   <p className="text-lg font-bold text-foreground mt-1">{activeBans.length}</p>
                 </div>
                 <Ban className="h-7 w-7 text-destructive opacity-80" />
@@ -324,10 +324,10 @@ export default function AdminDDoS() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Rate Limited</p>
-                  <p className="text-lg font-bold text-foreground mt-1">{rateLimitEvents}</p>
+                  <p className="text-xs text-muted-foreground">Bots Detected</p>
+                  <p className="text-lg font-bold text-foreground mt-1">{botEvents}</p>
                 </div>
-                <Clock className="h-7 w-7 text-primary opacity-80" />
+                <Bot className="h-7 w-7 text-primary opacity-80" />
               </div>
             </CardContent>
           </Card>
@@ -335,10 +335,10 @@ export default function AdminDDoS() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Bots Blocked</p>
-                  <p className="text-lg font-bold text-foreground mt-1">{botEvents}</p>
+                  <p className="text-xs text-muted-foreground">Crawlers Detected</p>
+                  <p className="text-lg font-bold text-foreground mt-1">{crawlerEvents}</p>
                 </div>
-                <Bot className="h-7 w-7 text-primary opacity-80" />
+                <Search className="h-7 w-7 text-green-500 opacity-80" />
               </div>
             </CardContent>
           </Card>
@@ -358,29 +358,29 @@ export default function AdminDDoS() {
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="bg-card border-border">
-            <CardHeader><CardTitle className="text-lg">Blocked Requests (7 Days)</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-lg">Security Events (7 Days)</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={blockedOverTime}>
+                <BarChart data={eventsOverTime}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis dataKey="date" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }} />
                   <YAxis tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }} />
                   <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, color: "hsl(var(--foreground))" }} />
-                  <Bar dataKey="blocked" fill="hsl(4, 90%, 58%)" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="events" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
           <Card className="bg-card border-border">
-            <CardHeader><CardTitle className="text-lg">Top Suspicious IPs</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-lg">Top Detected IPs</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={topSuspiciousIps} layout="vertical">
+                <BarChart data={topDetectedIps} layout="vertical">
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis type="number" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }} />
                   <YAxis type="category" dataKey="ip" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 10 }} width={120} />
                   <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, color: "hsl(var(--foreground))" }} />
-                  <Bar dataKey="count" fill="hsl(24, 95%, 53%)" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="count" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -392,7 +392,7 @@ export default function AdminDDoS() {
             <TabsTrigger value="ips">IP Management</TabsTrigger>
             <TabsTrigger value="live">Live Visitors</TabsTrigger>
             <TabsTrigger value="countries">Country Blocking</TabsTrigger>
-            <TabsTrigger value="rate">Rate Limiting</TabsTrigger>
+            <TabsTrigger value="crawlers">Search Engine Crawlers</TabsTrigger>
             <TabsTrigger value="logs">Security Log</TabsTrigger>
           </TabsList>
 
@@ -400,7 +400,7 @@ export default function AdminDDoS() {
           <TabsContent value="ips">
             <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-lg">Blocked IP Addresses</CardTitle>
+                <CardTitle className="text-lg">Manually Blocked IP Addresses</CardTitle>
                 <Dialog open={addIpOpen} onOpenChange={setAddIpOpen}>
                   <DialogTrigger asChild>
                     <Button size="sm"><Plus className="h-4 w-4 mr-1" /> Block IP</Button>
@@ -419,7 +419,7 @@ export default function AdminDDoS() {
               </CardHeader>
               <CardContent>
                 {activeBans.length === 0 ? (
-                  <p className="text-muted-foreground text-sm text-center py-8">No blocked IPs</p>
+                  <p className="text-muted-foreground text-sm text-center py-8">No manually blocked IPs</p>
                 ) : (
                   <div className="overflow-x-auto">
                     <Table>
@@ -521,7 +521,7 @@ export default function AdminDDoS() {
           <TabsContent value="countries">
             <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-lg">Country Blocking</CardTitle>
+                <CardTitle className="text-lg">Country Blocking (Manual)</CardTitle>
                 <div className="flex items-center gap-2">
                   <Select value={addCountryCode} onValueChange={setAddCountryCode}>
                     <SelectTrigger className="w-[200px]"><SelectValue placeholder="Select country" /></SelectTrigger>
@@ -553,40 +553,51 @@ export default function AdminDDoS() {
             </Card>
           </TabsContent>
 
-          {/* Rate Limiting */}
-          <TabsContent value="rate">
+          {/* Search Engine Crawlers */}
+          <TabsContent value="crawlers">
             <Card className="bg-card border-border">
-              <CardHeader><CardTitle className="text-lg">Rate Limiting Configuration</CardTitle></CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <Label>Max Requests per IP per Minute</Label>
-                    <Input type="number" value={rateLimitRpm} onChange={(e) => setRateLimitRpm(e.target.value)} min="1" />
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Search className="h-5 w-5 text-green-500" />
+                  Search Engine Crawlers
+                </CardTitle>
+                <p className="text-sm text-muted-foreground">Crawlers are always allowed and never blocked automatically.</p>
+              </CardHeader>
+              <CardContent>
+                {crawlerLogs.length === 0 ? (
+                  <p className="text-muted-foreground text-sm text-center py-8">No crawler activity recorded yet</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Crawler Type</TableHead>
+                          <TableHead>IP Address</TableHead>
+                          <TableHead>Page Accessed</TableHead>
+                          <TableHead>Last Crawl</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {crawlerLogs.map((l) => {
+                          const crawlerName = (l.details || "").replace("Search engine crawler: ", "").split("/")[0].split(" ")[0] || "Unknown";
+                          return (
+                            <TableRow key={l.id}>
+                              <TableCell>
+                                <Badge variant="secondary" className="text-xs">
+                                  <Search className="h-3 w-3 mr-1" />
+                                  {crawlerName}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="font-mono text-xs">{l.ip_address || "—"}</TableCell>
+                              <TableCell className="text-sm">{l.page || "—"}</TableCell>
+                              <TableCell className="text-xs text-muted-foreground">{new Date(l.created_at).toLocaleString()}</TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
                   </div>
-                  <div>
-                    <Label>Auto-ban Duration (minutes)</Label>
-                    <Input type="number" value={autoBanMinutes} onChange={(e) => setAutoBanMinutes(e.target.value)} min="1" />
-                  </div>
-                  <div>
-                    <Label>Spike Threshold (requests/min)</Label>
-                    <Input type="number" value={spikeThreshold} onChange={(e) => setSpikeThreshold(e.target.value)} min="10" />
-                  </div>
-                </div>
-                <Button onClick={saveRateLimits}>Save Rate Limits</Button>
-
-                <div className="border-t border-border pt-4 mt-4">
-                  <h3 className="font-semibold text-foreground mb-2">Bot Detection</h3>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Automated scripts, scraping tools, and unknown user agents are automatically detected and blocked.
-                    Events are logged in the Security Log tab.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">curl / wget detection</Badge>
-                    <Badge variant="secondary">Headless browser detection</Badge>
-                    <Badge variant="secondary">Empty user-agent blocking</Badge>
-                    <Badge variant="secondary">Known bot pattern matching</Badge>
-                  </div>
-                </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -596,7 +607,7 @@ export default function AdminDDoS() {
             <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-lg">Security Event Log</CardTitle>
-                <Input placeholder="Filter by IP or details..." value={logFilter} onChange={(e) => setLogFilter(e.target.value)} className="max-w-xs" />
+                <Input placeholder="Filter by IP, event, or details..." value={logFilter} onChange={(e) => setLogFilter(e.target.value)} className="max-w-xs" />
               </CardHeader>
               <CardContent>
                 {filteredLogs.length === 0 ? (
@@ -617,10 +628,7 @@ export default function AdminDDoS() {
                           <TableRow key={l.id}>
                             <TableCell className="text-xs text-muted-foreground whitespace-nowrap">{new Date(l.created_at).toLocaleString()}</TableCell>
                             <TableCell>
-                              <Badge variant={
-                                l.event_type === "rate_limit" || l.event_type === "bot_blocked" ? "destructive" :
-                                l.event_type === "emergency_enabled" ? "destructive" : "secondary"
-                              }>
+                              <Badge variant={getEventBadgeVariant(l.event_type)}>
                                 {l.event_type}
                               </Badge>
                             </TableCell>
