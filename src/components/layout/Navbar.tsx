@@ -38,6 +38,7 @@ const navigation = [
       { name: "Status", href: "/status" },
     ],
   },
+  { name: "Pre-Order", href: "https://shop.cloudonfire.com", external: true, highlight: true },
 ];
 
 export default function Navbar() {

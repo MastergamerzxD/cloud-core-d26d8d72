@@ -1,68 +1,46 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { X, Megaphone } from "lucide-react";
+import { useState } from "react";
+import { X, Rocket, ExternalLink } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function AnnouncementBanner() {
-  const [announcements, setAnnouncements] = useState<any[]>([]);
-  const [dismissed, setDismissed] = useState<string[]>([]);
+  const [dismissed, setDismissed] = useState(false);
 
-  useEffect(() => {
-    const load = async () => {
-      const { data } = await supabase
-        .from("announcements")
-        .select("*")
-        .eq("status", "active")
-        .order("created_at", { ascending: false })
-        .limit(3);
-      setAnnouncements(data || []);
-    };
-    load();
-
-    // Listen for realtime changes
-    const channel = supabase
-      .channel("public:announcements")
-      .on("postgres_changes", { event: "*", schema: "public", table: "announcements" }, () => {
-        load();
-      })
-      .subscribe();
-
-    return () => { supabase.removeChannel(channel); };
-  }, []);
-
-  const visible = announcements.filter((a) => !dismissed.includes(a.id));
-
-  if (visible.length === 0) return null;
+  if (dismissed) return null;
 
   return (
     <div className="fixed top-16 md:top-20 left-0 right-0 z-40">
-      <AnimatePresence>
-        {visible.map((ann) => (
-          <motion.div
-            key={ann.id}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="bg-primary/90 backdrop-blur-sm text-primary-foreground"
-          >
-            <div className="container-wide flex items-center justify-between py-2 px-4">
-              <div className="flex items-center gap-2 text-sm">
-                <Megaphone className="h-4 w-4 shrink-0" />
-                <span className="font-medium">{ann.title}</span>
-                {ann.description && (
-                  <span className="hidden sm:inline text-primary-foreground/80">— {ann.description}</span>
-                )}
-              </div>
-              <button
-                onClick={() => setDismissed((prev) => [...prev, ann.id])}
-                className="p-1 hover:bg-primary-foreground/20 rounded transition-colors shrink-0"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-          </motion.div>
-        ))}
-      </AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="bg-gradient-to-r from-primary/90 via-primary to-primary/90 backdrop-blur-sm text-primary-foreground"
+      >
+        <div className="container-wide flex items-center justify-between py-2 px-4">
+          <div className="flex items-center gap-2 text-sm flex-1 min-w-0">
+            <Rocket className="h-4 w-4 shrink-0" />
+            <span className="font-semibold truncate">
+              🚀 Pre-Orders Are Now Live — Get 40% OFF with Code <span className="font-black tracking-wide">PREORDER40</span>
+            </span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0 ml-3">
+            <a
+              href="https://shop.cloudonfire.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full bg-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors"
+            >
+              Start Pre-Order
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <button
+              onClick={() => setDismissed(true)}
+              className="p-1 hover:bg-primary-foreground/20 rounded transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
