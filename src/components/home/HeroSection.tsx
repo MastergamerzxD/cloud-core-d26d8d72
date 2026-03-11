@@ -69,10 +69,12 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-center lg:text-left">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <span className="glow-badge-fire text-xs sm:text-sm mb-2 sm:mb-3">
-                <Rocket className="w-3 h-3 sm:w-4 sm:h-4" />
-                Launching 15th April 2026
-              </span>
+              <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="inline-block">
+                <span className="glow-badge-fire text-xs sm:text-sm mb-2 sm:mb-3 cursor-pointer hover:scale-105 transition-transform">
+                  <Rocket className="w-3 h-3 sm:w-4 sm:h-4" />
+                  🔥 Pre-Orders Now Live — 40% OFF with PREORDER40
+                </span>
+              </a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}>
