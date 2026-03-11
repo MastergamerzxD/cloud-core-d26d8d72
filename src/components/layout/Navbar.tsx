@@ -84,6 +84,15 @@ export default function Navbar() {
                     {item.name}
                     <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === item.name ? "rotate-180" : ""}`} />
                   </button>
+                ) : item.external ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer"
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      item.highlight
+                        ? "text-primary font-bold animate-pulse hover:text-primary/80"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}>
+                    {item.name}
+                  </a>
                 ) : (
                   <Link to={item.href}
                     className={`px-4 py-2 text-sm font-medium transition-colors ${
