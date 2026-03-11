@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 import logoSymbol from "@/assets/logo-symbol.png";
@@ -38,7 +38,6 @@ const navigation = [
       { name: "Status", href: "/status" },
     ],
   },
-  { name: "Pre-Order", href: "https://shop.cloudonfire.com", external: true, highlight: true },
 ];
 
 export default function Navbar() {
@@ -84,15 +83,6 @@ export default function Navbar() {
                     {item.name}
                     <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === item.name ? "rotate-180" : ""}`} />
                   </button>
-                ) : item.external ? (
-                  <a href={item.href} target="_blank" rel="noopener noreferrer"
-                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      item.highlight
-                        ? "text-primary font-bold animate-pulse hover:text-primary/80"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}>
-                    {item.name}
-                  </a>
                 ) : (
                   <Link to={item.href}
                     className={`px-4 py-2 text-sm font-medium transition-colors ${
@@ -118,14 +108,44 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
             <Link to="/contact">
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground">Contact Sales</Button>
+              <Button variant="ghost" className="text-muted-foreground hover:text-foreground text-sm">Contact Sales</Button>
             </Link>
-            <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer">
-              <Button className="btn-fire">
-                <span className="relative z-10">Pre-Order Now</span>
-              </Button>
+            <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="relative group">
+              <motion.div
+                animate={{ boxShadow: [
+                  "0 0 15px hsl(24 95% 53% / 0.3), 0 0 30px hsl(24 95% 53% / 0.1)",
+                  "0 0 25px hsl(24 95% 53% / 0.5), 0 0 50px hsl(24 95% 53% / 0.2)",
+                  "0 0 15px hsl(24 95% 53% / 0.3), 0 0 30px hsl(24 95% 53% / 0.1)",
+                ]}}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-lg"
+              >
+                <Button
+                  className="relative overflow-hidden px-5 py-2.5 h-11 text-sm font-bold rounded-lg transition-transform duration-200 hover:scale-105 border-0"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%), hsl(330 80% 55%))",
+                  }}
+                >
+                  <span className="relative z-10 flex items-center gap-2 text-white">
+                    <Rocket className="w-4 h-4" />
+                    Pre-Order Now
+                  </span>
+                  {/* Shimmer overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                </Button>
+              </motion.div>
+              {/* 40% OFF badge */}
+              <span
+                className="absolute -top-2.5 -right-2.5 px-2 py-0.5 text-[10px] font-black rounded-full text-white z-20 animate-bounce"
+                style={{
+                  background: "linear-gradient(135deg, hsl(142 70% 45%), hsl(142 70% 35%))",
+                  boxShadow: "0 2px 8px hsl(142 70% 45% / 0.4)",
+                }}
+              >
+                40% OFF
+              </span>
             </a>
           </div>
 
@@ -139,6 +159,24 @@ export default function Navbar() {
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }} className="lg:hidden overflow-hidden border-t border-border/50 bg-background/95 backdrop-blur-xl">
               <div className="py-3 sm:py-4 space-y-1 sm:space-y-2 max-h-[70vh] overflow-y-auto">
+                {/* Pre-Order CTA at the top of mobile menu */}
+                <div className="px-4 pb-3 border-b border-border/30 mb-2">
+                  <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="block relative">
+                    <Button
+                      className="w-full h-12 text-sm font-bold rounded-xl border-0 relative overflow-hidden"
+                      style={{
+                        background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%), hsl(330 80% 55%))",
+                        boxShadow: "0 0 20px hsl(24 95% 53% / 0.3), 0 0 40px hsl(24 95% 53% / 0.1)",
+                      }}
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+                        <Rocket className="w-4 h-4" />
+                        Pre-Order Now — 40% OFF
+                      </span>
+                    </Button>
+                  </a>
+                </div>
+
                 {navigation.map((item) => (
                   <div key={item.name}>
                     {item.children ? (
@@ -162,13 +200,6 @@ export default function Navbar() {
                           )}
                         </AnimatePresence>
                       </div>
-                    ) : item.external ? (
-                      <a href={item.href} target="_blank" rel="noopener noreferrer"
-                        className={`block px-4 py-2.5 sm:py-3 text-sm sm:text-base transition-colors ${
-                          item.highlight ? "text-primary font-bold" : "text-foreground hover:text-primary"
-                        }`}>
-                        {item.name}
-                      </a>
                     ) : (
                       <Link to={item.href} className="block px-4 py-2.5 sm:py-3 text-sm sm:text-base text-foreground hover:text-primary transition-colors">
                         {item.name}
@@ -176,15 +207,10 @@ export default function Navbar() {
                     )}
                   </div>
                 ))}
-                <div className="pt-3 sm:pt-4 px-4 space-y-2 sm:space-y-3 border-t border-border/30 mt-2">
+                <div className="pt-3 sm:pt-4 px-4 border-t border-border/30 mt-2">
                   <Link to="/contact" className="block">
                     <Button variant="outline" className="w-full h-10 sm:h-11 text-sm">Contact Sales</Button>
                   </Link>
-                  <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="block">
-                    <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
-                      <span className="relative z-10">Pre-Order Now</span>
-                    </Button>
-                  </a>
                 </div>
               </div>
             </motion.div>
