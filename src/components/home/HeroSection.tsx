@@ -122,12 +122,14 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10"
             >
-              <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
-                <span className="relative z-10 flex items-center gap-2">
-                  Deploy Server
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </Button>
+              <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
+                  <span className="relative z-10 flex items-center gap-2">
+                    Start Pre-Order
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Button>
+              </a>
               <Link to="/vps-plans" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 border-neon-blue/30 text-neon-blue hover:border-neon-blue/60 hover:bg-neon-blue/5 w-full sm:w-auto h-11 sm:h-12">
                   Explore Plans
