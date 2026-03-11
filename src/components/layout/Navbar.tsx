@@ -122,9 +122,11 @@ export default function Navbar() {
             <Link to="/contact">
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">Contact Sales</Button>
             </Link>
-            <Button className="btn-fire" onClick={openPopup}>
-              <span className="relative z-10">Get Started</span>
-            </Button>
+            <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer">
+              <Button className="btn-fire">
+                <span className="relative z-10">Pre-Order Now</span>
+              </Button>
+            </a>
           </div>
 
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 text-foreground">
