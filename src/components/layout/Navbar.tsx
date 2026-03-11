@@ -38,6 +38,7 @@ const navigation = [
       { name: "Status", href: "/status" },
     ],
   },
+  { name: "Pre-Order", href: "https://shop.cloudonfire.com", external: true, highlight: true },
 ];
 
 export default function Navbar() {
@@ -83,6 +84,15 @@ export default function Navbar() {
                     {item.name}
                     <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === item.name ? "rotate-180" : ""}`} />
                   </button>
+                ) : item.external ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer"
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      item.highlight
+                        ? "text-primary font-bold animate-pulse hover:text-primary/80"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}>
+                    {item.name}
+                  </a>
                 ) : (
                   <Link to={item.href}
                     className={`px-4 py-2 text-sm font-medium transition-colors ${
@@ -112,9 +122,11 @@ export default function Navbar() {
             <Link to="/contact">
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">Contact Sales</Button>
             </Link>
-            <Button className="btn-fire" onClick={openPopup}>
-              <span className="relative z-10">Get Started</span>
-            </Button>
+            <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer">
+              <Button className="btn-fire">
+                <span className="relative z-10">Pre-Order Now</span>
+              </Button>
+            </a>
           </div>
 
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 text-foreground">
@@ -150,6 +162,13 @@ export default function Navbar() {
                           )}
                         </AnimatePresence>
                       </div>
+                    ) : item.external ? (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer"
+                        className={`block px-4 py-2.5 sm:py-3 text-sm sm:text-base transition-colors ${
+                          item.highlight ? "text-primary font-bold" : "text-foreground hover:text-primary"
+                        }`}>
+                        {item.name}
+                      </a>
                     ) : (
                       <Link to={item.href} className="block px-4 py-2.5 sm:py-3 text-sm sm:text-base text-foreground hover:text-primary transition-colors">
                         {item.name}
@@ -161,9 +180,11 @@ export default function Navbar() {
                   <Link to="/contact" className="block">
                     <Button variant="outline" className="w-full h-10 sm:h-11 text-sm">Contact Sales</Button>
                   </Link>
-                  <Button className="w-full h-10 sm:h-11 text-sm btn-fire" onClick={openPopup}>
-                    <span className="relative z-10">Get Started</span>
-                  </Button>
+                  <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="block">
+                    <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
+                      <span className="relative z-10">Pre-Order Now</span>
+                    </Button>
+                  </a>
                 </div>
               </div>
             </motion.div>

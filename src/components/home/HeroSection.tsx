@@ -69,10 +69,12 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-center lg:text-left">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <span className="glow-badge-fire text-xs sm:text-sm mb-2 sm:mb-3">
-                <Rocket className="w-3 h-3 sm:w-4 sm:h-4" />
-                Launching 15th April 2026
-              </span>
+              <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="inline-block">
+                <span className="glow-badge-fire text-xs sm:text-sm mb-2 sm:mb-3 cursor-pointer hover:scale-105 transition-transform">
+                  <Rocket className="w-3 h-3 sm:w-4 sm:h-4" />
+                  🔥 Pre-Orders Now Live — 40% OFF with PREORDER40
+                </span>
+              </a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}>
@@ -104,22 +106,30 @@ export default function HeroSection() {
 
             <motion.p
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-3 leading-relaxed"
             >
               Deploy <Link to="/gaming-vps" className="text-primary hover:underline font-medium">game servers</Link>, high-traffic applications, and real-time workloads 
               on infrastructure that never compromises. India's most reliable <Link to="/vps-plans" className="text-primary hover:underline font-medium">VPS hosting</Link> starts at just <span className="text-primary font-semibold">₹199/month</span>.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
+              className="text-sm sm:text-base text-primary font-medium max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8"
+            >
+              Pre-orders are now open. Secure your server today and save 40% using coupon <span className="font-black tracking-wide">PREORDER40</span>.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10"
             >
-              <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12" onClick={openPopup}>
-                <span className="relative z-10 flex items-center gap-2">
-                  Deploy Server
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </Button>
+              <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button size="lg" className="btn-fire text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto h-11 sm:h-12">
+                  <span className="relative z-10 flex items-center gap-2">
+                    Start Pre-Order
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Button>
+              </a>
               <Link to="/vps-plans" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-8 border-neon-blue/30 text-neon-blue hover:border-neon-blue/60 hover:bg-neon-blue/5 w-full sm:w-auto h-11 sm:h-12">
                   Explore Plans
