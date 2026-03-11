@@ -106,10 +106,16 @@ export default function HeroSection() {
 
             <motion.p
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-3 leading-relaxed"
             >
               Deploy <Link to="/gaming-vps" className="text-primary hover:underline font-medium">game servers</Link>, high-traffic applications, and real-time workloads 
               on infrastructure that never compromises. India's most reliable <Link to="/vps-plans" className="text-primary hover:underline font-medium">VPS hosting</Link> starts at just <span className="text-primary font-semibold">₹199/month</span>.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
+              className="text-sm sm:text-base text-primary font-medium max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8"
+            >
+              Pre-orders are now open. Secure your server today and save 40% using coupon <span className="font-black tracking-wide">PREORDER40</span>.
             </motion.p>
 
             <motion.div
