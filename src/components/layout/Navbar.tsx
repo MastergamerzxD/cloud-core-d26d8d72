@@ -180,9 +180,11 @@ export default function Navbar() {
                   <Link to="/contact" className="block">
                     <Button variant="outline" className="w-full h-10 sm:h-11 text-sm">Contact Sales</Button>
                   </Link>
-                  <Button className="w-full h-10 sm:h-11 text-sm btn-fire" onClick={openPopup}>
-                    <span className="relative z-10">Get Started</span>
-                  </Button>
+                  <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="block">
+                    <Button className="w-full h-10 sm:h-11 text-sm btn-fire">
+                      <span className="relative z-10">Pre-Order Now</span>
+                    </Button>
+                  </a>
                 </div>
               </div>
             </motion.div>
