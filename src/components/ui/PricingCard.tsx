@@ -103,19 +103,20 @@ export default function PricingCard({
         ))}
       </ul>
 
-      <Button
-        className={`w-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 ${
-          popular
-            ? "btn-fire"
-            : "bg-transparent border border-neon-blue/30 text-neon-blue hover:bg-neon-blue/10 hover:border-neon-blue/60 hover:shadow-[0_0_20px_hsl(217_91%_60%_/_0.2)]"
-        }`}
-        variant={popular ? "default" : "outline"}
-        onClick={openPopup}
-      >
-        <span className={popular ? "relative z-10" : ""}>
-          {price === "Coming Soon" ? "Get Notified" : "Get Started"}
-        </span>
-      </Button>
+      <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer">
+        <Button
+          className={`w-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 ${
+            popular
+              ? "btn-fire"
+              : "bg-transparent border border-neon-blue/30 text-neon-blue hover:bg-neon-blue/10 hover:border-neon-blue/60 hover:shadow-[0_0_20px_hsl(217_91%_60%_/_0.2)]"
+          }`}
+          variant={popular ? "default" : "outline"}
+        >
+          <span className={popular ? "relative z-10" : ""}>
+            {price === "Coming Soon" ? "Get Notified" : "Pre-Order Now"}
+          </span>
+        </Button>
+      </a>
     </motion.div>
   );
 }

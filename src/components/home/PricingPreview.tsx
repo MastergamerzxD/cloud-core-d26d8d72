@@ -62,6 +62,18 @@ export default function PricingPreview() {
           description="All prices in INR, billed monthly. No setup fees. Intel Platinum 8168 on all plans."
         />
 
+        {/* Pre-order notice */}
+        <div className="max-w-3xl mx-auto mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5 text-center">
+          <p className="text-sm text-foreground font-medium">
+            🔥 Pre-orders are currently open. Use coupon <span className="font-black text-primary tracking-wide">PREORDER40</span> to receive 40% off your first month.
+          </p>
+          <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer">
+            <Button size="sm" className="btn-fire mt-3">
+              <span className="relative z-10">Pre-Order Now</span>
+            </Button>
+          </a>
+        </div>
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
           {pricingPlans.map((plan, index) => (
             <PricingCard key={plan.name} {...plan} index={index} />
