@@ -160,6 +160,13 @@ export default function Navbar() {
                           )}
                         </AnimatePresence>
                       </div>
+                    ) : item.external ? (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer"
+                        className={`block px-4 py-2.5 sm:py-3 text-sm sm:text-base transition-colors ${
+                          item.highlight ? "text-primary font-bold" : "text-foreground hover:text-primary"
+                        }`}>
+                        {item.name}
+                      </a>
                     ) : (
                       <Link to={item.href} className="block px-4 py-2.5 sm:py-3 text-sm sm:text-base text-foreground hover:text-primary transition-colors">
                         {item.name}
