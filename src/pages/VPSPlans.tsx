@@ -1,3 +1,4 @@
+import PreOrderBanner from "@/components/PreOrderBanner";
 import SEOHead from "@/components/SEOHead";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
