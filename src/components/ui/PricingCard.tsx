@@ -105,7 +105,7 @@ export default function PricingCard({
         ))}
       </ul>
 
-      <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer">
+      <a href={shopUrl} target="_blank" rel="noopener noreferrer">
         <Button
           className={`w-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 ${
             popular
