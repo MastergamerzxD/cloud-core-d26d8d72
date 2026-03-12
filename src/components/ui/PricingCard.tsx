@@ -24,6 +24,7 @@ export default function PricingCard({
   popular = false,
   type,
   index = 0,
+  shopUrl = "https://shop.cloudonfire.com",
 }: PricingCardProps) {
   const { openPopup } = useLaunchPopup();
 
