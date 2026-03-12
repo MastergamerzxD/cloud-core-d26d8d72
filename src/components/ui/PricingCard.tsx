@@ -12,6 +12,7 @@ interface PricingCardProps {
   popular?: boolean;
   type: "pro" | "budget";
   index?: number;
+  shopUrl?: string;
 }
 
 export default function PricingCard({
