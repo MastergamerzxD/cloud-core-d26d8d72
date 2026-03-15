@@ -2,10 +2,6 @@ import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Mail, MessageCircle, Clock, MapPin } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 
 const contactMethods = [
   {
@@ -84,15 +80,14 @@ export default function Contact() {
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
-              {/* Contact Methods */}
+            <div className="max-w-2xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">Contact Information</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8 text-center">Contact Information</h2>
                 <div className="space-y-4">
                   {contactMethods.map((method, i) => (
                     <motion.div 
@@ -114,47 +109,6 @@ export default function Contact() {
                     </motion.div>
                   ))}
                 </div>
-              </motion.div>
-
-              {/* Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">Send a Message</h2>
-                <form className="glow-card !rounded-2xl p-6 sm:p-8 space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
-                      <Input id="name" placeholder="Your name" className="bg-card/50 border-border/40" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="your@email.com" className="bg-card/50 border-border/40" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="How can we help?" className="bg-card/50 border-border/40" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us more about your inquiry..."
-                      rows={5}
-                      className="bg-card/50 border-border/40"
-                    />
-                  </div>
-                  <Button type="submit" className="btn-fire w-full h-11">
-                    <span className="relative z-10">Send Message</span>
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center">
-                    We typically respond within 24 hours.
-                  </p>
-                </form>
               </motion.div>
             </div>
           </div>
