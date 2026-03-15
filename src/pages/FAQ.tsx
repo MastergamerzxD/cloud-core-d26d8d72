@@ -15,7 +15,7 @@ const faqCategories = [
     title: "General",
     items: [
       { q: "What is Cloud on Fire?", a: "Cloud on Fire is a VPS hosting provider based in India, offering high-performance virtual private servers with enterprise-grade DDoS protection. We specialize in gaming VPS and general-purpose hosting solutions." },
-      { q: "What's the difference between Pro VPS and Budget VPS?", a: "Pro VPS offers dedicated CPU cores, premium DDoS protection (never suspended under attacks), and is optimized for gaming and high-performance workloads. Budget VPS uses shared resources and is ideal for websites, bots, and development servers. Budget VPS may be temporarily suspended under extreme DDoS attacks to protect the network." },
+      { q: "What types of VPS do you offer?", a: "We offer two categories: Standard VPS plans (Starter, Plus, Pro, Enterprise) for general-purpose hosting, and Gaming VPS plans (Gamer Start, Gamer Plus, Gamer Pro, Gamer Elite) optimized for game server hosting with advanced DDoS protection and unmetered bandwidth." },
       { q: "Where are your servers located?", a: "Our servers are located in India, optimized for low-latency connectivity across the Indian subcontinent and Asia Pacific region." },
     ],
   },
@@ -25,8 +25,7 @@ const faqCategories = [
       { q: "What payment methods do you accept?", a: "We accept UPI, credit cards, debit cards, net banking, and popular payment wallets. All transactions are processed in INR." },
       { q: "Is there a setup fee?", a: "No, there are no setup fees. You only pay the monthly subscription price for your VPS plan." },
       { q: "Can I upgrade or downgrade my plan?", a: "Yes, you can upgrade your plan at any time. The price difference will be prorated for the remaining billing period. Downgrades take effect at the next billing cycle." },
-      { q: "What's your refund policy?", a: "We offer a 7-day money-back guarantee on all plans. If you're not satisfied, contact support within 7 days of purchase for a full refund." },
-      { q: "Do you provide GST invoices?", a: "Yes, we provide GST invoices for all purchases. You can download invoices from your account dashboard." },
+      { q: "What are your VPS plan prices?", a: "Standard VPS starts at ₹199/mo (Starter: 2 vCPU, 4GB RAM) up to ₹1,499/mo (Enterprise: 8 vCPU, 24GB RAM). Gaming VPS starts at ₹299/mo (Gamer Start: 2 vCPU, 4GB RAM) up to ₹1,599/mo (Gamer Elite: 8 vCPU, 24GB RAM). All plans include DDoS protection and NVMe storage." },
     ],
   },
   {
@@ -35,24 +34,22 @@ const faqCategories = [
       { q: "How quickly is my VPS deployed?", a: "Most VPS instances are deployed within 5-10 minutes after payment confirmation. You'll receive login credentials via email." },
       { q: "What operating systems are available?", a: "We support major Linux distributions including Ubuntu, Debian, CentOS, and AlmaLinux. Windows Server is available on select plans." },
       { q: "Do I get root/administrator access?", a: "Yes, you get full root access on Linux VPS and full administrator access on Windows VPS. You have complete control over your server." },
-      { q: "Is there a bandwidth limit?", a: "All plans include unlimited bandwidth. We don't charge for data transfer or impose monthly bandwidth caps." },
-      { q: "What is your uptime guarantee?", a: "We guarantee 99.9% uptime for Budget VPS and 99.99% uptime for Pro VPS, backed by our SLA." },
+      { q: "What is your uptime guarantee?", a: "We make reasonable and commercially practical efforts to maintain high uptime. While uptime is not guaranteed due to factors beyond our control, our enterprise-grade infrastructure minimizes the likelihood of major failures." },
     ],
   },
   {
     title: "DDoS Protection",
     items: [
-      { q: "Is DDoS protection included?", a: "Yes, DDoS protection is included on all VPS plans at no extra cost. The level of protection differs between Pro and Budget VPS." },
+      { q: "Is DDoS protection included?", a: "Yes, DDoS protection is included on all VPS plans at no extra cost. Gaming VPS plans include advanced DDoS protection for stronger mitigation." },
       { q: "What attacks can you mitigate?", a: "We can mitigate volumetric attacks (UDP floods, amplification attacks), protocol attacks (SYN floods, ICMP floods), and application-layer attacks (HTTP floods, Slowloris)." },
-      { q: "Will my Pro VPS ever be suspended during an attack?", a: "No. Pro VPS includes our premium DDoS protection with a zero-suspension policy. Your VPS will remain online during attacks." },
-      { q: "What happens to Budget VPS during extreme attacks?", a: "Budget VPS may be temporarily suspended during extreme DDoS attacks that threaten network stability. This is done to protect other customers on the shared infrastructure. For guaranteed uptime during attacks, we recommend Pro VPS." },
+      { q: "What's the difference between standard and advanced DDoS protection?", a: "Standard DDoS protection on VPS plans covers common attack vectors. Advanced DDoS protection on Gaming VPS plans provides stronger mitigation specifically optimized for game server traffic patterns, ensuring your game servers stay online during attacks." },
     ],
   },
   {
     title: "Support",
     items: [
-      { q: "How do I contact support?", a: "You can contact support via email at hello@cloudonfire.com or call us at +91 8766215705. Pro VPS customers receive priority support with under 15 minute response times." },
-      { q: "What's the average response time?", a: "Pro VPS customers receive responses within 15 minutes on average. Budget VPS customers typically receive responses within 60 minutes." },
+      { q: "How do I contact support?", a: "You can contact support via email at hello@cloudonfire.com, call us at +91 8766215705, or reach us on Instagram @cloudonfire_." },
+      { q: "What's the average response time?", a: "We aim to respond to all inquiries as quickly as possible. Priority support is available for higher-tier plans." },
       { q: "Is support available 24/7?", a: "Yes, our support team is available 24/7 for urgent issues. Non-urgent inquiries are handled during Indian business hours." },
     ],
   },
@@ -63,7 +60,7 @@ export default function FAQ() {
     <>
       <SEOHead
         title="VPS Hosting FAQ India — Common Questions Answered | Cloud on Fire"
-        description="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Learn about Pro VPS vs Budget VPS, DDoS protection, billing, payment methods, server specs, and support."
+        description="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Learn about VPS plans, Gaming VPS, DDoS protection, billing, payment methods, server specs, and support."
         keywords="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing India, Cloud on Fire FAQ, gaming VPS FAQ"
         canonical="/faq"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
