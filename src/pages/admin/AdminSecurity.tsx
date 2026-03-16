@@ -363,6 +363,7 @@ export default function AdminSecurity() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>IP</TableHead>
+                          <TableHead>Location</TableHead>
                           <TableHead>Country</TableHead>
                           <TableHead>Device</TableHead>
                           <TableHead>Browser</TableHead>
@@ -372,10 +373,13 @@ export default function AdminSecurity() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {filteredLogs.map((l) => (
+                        {filteredLogs.map((l) => {
+                          const session = sessionMap[l.session_id];
+                          return (
                           <TableRow key={l.id}>
                             <TableCell className="font-mono text-xs">{l.ip_address || "—"}</TableCell>
-                            <TableCell className="text-sm">{l.country || "—"}</TableCell>
+                            <TableCell className="text-sm">{session?.city || "—"}</TableCell>
+                            <TableCell className="text-sm">{l.country || session?.country || "—"}</TableCell>
                             <TableCell><Badge variant="secondary" className="text-xs">{l.device_type || "—"}</Badge></TableCell>
                             <TableCell className="text-sm">{l.browser || "—"}</TableCell>
                             <TableCell className="text-xs max-w-[200px] truncate">
