@@ -392,7 +392,9 @@ export default function AdminSecurity() {
                               {l.session_end ? new Date(l.session_end).toLocaleString() : "—"}
                             </TableCell>
                           </TableRow>
-                        ))}
+                          );
+                        })}
+
                       </TableBody>
                     </Table>
                   </div>
