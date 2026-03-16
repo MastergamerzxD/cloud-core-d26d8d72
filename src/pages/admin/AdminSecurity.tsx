@@ -21,6 +21,7 @@ export default function AdminSecurity() {
   const [blockedIps, setBlockedIps] = useState<any[]>([]);
   const [securityLogs, setSecurityLogs] = useState<any[]>([]);
   const [visitorLogs, setVisitorLogs] = useState<any[]>([]);
+  const [sessionMap, setSessionMap] = useState<Record<string, any>>({});
   const [logFilter, setLogFilter] = useState("");
   const [addIpOpen, setAddIpOpen] = useState(false);
   const [newIp, setNewIp] = useState("");
@@ -50,14 +51,18 @@ export default function AdminSecurity() {
   };
 
   const loadData = useCallback(async () => {
-    const [{ data: blocked }, { data: logs }, { data: vLogs }] = await Promise.all([
+    const [{ data: blocked }, { data: logs }, { data: vLogs }, { data: sessions }] = await Promise.all([
       supabase.from("blocked_ips").select("*").order("created_at", { ascending: false }),
       supabase.from("security_logs").select("*").order("created_at", { ascending: false }).limit(100),
       supabase.from("visitor_logs").select("*").order("created_at", { ascending: false }).limit(200),
+      supabase.from("visitor_sessions").select("session_id, city, country, country_code").limit(500),
     ]);
     setBlockedIps(blocked || []);
     setSecurityLogs(logs || []);
     setVisitorLogs(vLogs || []);
+    const map: Record<string, any> = {};
+    (sessions || []).forEach((s: any) => { map[s.session_id] = s; });
+    setSessionMap(map);
   }, []);
 
   useEffect(() => {
@@ -114,8 +119,11 @@ export default function AdminSecurity() {
   const filteredLogs = visitorLogs.filter((l) => {
     if (!logFilter) return true;
     const q = logFilter.toLowerCase();
+    const session = sessionMap[l.session_id];
+    const city = session?.city || "";
     return (l.ip_address || "").toLowerCase().includes(q) ||
-      (l.country || "").toLowerCase().includes(q);
+      (l.country || "").toLowerCase().includes(q) ||
+      city.toLowerCase().includes(q);
   });
 
   const activeBans = blockedIps.filter((b) => b.is_permanent || !b.expires_at || new Date(b.expires_at) > new Date());
@@ -355,6 +363,7 @@ export default function AdminSecurity() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>IP</TableHead>
+                          <TableHead>Location</TableHead>
                           <TableHead>Country</TableHead>
                           <TableHead>Device</TableHead>
                           <TableHead>Browser</TableHead>
@@ -364,10 +373,13 @@ export default function AdminSecurity() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {filteredLogs.map((l) => (
+                        {filteredLogs.map((l) => {
+                          const session = sessionMap[l.session_id];
+                          return (
                           <TableRow key={l.id}>
                             <TableCell className="font-mono text-xs">{l.ip_address || "—"}</TableCell>
-                            <TableCell className="text-sm">{l.country || "—"}</TableCell>
+                            <TableCell className="text-sm">{session?.city || "—"}</TableCell>
+                            <TableCell className="text-sm">{l.country || session?.country || "—"}</TableCell>
                             <TableCell><Badge variant="secondary" className="text-xs">{l.device_type || "—"}</Badge></TableCell>
                             <TableCell className="text-sm">{l.browser || "—"}</TableCell>
                             <TableCell className="text-xs max-w-[200px] truncate">
@@ -380,7 +392,9 @@ export default function AdminSecurity() {
                               {l.session_end ? new Date(l.session_end).toLocaleString() : "—"}
                             </TableCell>
                           </TableRow>
-                        ))}
+                          );
+                        })}
+
                       </TableBody>
                     </Table>
                   </div>
