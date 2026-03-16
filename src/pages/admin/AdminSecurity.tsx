@@ -51,14 +51,18 @@ export default function AdminSecurity() {
   };
 
   const loadData = useCallback(async () => {
-    const [{ data: blocked }, { data: logs }, { data: vLogs }] = await Promise.all([
+    const [{ data: blocked }, { data: logs }, { data: vLogs }, { data: sessions }] = await Promise.all([
       supabase.from("blocked_ips").select("*").order("created_at", { ascending: false }),
       supabase.from("security_logs").select("*").order("created_at", { ascending: false }).limit(100),
       supabase.from("visitor_logs").select("*").order("created_at", { ascending: false }).limit(200),
+      supabase.from("visitor_sessions").select("session_id, city, country, country_code").limit(500),
     ]);
     setBlockedIps(blocked || []);
     setSecurityLogs(logs || []);
     setVisitorLogs(vLogs || []);
+    const map: Record<string, any> = {};
+    (sessions || []).forEach((s: any) => { map[s.session_id] = s; });
+    setSessionMap(map);
   }, []);
 
   useEffect(() => {
