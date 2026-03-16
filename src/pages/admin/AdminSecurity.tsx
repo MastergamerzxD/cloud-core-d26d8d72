@@ -119,8 +119,11 @@ export default function AdminSecurity() {
   const filteredLogs = visitorLogs.filter((l) => {
     if (!logFilter) return true;
     const q = logFilter.toLowerCase();
+    const session = sessionMap[l.session_id];
+    const city = session?.city || "";
     return (l.ip_address || "").toLowerCase().includes(q) ||
-      (l.country || "").toLowerCase().includes(q);
+      (l.country || "").toLowerCase().includes(q) ||
+      city.toLowerCase().includes(q);
   });
 
   const activeBans = blockedIps.filter((b) => b.is_permanent || !b.expires_at || new Date(b.expires_at) > new Date());
