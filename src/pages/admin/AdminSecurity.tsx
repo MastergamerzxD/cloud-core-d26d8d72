@@ -21,6 +21,7 @@ export default function AdminSecurity() {
   const [blockedIps, setBlockedIps] = useState<any[]>([]);
   const [securityLogs, setSecurityLogs] = useState<any[]>([]);
   const [visitorLogs, setVisitorLogs] = useState<any[]>([]);
+  const [sessionMap, setSessionMap] = useState<Record<string, any>>({});
   const [logFilter, setLogFilter] = useState("");
   const [addIpOpen, setAddIpOpen] = useState(false);
   const [newIp, setNewIp] = useState("");
