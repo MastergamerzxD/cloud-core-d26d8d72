@@ -134,6 +134,10 @@ export default function GlobalSEO() {
       "FAQ",
       "Contact",
       "Status",
+      "Cloud on Fire",
+      "Cloud on Fire Hosting",
+      "Cheap VPS India",
+      "Minecraft Hosting India",
     ],
     url: [
       "https://cloudonfire.com/vps-plans",
@@ -147,6 +151,10 @@ export default function GlobalSEO() {
       "https://cloudonfire.com/faq",
       "https://cloudonfire.com/contact",
       "https://cloudonfire.com/status",
+      "https://cloudonfire.com/cloud-on-fire",
+      "https://cloudonfire.com/cloud-on-fire-hosting",
+      "https://cloudonfire.com/cheap-vps-india",
+      "https://cloudonfire.com/minecraft-hosting-india",
     ],
   };
 
