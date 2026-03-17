@@ -14,6 +14,7 @@ export default function GlobalSEO() {
     "@id": "https://cloudonfire.com/#organization",
     name: "Cloud on Fire",
     legalName: "Cloud on Fire",
+    alternateName: ["CloudOnFire", "Cloud on Fire Hosting", "Cloud on Fire VPS"],
     url: "https://cloudonfire.com",
     logo: {
       "@type": "ImageObject",
@@ -31,7 +32,7 @@ export default function GlobalSEO() {
       height: 630,
     },
     description:
-      "High-performance cloud infrastructure platform offering VPS hosting, gaming VPS, cloud RDP, and advanced DDoS protection. Powered by Intel Xeon Platinum processors, NVMe SSD storage, and Yotta Tier-3+ data centers in Delhi & Mumbai, India.",
+      "Cloud on Fire is India's leading high-performance cloud infrastructure platform offering VPS hosting, Gaming VPS, Minecraft server hosting, Cloud RDP, and advanced DDoS protection. Powered by Intel Xeon Platinum processors, NVMe SSD storage, and Tier-3+ data centers in Delhi & Mumbai, India.",
     foundingDate: "2024",
     numberOfEmployees: { "@type": "QuantitativeValue", minValue: 2 },
     areaServed: {
@@ -47,6 +48,8 @@ export default function GlobalSEO() {
       "Game Server Hosting",
       "Minecraft Server Hosting",
       "FiveM Server Hosting",
+      "Cloud on Fire Hosting",
+      "Cheap VPS India",
     ],
     sameAs: [
       "https://discord.gg/cloudonfire",
