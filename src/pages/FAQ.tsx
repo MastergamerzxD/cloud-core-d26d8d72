@@ -53,6 +53,14 @@ const faqCategories = [
       { q: "Is support available 24/7?", a: "Yes, our support team is available 24/7 for urgent issues. Non-urgent inquiries are handled during Indian business hours." },
     ],
   },
+  {
+    title: "About Cloud on Fire",
+    items: [
+      { q: "Is Cloud on Fire the same as Cloud on Hire?", a: "No. Cloud on Fire is an independent hosting provider offering VPS, Gaming VPS, and Minecraft hosting services in India. We are not affiliated with Cloud on Hire or any other similarly named company." },
+      { q: "What does Cloud on Fire offer?", a: "Cloud on Fire provides VPS Hosting (from ₹199/mo), Gaming VPS (from ₹299/mo), Cloud RDP, and enterprise-grade DDoS protection — all running on Intel Xeon Platinum processors with NVMe SSD storage in Indian data centers." },
+      { q: "Is Cloud on Fire a legitimate company?", a: "Yes. Cloud on Fire is a registered hosting company based in India, operating Tier-3+ data centers in Delhi and Mumbai. We serve hundreds of customers for VPS hosting, game servers, and cloud infrastructure." },
+    ],
+  },
 ];
 
 export default function FAQ() {

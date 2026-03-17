@@ -110,9 +110,9 @@ export default function Index() {
   return (
     <>
       <SEOHead
-        title="Cloud VPS Hosting in India | High Performance NVMe Servers | Cloud on Fire"
-        description="Cloud on Fire provides high performance VPS hosting, gaming VPS, and cloud infrastructure powered by Intel Xeon Platinum processors and NVMe storage."
-        keywords="VPS hosting India, gaming VPS India, Minecraft server hosting India, cloud VPS India, high performance VPS, DDoS protected VPS, cloud server India, game server hosting, best VPS hosting company in India, Cloud on Fire"
+        title="Cloud on Fire – Affordable VPS & Minecraft Hosting in India from ₹199"
+        description="Cloud on Fire offers high-performance VPS and Minecraft hosting starting at ₹199. Fast, secure, and DDoS-protected hosting in India. Gaming VPS, Cloud RDP, and enterprise infrastructure."
+        keywords="Cloud on Fire, Cloud on Fire Hosting, Cloud on Fire VPS, Cloud on Fire Minecraft Hosting, VPS hosting India, gaming VPS India, Minecraft server hosting India, cloud VPS India, high performance VPS, DDoS protected VPS, cheap VPS India, best VPS hosting company in India"
         canonical="/"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
         jsonLd={homeJsonLd}
