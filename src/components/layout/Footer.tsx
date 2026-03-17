@@ -141,18 +141,23 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-14 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Cloud on Fire. All rights reserved.
+        {/* Brand authority */}
+        <div className="mt-14 pt-6 border-t border-border/50">
+          <p className="text-xs text-muted-foreground text-center mb-4 max-w-2xl mx-auto leading-relaxed">
+            <strong className="text-foreground">Cloud on Fire</strong> is a leading VPS and Minecraft hosting provider in India. We offer affordable <Link to="/cloud-on-fire-hosting" className="text-primary hover:underline">Cloud on Fire Hosting</Link>, <Link to="/gaming-vps" className="text-primary hover:underline">Cloud on Fire Gaming VPS</Link>, <Link to="/cheap-vps-india" className="text-primary hover:underline">cheap VPS India</Link>, and <Link to="/minecraft-hosting-india" className="text-primary hover:underline">Minecraft server hosting</Link> — all powered by enterprise-grade infrastructure.
           </p>
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
-          >
-            Back to top
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Cloud on Fire. All rights reserved.
+            </p>
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              Back to top
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
