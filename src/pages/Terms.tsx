@@ -9,7 +9,7 @@ export default function Terms() {
         title="Terms & Conditions - Cloud on Fire"
         description="Terms & Conditions for Cloud on Fire VPS hosting services. Read our policies on service usage, acceptable use, refunds, liability, and customer responsibilities."
         canonical="/terms"
-        noindex
+        ogImage="https://cloudonfire.com/images/og-logo.jpg"
       />
       <Layout>
         <section className="section-padding">
