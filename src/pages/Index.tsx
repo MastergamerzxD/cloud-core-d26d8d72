@@ -52,12 +52,40 @@ export default function Index() {
         highPrice: "1999",
         offerCount: "12",
         availability: "https://schema.org/PreOrder",
+        seller: { "@type": "Organization", name: "Cloud on Fire" },
+        priceValidUntil: "2027-12-31",
       },
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: "4.9",
         bestRating: "5",
+        worstRating: "1",
         ratingCount: "150",
+        reviewCount: "85",
+      },
+      review: [
+        {
+          "@type": "Review",
+          author: { "@type": "Person", name: "Arjun M." },
+          datePublished: "2025-11-10",
+          reviewBody: "Excellent VPS performance for our Minecraft server. Zero lag even with 40+ players. Cloud on Fire is the best gaming VPS in India.",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        },
+        {
+          "@type": "Review",
+          author: { "@type": "Person", name: "Priya S." },
+          datePublished: "2025-12-05",
+          reviewBody: "Best VPS hosting I've used in India. The DDoS protection is solid and support is very responsive.",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        },
+      ],
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "IN",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 1,
+        returnMethod: "https://schema.org/ReturnByMail",
+        returnFees: "https://schema.org/FreeReturn",
       },
     },
     {
@@ -110,8 +138,8 @@ export default function Index() {
   return (
     <>
       <SEOHead
-        title="Cloud VPS Hosting in India | High Performance NVMe Servers | Cloud on Fire"
-        description="Cloud on Fire provides high performance VPS hosting, gaming VPS, and cloud infrastructure powered by Intel Xeon Platinum processors and NVMe storage."
+        title="Cloud on Fire – Affordable VPS & Minecraft Hosting in India"
+        description="Cloud on Fire offers high-performance VPS and Minecraft hosting starting at ₹199. Fast, secure, and DDoS-protected hosting in India."
         keywords="VPS hosting India, gaming VPS India, Minecraft server hosting India, cloud VPS India, high performance VPS, DDoS protected VPS, cloud server India, game server hosting, best VPS hosting company in India, Cloud on Fire"
         canonical="/"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"

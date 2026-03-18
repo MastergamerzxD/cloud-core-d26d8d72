@@ -27,6 +27,11 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import MediaGallery from "./pages/MediaGallery";
 import DynamicPage from "./pages/DynamicPage";
+import CloudOnFire from "./pages/CloudOnFire";
+import CloudOnFireHosting from "./pages/CloudOnFireHosting";
+import CheapVPSIndia from "./pages/CheapVPSIndia";
+import MinecraftHostingIndia from "./pages/MinecraftHostingIndia";
+import CloudOnFireVsOthers from "./pages/CloudOnFireVsOthers";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBlogList from "./pages/admin/AdminBlogList";
@@ -74,6 +79,11 @@ const App = () => (
                   <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route path="/media" element={<MediaGallery />} />
                   <Route path="/page/:slug" element={<DynamicPage />} />
+                  <Route path="/cloud-on-fire" element={<CloudOnFire />} />
+                  <Route path="/cloud-on-fire-hosting" element={<CloudOnFireHosting />} />
+                  <Route path="/cheap-vps-india" element={<CheapVPSIndia />} />
+                  <Route path="/minecraft-hosting-india" element={<MinecraftHostingIndia />} />
+                  <Route path="/cloud-on-fire-vs-others" element={<CloudOnFireVsOthers />} />
 
                   {/* Admin routes */}
                   <Route path="/admin/login" element={<AdminLogin />} />
