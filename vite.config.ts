@@ -17,16 +17,5 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: [
-      "react",
-      "react-dom",
-      "@tiptap/core",
-      "@tiptap/pm",
-      "@tiptap/react",
-      "@tiptap/starter-kit",
-      "@tiptap/extension-image",
-      "@tiptap/extension-link",
-      "@tiptap/extension-placeholder",
-    ],
   },
 }));
