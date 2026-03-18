@@ -79,6 +79,11 @@ const App = () => (
                   <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route path="/media" element={<MediaGallery />} />
                   <Route path="/page/:slug" element={<DynamicPage />} />
+                  <Route path="/cloud-on-fire" element={<CloudOnFire />} />
+                  <Route path="/cloud-on-fire-hosting" element={<CloudOnFireHosting />} />
+                  <Route path="/cheap-vps-india" element={<CheapVPSIndia />} />
+                  <Route path="/minecraft-hosting-india" element={<MinecraftHostingIndia />} />
+                  <Route path="/cloud-on-fire-vs-others" element={<CloudOnFireVsOthers />} />
 
                   {/* Admin routes */}
                   <Route path="/admin/login" element={<AdminLogin />} />
