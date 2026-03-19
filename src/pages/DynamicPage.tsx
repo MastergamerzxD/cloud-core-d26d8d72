@@ -30,9 +30,10 @@ export default function DynamicPage() {
   return (
     <Layout>
       <SEOHead
-        title={`${page.seo_title || page.title} - Cloud on Fire`}
+        title={`${page.seo_title || page.title} — Cloud on Fire`}
         description={page.seo_description || ""}
         canonical={`/page/${slug}`}
+        noindex={!page.seo_title && !page.seo_description}
       />
       <section className="section-padding">
         <div className="container-wide max-w-4xl">

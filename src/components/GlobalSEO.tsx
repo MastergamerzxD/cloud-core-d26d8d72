@@ -86,8 +86,10 @@ export default function GlobalSEO() {
     ],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Delhi",
-      addressRegion: "Delhi",
+      streetAddress: "Shop No 9, Capital Athena, Sec 1, Bisrakh Jalalpur",
+      addressLocality: "Noida",
+      addressRegion: "Uttar Pradesh",
+      postalCode: "201318",
       addressCountry: "IN",
     },
   };

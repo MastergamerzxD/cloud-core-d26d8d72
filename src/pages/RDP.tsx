@@ -92,15 +92,6 @@ export default function RDP() {
         canonical="/rdp"
         ogImage="https://cloudonfire.com/images/og-logo.jpg"
         jsonLd={[
-          ...rdpPlans.map((plan) => ({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: `${plan.name} — Cloud RDP`,
-            description: plan.description,
-            brand: { "@type": "Brand", name: "Cloud on Fire" },
-            category: "Cloud RDP Hosting",
-            image: "https://cloudonfire.com/images/logo-schema.png",
-          })),
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
