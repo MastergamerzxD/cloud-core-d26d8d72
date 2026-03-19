@@ -49,11 +49,8 @@ export default function GlobalSEO() {
       "FiveM Server Hosting",
     ],
     sameAs: [
-      "https://discord.gg/cloudonfire",
-      "https://twitter.com/cloudonfire_",
-      "https://instagram.com/cloudonfire_",
-      "https://youtube.com/@cloudonfire",
-      "https://linkedin.com/company/cloudonfire",
+      "https://www.instagram.com/cloudonfire_",
+      "https://wa.me/918766215705",
     ],
     contactPoint: [
       {
