@@ -23,6 +23,7 @@ export default function Layout({ children }: LayoutProps) {
       <main className="flex-1 pt-16 md:pt-20">{children}</main>
       <Footer />
       <PublicChatWidget />
+      <Suspense fallback={null}><AIChatHighlight /></Suspense>
       <VisitorTracker />
     </div>
   );
