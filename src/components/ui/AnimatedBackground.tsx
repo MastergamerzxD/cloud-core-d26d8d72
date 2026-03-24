@@ -68,7 +68,7 @@ export default function AnimatedBackground() {
     };
 
     const connectParticles = () => {
-      if (!ctx) return;
+      if (!ctx || isMobile) return; // Skip connection lines on mobile
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
