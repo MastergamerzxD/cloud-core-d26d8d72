@@ -382,3 +382,52 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-fire-red to-fire-yellow;
   }
 }
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Re-enable critical animations */
+  .animate-spin,
+  [data-allow-animation] {
+    animation-duration: revert !important;
+    animation-iteration-count: revert !important;
+  }
+
+  /* Reduce blur/shadow GPU load */
+  .blur-\[120px\],
+  .blur-\[180px\],
+  .blur-\[100px\],
+  .blur-\[60px\] {
+    filter: blur(40px) !important;
+  }
+
+  /* Simplify box shadows */
+  .glow-card {
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.1) !important;
+  }
+
+  /* Reduce backdrop blur */
+  .backdrop-blur-xl,
+  .backdrop-blur-lg,
+  .backdrop-blur-md {
+    backdrop-filter: blur(8px) !important;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
