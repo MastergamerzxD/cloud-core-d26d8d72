@@ -60,7 +60,8 @@ export default function AnimatedBackground() {
 
     const init = () => {
       particles = [];
-      const particleCount = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+      const maxParticles = isMobile ? 5 : 80;
+      const particleCount = Math.min(maxParticles, Math.floor((canvas.width * canvas.height) / (isMobile ? 80000 : 15000)));
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
