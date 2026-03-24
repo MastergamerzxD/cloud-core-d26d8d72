@@ -33,9 +33,11 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  // Memoize particles to avoid re-renders
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
+  // Memoize particles - fewer on mobile
   const particles = useMemo(() => 
-    [...Array(12)].map((_, i) => ({
+    [...Array(isMobile ? 4 : 12)].map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,

@@ -39,7 +39,7 @@ export default function CloudOnFireVsOthers() {
         description="Cloud on Fire is an independent Indian hosting company. Not affiliated with Cloud on Hire or any similar brand. Learn about Cloud on Fire's VPS, gaming hosting, and DDoS protection."
         keywords="Cloud on Fire, cloud on fire vs cloud on hire, is cloud on fire same as cloud on hire, Cloud on Fire hosting, Cloud on Fire VPS, independent hosting India"
         canonical="/cloud-on-fire-vs-others"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

@@ -142,7 +142,7 @@ export default function Index() {
         description="Cloud on Fire offers high-performance VPS and Minecraft hosting starting at ₹199. Fast, secure, and DDoS-protected hosting in India."
         keywords="VPS hosting India, gaming VPS India, Minecraft server hosting India, cloud VPS India, high performance VPS, DDoS protected VPS, cloud server India, game server hosting, best VPS hosting company in India, Cloud on Fire"
         canonical="/"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={homeJsonLd}
       />
       <Layout>

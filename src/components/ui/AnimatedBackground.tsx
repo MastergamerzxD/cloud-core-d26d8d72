@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -58,14 +60,15 @@ export default function AnimatedBackground() {
 
     const init = () => {
       particles = [];
-      const particleCount = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+      const maxParticles = isMobile ? 5 : 80;
+      const particleCount = Math.min(maxParticles, Math.floor((canvas.width * canvas.height) / (isMobile ? 80000 : 15000)));
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
     };
 
     const connectParticles = () => {
-      if (!ctx) return;
+      if (!ctx || isMobile) return; // Skip connection lines on mobile
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -114,7 +117,7 @@ export default function AnimatedBackground() {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <>

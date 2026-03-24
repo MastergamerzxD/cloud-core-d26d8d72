@@ -86,7 +86,7 @@ export default function WhyUs() {
         description="Why Cloud on Fire is the best VPS hosting provider in India. Enterprise DDoS protection, Intel Xeon Platinum performance, 24/7 expert support, and transparent INR pricing built for Indian developers."
         keywords="why Cloud on Fire, best VPS provider India, reliable VPS hosting India, VPS support India, transparent VPS pricing, best hosting provider India"
         canonical="/why-us"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

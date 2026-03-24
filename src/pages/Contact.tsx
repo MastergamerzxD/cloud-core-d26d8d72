@@ -38,7 +38,7 @@ export default function Contact() {
         description="Contact Cloud on Fire for VPS hosting support, sales inquiries, or technical questions. 24/7 support with under 15 minute response for Pro VPS customers. Email, phone, and live chat available."
         keywords="Cloud on Fire contact, VPS support India, hosting support, sales inquiry, technical support India, 24/7 VPS support"
         canonical="/contact"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

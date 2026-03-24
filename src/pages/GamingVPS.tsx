@@ -199,7 +199,7 @@ export default function GamingVPS() {
         keywords="gaming VPS India, Minecraft server hosting India, FiveM server hosting, game server India, multiplayer VPS, low latency gaming VPS, DDoS protected game server, Hytale server hosting, Cloud on Fire gaming"
         canonical="/gaming-vps"
         ogType="product"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           ...gamingPlans.map((plan) => ({
             "@context": "https://schema.org",

@@ -25,7 +25,7 @@ export default function CloudOnFireHosting() {
         description="Cloud on Fire Hosting provides high-performance VPS and gaming server hosting in India. Intel Xeon Platinum hardware, NVMe storage, and DDoS protection from ₹199/month."
         keywords="Cloud on Fire hosting, cloud on fire VPS hosting, hosting India, VPS India, game hosting India, cloud server India"
         canonical="/cloud-on-fire-hosting"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

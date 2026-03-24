@@ -139,7 +139,7 @@ export default function VPSPlans() {
         keywords="VPS hosting India, cloud VPS India, cheap VPS India, NVMe VPS hosting, VPS plans India, high performance VPS, server hosting India, Cloud on Fire VPS"
         canonical="/vps-plans"
         ogType="product"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           ...plans.map((plan) => ({
             "@context": "https://schema.org",

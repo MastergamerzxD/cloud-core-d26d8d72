@@ -21,7 +21,7 @@ export default function CheapVPSIndia() {
         description="Looking for cheap VPS hosting in India? Cloud on Fire offers affordable VPS servers starting at ₹199/month with Intel Xeon Platinum, NVMe SSD, and DDoS protection."
         keywords="cheap VPS India, affordable VPS India, low cost VPS hosting, budget VPS India, VPS ₹199, cheapest VPS India, Cloud on Fire VPS"
         canonical="/cheap-vps-india"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

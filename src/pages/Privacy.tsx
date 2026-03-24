@@ -9,7 +9,7 @@ export default function Privacy() {
         title="Privacy Policy - Cloud on Fire VPS Hosting India"
         description="Privacy Policy for Cloud on Fire VPS hosting. Learn how we collect, use, protect your personal information and your rights regarding data privacy."
         canonical="/privacy"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
       />
       <Layout>
         <section className="section-padding">

@@ -90,7 +90,7 @@ export default function RDP() {
         description="High performance remote desktop servers powered by Intel Xeon Platinum processors for development, remote work, and software workloads."
         keywords="cloud RDP India, remote desktop hosting, Windows RDP server, cloud desktop India, high performance RDP, remote workstation India, Cloud on Fire RDP"
         canonical="/rdp"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

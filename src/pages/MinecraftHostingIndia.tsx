@@ -32,7 +32,7 @@ export default function MinecraftHostingIndia() {
         description="Host your Minecraft server in India with Cloud on Fire. Stable 20 TPS, NVMe SSD, DDoS protection, and full root access from ₹299/month. Best Minecraft hosting in India."
         keywords="Minecraft server hosting India, Minecraft VPS India, Minecraft hosting, game server hosting India, Cloud on Fire Minecraft, best Minecraft hosting India"
         canonical="/minecraft-hosting-india"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

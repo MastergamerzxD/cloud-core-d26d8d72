@@ -58,7 +58,7 @@ export default function Infrastructure() {
         description="Explore the infrastructure behind Cloud on Fire including enterprise processors, NVMe storage, and advanced network architecture."
         keywords="VPS infrastructure India, Yotta data center, Intel Xeon VPS, NVMe Gen4 VPS, Delhi data center, enterprise VPS hardware"
         canonical="/infrastructure"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",
