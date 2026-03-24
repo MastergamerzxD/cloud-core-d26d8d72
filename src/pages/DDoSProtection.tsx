@@ -53,7 +53,7 @@ export default function DDoSProtection() {
         description="Enterprise-grade Layer 4 DDoS mitigation up to 1Tbps for VPS and game servers in India. Pro VPS never suspended under attack. Real-time threat detection and automatic mitigation included on all plans."
         keywords="DDoS protection India, anti-DDoS VPS, DDoS mitigation India, protected VPS hosting, Layer 4 DDoS protection, 1Tbps DDoS protection, DDoS protected game server India, Cloud on Fire DDoS"
         canonical="/ddos-protection"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

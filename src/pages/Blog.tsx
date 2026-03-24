@@ -25,7 +25,7 @@ export default function Blog() {
         keywords="VPS hosting blog India, Cloud on Fire blog, hosting tutorials, DDoS protection guides, gaming server tips, cloud infrastructure news"
         canonical="/blog"
         ogType="blog"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

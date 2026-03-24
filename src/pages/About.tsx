@@ -55,7 +55,7 @@ export default function About() {
         description="Cloud on Fire is India's performance-focused VPS hosting company. Enterprise-grade infrastructure with Intel Xeon Platinum processors, NVMe storage, and DDoS protection — accessible to developers and businesses."
         keywords="about Cloud on Fire, VPS hosting company India, Indian hosting provider, Cloud on Fire team, Cloud on Fire story"
         canonical="/about"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",

@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
  */
 export default function GlobalSEO() {
   const logoUrl = "https://cloudonfire.com/images/logo-schema.png";
-  const ogImageUrl = "https://cloudonfire.com/images/og-logo.jpg";
+  const ogImageUrl = "https://cloudonfire.com/images/og-logo.png";
 
   const organizationSchema = {
     "@context": "https://schema.org",

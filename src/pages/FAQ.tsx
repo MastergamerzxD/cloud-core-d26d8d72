@@ -63,7 +63,7 @@ export default function FAQ() {
         description="Find answers to frequently asked questions about Cloud on Fire VPS hosting in India. Learn about VPS plans, Gaming VPS, DDoS protection, billing, payment methods, server specs, and support."
         keywords="VPS FAQ India, VPS hosting questions, DDoS protection FAQ, VPS billing India, Cloud on Fire FAQ, gaming VPS FAQ"
         canonical="/faq"
-        ogImage="https://cloudonfire.com/images/og-logo.jpg"
+        ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
           {
             "@context": "https://schema.org",
