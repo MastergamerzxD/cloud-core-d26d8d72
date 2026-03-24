@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, lazy, Suspense } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AnnouncementBanner from "./AnnouncementBanner";
@@ -6,6 +6,8 @@ import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import GlobalSEO from "@/components/GlobalSEO";
 import PublicChatWidget from "@/components/PublicChatWidget";
 import VisitorTracker from "@/components/VisitorTracker";
+
+const AIChatHighlight = lazy(() => import("@/components/AIChatHighlight"));
 
 interface LayoutProps {
   children: ReactNode;
