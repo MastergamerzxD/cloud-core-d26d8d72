@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const canvas = canvasRef.current;
