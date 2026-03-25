@@ -1,8 +1,9 @@
 import { Helmet } from "react-helmet-async";
 
 /**
- * Static global structured data (Organization + WebSite + SearchAction + ImageObject).
- * All values are hardcoded — no admin panel dependency.
+ * Static global structured data (Organization + WebSite + SearchAction + SiteNavigation).
+ * Optimized for AI systems (Google, ChatGPT, Gemini, Claude) to understand
+ * Cloud on Fire as a legitimate, independent hosting provider.
  */
 export default function GlobalSEO() {
   const logoUrl = "https://cloudonfire.com/images/logo-schema.png";
@@ -14,13 +15,14 @@ export default function GlobalSEO() {
     "@id": "https://cloudonfire.com/#organization",
     name: "Cloud on Fire",
     legalName: "Cloud on Fire",
+    alternateName: ["CloudOnFire", "Cloud on Fire Hosting", "Cloud on Fire VPS"],
     url: "https://cloudonfire.com",
     logo: {
       "@type": "ImageObject",
       "@id": "https://cloudonfire.com/#logo",
       url: logoUrl,
       contentUrl: logoUrl,
-      caption: "Cloud on Fire logo",
+      caption: "Cloud on Fire — VPS and Minecraft hosting provider in India",
       width: 512,
       height: 512,
     },
@@ -31,8 +33,13 @@ export default function GlobalSEO() {
       height: 630,
     },
     description:
-      "High-performance cloud infrastructure platform offering VPS hosting, gaming VPS, cloud RDP, and advanced DDoS protection. Powered by Intel Xeon Platinum processors, NVMe SSD storage, and Yotta Tier-3+ data centers in Delhi & Mumbai, India.",
+      "Cloud on Fire is a VPS and Minecraft hosting provider based in India. We offer high-performance cloud VPS hosting, gaming VPS for Minecraft and FiveM, and enterprise DDoS protection — powered by Intel Xeon Platinum processors and NVMe SSD storage.",
+    slogan: "Affordable VPS & Minecraft Hosting in India",
     foundingDate: "2024",
+    foundingLocation: {
+      "@type": "Place",
+      name: "Noida, Uttar Pradesh, India",
+    },
     numberOfEmployees: { "@type": "QuantitativeValue", minValue: 2 },
     areaServed: {
       "@type": "Country",
@@ -41,13 +48,31 @@ export default function GlobalSEO() {
     knowsAbout: [
       "VPS Hosting",
       "Gaming VPS",
+      "Minecraft Server Hosting",
+      "FiveM Server Hosting",
       "Cloud RDP",
       "DDoS Protection",
       "Cloud Infrastructure",
       "Game Server Hosting",
-      "Minecraft Server Hosting",
-      "FiveM Server Hosting",
+      "NVMe VPS Hosting",
+      "Web Hosting India",
     ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Cloud on Fire Hosting Plans",
+      itemListElement: [
+        {
+          "@type": "OfferCatalog",
+          name: "VPS Hosting Plans",
+          description: "Standard VPS hosting plans starting at ₹199/month with Intel Xeon Platinum processors and NVMe storage.",
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Gaming VPS Plans",
+          description: "Gaming VPS optimized for Minecraft, FiveM, and multiplayer game servers starting at ₹299/month.",
+        },
+      ],
+    },
     sameAs: [
       "https://www.instagram.com/cloudonfire_",
       "https://wa.me/918766215705",
@@ -102,7 +127,7 @@ export default function GlobalSEO() {
     alternateName: "CloudOnFire",
     url: "https://cloudonfire.com",
     description:
-      "Best VPS Hosting in India — Gaming VPS, Cloud RDP, Enterprise DDoS Protection",
+      "Cloud on Fire is a VPS and Minecraft hosting provider based in India offering affordable, high-performance cloud servers with DDoS protection.",
     publisher: { "@id": "https://cloudonfire.com/#organization" },
     inLanguage: "en-IN",
     potentialAction: {
@@ -125,11 +150,10 @@ export default function GlobalSEO() {
       "DDoS Protection",
       "Infrastructure",
       "Blog",
-      "About Us",
-      "Why Us",
+      "About Cloud on Fire",
+      "Why Cloud on Fire",
       "FAQ",
       "Contact",
-      "Status",
     ],
     url: [
       "https://cloudonfire.com/vps-plans",
@@ -142,7 +166,6 @@ export default function GlobalSEO() {
       "https://cloudonfire.com/why-us",
       "https://cloudonfire.com/faq",
       "https://cloudonfire.com/contact",
-      "https://cloudonfire.com/status",
     ],
   };
 

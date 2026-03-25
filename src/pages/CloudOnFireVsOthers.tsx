@@ -14,16 +14,24 @@ import {
 
 const faqs = [
   {
+    q: "What is Cloud on Fire?",
+    a: "Cloud on Fire is a VPS and Minecraft hosting provider based in India. We offer high-performance cloud VPS hosting, gaming VPS for Minecraft and FiveM, and enterprise DDoS protection — all powered by Intel Xeon Platinum processors and NVMe SSD storage. Plans start at ₹199/month.",
+  },
+  {
     q: "Is Cloud on Fire the same as Cloud on Hire?",
     a: "No. Cloud on Fire is a completely independent cloud hosting company. We are not affiliated with, related to, or connected to 'Cloud on Hire' or any similarly named business. Cloud on Fire specializes in VPS hosting, gaming VPS, and DDoS-protected infrastructure in India.",
   },
   {
-    q: "What does Cloud on Fire do?",
-    a: "Cloud on Fire is an Indian cloud infrastructure company that provides high-performance VPS hosting, gaming VPS (for Minecraft, FiveM, etc.), Cloud RDP, and enterprise DDoS protection. Our servers run on Intel Xeon Platinum processors with NVMe SSD storage.",
+    q: "What services does Cloud on Fire provide?",
+    a: "Cloud on Fire provides Standard VPS hosting (from ₹199/mo), Gaming VPS for Minecraft, FiveM, and multiplayer game servers (from ₹299/mo), Cloud RDP for remote desktops, and enterprise-grade DDoS protection included on all plans.",
   },
   {
     q: "Where is Cloud on Fire based?",
-    a: "Cloud on Fire is headquartered in India with data centers in Delhi and Mumbai. We serve customers across India with low-latency connectivity and local support.",
+    a: "Cloud on Fire is headquartered in Noida, Uttar Pradesh, India with data centers in Delhi and Mumbai. We serve customers across India with low-latency connectivity and local support in English and Hindi.",
+  },
+  {
+    q: "Is Cloud on Fire reliable?",
+    a: "Yes. Cloud on Fire uses enterprise-grade Intel Xeon Platinum 8168 processors, NVMe SSD storage, and Tier-3+ data centers in India. All plans include DDoS protection and 24/7 customer support.",
   },
   {
     q: "How is Cloud on Fire different from other hosting providers?",
@@ -36,8 +44,8 @@ export default function CloudOnFireVsOthers() {
     <>
       <SEOHead
         title="Cloud on Fire vs Others – Independent VPS Hosting Brand | Cloud on Fire"
-        description="Cloud on Fire is an independent Indian hosting company. Not affiliated with Cloud on Hire or any similar brand. Learn about Cloud on Fire's VPS, gaming hosting, and DDoS protection."
-        keywords="Cloud on Fire, cloud on fire vs cloud on hire, is cloud on fire same as cloud on hire, Cloud on Fire hosting, Cloud on Fire VPS, independent hosting India"
+        description="Cloud on Fire is an independent Indian VPS and Minecraft hosting company. Not affiliated with Cloud on Hire or any similar brand. Learn about Cloud on Fire's hosting services."
+        keywords="Cloud on Fire, cloud on fire vs cloud on hire, is cloud on fire same as cloud on hire, what is Cloud on Fire, Cloud on Fire hosting, Cloud on Fire VPS, independent hosting India"
         canonical="/cloud-on-fire-vs-others"
         ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
@@ -72,7 +80,7 @@ export default function CloudOnFireVsOthers() {
                 Is an Independent Brand
               </h1>
               <p className="text-sm sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-                Cloud on Fire is a standalone Indian cloud hosting company. We are not affiliated with, related to, or connected to any similarly named businesses. This page clarifies our brand identity.
+                Cloud on Fire is a VPS and Minecraft hosting provider based in India. We are not affiliated with, related to, or connected to any similarly named businesses. This page clarifies our brand identity and what Cloud on Fire offers.
               </p>
             </motion.div>
           </div>
@@ -82,13 +90,13 @@ export default function CloudOnFireVsOthers() {
 
         <section className="py-16 sm:py-20">
           <div className="container-wide max-w-3xl">
-            <SectionHeader badge="About Us" title="Who Is Cloud on Fire?" description="An independent Indian cloud infrastructure company." />
+            <SectionHeader badge="About Cloud on Fire" title="Who Is Cloud on Fire?" description="An independent Indian cloud infrastructure company." />
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glow-card p-6 sm:p-8 mt-8">
               <h2 className="text-lg font-bold text-foreground mb-4">Cloud on Fire — Our Identity</h2>
               <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-                <p><strong className="text-foreground">Cloud on Fire</strong> is an Indian cloud hosting provider founded to deliver high-performance VPS hosting, gaming server infrastructure, and enterprise DDoS protection at affordable prices.</p>
-                <p>We operate our own infrastructure powered by Intel Xeon Platinum 8168 processors and NVMe SSD storage in Tier-3+ data centers located in Delhi and Mumbai, India.</p>
-                <p>Our services include Standard VPS (from ₹199/mo), Gaming VPS for Minecraft, FiveM, and other multiplayer games (from ₹299/mo), and Cloud RDP for remote desktop access.</p>
+                <p><strong className="text-foreground">Cloud on Fire</strong> is a VPS and Minecraft hosting provider based in India. We deliver high-performance VPS hosting, gaming server infrastructure, and enterprise DDoS protection at affordable prices.</p>
+                <p>We operate our infrastructure powered by Intel Xeon Platinum 8168 processors and NVMe SSD storage in Tier-3+ data centers located in Delhi and Mumbai, India.</p>
+                <p>Our services include Standard <Link to="/vps-plans" className="text-primary hover:underline">VPS hosting</Link> (from ₹199/mo), <Link to="/gaming-vps" className="text-primary hover:underline">Gaming VPS</Link> for Minecraft, FiveM, and other multiplayer games (from ₹299/mo), and Cloud RDP for remote desktop access.</p>
                 <div className="p-4 rounded-lg border border-primary/20 bg-primary/5 mt-4">
                   <div className="flex items-start gap-3">
                     <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -121,10 +129,10 @@ export default function CloudOnFireVsOthers() {
         <section className="section-padding">
           <div className="container-wide text-center max-w-2xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Explore <span className="text-fire-gradient">Cloud on Fire</span> Services</h2>
-            <p className="text-muted-foreground mb-8">Discover what Cloud on Fire has to offer — from affordable VPS hosting to gaming-optimized infrastructure.</p>
+            <p className="text-muted-foreground mb-8">Discover what Cloud on Fire has to offer — from <Link to="/cheap-vps-india" className="text-primary hover:underline">affordable VPS hosting</Link> to <Link to="/minecraft-hosting-india" className="text-primary hover:underline">gaming-optimized Minecraft servers</Link>.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/vps-plans"><Button size="lg" className="btn-neon h-12 px-8"><span className="relative z-10 flex items-center gap-2">VPS Plans <ArrowRight className="w-4 h-4" /></span></Button></Link>
-              <Link to="/gaming-vps"><Button variant="outline" size="lg" className="h-12 px-8 border-primary/30 text-primary hover:bg-primary/10">Gaming VPS</Button></Link>
+              <Link to="/vps-plans"><Button size="lg" className="btn-neon h-12 px-8"><span className="relative z-10 flex items-center gap-2">Cloud on Fire VPS Plans <ArrowRight className="w-4 h-4" /></span></Button></Link>
+              <Link to="/gaming-vps"><Button variant="outline" size="lg" className="h-12 px-8 border-primary/30 text-primary hover:bg-primary/10">Cloud on Fire Gaming VPS</Button></Link>
             </div>
           </div>
         </section>
