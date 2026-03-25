@@ -22,7 +22,7 @@ export default function CloudOnFireHosting() {
     <>
       <SEOHead
         title="Cloud on Fire Hosting – VPS, Gaming & Cloud Servers in India"
-        description="Cloud on Fire Hosting provides high-performance VPS and gaming server hosting in India. Intel Xeon Platinum hardware, NVMe storage, and DDoS protection from ₹199/month."
+        description="Cloud on Fire is a VPS and Minecraft hosting provider based in India. We offer high-performance cloud servers with Intel Xeon Platinum hardware, NVMe storage, and DDoS protection from ₹199/month."
         keywords="Cloud on Fire hosting, cloud on fire VPS hosting, hosting India, VPS India, game hosting India, cloud server India"
         canonical="/cloud-on-fire-hosting"
         ogImage="https://cloudonfire.com/images/og-logo.png"
