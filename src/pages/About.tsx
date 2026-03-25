@@ -52,8 +52,8 @@ export default function About() {
     <>
       <SEOHead
         title="About Cloud on Fire — India's Performance-Focused VPS Hosting Company"
-        description="Cloud on Fire is India's performance-focused VPS hosting company. Enterprise-grade infrastructure with Intel Xeon Platinum processors, NVMe storage, and DDoS protection — accessible to developers and businesses."
-        keywords="about Cloud on Fire, VPS hosting company India, Indian hosting provider, Cloud on Fire team, Cloud on Fire story"
+        description="Cloud on Fire is a VPS and Minecraft hosting provider based in India. Founded to deliver enterprise-grade infrastructure with Intel Xeon Platinum processors, NVMe storage, and DDoS protection — accessible to developers and businesses."
+        keywords="about Cloud on Fire, what is Cloud on Fire, Cloud on Fire hosting, VPS hosting company India, Indian hosting provider, Cloud on Fire team"
         canonical="/about"
         ogImage="https://cloudonfire.com/images/og-logo.png"
         jsonLd={[
@@ -62,7 +62,7 @@ export default function About() {
             "@type": "AboutPage",
             name: "About Cloud on Fire",
             url: "https://cloudonfire.com/about",
-            description: "Learn about Cloud on Fire — India's performance-focused VPS hosting company founded to deliver enterprise-grade infrastructure at accessible prices.",
+            description: "Cloud on Fire is a VPS and Minecraft hosting provider based in India. Learn about our mission, team, and enterprise-grade infrastructure.",
             mainEntity: { "@id": "https://cloudonfire.com/#organization" },
           },
           {
@@ -70,7 +70,7 @@ export default function About() {
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: "https://cloudonfire.com/" },
-              { "@type": "ListItem", position: 2, name: "About", item: "https://cloudonfire.com/about" },
+              { "@type": "ListItem", position: 2, name: "About Cloud on Fire", item: "https://cloudonfire.com/about" },
             ],
           },
         ]}
@@ -89,7 +89,7 @@ export default function About() {
               className="max-w-3xl mx-auto text-center"
             >
               <span className="glow-badge-fire mb-6 inline-flex">
-                About Us
+                About Cloud on Fire
               </span>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight mb-4 sm:mb-6">
                 Building Infrastructure
@@ -97,9 +97,9 @@ export default function About() {
                 <span className="text-fire-gradient">That Developers Trust</span>
               </h1>
               <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Cloud on Fire was founded with a simple mission: provide enterprise-grade 
+                Cloud on Fire is a VPS and Minecraft hosting provider based in India. We deliver enterprise-grade 
                 hosting infrastructure that's accessible, affordable, and reliable for 
-                developers and businesses in India.
+                developers, gamers, and businesses.
               </p>
             </motion.div>
           </div>
@@ -112,7 +112,7 @@ export default function About() {
           <div className="container-wide">
             <SectionHeader
               badge="Leadership"
-              title="Meet Our Founders"
+              title="Meet the Cloud on Fire Team"
               description="The people behind Cloud on Fire's vision and execution."
             />
 
@@ -154,7 +154,7 @@ export default function About() {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
-                  Our Story
+                  The Cloud on Fire Story
                 </h2>
                 <div className="space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
                   <p>
@@ -164,13 +164,13 @@ export default function About() {
                     real workloads.
                   </p>
                   <p>
-                    We believed there had to be a middle ground—hosting that performs like 
+                    We believed there had to be a middle ground — hosting that performs like 
                     enterprise infrastructure but is priced fairly for the Indian market. 
                     So we built it ourselves.
                   </p>
                   <p>
-                    Today, Cloud on Fire powers hundreds of game servers, high-traffic websites, 
-                    and critical applications across India.
+                    Today, Cloud on Fire provides VPS hosting, gaming VPS for Minecraft and FiveM, 
+                    and DDoS-protected cloud infrastructure to developers and businesses across India.
                   </p>
                 </div>
               </motion.div>
@@ -184,7 +184,7 @@ export default function About() {
               >
                 <div className="grid grid-cols-2 gap-8 text-center">
                   {[
-                    { value: "99.9%", label: "Uptime Record" },
+                    { value: "99.9%", label: "Uptime Target" },
                     { value: "24/7", label: "Support Available" },
                     { value: "India", label: "Based & Operated" },
                     { value: "Apr '26", label: "Launch Date" },
@@ -207,7 +207,7 @@ export default function About() {
           <div className="container-wide">
             <SectionHeader
               badge="Our Values"
-              title="What Drives Us"
+              title="What Drives Cloud on Fire"
               description="These principles guide every decision we make."
             />
 
@@ -246,17 +246,17 @@ export default function About() {
               className="glow-card glow-card-popular !rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto text-center"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ready to Experience the Difference?
+                Ready to Experience Cloud on Fire?
               </h2>
               <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-                Join hundreds of developers and businesses who trust Cloud on Fire 
-                for their hosting needs.
+                Join developers and businesses who trust Cloud on Fire 
+                for their VPS and gaming server hosting needs.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/vps-plans">
                   <Button size="lg" className="btn-fire w-full sm:w-auto h-12 px-8">
                     <span className="relative z-10 flex items-center gap-2">
-                      View VPS Hosting Plans
+                      View Cloud on Fire VPS Plans
                       <ArrowRight className="w-4 h-4" />
                     </span>
                   </Button>
@@ -268,10 +268,10 @@ export default function About() {
                 </Link>
               </div>
               <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
-                <Link to="/why-us" className="hover:text-primary transition-colors">Why choose us →</Link>
-                <Link to="/infrastructure" className="hover:text-primary transition-colors">Our infrastructure →</Link>
+                <Link to="/why-us" className="hover:text-primary transition-colors">Why choose Cloud on Fire →</Link>
+                <Link to="/infrastructure" className="hover:text-primary transition-colors">Cloud on Fire infrastructure →</Link>
                 <Link to="/ddos-protection" className="hover:text-primary transition-colors">DDoS protection →</Link>
-                <Link to="/contact" className="hover:text-primary transition-colors">Contact us →</Link>
+                <Link to="/contact" className="hover:text-primary transition-colors">Contact Cloud on Fire →</Link>
               </div>
             </motion.div>
           </div>
