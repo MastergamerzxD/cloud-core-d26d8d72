@@ -30,27 +30,34 @@ export default function BlogPost() {
   if (loading) return <Layout><div className="section-padding container-wide text-center text-muted-foreground">Loading...</div></Layout>;
   if (!post) return <Layout><div className="section-padding container-wide text-center"><h1 className="text-2xl font-bold text-foreground mb-4">Post not found</h1><Link to="/blog" className="text-primary hover:underline">← Back to blog</Link></div></Layout>;
 
+  const seoTitle = (post.meta_title || `${post.title} — Cloud on Fire Blog`).slice(0, 60);
+  const seoDesc = (post.meta_description || post.excerpt || `Read "${post.title}" on the Cloud on Fire blog. Expert insights on VPS hosting, gaming servers, and cloud infrastructure in India.`).slice(0, 160);
+  const wordCount = (post.content || "").replace(/<[^>]*>/g, " ").split(/\s+/).filter(Boolean).length;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
   return (
     <Layout>
       <SEOHead
-        title={`${post.meta_title || post.title} — Cloud on Fire Blog`}
-        description={post.meta_description || post.excerpt || ""}
-        keywords={post.tags?.join(", ") || ""}
+        title={seoTitle}
+        description={seoDesc}
+        keywords={post.tags?.join(", ") || "VPS hosting India, Cloud on Fire"}
         canonical={post.canonical_url || `/blog/${post.slug}`}
         ogType="article"
-        ogImage={post.featured_image}
+        ogImage={post.featured_image || "https://cloudonfire.com/images/og-logo.png"}
         jsonLd={[
           {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             headline: post.title,
-            description: post.meta_description || post.excerpt || "",
-            image: post.featured_image || "https://cloudonfire.com/images/logo-schema.png",
+            description: seoDesc,
+            image: post.featured_image || "https://cloudonfire.com/images/og-logo.png",
             datePublished: post.publish_date,
             dateModified: post.updated_at || post.publish_date,
+            wordCount,
             author: {
-              "@type": "Person",
+              "@type": "Organization",
               name: post.author_name || "Cloud on Fire",
+              url: "https://cloudonfire.com",
             },
             publisher: {
               "@type": "Organization",
@@ -94,9 +101,10 @@ export default function BlogPost() {
 
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{post.title}</h1>
 
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-8">
             {post.author_name && <span>By {post.author_name}</span>}
-            {post.publish_date && <span>{new Date(post.publish_date).toLocaleDateString()}</span>}
+            {post.publish_date && <time dateTime={post.publish_date}>{new Date(post.publish_date).toLocaleDateString()}</time>}
+            <span>{readingTime} min read</span>
             {post.tags?.length > 0 && (
               <div className="flex gap-1">
                 {post.tags.map((tag: string) => (

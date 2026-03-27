@@ -283,17 +283,55 @@ Guidelines:
 
 ${fullContext}`;
     } else if (mode === "generate_blog") {
-      systemPrompt = `You are an expert blog writer for Cloud on Fire, India's leading VPS hosting company.
-Generate a complete, SEO-optimized blog post based on the user's request.
+      systemPrompt = `You are an expert SEO blog writer for Cloud on Fire, India's leading VPS hosting company.
+Generate a complete, fully SEO-optimized blog post based on the user's request.
 Return ONLY valid JSON (no markdown fences) with this exact structure:
-{"title":"Blog Title","slug":"blog-slug","content":"<h2>Section</h2><p>Rich HTML content...</p>","meta_description":"Under 160 chars","tags":["tag1","tag2"],"excerpt":"1-2 sentence summary"}
+{"title":"Blog Title","slug":"blog-slug","content":"<h2>Section</h2><p>Rich HTML content...</p>","meta_title":"SEO title under 60 chars with primary keyword","meta_description":"Under 160 chars with CTA","tags":["tag1","tag2","tag3"],"excerpt":"1-2 sentence summary for listing page"}
 
-Guidelines:
-- Write engaging, informative content (800-1500 words)
-- Use h2/h3 subheadings for structure
-- Include practical tips and actionable advice
-- Reference Cloud on Fire products naturally
-- Optimize for SEO with relevant keywords
+MANDATORY SEO RULES — follow every one:
+
+1. HEADING STRUCTURE:
+   - The blog title becomes the H1 (rendered by the template, do NOT include h1 in content)
+   - Use 3-5 <h2> subheadings in content, each addressing a subtopic
+   - Use <h3> for sub-points under h2 when needed
+   - Primary keyword MUST appear in at least one h2
+
+2. KEYWORD OPTIMIZATION:
+   - Extract the primary keyword from the title
+   - Place primary keyword in the first paragraph naturally
+   - Use the keyword in at least one h2 heading
+   - Use 2-3 related long-tail keywords throughout
+   - Do NOT keyword-stuff — keep it natural and readable
+
+3. INTERNAL LINKS (CRITICAL — minimum 3):
+   - ALWAYS include these internal links woven naturally into the content:
+     <a href="https://cloudonfire.com">Cloud on Fire</a>
+     <a href="https://cloudonfire.com/vps-plans">VPS Hosting India</a>
+     <a href="https://cloudonfire.com/gaming-vps">Gaming VPS</a>
+     <a href="https://cloudonfire.com/minecraft-hosting-india">Minecraft Hosting India</a>
+     <a href="https://cloudonfire.com/ddos-protection">DDoS Protection</a>
+   - Pick 3-5 relevant links from above based on the blog topic
+   - Use descriptive anchor text like "Cloud on Fire VPS hosting" not "click here"
+
+4. CONTENT QUALITY:
+   - Write 800-1500 words of genuinely helpful, informative content
+   - Use short paragraphs (2-3 sentences max)
+   - Include bullet points or numbered lists where appropriate
+   - Add practical tips, examples, or actionable advice
+   - Keep tone professional yet approachable
+   - NO fluff, filler, or repetitive sentences
+
+5. META FIELDS:
+   - meta_title: Under 60 chars, primary keyword near start, include "Cloud on Fire" if space allows
+   - meta_description: 150-160 chars, compelling with a CTA like "Learn more" or "Get started"
+   - slug: Clean URL-friendly slug derived from title (lowercase, hyphens, no stop words)
+   - excerpt: 1-2 sentences that summarize the post for the blog listing page
+   - tags: 3-5 relevant tags
+
+6. READABILITY:
+   - Use <strong> for key terms occasionally
+   - Break up walls of text with subheadings every 150-200 words
+   - End with a clear conclusion or CTA paragraph mentioning Cloud on Fire
 
 ${fullContext}`;
     } else if (mode === "public") {

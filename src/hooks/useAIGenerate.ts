@@ -60,13 +60,19 @@ export function useAIGenerate() {
       const { parsed } = await resp.json();
       if (!parsed) throw new Error("AI returned invalid format");
 
+      const autoMetaTitle = parsed.meta_title || `${parsed.title} — Cloud on Fire`;
+      const autoMetaDesc = parsed.meta_description || parsed.excerpt || `Learn about ${parsed.title}. Cloud on Fire provides high-performance VPS hosting in India.`;
+
       const { data, error } = await supabase.from("blog_posts").insert({
         title: parsed.title,
         slug: parsed.slug,
         content: parsed.content,
-        meta_description: parsed.meta_description,
+        meta_title: autoMetaTitle.slice(0, 60),
+        meta_description: autoMetaDesc.slice(0, 160),
         tags: parsed.tags || [],
         excerpt: parsed.excerpt || "",
+        author_name: "Cloud on Fire",
+        publish_date: new Date().toISOString(),
         status: "draft",
       }).select("id").single();
 
