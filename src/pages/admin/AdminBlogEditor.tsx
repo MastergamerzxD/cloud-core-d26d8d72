@@ -60,13 +60,21 @@ export default function AdminBlogEditor() {
       return;
     }
     setSaving(true);
+
+    // Auto-generate SEO fields if empty
+    const autoMetaTitle = form.meta_title || `${form.title} — Cloud on Fire`.slice(0, 60);
+    const autoMetaDesc = form.meta_description || (form.excerpt ? form.excerpt.slice(0, 160) : `${form.title}. Learn more from Cloud on Fire, India's leading VPS hosting provider.`.slice(0, 160));
+    const autoAuthor = form.author_name || "Cloud on Fire";
+    const autoCanonical = form.canonical_url || `/blog/${form.slug}`;
+    const autoPublishDate = form.publish_date ? new Date(form.publish_date).toISOString() : (status === "published" ? new Date().toISOString() : null);
+
     const payload = {
       title: form.title, slug: form.slug, excerpt: form.excerpt, content: form.content,
-      featured_image: form.featured_image, author_name: form.author_name,
+      featured_image: form.featured_image, author_name: autoAuthor,
       category_id: form.category_id || null, status: status || form.status,
-      publish_date: form.publish_date ? new Date(form.publish_date).toISOString() : null,
-      meta_title: form.meta_title, meta_description: form.meta_description,
-      canonical_url: form.canonical_url, tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
+      publish_date: autoPublishDate,
+      meta_title: autoMetaTitle, meta_description: autoMetaDesc,
+      canonical_url: autoCanonical, tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
       author_id: user?.id, updated_at: new Date().toISOString(),
     };
 
