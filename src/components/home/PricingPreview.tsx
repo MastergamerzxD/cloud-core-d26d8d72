@@ -8,7 +8,7 @@ const pricingPlans = [
   {
     name: "Starter",
     price: "₹199",
-    description: "Cloud VPS starting point",
+    description: "Perfect for personal projects & small websites",
     type: "budget" as const,
     features: [
       "2 vCPU Cores",
@@ -19,11 +19,12 @@ const pricingPlans = [
       "1x IPv4 Address",
     ],
     popular: false,
+    badge: "Best Value",
   },
   {
     name: "Gamer Plus",
     price: "₹399",
-    description: "Popular for game servers",
+    description: "Recommended for game servers & apps",
     type: "pro" as const,
     features: [
       "4 vCPU Cores",
@@ -31,14 +32,15 @@ const pricingPlans = [
       "60 GB NVMe Storage",
       "2000 GB Bandwidth",
       "Advanced DDoS Protection",
-      "Gaming Support",
+      "Gaming Optimized",
     ],
     popular: true,
+    badge: "Most Popular",
   },
   {
     name: "Plus",
     price: "₹399",
-    description: "Best value for websites & apps",
+    description: "Great for businesses & high-traffic sites",
     type: "budget" as const,
     features: [
       "4 vCPU Cores",
@@ -49,29 +51,25 @@ const pricingPlans = [
       "1x IPv4 Address",
     ],
     popular: false,
+    badge: "Recommended",
   },
 ];
 
 export default function PricingPreview() {
   return (
-    <section className="section-padding bg-card/60">
+    <section className="section-padding bg-card/40">
       <div className="container-wide">
         <SectionHeader
           badge="Pricing"
-          title="Transparent Pricing, No Hidden Fees"
-          description="All prices in INR, billed monthly. No setup fees. Intel Platinum 8168 on all plans."
+          title="Simple, Transparent Pricing"
+          description="No hidden fees. All plans include DDoS protection, NVMe storage, and 24/7 support."
         />
 
         {/* Pre-order notice */}
-        <div className="max-w-3xl mx-auto mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5 text-center">
-          <p className="text-sm text-foreground font-medium">
-            🔥 Pre-orders are currently open. Use coupon <span className="font-black text-primary tracking-wide">PREORDER40</span> to receive 40% off your first month.
+        <div className="max-w-2xl mx-auto mb-8 p-4 rounded-xl border border-primary/20 bg-primary/5 text-center">
+          <p className="text-sm text-foreground">
+            🔥 Use coupon <span className="font-black text-primary tracking-wide">PREORDER40</span> for 40% off your first month.
           </p>
-          <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer">
-            <Button size="sm" className="btn-fire mt-3">
-              <span className="relative z-10">Pre-Order Now</span>
-            </Button>
-          </a>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
