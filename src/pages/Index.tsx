@@ -8,6 +8,7 @@ import ServicesGrid from "@/components/home/ServicesGrid";
 // Lazy load below-fold sections for better Core Web Vitals
 const GamesSection = lazy(() => import("@/components/home/GamesSection"));
 const FeaturesSection = lazy(() => import("@/components/home/FeaturesSection"));
+const TrustSection = lazy(() => import("@/components/home/TrustSection"));
 const PricingPreview = lazy(() => import("@/components/home/PricingPreview"));
 const InfrastructureSection = lazy(() => import("@/components/home/InfrastructureSection"));
 const TrustBadgesSection = lazy(() => import("@/components/home/TrustBadgesSection"));
@@ -169,13 +170,17 @@ export default function Index() {
         </Suspense>
         <Divider variant="fire" />
         <Suspense fallback={<SectionFallback />}>
-          <PricingPreview />
+          <TrustSection />
         </Suspense>
         <Divider />
         <Suspense fallback={<SectionFallback />}>
-          <InfrastructureSection />
+          <PricingPreview />
         </Suspense>
         <Divider variant="fire" />
+        <Suspense fallback={<SectionFallback />}>
+          <InfrastructureSection />
+        </Suspense>
+        <Divider />
         <Suspense fallback={<SectionFallback />}>
           <TrustBadgesSection />
         </Suspense>
