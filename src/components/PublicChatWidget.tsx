@@ -7,22 +7,31 @@ type Message = { role: "user" | "assistant"; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`;
 
+const quickOptions = [
+  { label: "₹199–₹500 Plans", message: "What VPS plans do you have between ₹199 and ₹500?" },
+  { label: "₹500–₹1000 Plans", message: "What VPS plans do you have between ₹500 and ₹1000?" },
+  { label: "Gaming VPS", message: "What gaming VPS plans do you offer for Minecraft?" },
+  { label: "Best for me?", message: "I need help choosing the right VPS plan for my needs." },
+];
+
 export default function PublicChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "👋 Hi! I'm Cloud on Fire's assistant. Ask me about our VPS hosting, DDoS protection, pricing, or anything else!" },
+    { role: "assistant", content: "👋 Hi! Tell me your budget and I'll suggest the best VPS plan for you ⚡" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showQuickOptions, setShowQuickOptions] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo(0, scrollRef.current.scrollHeight);
   }, [messages]);
 
-  const send = async () => {
-    if (!input.trim() || loading) return;
-    const userMsg: Message = { role: "user", content: input.trim() };
+  const sendMessage = async (text: string) => {
+    if (!text.trim() || loading) return;
+    setShowQuickOptions(false);
+    const userMsg: Message = { role: "user", content: text.trim() };
     const allMessages = [...messages, userMsg];
     setMessages(allMessages);
     setInput("");
@@ -82,8 +91,8 @@ export default function PublicChatWidget() {
           } catch {}
         }
       }
-    } catch (e: any) {
-      updateAssistant("Sorry, I'm having trouble responding right now. Please try again or visit /contact for help.");
+    } catch {
+      updateAssistant("Sorry, I'm having trouble right now. Please try again or contact us at hello@cloudonfire.com.");
     }
     setLoading(false);
   };
@@ -101,12 +110,15 @@ export default function PublicChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-[22rem] h-[28rem] bg-card border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+    <div className="fixed bottom-6 right-6 z-50 w-[22rem] h-[30rem] bg-card border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-primary to-primary/80">
         <div className="flex items-center gap-2">
           <MessageCircle className="h-5 w-5 text-primary-foreground" />
-          <span className="font-semibold text-primary-foreground text-sm">Cloud on Fire Assistant</span>
+          <div>
+            <span className="font-semibold text-primary-foreground text-sm block">Cloud on Fire</span>
+            <span className="text-primary-foreground/70 text-[10px]">VPS Sales Assistant</span>
+          </div>
         </div>
         <button onClick={() => setOpen(false)} className="text-primary-foreground/80 hover:text-primary-foreground">
           <X className="h-4 w-4" />
@@ -129,6 +141,22 @@ export default function PublicChatWidget() {
             </div>
           </div>
         ))}
+
+        {/* Quick options */}
+        {showQuickOptions && !loading && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {quickOptions.map((opt) => (
+              <button
+                key={opt.label}
+                onClick={() => sendMessage(opt.message)}
+                className="px-3 py-1.5 text-xs font-medium rounded-full border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        )}
+
         {loading && messages[messages.length - 1]?.role === "user" && (
           <div className="flex justify-start">
             <div className="bg-muted rounded-lg px-3 py-2">
@@ -144,16 +172,16 @@ export default function PublicChatWidget() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask a question..."
+            placeholder="Ask about plans, pricing..."
             className="flex-1 h-9 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
-                send();
+                sendMessage(input);
               }
             }}
           />
-          <Button onClick={send} disabled={loading || !input.trim()} size="icon" className="h-9 w-9 shrink-0">
+          <Button onClick={() => sendMessage(input)} disabled={loading || !input.trim()} size="icon" className="h-9 w-9 shrink-0">
             <Send className="h-4 w-4" />
           </Button>
         </div>

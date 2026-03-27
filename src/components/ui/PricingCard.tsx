@@ -115,7 +115,7 @@ export default function PricingCard({
           variant={popular ? "default" : "outline"}
         >
           <span className={popular ? "relative z-10" : ""}>
-            {price === "Coming Soon" ? "Get Notified" : "Pre-Order Now"}
+            {price === "Coming Soon" ? "Get Notified" : "Start Hosting"}
           </span>
         </Button>
       </a>
