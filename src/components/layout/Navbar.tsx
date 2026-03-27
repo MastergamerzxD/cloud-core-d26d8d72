@@ -113,20 +113,32 @@ export default function Navbar() {
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground text-sm">Contact Sales</Button>
             </Link>
             <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="relative group">
-              <Button
-                className="relative overflow-hidden px-5 py-2.5 h-11 text-sm font-bold rounded-lg transition-all duration-200 hover:scale-105 border-0 shadow-[0_0_20px_hsl(24_95%_53%_/_0.25)]"
-                style={{
-                  background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%))",
-                }}
+              <motion.div
+                animate={{ boxShadow: [
+                  "0 0 15px hsl(24 95% 53% / 0.3), 0 0 30px hsl(24 95% 53% / 0.1)",
+                  "0 0 25px hsl(24 95% 53% / 0.5), 0 0 50px hsl(24 95% 53% / 0.2)",
+                  "0 0 15px hsl(24 95% 53% / 0.3), 0 0 30px hsl(24 95% 53% / 0.1)",
+                ]}}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-lg"
               >
-                <span className="relative z-10 flex items-center gap-2 text-white">
-                  <Rocket className="w-4 h-4" />
-                  Start Hosting
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              </Button>
+                <Button
+                  className="relative overflow-hidden px-5 py-2.5 h-11 text-sm font-bold rounded-lg transition-transform duration-200 hover:scale-105 border-0"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%), hsl(330 80% 55%))",
+                  }}
+                >
+                  <span className="relative z-10 flex items-center gap-2 text-white">
+                    <Rocket className="w-4 h-4" />
+                    Pre-Order Now
+                  </span>
+                  {/* Shimmer overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                </Button>
+              </motion.div>
+              {/* 40% OFF badge */}
               <span
-                className="absolute -top-2.5 -right-2.5 px-2 py-0.5 text-[10px] font-black rounded-full text-white z-20"
+                className="absolute -top-2.5 -right-2.5 px-2 py-0.5 text-[10px] font-black rounded-full text-white z-20 animate-bounce"
                 style={{
                   background: "linear-gradient(135deg, hsl(142 70% 45%), hsl(142 70% 35%))",
                   boxShadow: "0 2px 8px hsl(142 70% 45% / 0.4)",
@@ -149,16 +161,17 @@ export default function Navbar() {
               <div className="py-3 sm:py-4 space-y-1 sm:space-y-2 max-h-[70vh] overflow-y-auto">
                 {/* Pre-Order CTA at the top of mobile menu */}
                 <div className="px-4 pb-3 border-b border-border/30 mb-2">
-                  <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="block">
+                  <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="block relative">
                     <Button
-                      className="w-full h-12 text-sm font-bold rounded-xl border-0"
+                      className="w-full h-12 text-sm font-bold rounded-xl border-0 relative overflow-hidden"
                       style={{
-                        background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%))",
+                        background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%), hsl(330 80% 55%))",
+                        boxShadow: "0 0 20px hsl(24 95% 53% / 0.3), 0 0 40px hsl(24 95% 53% / 0.1)",
                       }}
                     >
                       <span className="relative z-10 flex items-center justify-center gap-2 text-white">
                         <Rocket className="w-4 h-4" />
-                        Start Hosting — 40% OFF
+                        Pre-Order Now — 40% OFF
                       </span>
                     </Button>
                   </a>

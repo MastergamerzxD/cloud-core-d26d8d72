@@ -1,27 +1,26 @@
 import { motion } from "framer-motion";
-import { Zap, Server, IndianRupee, Activity } from "lucide-react";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Server, Shield, Cpu, HardDrive } from "lucide-react";
 
 const trustPoints = [
   {
-    icon: Zap,
-    title: "Fast Deployment",
-    description: "Get your VPS server up and running in minutes, not hours. One-click setup with your choice of OS.",
-  },
-  {
     icon: Server,
-    title: "High-Performance VPS",
-    description: "Intel Xeon Platinum 8168 processors, NVMe Gen4 SSDs, and 10Gbps networking for demanding workloads.",
+    title: "Enterprise Hardware",
+    description: "Intel Xeon Platinum 8168 processors with ECC RAM",
   },
   {
-    icon: IndianRupee,
-    title: "Affordable Pricing",
-    description: "Enterprise-grade infrastructure starting at just ₹199/month. No hidden fees, no surprises.",
+    icon: Shield,
+    title: "Multi-Layer Security",
+    description: "Hardware firewalls, network segmentation, and real-time monitoring",
   },
   {
-    icon: Activity,
-    title: "Reliable Uptime",
-    description: "99.9% uptime SLA backed by Tier-3+ data centers in India with redundant power and cooling.",
+    icon: Cpu,
+    title: "Redundant Systems",
+    description: "N+1 power and cooling with automatic failover capabilities",
+  },
+  {
+    icon: HardDrive,
+    title: "NVMe Storage",
+    description: "High-speed solid-state drives with RAID protection",
   },
 ];
 
@@ -29,29 +28,88 @@ export default function TrustSection() {
   return (
     <section className="section-padding">
       <div className="container-wide">
-        <SectionHeader
-          badge="Why Cloud on Fire"
-          title="Why Choose Cloud on Fire?"
-          description="Cloud on Fire is a VPS hosting provider built for performance, reliability, and affordability."
-        />
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+          {/* Left content */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-primary bg-primary/10 rounded-full mb-3 sm:mb-4">
+              Infrastructure
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
+              Built on Enterprise-Grade
+              <br className="hidden sm:block" />
+              <span className="text-fire-gradient"> Hardware You Can Trust</span>
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
+              Our infrastructure is engineered with the same principles used by major cloud providers. 
+              Every server, switch, and cable is selected for reliability and performance.
+            </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-5xl mx-auto">
-          {trustPoints.map((point, index) => (
-            <motion.div
-              key={point.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glow-card p-5 sm:p-6 text-center group hover:border-primary/30 transition-all duration-300"
-            >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                <point.icon className="w-6 h-6 text-primary" />
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 sm:gap-6">
+              {trustPoints.map((point, index) => (
+                <motion.div
+                  key={point.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="flex gap-3 sm:gap-4"
+                >
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <point.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-semibold text-foreground mb-0.5 sm:mb-1">{point.title}</h4>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">{point.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right visual - hidden on small mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative hidden sm:block"
+          >
+            <div className="relative aspect-square max-w-sm lg:max-w-md mx-auto">
+              {/* Background glow */}
+              <div className="absolute inset-0 bg-primary/10 rounded-full blur-[100px]" />
+              
+              {/* Server rack visualization */}
+              <div className="relative glass-card p-4 sm:p-8 h-full flex flex-col justify-center">
+                <div className="space-y-2 sm:space-y-3">
+                  {[...Array(6)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="h-10 sm:h-12 rounded-lg bg-secondary/50 border border-border/50 flex items-center px-3 sm:px-4 gap-2 sm:gap-3"
+                    >
+                      <div className="flex gap-1">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary/50" />
+                      </div>
+                      <div className="flex-1 h-1.5 sm:h-2 rounded-full bg-border/50" />
+                      <div className="flex gap-0.5 sm:gap-1">
+                        {[...Array(4)].map((_, j) => (
+                          <div key={j} className="w-0.5 sm:w-1 h-5 sm:h-6 rounded-full bg-primary/30" />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 sm:mt-6 text-center">
+                  <span className="text-xs sm:text-sm text-muted-foreground">Active Servers: Online</span>
+                </div>
               </div>
-              <h3 className="text-sm sm:text-base font-semibold text-foreground mb-2">{point.title}</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{point.description}</p>
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
