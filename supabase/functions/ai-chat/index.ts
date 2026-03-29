@@ -67,7 +67,7 @@ CONTACT INFORMATION:
 - Certification: Tier-3+ certified facility
 - Processors: Intel Xeon Platinum 8168
 - Storage: NVMe Gen4 SSDs
-- Network: 10 Gbps+ uplinks, premium peering
+- Network: 1 Gbps uplinks, premium peering
 - DDoS Scrubbing: 1 Tbps capacity
 - Power: Redundant power with UPS and diesel generators
 - Cooling: Precision cooling systems

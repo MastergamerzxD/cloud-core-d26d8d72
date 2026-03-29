@@ -27,7 +27,7 @@ const specs = [
     icon: Network,
     title: "Premium Network",
     description: "Multiple Tier-1 transit providers with BGP-optimized routing for the lowest possible latency across India.",
-    details: ["10Gbps+ uplinks", "Multiple peering points", "BGP optimized routing", "Redundant connectivity"],
+    details: ["1Gbps uplinks", "Multiple peering points", "BGP optimized routing", "Redundant connectivity"],
   },
   {
     icon: Shield,

@@ -76,7 +76,7 @@ const useCases = [
 const keyFeatures = [
   { icon: Cpu, label: "Enterprise Intel Xeon CPUs", description: "Intel Xeon Platinum 8168 processors for workstation-level performance." },
   { icon: HardDrive, label: "NVMe SSD Storage", description: "Enterprise NVMe Gen4 drives with up to 7GB/s read speeds." },
-  { icon: Wifi, label: "High-speed Networking", description: "10Gbps uplinks with optimized routing for smooth remote access." },
+  { icon: Wifi, label: "High-speed Networking", description: "1Gbps uplinks with optimized routing for smooth remote access." },
   { icon: Lock, label: "Secure Remote Access", description: "Encrypted RDP connections with enterprise-grade security." },
   { icon: Monitor, label: "Windows Server", description: "Licensed Windows Server with full administrator access." },
   { icon: Shield, label: "DDoS Protection", description: "Always-on enterprise DDoS mitigation included on every plan." },

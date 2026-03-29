@@ -19,7 +19,7 @@ const infraCards = [
   {
     icon: Globe,
     title: "Global Networking",
-    description: "Premium 10Gbps uplinks with optimized peering for low-latency connectivity across India and beyond.",
+    description: "Premium 1Gbps uplinks with optimized peering for low-latency connectivity across India and beyond.",
     gradient: "from-neon-cyan/15 to-transparent",
   },
   {
