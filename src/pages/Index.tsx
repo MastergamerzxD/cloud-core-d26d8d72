@@ -156,9 +156,9 @@ export default function Index() {
       <Layout>
         <HeroSection />
         <Divider variant="fire" />
-        <ReviewsSection />
-        <Divider />
         <ServicesGrid />
+        <Divider />
+        <ReviewsSection />
         <Divider variant="fire" />
         <Suspense fallback={<SectionFallback />}>
           <GamesSection />
