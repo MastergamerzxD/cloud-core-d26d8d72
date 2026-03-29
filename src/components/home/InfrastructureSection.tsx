@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Server, Building2, Globe, TrendingUp } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
-import LatencyTestTool from "@/components/tools/LatencyTestTool";
+
 
 const infraCards = [
   {
@@ -62,9 +62,6 @@ export default function InfrastructureSection() {
               </div>
               </motion.div>
           ))}
-          
-          {/* Latency test preview card */}
-          <LatencyTestTool variant="compact" />
         </div>
       </div>
     </section>
