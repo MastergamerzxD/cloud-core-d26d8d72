@@ -167,10 +167,6 @@ export default function Index() {
         <Suspense fallback={<SectionFallback />}>
           <FeaturesSection />
         </Suspense>
-        <Divider variant="fire" />
-        <Suspense fallback={<SectionFallback />}>
-          <PricingPreview />
-        </Suspense>
         <Divider />
         <Suspense fallback={<SectionFallback />}>
           <InfrastructureSection />
