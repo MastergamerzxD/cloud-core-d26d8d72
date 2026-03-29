@@ -7,7 +7,7 @@ const badges = [
   { icon: Cpu, label: "Intel Xeon Platinum", description: "Enterprise-grade 24-core processors" },
   { icon: HardDrive, label: "NVMe Gen4 Storage", description: "Up to 7GB/s sequential reads" },
   { icon: Shield, label: "1Tbps DDoS Shield", description: "Always-on attack mitigation" },
-  { icon: Gauge, label: "10Gbps Network", description: "Premium low-latency uplinks" },
+  { icon: Gauge, label: "1Gbps Network", description: "Premium low-latency uplinks" },
   { icon: Clock, label: "99.99% Uptime", description: "Enterprise reliability SLA" },
 ];
 

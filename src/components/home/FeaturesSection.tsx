@@ -22,8 +22,8 @@ const features = [
   {
     icon: Wifi,
     title: "High Bandwidth Networking",
-    description: "10Gbps premium uplinks with optimized routing for sub-millisecond latency across India and beyond.",
-    stat: "10Gbps",
+    description: "1Gbps premium uplinks with optimized routing for sub-millisecond latency across India and beyond.",
+    stat: "1Gbps",
     statLabel: "Uplink",
     gradient: "from-neon-purple/15 to-transparent",
   },
@@ -42,7 +42,7 @@ const statsBar = [
   { icon: Cpu, value: "Xeon Platinum", label: "Enterprise CPUs" },
   { icon: HardDrive, value: "NVMe Gen4", label: "SSD Storage" },
   { icon: Shield, value: "1Tbps", label: "DDoS Mitigation" },
-  { icon: Gauge, value: "10Gbps", label: "Network Uplink" },
+  { icon: Gauge, value: "1Gbps", label: "Network Uplink" },
 ];
 
 export default function FeaturesSection() {

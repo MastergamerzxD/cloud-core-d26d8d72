@@ -1,90 +1,170 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Server, Gamepad2, Monitor, Shield } from "lucide-react";
+import { ArrowRight, Server, Gamepad2, Monitor, Check, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 
-const services = [
+const products = [
   {
     icon: Server,
     name: "VPS Hosting",
-    description: "Deploy high-performance cloud VPS for web apps, APIs, databases, and development workloads. Starting at ₹199/month.",
+    badge: "Most Popular",
+    subtitle: "Affordable and powerful virtual servers",
+    price: "₹199",
     href: "/vps-plans",
-    gradient: "from-neon-blue/20 to-neon-purple/10",
-    iconColor: "text-neon-blue",
-    iconBg: "bg-neon-blue/15 group-hover:bg-neon-blue/25",
-    anchor: "Explore VPS hosting plans",
+    popular: true,
+    features: [
+      "NVMe SSD Storage",
+      "Full Root Access",
+      "Instant Deployment",
+      "DDoS Protection",
+    ],
   },
   {
     icon: Gamepad2,
     name: "Gaming VPS",
-    description: "Optimized for Minecraft, FiveM, Rust, and multiplayer game servers with enterprise DDoS protection.",
+    badge: null,
+    subtitle: "Optimized for performance and low latency",
+    price: "₹299",
     href: "/gaming-vps",
-    gradient: "from-primary/20 to-fire-red/10",
-    iconColor: "text-primary",
-    iconBg: "bg-primary/15 group-hover:bg-primary/25",
-    anchor: "Explore gaming VPS hosting",
+    popular: false,
+    features: [
+      "Ultimate DDoS Protection",
+      "Low Latency Network",
+      "High CPU Performance",
+      "Game-optimized Setup",
+    ],
   },
   {
     icon: Monitor,
-    name: "Cloud RDP",
-    description: "Enterprise-grade cloud desktops for development, trading, remote work, and productivity.",
+    name: "RDP Plans",
+    badge: null,
+    subtitle: "Secure remote desktop solutions",
+    price: "Coming Soon",
     href: "/rdp",
-    gradient: "from-neon-cyan/20 to-neon-blue/10",
-    iconColor: "text-neon-cyan",
-    iconBg: "bg-neon-cyan/15 group-hover:bg-neon-cyan/25",
-    anchor: "Explore cloud RDP servers",
-  },
-  {
-    icon: Shield,
-    name: "DDoS Protection",
-    description: "Enterprise-grade mitigation up to 1Tbps. Keep your servers online during the heaviest attacks.",
-    href: "/ddos-protection",
-    gradient: "from-neon-purple/20 to-neon-blue/10",
-    iconColor: "text-neon-purple",
-    iconBg: "bg-neon-purple/15 group-hover:bg-neon-purple/25",
-    anchor: "Learn about DDoS protection",
+    popular: false,
+    comingSoon: true,
+    features: [
+      "Dedicated Resources",
+      "Secure Environment",
+      "High-speed Connection",
+      "Easy Access",
+    ],
   },
 ];
 
 export default function ServicesGrid() {
   return (
     <section className="section-padding bg-card/40 relative overflow-hidden">
-      <div className="absolute inset-0 network-grid-bg opacity-20" />
+      <div className="absolute inset-0 network-grid-bg opacity-10" />
 
       <div className="container-wide relative">
         <SectionHeader
-          badge="🚀 Our Services"
-          title="Your Complete Cloud Infrastructure"
-          description="Everything you need to deploy, scale, and protect your applications in one platform."
+          badge="🚀 Our Products"
+          title="Choose Your Cloud Solution"
+          description="Deploy high-performance servers tailored to your workload — from cloud VPS to gaming servers to remote desktops."
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-          {services.map((service, index) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+          {products.map((product, index) => (
             <motion.div
-              key={service.name}
-              initial={{ opacity: 0, y: 20 }}
+              key={product.name}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glow-card p-6 sm:p-7 !rounded-2xl group relative"
+              transition={{ duration: 0.5, delay: index * 0.12 }}
+              className={`relative group rounded-2xl border transition-all duration-300 p-6 sm:p-7 flex flex-col ${
+                product.popular
+                  ? "border-primary/40 bg-gradient-to-b from-primary/[0.06] to-card shadow-[0_0_30px_hsl(var(--primary)/0.08)]"
+                  : "border-border/60 bg-card/80 hover:border-border"
+              } hover:shadow-lg hover:scale-[1.02]`}
             >
-              {/* Subtle gradient overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
-
-              <div className="relative">
-                <div className={`w-14 h-14 rounded-xl ${service.iconBg} flex items-center justify-center mb-5 transition-colors duration-300`}>
-                  <service.icon className={`w-7 h-7 ${service.iconColor}`} />
+              {/* Popular badge */}
+              {product.badge && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                  <span
+                    className="inline-flex items-center gap-1.5 px-4 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-primary-foreground rounded-full whitespace-nowrap"
+                    style={{
+                      background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%))",
+                      boxShadow: "0 0 20px hsl(24 95% 53% / 0.4)",
+                    }}
+                  >
+                    <Zap className="w-3 h-3" />
+                    {product.badge}
+                  </span>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">{service.name}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{service.description}</p>
-                <Link to={service.href} aria-label={service.anchor}>
-                  <Button variant="ghost" size="sm" className="px-0 text-primary hover:text-primary/80 hover:bg-transparent group/btn">
-                    Learn More
-                    <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover/btn:translate-x-1" />
-                  </Button>
-                </Link>
+              )}
+
+              {/* Top accent line */}
+              {product.popular && (
+                <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl bg-gradient-to-r from-transparent via-primary to-transparent" />
+              )}
+
+              {/* Icon */}
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300 ${
+                product.popular
+                  ? "bg-primary/15 group-hover:bg-primary/25"
+                  : "bg-muted group-hover:bg-muted/80"
+              }`}>
+                <product.icon className={`w-6 h-6 ${product.popular ? "text-primary" : "text-foreground/70"}`} />
               </div>
+
+              {/* Title & subtitle */}
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1">{product.name}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{product.subtitle}</p>
+
+              {/* Features */}
+              <ul className="space-y-2.5 mb-6 flex-1">
+                {product.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2.5">
+                    <div className={`w-4.5 h-4.5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      product.popular ? "bg-primary/15" : "bg-muted"
+                    }`}>
+                      <Check className={`w-3 h-3 ${product.popular ? "text-primary" : "text-foreground/60"}`} />
+                    </div>
+                    <span className="text-sm text-muted-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Price */}
+              <div className="mb-5">
+                <span className={`text-3xl sm:text-4xl font-black tracking-tight ${
+                  product.popular ? "text-primary" : "text-foreground"
+                }`}>
+                  {product.price}
+                </span>
+                {!product.comingSoon && (
+                  <span className="text-sm text-muted-foreground ml-1">/mo</span>
+                )}
+              </div>
+
+              {/* CTA */}
+              <Link to={product.href} className="mt-auto">
+                {product.comingSoon ? (
+                  <Button
+                    variant="outline"
+                    className="w-full h-11 text-sm font-semibold opacity-60 cursor-not-allowed"
+                    disabled
+                  >
+                    Coming Soon
+                  </Button>
+                ) : (
+                  <Button
+                    className={`w-full h-11 text-sm font-semibold transition-all duration-300 group/btn ${
+                      product.popular
+                        ? "btn-fire"
+                        : "bg-transparent border border-border text-foreground hover:bg-muted hover:border-foreground/20"
+                    }`}
+                    variant={product.popular ? "default" : "outline"}
+                  >
+                    <span className={product.popular ? "relative z-10 flex items-center gap-1.5" : "flex items-center gap-1.5"}>
+                      View Plans
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
+                    </span>
+                  </Button>
+                )}
+              </Link>
             </motion.div>
           ))}
         </div>

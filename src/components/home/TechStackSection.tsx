@@ -5,7 +5,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 const techItems = [
   { icon: Cpu, label: "Intel Platinum 8168", sublabel: "Enterprise Processors" },
   { icon: HardDrive, label: "NVMe Gen4 SSD", sublabel: "7GB/s Read Speed" },
-  { icon: Network, label: "10Gbps Uplink", sublabel: "Premium Bandwidth" },
+  { icon: Network, label: "1Gbps Uplink", sublabel: "Premium Bandwidth" },
   { icon: Shield, label: "1Tbps DDoS", sublabel: "Always-On Protection" },
   { icon: Server, label: "Yotta DC", sublabel: "Tier-3+ Certified" },
   { icon: Monitor, label: "Full Root Access", sublabel: "Complete Control" },
