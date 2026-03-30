@@ -14,8 +14,8 @@ const specs = [
   {
     icon: Cpu,
     title: "Enterprise Processors",
-    description: "Intel Xeon Platinum 8168 processors with 24 cores, turbo up to 3.7GHz — optimized for gaming and real-time applications.",
-    details: ["Intel® Xeon® Platinum 8168", "24 Cores / 48 Threads", "Turbo up to 3.7GHz", "33MB L3 Cache"],
+    description: "Intel Xeon Platinum series processors (8168 / 8173M) with high core counts and strong single-core performance — optimized for low latency workloads and real-time applications.",
+    details: ["Intel® Xeon® Platinum Series", "8168 / 8173M Models", "High-frequency cores with turbo boost", "Enterprise-grade reliability"],
   },
   {
     icon: HardDrive,

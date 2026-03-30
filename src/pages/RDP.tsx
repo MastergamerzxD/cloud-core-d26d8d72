@@ -74,7 +74,7 @@ const useCases = [
 ];
 
 const keyFeatures = [
-  { icon: Cpu, label: "Enterprise Intel Xeon CPUs", description: "Intel Xeon Platinum 8168 processors for workstation-level performance." },
+  { icon: Cpu, label: "Enterprise Intel Xeon CPUs", description: "Intel Xeon Platinum series processors for workstation-level performance." },
   { icon: HardDrive, label: "NVMe SSD Storage", description: "Enterprise NVMe Gen4 drives with up to 7GB/s read speeds." },
   { icon: Wifi, label: "High-speed Networking", description: "1Gbps uplinks with optimized routing for smooth remote access." },
   { icon: Lock, label: "Secure Remote Access", description: "Encrypted RDP connections with enterprise-grade security." },
@@ -148,7 +148,7 @@ export default function RDP() {
               </h1>
               <p className="text-sm sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
                 Cloud on Fire RDP provides a powerful cloud desktop accessible from anywhere. 
-                Each instance runs on enterprise infrastructure powered by Intel Xeon Platinum 8168, 
+                Each instance runs on enterprise infrastructure powered by Intel Xeon Platinum series processors, 
                 delivering <span className="text-foreground font-medium">workstation-level performance in the cloud.</span>
               </p>
               <div className="flex flex-wrap justify-center gap-3">

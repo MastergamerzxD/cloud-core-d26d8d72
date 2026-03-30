@@ -120,7 +120,7 @@ export default function Index() {
           name: "Is Cloud on Fire reliable?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. Cloud on Fire uses enterprise-grade Intel Xeon Platinum 8168 processors, NVMe SSD storage, and Tier-3+ data centers in India. All plans include DDoS protection and 24/7 customer support.",
+            text: "Yes. Cloud on Fire uses enterprise-grade Intel Xeon Platinum series processors (8168 / 8173M), NVMe SSD storage, and Tier-3+ data centers in India. All plans include DDoS protection and 24/7 customer support.",
           },
         },
         {

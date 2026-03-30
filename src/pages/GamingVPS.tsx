@@ -453,18 +453,18 @@ export default function GamingVPS() {
                 </div>
                 <div className="flex-1">
                   <h2 className="text-lg sm:text-2xl font-bold text-foreground mb-2">
-                    Gaming Infrastructure — <span className="text-fire-gradient">Intel Xeon Platinum</span>
+                    Gaming Infrastructure — <span className="text-fire-gradient">Intel Xeon Platinum Series</span>
                   </h2>
                   <p className="text-muted-foreground text-sm sm:text-base mb-5">
-                    Powered by Intel Xeon Platinum 8168 processors, delivering strong single-core performance essential for game server workloads and large player counts.
+                    Powered by Intel Xeon Platinum series processors (8168 / 8173M), delivering strong single-core performance essential for game server workloads and smooth multiplayer experiences.
                   </p>
                   <div className="grid sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-muted-foreground mb-5">
                     {[
-                      "24 physical cores per processor",
-                      "48 threads with hyper-threading",
-                      "Base clock 2.7 GHz with turbo boost",
-                      "High-density virtualization environments",
-                      "Enterprise hardware used in global datacenters",
+                      "High-frequency cores optimized for low latency",
+                      "Strong single-core performance for game servers",
+                      "Smooth gameplay with reduced lag spikes",
+                      "Faster world loading and stable tick rates",
+                      "Enterprise-grade reliability for 24/7 uptime",
                     ].map((spec) => (
                       <div key={spec} className="flex items-center gap-2.5">
                         <div className="w-2 h-2 rounded-full bg-primary/70 flex-shrink-0 shadow-[0_0_6px_hsl(24_95%_53%_/_0.5)]" />
@@ -474,7 +474,7 @@ export default function GamingVPS() {
                   </div>
                   <div className="p-4 rounded-lg border border-primary/15 bg-primary/5">
                     <p className="text-xs sm:text-sm text-muted-foreground italic">
-                      "With powerful Xeon Platinum infrastructure, Cloud on Fire Gaming VPS can handle large player bases, complex plugins, and modded environments without lag or instability."
+                      "With Xeon Platinum infrastructure, Cloud on Fire Gaming VPS delivers stable performance under load — capable of handling large player counts depending on configuration, plugins, and optimization."
                     </p>
                   </div>
                 </div>
@@ -580,7 +580,7 @@ export default function GamingVPS() {
             />
             <Accordion type="single" collapsible className="space-y-3">
               {[
-                { q: "Can I host a Minecraft server on Cloud on Fire?", a: "Yes. Cloud on Fire Gaming VPS is optimized for Minecraft server hosting. Our Intel Xeon Platinum processors deliver stable 20 TPS even with modpacks, plugins, and large player counts. Plans start at ₹299/month." },
+                { q: "Can I host a Minecraft server on Cloud on Fire?", a: "Yes. Cloud on Fire Gaming VPS is optimized for Minecraft server hosting. Our Intel Xeon Platinum series processors deliver stable performance — capable of handling 100+ concurrent players depending on configuration, plugins, and optimization. Plans start at ₹299/month." },
                 { q: "Can I host a FiveM server on Cloud on Fire?", a: "Yes. Our Gaming VPS supports FiveM servers with heavy scripts, custom vehicles, and 64+ player slots. Advanced DDoS protection ensures your roleplay community stays online." },
                 { q: "What is a Gaming VPS?", a: "A Gaming VPS is a virtual private server optimized specifically for running multiplayer game servers. It includes unmetered bandwidth, advanced DDoS protection, and hardware tuned for real-time gaming workloads." },
                 { q: "Is DDoS protection included for gaming VPS?", a: "Yes, all Gaming VPS plans include advanced DDoS protection at no extra cost. Your game servers stay online during attacks with automatic traffic filtering." },

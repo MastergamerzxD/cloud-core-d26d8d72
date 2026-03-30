@@ -121,11 +121,11 @@ const useCases = [
 ];
 
 const processorSpecs = [
-  "24 physical cores per processor",
-  "48 threads with hyper-threading",
-  "Base clock 2.7 GHz with turbo boost",
-  "High-density virtualization environments",
-  "Enterprise hardware used in global datacenters",
+  "High-frequency performance cores optimized for low latency",
+  "Up to 48 threads with hyper-threading support",
+  "Strong single-core performance for demanding workloads",
+  "Enterprise-grade reliability used in global datacenters",
+  "Optimized for VPS hosting, databases, and real-time applications",
 ];
 
 export default function VPSPlans() {
@@ -173,7 +173,7 @@ export default function VPSPlans() {
               {
                 "@type": "Question",
                 name: "What processor does Cloud on Fire VPS use?",
-                acceptedAnswer: { "@type": "Answer", text: "All Cloud on Fire VPS plans are powered by Intel Xeon Platinum 8168 processors with 24 cores, 48 threads, and turbo boost up to 3.7GHz — enterprise-grade CPUs designed for cloud infrastructure." },
+                acceptedAnswer: { "@type": "Answer", text: "Cloud on Fire VPS plans are powered by Intel Xeon Platinum series processors (8168 / 8173M) — enterprise-grade CPUs with high core counts, strong single-core performance, and turbo boost capabilities designed for cloud infrastructure." },
               },
               {
                 "@type": "Question",
@@ -282,7 +282,7 @@ export default function VPSPlans() {
                     Enterprise Cloud Compute Powered by <span className="text-neon-gradient">Intel Xeon Platinum</span>
                   </h2>
                   <p className="text-muted-foreground text-sm sm:text-base mb-5">
-                    All Cloud on Fire VPS plans are powered by Intel Xeon Platinum 8168 processors — enterprise-grade CPUs designed for large scale cloud infrastructure.
+                    Cloud on Fire VPS plans are powered by Intel Xeon Platinum series processors (8168 / 8173M) — enterprise-grade CPUs delivering strong single-core performance and high thread counts for scalable cloud workloads.
                   </p>
                   <div className="grid sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-muted-foreground mb-5">
                     {processorSpecs.map((spec) => (
@@ -294,7 +294,7 @@ export default function VPSPlans() {
                   </div>
                   <div className="relative p-4 rounded-lg border border-neon-blue/15 bg-neon-blue/5">
                     <p className="text-xs sm:text-sm text-muted-foreground italic">
-                      "These processors deliver exceptional stability and strong single-core performance, making them ideal for game servers, web hosting, databases, and scalable backend services."
+                      "These processors deliver exceptional stability and strong single-core performance — ideal for web hosting, game servers, databases, and scalable backend services."
                     </p>
                   </div>
                 </div>
@@ -375,7 +375,7 @@ export default function VPSPlans() {
             <Accordion type="single" collapsible className="space-y-3">
               {[
                 { q: "What is a VPS server?", a: "A VPS (Virtual Private Server) is a virtualized server with dedicated CPU, RAM, and storage resources. Unlike shared hosting, your VPS operates independently, giving you full root access and the ability to install any software you need." },
-                { q: "What processor does Cloud on Fire VPS use?", a: "All Cloud on Fire VPS plans are powered by Intel Xeon Platinum 8168 processors with 24 cores, 48 threads, and turbo boost up to 3.7GHz — enterprise-grade CPUs designed for cloud infrastructure." },
+                { q: "What processor does Cloud on Fire VPS use?", a: "Cloud on Fire VPS plans are powered by Intel Xeon Platinum series processors (8168 / 8173M) — enterprise-grade CPUs with strong single-core performance and high thread counts, designed for cloud infrastructure and demanding workloads." },
                 { q: "Is DDoS protection included with VPS plans?", a: "Yes, all VPS plans include DDoS protection at no extra cost. Our infrastructure monitors and filters malicious traffic to keep your server online." },
                 { q: "What is the cheapest VPS plan available?", a: "The Starter VPS plan begins at ₹199/month and includes 2 vCPU cores, 4 GB DDR4 RAM, 30 GB NVMe storage, and DDoS protection." },
                 { q: "How quickly are servers deployed?", a: "VPS servers are provisioned and ready to use within minutes of order confirmation. You'll receive full root access credentials via email." },

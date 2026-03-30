@@ -33,7 +33,7 @@ const stages = [
   {
     icon: Cpu,
     label: "Compute Nodes",
-    description: "Processed by Intel Xeon Platinum 8168 processors",
+    description: "Processed by Intel Xeon Platinum series processors",
     color: "text-neon-purple",
     bg: "bg-neon-purple/10",
     border: "border-neon-purple/20",

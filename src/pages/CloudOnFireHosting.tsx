@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const highlights = [
-  "Intel Xeon Platinum 8168 processors",
+  "Intel Xeon Platinum series processors (8168 / 8173M)",
   "NVMe Gen4 SSD storage on all plans",
   "Enterprise DDoS protection included",
   "Data centers in India (Delhi & Mumbai)",

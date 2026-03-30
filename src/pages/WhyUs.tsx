@@ -13,7 +13,7 @@ const reasons = [
     title: "Performance Engineering",
     description: "We obsess over every millisecond of latency. Our infrastructure is tuned for maximum performance, not maximum profit margins.",
     points: [
-      "Intel Xeon Platinum 8168 processors",
+      "Intel Xeon Platinum series processors (8168 / 8173M)",
       "Enterprise NVMe storage with sustained performance",
       "Premium network with intelligent routing",
       "Dedicated resources for Pro VPS customers",
