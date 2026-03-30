@@ -23,7 +23,8 @@ const products = [
   {
     icon: Gamepad2,
     name: "Gaming VPS",
-    badge: null,
+    badge: "Best for Gaming",
+    badgeStyle: "gaming" as const,
     subtitle: "Optimized for performance and low latency",
     price: "₹299",
     href: "/gaming-vps",
