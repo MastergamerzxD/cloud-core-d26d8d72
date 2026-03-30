@@ -6,7 +6,7 @@ const cards = [
   {
     icon: Cpu,
     title: "Compute Infrastructure",
-    description: "Cloud on Fire servers are powered by Intel Xeon Platinum 8168 processors — enterprise-grade CPUs with 24 cores, 48 threads, and turbo boost up to 3.7 GHz. Designed for high-performance workloads and scalable cloud deployments.",
+    description: "Cloud on Fire servers are powered by Intel Xeon Platinum series processors (8168 / 8173M) — enterprise-grade CPUs with high core counts, strong single-core performance, and turbo boost capabilities. Designed for high-performance workloads and scalable cloud deployments.",
     color: "text-neon-blue",
     bg: "bg-neon-blue/10",
     border: "border-neon-blue/20",

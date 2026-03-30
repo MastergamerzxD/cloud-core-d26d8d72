@@ -3,7 +3,7 @@ import { Cpu, HardDrive, Network, Shield, Server, Monitor, Database, Lock } from
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const techItems = [
-  { icon: Cpu, label: "Intel Platinum 8168", sublabel: "Enterprise Processors" },
+  { icon: Cpu, label: "Intel Xeon Platinum", sublabel: "Enterprise Processors" },
   { icon: HardDrive, label: "NVMe Gen4 SSD", sublabel: "7GB/s Read Speed" },
   { icon: Network, label: "1Gbps Uplink", sublabel: "Premium Bandwidth" },
   { icon: Shield, label: "1Tbps DDoS", sublabel: "Always-On Protection" },

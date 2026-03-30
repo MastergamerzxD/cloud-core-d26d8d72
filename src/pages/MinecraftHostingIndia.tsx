@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const features = [
-  "Stable 20 TPS even with 40+ players",
+  "Stable performance — capable of handling 100+ concurrent players depending on configuration",
   "NVMe SSD for instant world loading",
   "Advanced DDoS protection included",
   "Supports Vanilla, Paper, Spigot, Forge, Fabric",

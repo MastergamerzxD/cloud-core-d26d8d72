@@ -260,7 +260,7 @@ export default function ServerPlanCalculator({ variant = "vps" }: Props) {
                       <Cpu className={`w-5 h-5 ${isGaming ? "text-primary" : "text-neon-blue"} shrink-0`} />
                       <div>
                         <div className="text-xs text-muted-foreground">Processor</div>
-                        <div className="text-sm font-semibold text-foreground">Intel Xeon Platinum 8168</div>
+                        <div className="text-sm font-semibold text-foreground">Intel Xeon Platinum Series</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-card/60 border border-border/20">

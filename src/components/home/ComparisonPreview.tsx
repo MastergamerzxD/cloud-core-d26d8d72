@@ -11,7 +11,7 @@ const products = [
     description: "Cloud VPS for web apps, APIs, databases, and development environments.",
     price: "From ₹199/mo",
     href: "/vps-plans",
-    highlights: ["Intel Xeon Platinum 8168", "NVMe SSD Storage", "DDoS Protection", "6 plan tiers"],
+    highlights: ["Intel Xeon Platinum Series", "NVMe SSD Storage", "DDoS Protection", "6 plan tiers"],
   },
   {
     icon: Gamepad2,
