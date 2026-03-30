@@ -31,7 +31,7 @@ CONTACT INFORMATION:
 
 1. PRO VPS (/pro-vps)
    - Target: Gamers, game server hosts, high-traffic websites, mission-critical applications
-   - CPU: Dedicated Intel Xeon Platinum 8168 cores (no shared/oversold)
+   - CPU: Intel Xeon Platinum series processors (8168 / 8173M) — high-frequency cores with strong single-core performance
    - Storage: NVMe Gen4 SSDs for maximum I/O
    - DDoS Protection: Enterprise-grade, always-on, never suspended under attack
    - Network: Premium low-latency network across India
@@ -65,7 +65,7 @@ CONTACT INFORMATION:
 ─── INFRASTRUCTURE (/infrastructure) ───
 - Primary Data Center: Yotta NM1, Navi Mumbai, India
 - Certification: Tier-3+ certified facility
-- Processors: Intel Xeon Platinum 8168
+- Processors: Intel Xeon Platinum series (8168 / 8173M)
 - Storage: NVMe Gen4 SSDs
 - Network: 1 Gbps uplinks, premium peering
 - DDoS Scrubbing: 1 Tbps capacity

@@ -233,7 +233,7 @@ export default function GamingVPS() {
               {
                 "@type": "Question",
                 name: "Can I host a Minecraft server on Cloud on Fire?",
-                acceptedAnswer: { "@type": "Answer", text: "Yes. Cloud on Fire Gaming VPS is optimized for Minecraft server hosting. Our Intel Xeon Platinum processors deliver stable 20 TPS even with modpacks, plugins, and large player counts. Plans start at ₹299/month." },
+                acceptedAnswer: { "@type": "Answer", text: "Yes. Cloud on Fire Gaming VPS is optimized for Minecraft server hosting. Our Intel Xeon Platinum series processors deliver stable performance — capable of handling 100+ concurrent players depending on configuration, plugins, and optimization. Plans start at ₹299/month." },
               },
               {
                 "@type": "Question",
