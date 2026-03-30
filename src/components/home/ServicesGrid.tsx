@@ -23,7 +23,8 @@ const products = [
   {
     icon: Gamepad2,
     name: "Gaming VPS",
-    badge: null,
+    badge: "Best for Gaming",
+    badgeStyle: "gaming" as const,
     subtitle: "Optimized for performance and low latency",
     price: "₹299",
     href: "/gaming-vps",
@@ -79,17 +80,28 @@ export default function ServicesGrid() {
                   : "border-border/60 bg-card/80 hover:border-border"
               } hover:shadow-lg hover:scale-[1.02]`}
             >
-              {/* Popular badge */}
+              {/* Badge */}
               {product.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                   <span
                     className="inline-flex items-center gap-1.5 px-4 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-primary-foreground rounded-full whitespace-nowrap"
-                    style={{
-                      background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%))",
-                      boxShadow: "0 0 20px hsl(24 95% 53% / 0.4)",
-                    }}
+                    style={
+                      (product as any).badgeStyle === "gaming"
+                        ? {
+                            background: "linear-gradient(135deg, hsl(270 76% 55%), hsl(217 91% 60%))",
+                            boxShadow: "0 0 20px hsl(270 76% 55% / 0.5), 0 0 40px hsl(217 91% 60% / 0.2)",
+                          }
+                        : {
+                            background: "linear-gradient(135deg, hsl(24 95% 53%), hsl(4 90% 58%))",
+                            boxShadow: "0 0 20px hsl(24 95% 53% / 0.4)",
+                          }
+                    }
                   >
-                    <Zap className="w-3 h-3" />
+                    {(product as any).badgeStyle === "gaming" ? (
+                      <Gamepad2 className="w-3 h-3" />
+                    ) : (
+                      <Zap className="w-3 h-3" />
+                    )}
                     {product.badge}
                   </span>
                 </div>

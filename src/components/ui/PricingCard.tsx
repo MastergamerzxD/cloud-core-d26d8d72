@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, Zap } from "lucide-react";
+import { Check, Zap, Cpu, MemoryStick, HardDrive, Globe, Shield, Server } from "lucide-react";
 import { Button } from "./button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
@@ -14,6 +14,38 @@ interface PricingCardProps {
   index?: number;
   shopUrl?: string;
 }
+
+// Map feature keywords to icons
+const getFeatureIcon = (feature: string) => {
+  const lower = feature.toLowerCase();
+  if (lower.includes("vcpu") || lower.includes("cpu") || lower.includes("core")) return Cpu;
+  if (lower.includes("ram") || lower.includes("ddr")) return MemoryStick;
+  if (lower.includes("nvme") || lower.includes("storage") || lower.includes("ssd")) return HardDrive;
+  if (lower.includes("bandwidth")) return Globe;
+  if (lower.includes("ddos") || lower.includes("protection")) return Shield;
+  if (lower.includes("ipv4") || lower.includes("address")) return Server;
+  return Check;
+};
+
+// Parse feature to highlight the value portion
+const parseFeature = (feature: string) => {
+  // Patterns like "4 vCPU Cores", "6 GB DDR4 RAM", "60 GB NVMe Storage", "2000 GB Bandwidth"
+  const match = feature.match(/^([\d,]+\s*(?:x\s*)?(?:GB|TB|vCPU)?)\s+(.+)$/i);
+  if (match) {
+    return { value: match[1], label: match[2] };
+  }
+  // Patterns like "Unmetered Bandwidth"
+  const unmatch = feature.match(/^(Unmetered|Advanced|Standard|Priority|Full)\s+(.+)$/i);
+  if (unmatch) {
+    return { value: unmatch[1], label: unmatch[2] };
+  }
+  // Patterns like "1x IPv4 Address"
+  const countMatch = feature.match(/^(\d+x)\s+(.+)$/i);
+  if (countMatch) {
+    return { value: countMatch[1], label: countMatch[2] };
+  }
+  return { value: null, label: feature };
+};
 
 export default function PricingCard({
   name,
@@ -88,34 +120,46 @@ export default function PricingCard({
       {/* Glowing divider */}
       <div className={`h-px mb-5 sm:mb-6 ${popular ? "gradient-divider-fire" : "gradient-divider"}`} />
 
-      <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
-        {features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-2.5 sm:gap-3">
-            <div
-              className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
-                popular ? "bg-primary/20" : "bg-neon-blue/10"
-              }`}
-            >
-              <Check className={`w-3 h-3 ${popular ? "text-primary" : "text-neon-blue"}`} />
-            </div>
-            <span className="text-xs sm:text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
-              {feature}
-            </span>
-          </li>
-        ))}
+      <ul className="space-y-3 sm:space-y-3.5 mb-6 sm:mb-8">
+        {features.map((feature, i) => {
+          const FeatureIcon = getFeatureIcon(feature);
+          const { value, label } = parseFeature(feature);
+
+          return (
+            <li key={i} className="flex items-center gap-3">
+              <div
+                className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                  popular ? "bg-primary/15 border border-primary/20" : "bg-neon-blue/10 border border-neon-blue/15"
+                }`}
+              >
+                <FeatureIcon className={`w-3.5 h-3.5 ${popular ? "text-primary" : "text-neon-blue"}`} />
+              </div>
+              <span className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
+                {value ? (
+                  <>
+                    <span className="font-bold text-foreground text-[15px]">{value}</span>{" "}
+                    <span className="text-muted-foreground">{label}</span>
+                  </>
+                ) : (
+                  <span>{label}</span>
+                )}
+              </span>
+            </li>
+          );
+        })}
       </ul>
 
       <a href={shopUrl} target="_blank" rel="noopener noreferrer">
         <Button
-          className={`w-full h-11 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-300 ${
+          className={`w-full h-12 sm:h-13 text-sm sm:text-base font-bold transition-all duration-300 ${
             popular
-              ? "btn-fire"
-              : "bg-transparent border border-neon-blue/30 text-neon-blue hover:bg-neon-blue/10 hover:border-neon-blue/60 hover:shadow-[0_0_20px_hsl(217_91%_60%_/_0.2)]"
+              ? "btn-fire shadow-[0_0_20px_hsl(24_95%_53%_/_0.3)]"
+              : "bg-transparent border-2 border-neon-blue/30 text-neon-blue hover:bg-neon-blue/10 hover:border-neon-blue/60 hover:shadow-[0_0_20px_hsl(217_91%_60%_/_0.2)]"
           }`}
           variant={popular ? "default" : "outline"}
         >
           <span className={popular ? "relative z-10" : ""}>
-            {price === "Coming Soon" ? "Get Notified" : "Pre-Order Now"}
+            {price === "Coming Soon" ? "Get Notified" : "Pre-Order Now →"}
           </span>
         </Button>
       </a>
