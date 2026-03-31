@@ -109,6 +109,17 @@ export default function Terms() {
 
                   <p>Refund requests submitted within the eligible period will be reviewed and processed if the service has not been heavily used or abused.</p>
 
+                  <div className="my-6 rounded-lg border border-primary/30 bg-primary/5 p-5">
+                    <p className="text-foreground font-semibold flex items-center gap-2 mb-2">
+                      ⚠️ Important: How to Request a Refund
+                    </p>
+                    <p>
+                      Refund requests are <strong className="text-foreground">only accepted via a support ticket</strong> opened within the eligible refund window on{" "}
+                      <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">shop.cloudonfire.com</a>.
+                      Requests made through any other channel (email, social media, etc.) will <strong className="text-foreground">not be processed</strong>.
+                    </p>
+                  </div>
+
                   <h3 className="text-xl font-semibold text-foreground mt-6 mb-2">Refunds After Refund Window</h3>
                   <p>After the refund period expires:</p>
                   <ul className="list-disc list-inside space-y-1">
