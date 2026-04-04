@@ -18,6 +18,7 @@ interface PricingCardProps {
 // Map feature keywords to icons
 const getFeatureIcon = (feature: string) => {
   const lower = feature.toLowerCase();
+  if (lower.includes("pterodactyl")) return Gift;
   if (lower.includes("vcpu") || lower.includes("cpu") || lower.includes("core")) return Cpu;
   if (lower.includes("ram") || lower.includes("ddr")) return MemoryStick;
   if (lower.includes("nvme") || lower.includes("storage") || lower.includes("ssd")) return HardDrive;
