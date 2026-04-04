@@ -118,6 +118,7 @@ const gamingPlans = [
       "Advanced DDoS Protection",
       "1x IPv4 Address",
       "Priority Gaming Support",
+      "Free Pterodactyl Panel",
     ],
   },
 ];
