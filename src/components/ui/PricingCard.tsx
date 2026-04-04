@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, Zap, Cpu, MemoryStick, HardDrive, Globe, Shield, Server } from "lucide-react";
+import { Check, Zap, Cpu, MemoryStick, HardDrive, Globe, Shield, Server, Gift } from "lucide-react";
 import { Button } from "./button";
 import { useLaunchPopup } from "@/hooks/useLaunchPopup";
 
