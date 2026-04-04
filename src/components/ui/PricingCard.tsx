@@ -125,6 +125,28 @@ export default function PricingCard({
         {features.map((feature, i) => {
           const FeatureIcon = getFeatureIcon(feature);
           const { value, label } = parseFeature(feature);
+          const isPterodactyl = feature.toLowerCase().includes("pterodactyl");
+
+          if (isPterodactyl) {
+            return (
+              <li
+                key={i}
+                className="relative flex items-center gap-3 px-3 py-2.5 rounded-xl border border-green-500/30 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-transparent"
+              >
+                <div className="absolute -top-2 right-3">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-green-400 bg-green-500/15 border border-green-500/25 px-2 py-0.5 rounded-full">
+                    Included Free
+                  </span>
+                </div>
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 bg-green-500/20 border border-green-500/30">
+                  <Gift className="w-3.5 h-3.5 text-green-400" />
+                </div>
+                <span className="text-sm font-semibold text-green-400">
+                  Pterodactyl Panel
+                </span>
+              </li>
+            );
+          }
 
           return (
             <li key={i} className="flex items-center gap-3">
