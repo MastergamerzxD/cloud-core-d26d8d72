@@ -19,7 +19,7 @@ export default function AnnouncementBanner() {
           <div className="flex items-center gap-2 text-sm flex-1 min-w-0">
             <Rocket className="h-4 w-4 shrink-0" />
             <span className="font-semibold truncate">
-              🚀 Pre-Orders Are Now Live — Get 40% OFF with Code <span className="font-black tracking-wide">PREORDER40</span>
+              🚀 Cloud on Fire Is Now Live — Deploy Your Server Today!
             </span>
           </div>
           <div className="flex items-center gap-2 shrink-0 ml-3">
@@ -29,7 +29,7 @@ export default function AnnouncementBanner() {
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full bg-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors"
             >
-              Start Pre-Order
+              Get Started
               <ExternalLink className="w-3 h-3" />
             </a>
             <button

@@ -153,7 +153,7 @@ export default function VPSPlans() {
               "@type": "Offer",
               priceCurrency: "INR",
               price: plan.price.replace(/[₹,]/g, ""),
-              availability: "https://schema.org/PreOrder",
+              availability: "https://schema.org/InStock",
               seller: { "@type": "Organization", name: "Cloud on Fire" },
               priceValidUntil: "2027-12-31",
             },

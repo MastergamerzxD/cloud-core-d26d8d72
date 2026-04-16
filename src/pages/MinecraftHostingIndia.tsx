@@ -42,7 +42,7 @@ export default function MinecraftHostingIndia() {
             brand: { "@type": "Brand", name: "Cloud on Fire" },
             category: "Minecraft Server Hosting",
             image: "https://cloudonfire.com/images/logo-schema.png",
-            offers: { "@type": "AggregateOffer", priceCurrency: "INR", lowPrice: "299", highPrice: "1999", offerCount: "6", availability: "https://schema.org/PreOrder" },
+            offers: { "@type": "AggregateOffer", priceCurrency: "INR", lowPrice: "299", highPrice: "1999", offerCount: "6", availability: "https://schema.org/InStock" },
             aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", bestRating: "5", ratingCount: "85" },
           },
           {

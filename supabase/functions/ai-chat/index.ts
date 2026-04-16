@@ -16,7 +16,7 @@ COMPANY OVERVIEW:
 - Headquarters: India
 - Website: https://cloudonfire.in
 - Founded: 2024
-- Launch Date: 15th April 2026
+- Launch Date: 15th April 2026 (NOW LIVE)
 - Tagline: India's #1 High-Performance VPS Hosting Provider
 - Mission: To provide enterprise-grade VPS hosting with unmatched performance, security, and support at affordable prices for Indian businesses, developers, and gamers.
 

@@ -56,7 +56,7 @@ export default function CTASection() {
           </div>
 
           <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-muted-foreground">
-            Launching 15th April 2026 • No credit card required • 24/7 support
+            Now Live • No credit card required • 24/7 support
           </p>
 
           {/* Internal links for SEO */}

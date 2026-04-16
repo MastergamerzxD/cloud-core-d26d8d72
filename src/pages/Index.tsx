@@ -51,7 +51,7 @@ export default function Index() {
         lowPrice: "199",
         highPrice: "1599",
         offerCount: "8",
-        availability: "https://schema.org/PreOrder",
+        availability: "https://schema.org/InStock",
         seller: { "@type": "Organization", name: "Cloud on Fire" },
         priceValidUntil: "2027-12-31",
       },

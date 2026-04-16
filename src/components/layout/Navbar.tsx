@@ -130,22 +130,12 @@ export default function Navbar() {
                 >
                   <span className="relative z-10 flex items-center gap-2 text-white">
                     <Rocket className="w-4 h-4" />
-                    Pre-Order Now
+                    Get Started
                   </span>
                   {/* Shimmer overlay */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </Button>
               </motion.div>
-              {/* 40% OFF badge */}
-              <span
-                className="absolute -top-2.5 -right-2.5 px-2 py-0.5 text-[10px] font-black rounded-full text-white z-20 animate-bounce"
-                style={{
-                  background: "linear-gradient(135deg, hsl(142 70% 45%), hsl(142 70% 35%))",
-                  boxShadow: "0 2px 8px hsl(142 70% 45% / 0.4)",
-                }}
-              >
-                40% OFF
-              </span>
             </a>
           </div>
 
@@ -159,7 +149,7 @@ export default function Navbar() {
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }} className="lg:hidden overflow-hidden border-t border-border/50 bg-background/95 backdrop-blur-xl">
               <div className="py-3 sm:py-4 space-y-1 sm:space-y-2 max-h-[70vh] overflow-y-auto">
-                {/* Pre-Order CTA at the top of mobile menu */}
+                {/* CTA at the top of mobile menu */}
                 <div className="px-4 pb-3 border-b border-border/30 mb-2">
                   <a href="https://shop.cloudonfire.com" target="_blank" rel="noopener noreferrer" className="block relative">
                     <Button
@@ -171,7 +161,7 @@ export default function Navbar() {
                     >
                       <span className="relative z-10 flex items-center justify-center gap-2 text-white">
                         <Rocket className="w-4 h-4" />
-                        Pre-Order Now — 40% OFF
+                        Get Started
                       </span>
                     </Button>
                   </a>
