@@ -36,7 +36,7 @@ export default function CheapVPSIndia() {
             name: "Cloud on Fire Affordable VPS Hosting India",
             description: "Cheap VPS hosting in India starting at ₹199/month with enterprise hardware and DDoS protection.",
             brand: { "@type": "Brand", name: "Cloud on Fire" },
-            offers: { "@type": "AggregateOffer", priceCurrency: "INR", lowPrice: "199", highPrice: "1899", offerCount: "6", availability: "https://schema.org/PreOrder" },
+            offers: { "@type": "AggregateOffer", priceCurrency: "INR", lowPrice: "199", highPrice: "1899", offerCount: "6", availability: "https://schema.org/InStock" },
             aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", bestRating: "5", ratingCount: "150" },
           },
           {
