@@ -26,8 +26,7 @@ function formatRemaining(ms: number) {
 
 export default function MaintenancePopup() {
   const [open, setOpen] = useState(false);
-  const [endTime] = useState<number>(() => getEndTime());
-  const [remaining, setRemaining] = useState(() => endTime - Date.now());
+  const [remaining, setRemaining] = useState(() => MAINTENANCE_END_UTC - Date.now());
 
   // Intercept clicks on links pointing to shop.cloudonfire.com
   useEffect(() => {
