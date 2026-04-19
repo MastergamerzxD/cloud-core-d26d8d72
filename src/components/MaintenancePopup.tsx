@@ -50,10 +50,10 @@ export default function MaintenancePopup() {
   useEffect(() => {
     if (!open) return;
     const id = setInterval(() => {
-      setRemaining(endTime - Date.now());
+      setRemaining(MAINTENANCE_END_UTC - Date.now());
     }, 1000);
     return () => clearInterval(id);
-  }, [open, endTime]);
+  }, [open]);
 
   const { h, m, s } = formatRemaining(remaining);
 
