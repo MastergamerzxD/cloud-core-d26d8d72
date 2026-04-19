@@ -6,23 +6,10 @@ import { Button } from "@/components/ui/button";
 const PHONE = "+918766215705";
 const WHATSAPP = "918766215705";
 
-// Fixed target end time so countdown is consistent across reloads (24h from first mount per browser)
-const STORAGE_KEY = "cof_maintenance_end";
-
-function getEndTime(): number {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      const ts = parseInt(stored, 10);
-      if (!isNaN(ts) && ts > Date.now()) return ts;
-    }
-  } catch {}
-  const newEnd = Date.now() + 24 * 60 * 60 * 1000;
-  try {
-    localStorage.setItem(STORAGE_KEY, String(newEnd));
-  } catch {}
-  return newEnd;
-}
+// GLOBAL maintenance end time — same for every visitor worldwide.
+// Edit this single constant to extend or shorten the maintenance window.
+// Currently set to ~24h from rollout (IST ~midnight April 21, 2026).
+const MAINTENANCE_END_UTC = Date.parse("2026-04-20T18:30:00Z");
 
 function formatRemaining(ms: number) {
   if (ms < 0) ms = 0;
@@ -39,8 +26,7 @@ function formatRemaining(ms: number) {
 
 export default function MaintenancePopup() {
   const [open, setOpen] = useState(false);
-  const [endTime] = useState<number>(() => getEndTime());
-  const [remaining, setRemaining] = useState(() => endTime - Date.now());
+  const [remaining, setRemaining] = useState(() => MAINTENANCE_END_UTC - Date.now());
 
   // Intercept clicks on links pointing to shop.cloudonfire.com
   useEffect(() => {
@@ -64,10 +50,10 @@ export default function MaintenancePopup() {
   useEffect(() => {
     if (!open) return;
     const id = setInterval(() => {
-      setRemaining(endTime - Date.now());
+      setRemaining(MAINTENANCE_END_UTC - Date.now());
     }, 1000);
     return () => clearInterval(id);
-  }, [open, endTime]);
+  }, [open]);
 
   const { h, m, s } = formatRemaining(remaining);
 
