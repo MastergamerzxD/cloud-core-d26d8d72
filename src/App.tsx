@@ -9,6 +9,7 @@ import { AdminAuthProvider } from "@/hooks/useAdminAuth";
 
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
 import LoadingScreen from "@/components/LoadingScreen";
+import MaintenancePopup from "@/components/MaintenancePopup";
 import Index from "./pages/Index";
 import VPSPlans from "./pages/VPSPlans";
 import GamingVPS from "./pages/GamingVPS";
@@ -60,6 +61,7 @@ const App = () => (
           <BrowserRouter>
             <AdminAuthProvider>
               <LaunchPopupProvider>
+                <MaintenancePopup />
                 <Routes>
                   {/* Public routes */}
                   <Route path="/" element={<Index />} />
