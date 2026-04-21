@@ -8,8 +8,8 @@ const WHATSAPP = "918766215705";
 
 // GLOBAL maintenance end time — same for every visitor worldwide.
 // Edit this single constant to extend or shorten the maintenance window.
-// Currently set to ~24h from rollout (IST ~midnight April 21, 2026).
-const MAINTENANCE_END_UTC = Date.parse("2026-04-20T18:30:00Z");
+// Currently set to ~29h from rollout (IST ~5am April 21, 2026).
+const MAINTENANCE_END_UTC = Date.parse("2026-04-20T23:30:00Z");
 
 function formatRemaining(ms: number) {
   if (ms < 0) ms = 0;
